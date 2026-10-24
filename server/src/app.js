@@ -101,8 +101,9 @@ const authLimiter = rateLimit({
 
 app.use('/api', globalLimiter);
 
-// ─── Static uploads (local disk only) ─────────────────────────────────────────
-if (!env.BLOB_READ_WRITE_TOKEN) {
+// ─── Static uploads (local disk only, never on Vercel) ────────────────────────
+const isVercel = Boolean(process.env.VERCEL);
+if (!isVercel && !env.BLOB_READ_WRITE_TOKEN) {
   const uploadsDir = path.resolve(env.UPLOAD_DIR);
   app.use(
     '/uploads',

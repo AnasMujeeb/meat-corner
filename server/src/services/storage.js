@@ -8,8 +8,10 @@
  * Behavior:
  *  - If BLOB_READ_WRITE_TOKEN is set:
  *      Uploads to @vercel/blob with public access and returns absolute HTTPS URLs.
- *  - If BLOB_READ_WRITE_TOKEN is not set:
- *      Saves to local disk under UPLOAD_DIR and returns relative /uploads/... URLs.
+ *  - If running on Vercel without BLOB_READ_WRITE_TOKEN:
+ *      Does not crash at startup; saveImage throws a 503 "Image storage is not configured".
+ *  - If local disk:
+ *      Lazily creates UPLOAD_DIR on first save; returns relative /uploads/... URLs.
  */
 
 import path from 'path';
@@ -21,16 +23,25 @@ import { env } from '../config/env.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const srcDir = path.resolve(__dirname, '..');
 const UPLOAD_DIR = path.resolve(env.UPLOAD_DIR);
+const isVercel = Boolean(process.env.VERCEL);
 const isBlobStorage = Boolean(env.BLOB_READ_WRITE_TOKEN);
 
-// Ensure mkdir and local validation only run when using local disk
-if (!isBlobStorage) {
+/**
+ * Ensure upload directory exists lazily when saving to local disk.
+ */
+async function ensureUploadDir() {
   if (UPLOAD_DIR.startsWith(srcDir)) {
     throw new Error(
       `CRITICAL: UPLOAD_DIR (${UPLOAD_DIR}) must not be located within src/ (${srcDir}) to prevent infinite file watcher loops.`
     );
   }
-  await fs.mkdir(UPLOAD_DIR, { recursive: true });
+  try {
+    await fs.mkdir(UPLOAD_DIR, { recursive: true });
+  } catch (err) {
+    if (err.code !== 'EEXIST') {
+      throw err;
+    }
+  }
 }
 
 /**
@@ -41,10 +52,10 @@ if (!isBlobStorage) {
  * @returns {Promise<{ url: string, thumbUrl: string }>}
  */
 export async function saveImage(buffer, baseName) {
-  const mainFilename = `${baseName}.webp`;
-  const thumbFilename = `${baseName}_thumb.webp`;
-
   if (isBlobStorage) {
+    const mainFilename = `${baseName}.webp`;
+    const thumbFilename = `${baseName}_thumb.webp`;
+
     const mainWebpBuffer = await sharp(buffer)
       .rotate()
       .resize({ width: 1200, withoutEnlargement: true })
@@ -78,7 +89,19 @@ export async function saveImage(buffer, baseName) {
     };
   }
 
-  // Local disk persistence
+  // Running on Vercel without Blob storage
+  if (isVercel) {
+    const err = new Error('Image storage is not configured');
+    err.statusCode = 503;
+    throw err;
+  }
+
+  // Local disk persistence: lazily ensure directory exists
+  await ensureUploadDir();
+
+  const mainFilename = `${baseName}.webp`;
+  const thumbFilename = `${baseName}_thumb.webp`;
+
   const mainPath = path.join(UPLOAD_DIR, mainFilename);
   const thumbPath = path.join(UPLOAD_DIR, thumbFilename);
 
@@ -112,6 +135,7 @@ export async function deleteImage(url) {
 
   // Blob storage deletion (best-effort)
   if (url.startsWith('http://') || url.startsWith('https://')) {
+    if (!env.BLOB_READ_WRITE_TOKEN) return;
     try {
       const { del } = await import('@vercel/blob');
       const urlsToDelete = [url];
@@ -122,6 +146,11 @@ export async function deleteImage(url) {
     } catch (err) {
       console.warn('⚠️  Failed to delete from Vercel Blob (best-effort):', err.message);
     }
+    return;
+  }
+
+  // If on Vercel without blob storage, never touch local disk
+  if (isVercel) {
     return;
   }
 
@@ -138,7 +167,7 @@ export async function deleteImage(url) {
   const mainPath = path.join(UPLOAD_DIR, filename);
 
   if (filename.endsWith('_thumb.webp')) {
-    await fs.rm(mainPath, { force: true });
+    await fs.rm(mainPath, { force: true }).catch(() => {});
     return;
   }
 
@@ -146,7 +175,7 @@ export async function deleteImage(url) {
   const thumbPath = path.join(UPLOAD_DIR, thumbFilename);
 
   await Promise.all([
-    fs.rm(mainPath, { force: true }),
-    fs.rm(thumbPath, { force: true }),
+    fs.rm(mainPath, { force: true }).catch(() => {}),
+    fs.rm(thumbPath, { force: true }).catch(() => {}),
   ]);
 }

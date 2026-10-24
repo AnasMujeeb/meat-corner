@@ -93,6 +93,10 @@ function resolveUploadUrl(url) {
  * and returns { url, thumbUrl }.
  */
 export const uploadImage = asyncHandler(async (req, res) => {
+  if (process.env.VERCEL && !env.BLOB_READ_WRITE_TOKEN) {
+    throw createError(503, 'Image storage is not configured');
+  }
+
   if (!req.file) {
     throw createError(400, 'No image file provided.');
   }
@@ -109,8 +113,8 @@ export const uploadImage = asyncHandler(async (req, res) => {
 /**
  * DELETE /api/admin/upload
  * Body: { url: string }
- * Deletes an uploaded image + its thumb from disk.
- * Only allows paths matching the strict SAFE_UPLOAD_URL_RE allowlist.
+ * Deletes an uploaded image + its thumb from disk or Blob storage.
+ * Only allows paths matching the strict SAFE_UPLOAD_URL_RE allowlist for local paths.
  */
 export const deleteUpload = asyncHandler(async (req, res) => {
   const { url } = req.body;
@@ -120,6 +124,9 @@ export const deleteUpload = asyncHandler(async (req, res) => {
 
   // Handle Blob / remote URLs
   if (url.startsWith('http://') || url.startsWith('https://')) {
+    if (process.env.VERCEL && !env.BLOB_READ_WRITE_TOKEN) {
+      throw createError(503, 'Image storage is not configured');
+    }
     try {
       new URL(url);
     } catch {
@@ -127,6 +134,11 @@ export const deleteUpload = asyncHandler(async (req, res) => {
     }
     await deleteImage(url);
     return res.json({ success: true, message: 'Image deleted.' });
+  }
+
+  // On Vercel, local filesystem paths cannot be accessed or deleted
+  if (process.env.VERCEL) {
+    throw createError(404, 'File not found.');
   }
 
   // resolveUploadUrl throws 400 for any invalid/traversal url
