@@ -14,10 +14,12 @@ import publicRoutes from './routes/public.routes.js';
 import adminRoutes from './routes/admin.routes.js';
 import { requireAdmin } from './middleware/requireAdmin.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { connectDB } from './config/database.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
+app.set('trust proxy', 1);
 
 // ─── Security & Compression ────────────────────────────────────────────────────
 app.use(
@@ -29,12 +31,27 @@ app.use(
 app.use(compression());
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-const allowedOrigins = [env.CLIENT_URL, env.ADMIN_URL];
+const parseOrigins = (val) => {
+  if (!val) return [];
+  if (Array.isArray(val)) return val;
+  return val
+    .split(',')
+    .map((s) => s.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
+};
+
+const allowedOrigins = [
+  ...parseOrigins(env.CLIENT_URL),
+  ...parseOrigins(env.ADMIN_URL),
+];
+
 app.use(
   cors({
     origin: (origin, callback) => {
       // Allow server-to-server requests (no origin) and allowed origins
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin) return callback(null, true);
+      const normalized = origin.replace(/\/+$/, '');
+      if (allowedOrigins.includes(normalized)) {
         callback(null, true);
       } else {
         callback(new Error(`CORS policy: origin '${origin}' not allowed.`));
@@ -48,6 +65,16 @@ app.use(
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use(cookieParser());
+
+// ─── Lazy DB Connection ───────────────────────────────────────────────────────
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // ─── Logging ──────────────────────────────────────────────────────────────────
 if (env.NODE_ENV !== 'test') {
@@ -74,17 +101,19 @@ const authLimiter = rateLimit({
 
 app.use('/api', globalLimiter);
 
-// ─── Static uploads ───────────────────────────────────────────────────────────
-const uploadsDir = path.resolve(env.UPLOAD_DIR);
-app.use(
-  '/uploads',
-  express.static(uploadsDir, {
-    maxAge: '1y',
-    immutable: true,
-    etag: true,
-    lastModified: true,
-  })
-);
+// ─── Static uploads (local disk only) ─────────────────────────────────────────
+if (!env.BLOB_READ_WRITE_TOKEN) {
+  const uploadsDir = path.resolve(env.UPLOAD_DIR);
+  app.use(
+    '/uploads',
+    express.static(uploadsDir, {
+      maxAge: '1y',
+      immutable: true,
+      etag: true,
+      lastModified: true,
+    })
+  );
+}
 
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (_req, res) => {

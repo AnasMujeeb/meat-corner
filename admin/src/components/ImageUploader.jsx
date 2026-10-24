@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Upload, X, Star } from 'lucide-react';
 import { uploadApi } from '../api/endpoints.js';
+import { compressImage } from '../utils/imageCompressor.js';
 import toast from 'react-hot-toast';
 
 /**
@@ -28,7 +29,8 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
     try {
       const results = [];
       for (let i = 0; i < fileArr.length; i++) {
-        const result = await uploadApi.upload(fileArr[i], (p) => {
+        const compressed = await compressImage(fileArr[i]);
+        const result = await uploadApi.upload(compressed, (p) => {
           setProgress(Math.round(((i + p / 100) / fileArr.length) * 100));
         });
         results.push({ url: result.url, thumbUrl: result.thumbUrl, alt: '' });

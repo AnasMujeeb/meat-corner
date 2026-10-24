@@ -1,5 +1,22 @@
 import { z } from 'zod';
 
+const commaSeparatedUrls = z.string().refine(
+  (val) =>
+    val
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .every((s) => {
+        try {
+          new URL(s);
+          return true;
+        } catch {
+          return false;
+        }
+      }),
+  { message: 'Must be a valid URL or comma-separated list of valid URLs' }
+);
+
 const envSchema = z.object({
   PORT: z
     .string()
@@ -10,8 +27,8 @@ const envSchema = z.object({
   MONGODB_URI: z.string().url('MONGODB_URI must be a valid URI'),
   JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
   JWT_EXPIRES_IN: z.string().default('7d'),
-  CLIENT_URL: z.string().url('CLIENT_URL must be a valid URL'),
-  ADMIN_URL: z.string().url('ADMIN_URL must be a valid URL'),
+  CLIENT_URL: commaSeparatedUrls,
+  ADMIN_URL: commaSeparatedUrls,
   UPLOAD_DIR: z
     .string()
     .default('uploads')
@@ -19,6 +36,7 @@ const envSchema = z.object({
       (dir) => !dir.replace(/\\/g, '/').split('/').includes('src'),
       'UPLOAD_DIR must not be located within the src/ directory'
     ),
+  BLOB_READ_WRITE_TOKEN: z.string().optional(),
 });
 
 function validateEnv() {
@@ -28,8 +46,7 @@ function validateEnv() {
     const errors = result.error.errors
       .map((e) => `  • ${e.path.join('.')}: ${e.message}`)
       .join('\n');
-    console.error('❌  Environment validation failed:\n' + errors);
-    process.exit(1);
+    throw new Error(`Environment validation failed:\n${errors}`);
   }
 
   return result.data;

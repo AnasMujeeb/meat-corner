@@ -1,6 +1,7 @@
-﻿import { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Upload, X } from 'lucide-react';
 import { uploadApi } from '../api/endpoints.js';
+import { compressImage } from '../utils/imageCompressor.js';
 import toast from 'react-hot-toast';
 
 /**
@@ -22,7 +23,8 @@ export default function SingleImageUploader({ value = '', onChange, label = 'Ima
     setUploading(true);
     setProgress(0);
     try {
-      const result = await uploadApi.upload(file, (p) => setProgress(p));
+      const compressed = await compressImage(file);
+      const result = await uploadApi.upload(compressed, (p) => setProgress(p));
       onChange(result.url || '');
     } catch (err) {
       toast.error(err.message || 'Upload failed');

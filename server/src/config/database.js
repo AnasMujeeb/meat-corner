@@ -1,22 +1,35 @@
 import mongoose from 'mongoose';
 import { env } from './env.js';
 
-let isConnected = false;
+let cachedPromise = null;
 
 export async function connectDB() {
-  if (isConnected) return;
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
 
-  const conn = await mongoose.connect(env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000,
-  });
+  if (!cachedPromise) {
+    cachedPromise = mongoose
+      .connect(env.MONGODB_URI, {
+        serverSelectionTimeoutMS: 5000,
+      })
+      .then((m) => {
+        console.log(`✅  MongoDB connected: ${m.connection.host}`);
+        return m;
+      })
+      .catch((err) => {
+        cachedPromise = null;
+        throw err;
+      });
+  }
 
-  isConnected = true;
-  console.log(`✅  MongoDB connected: ${conn.connection.host}`);
+  await cachedPromise;
+  return mongoose.connection;
 }
 
 export async function disconnectDB() {
-  if (!isConnected) return;
+  if (mongoose.connection.readyState === 0) return;
   await mongoose.disconnect();
-  isConnected = false;
+  cachedPromise = null;
   console.log('🔌  MongoDB disconnected');
 }

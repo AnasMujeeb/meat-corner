@@ -10,7 +10,7 @@ import { env } from '../config/env.js';
 // ─── Multer configuration ─────────────────────────────────────────────────────
 
 const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'];
-const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8 MB
+const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB (Vercel body limit is 4.5 MB)
 
 const storage = multer.memoryStorage();
 
@@ -114,6 +114,20 @@ export const uploadImage = asyncHandler(async (req, res) => {
  */
 export const deleteUpload = asyncHandler(async (req, res) => {
   const { url } = req.body;
+  if (!url || typeof url !== 'string') {
+    throw createError(400, 'url is required.');
+  }
+
+  // Handle Blob / remote URLs
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    try {
+      new URL(url);
+    } catch {
+      throw createError(400, 'Invalid image URL.');
+    }
+    await deleteImage(url);
+    return res.json({ success: true, message: 'Image deleted.' });
+  }
 
   // resolveUploadUrl throws 400 for any invalid/traversal url
   const targetPath = resolveUploadUrl(url);
