@@ -22,18 +22,17 @@ export default function Img({
   let finalSrc = src;
   let srcSet;
 
-  if (typeof src === "string" && src.includes("/uploads/processed/")) {
+  if (typeof src === "string" && (src.includes("/uploads/") || src.startsWith("http") || thumbUrl)) {
     const isThumb = src.includes("_thumb.webp");
     const fullUrl = isThumb ? src.replace("_thumb.webp", ".webp") : src;
-    const thumb = thumbUrl || (isThumb ? src : src.replace(/\.webp$/, "_thumb.webp"));
+    const thumb = thumbUrl || (isThumb ? src : (src.endsWith(".webp") ? src.replace(/\.webp$/, "_thumb.webp") : src));
 
     // For cards/lists (non-priority), use thumbnail as default src with srcset
-    if (!priority) {
-      finalSrc = thumb;
+    if (thumb && fullUrl && thumb !== fullUrl) {
+      finalSrc = priority ? fullUrl : thumb;
       srcSet = `${thumb} 400w, ${fullUrl} 1200w`;
     } else {
-      finalSrc = fullUrl;
-      srcSet = `${thumb} 400w, ${fullUrl} 1200w`;
+      finalSrc = thumbUrl && !priority ? thumbUrl : fullUrl;
     }
   }
 

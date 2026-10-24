@@ -10,7 +10,8 @@
     "seed": "node src/seed/index.js",
     "clean": "node scripts/clean-db.mjs",
     "db:clean": "node scripts/clean-db.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "migrate:images": "node scripts/migrate-images-to-blob.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
