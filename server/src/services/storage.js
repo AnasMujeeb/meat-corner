@@ -126,7 +126,75 @@ export async function saveImage(buffer, baseName) {
 const SAFE_UPLOAD_URL_RE = /^\/uploads\/[A-Za-z0-9_-]+\.webp$/;
 
 /**
+ * Check whether an image URL (or its thumbnail variant) is referenced in the database
+ * by any MenuItem, Category, or SiteSettings record.
+ *
+ * @param {string} url - The URL or path to check
+ * @returns {Promise<boolean>}
+ */
+export async function isImageReferenced(url) {
+  if (!url || typeof url !== 'string') return false;
+
+  try {
+    const mongoose = (await import('mongoose')).default;
+    if (mongoose.connection.readyState !== 1) {
+      return false;
+    }
+
+    const MenuItem = mongoose.models.MenuItem || (await import('../models/MenuItem.js')).default;
+    const Category = mongoose.models.Category || (await import('../models/Category.js')).default;
+    const SiteSettings = mongoose.models.SiteSettings || (await import('../models/SiteSettings.js')).default;
+
+    const urlsToCheck = new Set();
+    const cleanUrl = url.trim();
+    urlsToCheck.add(cleanUrl);
+
+    try {
+      if (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) {
+        const u = new URL(cleanUrl);
+        urlsToCheck.add(`${u.origin}${u.pathname}`);
+        urlsToCheck.add(u.pathname);
+        urlsToCheck.add(u.pathname.replace(/^\/+/, ''));
+      }
+    } catch {}
+
+    for (const u of Array.from(urlsToCheck)) {
+      if (u.includes('_thumb.webp')) {
+        urlsToCheck.add(u.replace(/_thumb\.webp$/, '.webp'));
+      } else if (u.endsWith('.webp')) {
+        urlsToCheck.add(u.replace(/\.webp$/, '_thumb.webp'));
+      }
+    }
+
+    const urlList = Array.from(urlsToCheck);
+
+    const [inMenuItem, inCategory, inSiteSettings] = await Promise.all([
+      MenuItem.exists({
+        $or: [
+          { 'images.url': { $in: urlList } },
+          { 'images.thumbUrl': { $in: urlList } },
+        ],
+      }),
+      Category.exists({ image: { $in: urlList } }),
+      SiteSettings.exists({
+        $or: [
+          { logo: { $in: urlList } },
+          { heroPoster: { $in: urlList } },
+          { heroVideoUrl: { $in: urlList } },
+        ],
+      }),
+    ]);
+
+    return Boolean(inMenuItem || inCategory || inSiteSettings);
+  } catch (err) {
+    console.warn('⚠️  Failed to check if image is referenced:', err.message);
+    return true; // err on the side of caution
+  }
+}
+
+/**
  * Delete an image (and its corresponding thumb) from Blob storage or disk.
+ * Skips deletion if the image is still referenced by any menu item, category, or settings.
  *
  * @param {string} url - The URL returned by saveImage
  */
@@ -137,6 +205,10 @@ export async function deleteImage(url) {
   if (url.startsWith('http://') || url.startsWith('https://')) {
     if (!env.BLOB_READ_WRITE_TOKEN) return;
     try {
+      const referenced = await isImageReferenced(url);
+      if (referenced) {
+        return;
+      }
       const { del } = await import('@vercel/blob');
       const urlsToDelete = [url];
       if (!url.includes('_thumb.webp') && url.endsWith('.webp')) {

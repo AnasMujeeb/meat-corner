@@ -55,13 +55,18 @@ export const updateCategory = asyncHandler(async (req, res) => {
     category.name = name;
   }
 
-  // If image is being replaced or removed, delete old file from disk
-  if ('image' in rest && rest.image !== category.image && category.image) {
-    deleteImage(category.image).catch(() => {});
-  }
+  // If image is being replaced or removed, delete old file only after saving
+  const oldImageToDelete =
+    'image' in rest && rest.image !== category.image && category.image
+      ? category.image
+      : null;
 
   Object.assign(category, rest);
   await category.save();
+
+  if (oldImageToDelete) {
+    deleteImage(oldImageToDelete).catch(() => {});
+  }
 
   res.json({ success: true, data: category });
 });
@@ -79,12 +84,14 @@ export const deleteCategory = asyncHandler(async (req, res) => {
     );
   }
 
-  // Delete image files from disk (never crash if missing)
-  if (category.image) {
-    deleteImage(category.image).catch(() => {});
-  }
+  const oldImage = category.image;
 
   await category.deleteOne();
+
+  // Delete image files only if unreferenced
+  if (oldImage) {
+    deleteImage(oldImage).catch(() => {});
+  }
   res.json({ success: true, message: 'Category deleted.' });
 });
 

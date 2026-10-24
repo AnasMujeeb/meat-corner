@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import { asyncHandler } from '../middleware/asyncHandler.js';
 import { createError } from '../middleware/errorHandler.js';
-import { saveImage, deleteImage } from '../services/storage.js';
+import { saveImage, deleteImage, isImageReferenced } from '../services/storage.js';
 import { env } from '../config/env.js';
 
 // ─── Multer configuration ─────────────────────────────────────────────────────
@@ -132,6 +132,12 @@ export const deleteUpload = asyncHandler(async (req, res) => {
     } catch {
       throw createError(400, 'Invalid image URL.');
     }
+
+    const referenced = await isImageReferenced(url);
+    if (referenced) {
+      return res.json({ success: true, message: 'Image is in use; deletion skipped.' });
+    }
+
     await deleteImage(url);
     return res.json({ success: true, message: 'Image deleted.' });
   }
@@ -149,6 +155,11 @@ export const deleteUpload = asyncHandler(async (req, res) => {
     await fs.access(targetPath);
   } catch {
     throw createError(404, 'File not found.');
+  }
+
+  const referenced = await isImageReferenced(url);
+  if (referenced) {
+    return res.json({ success: true, message: 'Image is in use; deletion skipped.' });
   }
 
   await deleteImage(url);

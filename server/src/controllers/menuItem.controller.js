@@ -139,19 +139,20 @@ export const updateMenuItem = asyncHandler(async (req, res) => {
     item.category = category;
   }
 
-  // If images array is being replaced, delete old images no longer present
+  // If images array is being replaced, collect old images no longer present and delete only after saving
+  let oldImagesToDelete = [];
   if (images !== undefined) {
     const newUrls = new Set((images || []).map((img) => img.url));
-    for (const oldImg of item.images) {
-      if (!newUrls.has(oldImg.url)) {
-        deleteImage(oldImg.url).catch(() => {});
-      }
-    }
+    oldImagesToDelete = (item.images || []).filter((oldImg) => !newUrls.has(oldImg.url));
     item.images = images;
   }
 
   Object.assign(item, rest);
   await item.save();
+
+  for (const oldImg of oldImagesToDelete) {
+    deleteImage(oldImg.url).catch(() => {});
+  }
 
   const populated = await item.populate('category', 'name slug');
   res.json({ success: true, data: populated });
@@ -161,12 +162,17 @@ export const deleteMenuItem = asyncHandler(async (req, res) => {
   const item = await MenuItem.findById(req.params.id);
   if (!item) throw createError(404, 'Menu item not found.');
 
-  // Delete all associated image files from disk
-  for (const img of item.images) {
-    deleteImage(img.url).catch(() => {});
-  }
+  const imagesToDelete = item.images || [];
 
   await item.deleteOne();
+
+  // Delete associated image files only if unreferenced
+  for (const img of imagesToDelete) {
+    if (img?.url) {
+      deleteImage(img.url).catch(() => {});
+    }
+  }
+
   res.json({ success: true, message: 'Menu item deleted.' });
 });
 
