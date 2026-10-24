@@ -1,0 +1,29 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MEAT CORNER — Typography & Fonts
+   Space Mono for temporary monospace brand headings, Inter for body text.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import '@fontsource/space-mono';
+
+@font-face {
+  font-family: 'OCR A Extended';
+  src: url('../assets/fonts/ocraext.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OCRAEXT';
+  src: url('../assets/fonts/ocraext.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-heading: 'OCR A Extended', 'OCRAEXT', 'Space Mono', monospace;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Space Mono', 'OCR A Extended', monospace;
+}
+

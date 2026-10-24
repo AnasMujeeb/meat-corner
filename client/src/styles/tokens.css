@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MEAT CORNER — Design Tokens
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Colors */
+  --red: #b71930;
+  --red-hover: #941326;
+  --red2: #d84b59;
+  --ticker-border: #8e1023;
+  --ink: #121212;
+  --muted: #6f6a68;
+  --paper: #f7f3ee;
+  --white: #ffffff;
+  --line: #ded7d0;
+  --line-dark: #242424;
+
+  /* Footer Colors */
+  --footer-bg: #111111;
+  --footer-mega: #2c2c2c;
+  --footer-muted: #aaaaaa;
+  --footer-link: #eeeeee;
+
+  /* Sizing & Layout */
+  --navh: 82px;
+  --wrap-max: 1320px;
+  --wrap-pad: 24px;
+  --section-py: 100px;
+
+  /* Shadows */
+  --card-shadow: 0 7px 26px rgba(18, 18, 18, 0.07);
+  --card-shadow-hover: 0 18px 45px rgba(18, 18, 18, 0.08);
+  --topbar-shadow: 0 8px 28px rgba(18, 18, 18, 0.08);
+  --bottomnav-shadow: 0 -8px 24px rgba(18, 18, 18, 0.08);
+
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'OCR A Extended', 'OCRAEXT', 'Space Mono', monospace;
+
+  /* Transitions */
+  --ease: 0.22s ease;
+  --ease-slow: 0.4s ease;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --navh: 68px;
+    --wrap-pad: 14px;
+    --section-py: 62px;
+    --card-shadow: 0 4px 14px rgba(18, 18, 18, 0.07);
+  }
+}

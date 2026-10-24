@@ -1,0 +1,377 @@
+{
+  "angus-kofta-with-cheese": {
+    "url": "/uploads/processed/angus-kofta-with-cheese.webp",
+    "thumbUrl": "/uploads/processed/angus-kofta-with-cheese_thumb.webp",
+    "original": "Appetizers\\Angus Kofta with Cheese.jpg"
+  },
+  "cheesy-garlic-bread": {
+    "url": "/uploads/processed/cheesy-garlic-bread.webp",
+    "thumbUrl": "/uploads/processed/cheesy-garlic-bread_thumb.webp",
+    "original": "Appetizers\\Cheesy Garlic Bread.heic"
+  },
+  "fried-mozerella-cheese-balls": {
+    "url": "/uploads/processed/fried-mozerella-cheese-balls.webp",
+    "thumbUrl": "/uploads/processed/fried-mozerella-cheese-balls_thumb.webp",
+    "original": "Appetizers\\Fried Mozerella cheese balls.jpg"
+  },
+  "homemade-onion-rings": {
+    "url": "/uploads/processed/homemade-onion-rings.webp",
+    "thumbUrl": "/uploads/processed/homemade-onion-rings_thumb.webp",
+    "original": "Appetizers\\Homemade Onion Rings.heic"
+  },
+  "jalapeno-cheese-fries": {
+    "url": "/uploads/processed/jalapeno-cheese-fries.webp",
+    "thumbUrl": "/uploads/processed/jalapeno-cheese-fries_thumb.webp",
+    "original": "Appetizers\\Jalapeno Cheese Fries.jpg"
+  },
+  "jalapeno-mac-cheese-balls": {
+    "url": "/uploads/processed/jalapeno-mac-cheese-balls.webp",
+    "thumbUrl": "/uploads/processed/jalapeno-mac-cheese-balls_thumb.webp",
+    "original": "Appetizers\\Jalapeno Mac & Cheese Balls.jpg"
+  },
+  "meat-corner-nachos": {
+    "url": "/uploads/processed/meat-corner-nachos.webp",
+    "thumbUrl": "/uploads/processed/meat-corner-nachos_thumb.webp",
+    "original": "Appetizers\\Meat Corner Nachos.jpg"
+  },
+  "short-ribs-nachos": {
+    "url": "/uploads/processed/short-ribs-nachos.webp",
+    "thumbUrl": "/uploads/processed/short-ribs-nachos_thumb.webp",
+    "original": "Appetizers\\Short Ribs Nachos.jpg"
+  },
+  "spicy-angus-kofta-with-cheese": {
+    "url": "/uploads/processed/spicy-angus-kofta-with-cheese.webp",
+    "thumbUrl": "/uploads/processed/spicy-angus-kofta-with-cheese_thumb.webp",
+    "original": "Appetizers\\Spicy Angus Kofta with Cheese.jpg"
+  },
+  "wagyu-kofta-with-cheese": {
+    "url": "/uploads/processed/wagyu-kofta-with-cheese.webp",
+    "thumbUrl": "/uploads/processed/wagyu-kofta-with-cheese_thumb.webp",
+    "original": "Appetizers\\Wagyu Kofta with Cheese.jpg"
+  },
+  "wagyu-minced-beef-nachos": {
+    "url": "/uploads/processed/wagyu-minced-beef-nachos.webp",
+    "thumbUrl": "/uploads/processed/wagyu-minced-beef-nachos_thumb.webp",
+    "original": "Appetizers\\Wagyu Minced Beef Nachos.jpg"
+  },
+  "americano": {
+    "url": "/uploads/processed/americano.webp",
+    "thumbUrl": "/uploads/processed/americano_thumb.webp",
+    "original": "Drinks\\americano.jpg"
+  },
+  "blueberry-mojito": {
+    "url": "/uploads/processed/blueberry-mojito.webp",
+    "thumbUrl": "/uploads/processed/blueberry-mojito_thumb.webp",
+    "original": "Drinks\\Blueberry Mojito.HEIC"
+  },
+  "espresso": {
+    "url": "/uploads/processed/espresso.webp",
+    "thumbUrl": "/uploads/processed/espresso_thumb.webp",
+    "original": "Drinks\\espresso.jpg"
+  },
+  "fresh-orange-juice": {
+    "url": "/uploads/processed/fresh-orange-juice.webp",
+    "thumbUrl": "/uploads/processed/fresh-orange-juice_thumb.webp",
+    "original": "Drinks\\Fresh Orange Juice.HEIC"
+  },
+  "kinza-blackurrant": {
+    "url": "/uploads/processed/kinza-blackurrant.webp",
+    "thumbUrl": "/uploads/processed/kinza-blackurrant_thumb.webp",
+    "original": "Drinks\\Kinza Blackurrant.HEIC"
+  },
+  "kinza-cola-zero": {
+    "url": "/uploads/processed/kinza-cola-zero.webp",
+    "thumbUrl": "/uploads/processed/kinza-cola-zero_thumb.webp",
+    "original": "Drinks\\Kinza Cola Zero.HEIC"
+  },
+  "kinza-cola": {
+    "url": "/uploads/processed/kinza-cola.webp",
+    "thumbUrl": "/uploads/processed/kinza-cola_thumb.webp",
+    "original": "Drinks\\Kinza Cola.HEIC"
+  },
+  "kinza-lemon-zero": {
+    "url": "/uploads/processed/kinza-lemon-zero.webp",
+    "thumbUrl": "/uploads/processed/kinza-lemon-zero_thumb.webp",
+    "original": "Drinks\\Kinza Lemon Zero.HEIC"
+  },
+  "kinza-lemon": {
+    "url": "/uploads/processed/kinza-lemon.webp",
+    "thumbUrl": "/uploads/processed/kinza-lemon_thumb.webp",
+    "original": "Drinks\\Kinza Lemon.HEIC"
+  },
+  "kinza-orange": {
+    "url": "/uploads/processed/kinza-orange.webp",
+    "thumbUrl": "/uploads/processed/kinza-orange_thumb.webp",
+    "original": "Drinks\\Kinza Orange.HEIC"
+  },
+  "kinza-pomegrenate": {
+    "url": "/uploads/processed/kinza-pomegrenate.webp",
+    "thumbUrl": "/uploads/processed/kinza-pomegrenate_thumb.webp",
+    "original": "Drinks\\Kinza Pomegrenate.HEIC"
+  },
+  "mint-lemonade": {
+    "url": "/uploads/processed/mint-lemonade.webp",
+    "thumbUrl": "/uploads/processed/mint-lemonade_thumb.webp",
+    "original": "Drinks\\Mint Lemonade.HEIC"
+  },
+  "orange-raspberry-juice": {
+    "url": "/uploads/processed/orange-raspberry-juice.webp",
+    "thumbUrl": "/uploads/processed/orange-raspberry-juice_thumb.webp",
+    "original": "Drinks\\Orange Raspberry juice.HEIC"
+  },
+  "passion-fruit-mojito": {
+    "url": "/uploads/processed/passion-fruit-mojito.webp",
+    "thumbUrl": "/uploads/processed/passion-fruit-mojito_thumb.webp",
+    "original": "Drinks\\Passion Fruit Mojito.HEIC"
+  },
+  "strawberry-mojito": {
+    "url": "/uploads/processed/strawberry-mojito.webp",
+    "thumbUrl": "/uploads/processed/strawberry-mojito_thumb.webp",
+    "original": "Drinks\\Strawberry Mojito.HEIC"
+  },
+  "strawberry-rosehip-iced-tea": {
+    "url": "/uploads/processed/strawberry-rosehip-iced-tea.webp",
+    "thumbUrl": "/uploads/processed/strawberry-rosehip-iced-tea_thumb.webp",
+    "original": "Drinks\\Strawberry rosehip Iced Tea.HEIC"
+  },
+  "chicken-shawarma-bowl": {
+    "url": "/uploads/processed/chicken-shawarma-bowl.webp",
+    "thumbUrl": "/uploads/processed/chicken-shawarma-bowl_thumb.webp",
+    "original": "Healthy Dishes\\Chicken Shawarma Bowl.PNG"
+  },
+  "tenderloin-beef-shawarma-bowl": {
+    "url": "/uploads/processed/tenderloin-beef-shawarma-bowl.webp",
+    "thumbUrl": "/uploads/processed/tenderloin-beef-shawarma-bowl_thumb.webp",
+    "original": "Healthy Dishes\\Tenderloin Beef Shawarma Bowl.PNG"
+  },
+  "classic-salmon": {
+    "url": "/uploads/processed/classic-salmon.webp",
+    "thumbUrl": "/uploads/processed/classic-salmon_thumb.webp",
+    "original": "Main Courses\\Classic Salmon.jpg"
+  },
+  "fillet-mignon-steak-200g": {
+    "url": "/uploads/processed/fillet-mignon-steak-200g.webp",
+    "thumbUrl": "/uploads/processed/fillet-mignon-steak-200g_thumb.webp",
+    "original": "Main Courses\\Fillet Mignon Steak 200g.jpg"
+  },
+  "flamed-grilled-chicken-breast-220g": {
+    "url": "/uploads/processed/flamed-grilled-chicken-breast-220g.webp",
+    "thumbUrl": "/uploads/processed/flamed-grilled-chicken-breast-220g_thumb.webp",
+    "original": "Main Courses\\Flamed Grilled Chicken Breast 220g.jpg"
+  },
+  "lokum-steak": {
+    "url": "/uploads/processed/lokum-steak.webp",
+    "thumbUrl": "/uploads/processed/lokum-steak_thumb.webp",
+    "original": "Main Courses\\Lokum Steak.jpg"
+  },
+  "mexican-rice-chicken-bowl": {
+    "url": "/uploads/processed/mexican-rice-chicken-bowl.webp",
+    "thumbUrl": "/uploads/processed/mexican-rice-chicken-bowl_thumb.webp",
+    "original": "Main Courses\\Mexican Rice Chicken Bowl.jpg"
+  },
+  "ribeye-steak": {
+    "url": "/uploads/processed/ribeye-steak.webp",
+    "thumbUrl": "/uploads/processed/ribeye-steak_thumb.webp",
+    "original": "Main Courses\\Ribeye Steak.jpg"
+  },
+  "shashlik-tenderloin": {
+    "url": "/uploads/processed/shashlik-tenderloin.webp",
+    "thumbUrl": "/uploads/processed/shashlik-tenderloin_thumb.webp",
+    "original": "Main Courses\\Shashlik Tenderloin.jpg"
+  },
+  "striploin-steak": {
+    "url": "/uploads/processed/striploin-steak.webp",
+    "thumbUrl": "/uploads/processed/striploin-steak_thumb.webp",
+    "original": "Main Courses\\Striploin Steak .jpg"
+  },
+  "black-angus-ribeye-entrecote-steak": {
+    "url": "/uploads/processed/black-angus-ribeye-entrecote-steak.webp",
+    "thumbUrl": "/uploads/processed/black-angus-ribeye-entrecote-steak_thumb.webp",
+    "original": "Premium Speciality Steaks\\Black Angus Ribeye Entrecote Steak.jpg"
+  },
+  "black-angus-ribeye-steak": {
+    "url": "/uploads/processed/black-angus-ribeye-steak.webp",
+    "thumbUrl": "/uploads/processed/black-angus-ribeye-steak_thumb.webp",
+    "original": "Premium Speciality Steaks\\Black Angus Ribeye Steak.jpg"
+  },
+  "wagyu-ribeye-entrecote-steak": {
+    "url": "/uploads/processed/wagyu-ribeye-entrecote-steak.webp",
+    "thumbUrl": "/uploads/processed/wagyu-ribeye-entrecote-steak_thumb.webp",
+    "original": "Premium Speciality Steaks\\Wagyu Ribeye Entrecote Steak.jpg"
+  },
+  "wagyu-striploin-entrecote-steak": {
+    "url": "/uploads/processed/wagyu-striploin-entrecote-steak.webp",
+    "thumbUrl": "/uploads/processed/wagyu-striploin-entrecote-steak_thumb.webp",
+    "original": "Premium Speciality Steaks\\Wagyu Striploin Entrecote Steak.jpg"
+  },
+  "chicken-pasta-salad": {
+    "url": "/uploads/processed/chicken-pasta-salad.webp",
+    "thumbUrl": "/uploads/processed/chicken-pasta-salad_thumb.webp",
+    "original": "Salads\\Chicken Pasta Salad.HEIC"
+  },
+  "house-tenderloin-salad-100g": {
+    "url": "/uploads/processed/house-tenderloin-salad-100g.webp",
+    "thumbUrl": "/uploads/processed/house-tenderloin-salad-100g_thumb.webp",
+    "original": "Salads\\house tenderloin salad 100g.jpeg"
+  },
+  "meat-corner-salad": {
+    "url": "/uploads/processed/meat-corner-salad.webp",
+    "thumbUrl": "/uploads/processed/meat-corner-salad_thumb.webp",
+    "original": "Salads\\Meat Corner Salad.jpg"
+  },
+  "mexican-nachos-salad": {
+    "url": "/uploads/processed/mexican-nachos-salad.webp",
+    "thumbUrl": "/uploads/processed/mexican-nachos-salad_thumb.webp",
+    "original": "Salads\\Mexican Nachos Salad.jpg"
+  },
+  "philly-cheese-steak": {
+    "url": "/uploads/processed/philly-cheese-steak.webp",
+    "thumbUrl": "/uploads/processed/philly-cheese-steak_thumb.webp",
+    "original": "Sandwiches\\philly cheese steak.jpeg"
+  },
+  "tenderloin-shashlik-sandwich": {
+    "url": "/uploads/processed/tenderloin-shashlik-sandwich.webp",
+    "thumbUrl": "/uploads/processed/tenderloin-shashlik-sandwich_thumb.webp",
+    "original": "Sandwiches\\tenderloin shashlik sandwich.jpeg"
+  },
+  "truffle-mushroom-sandwich": {
+    "url": "/uploads/processed/truffle-mushroom-sandwich.webp",
+    "thumbUrl": "/uploads/processed/truffle-mushroom-sandwich_thumb.webp",
+    "original": "Sandwiches\\Truffle Mushroom sandwich.jpeg"
+  },
+  "wagyu-kofta-sandwich": {
+    "url": "/uploads/processed/wagyu-kofta-sandwich.webp",
+    "thumbUrl": "/uploads/processed/wagyu-kofta-sandwich_thumb.webp",
+    "original": "Sandwiches\\Wagyu Kofta sandwich.jpeg"
+  },
+  "chimichuri-sauce": {
+    "url": "/uploads/processed/chimichuri-sauce.webp",
+    "thumbUrl": "/uploads/processed/chimichuri-sauce_thumb.webp",
+    "original": "Sauces\\Chimichuri Sauce.PNG"
+  },
+  "cowboy-sauce": {
+    "url": "/uploads/processed/cowboy-sauce.webp",
+    "thumbUrl": "/uploads/processed/cowboy-sauce_thumb.webp",
+    "original": "Sauces\\Cowboy Sauce.HEIC"
+  },
+  "entrecote-sauce": {
+    "url": "/uploads/processed/entrecote-sauce.webp",
+    "thumbUrl": "/uploads/processed/entrecote-sauce_thumb.webp",
+    "original": "Sauces\\Entrecote Sauce.HEIC"
+  },
+  "homemade-jalapeno": {
+    "url": "/uploads/processed/homemade-jalapeno.webp",
+    "thumbUrl": "/uploads/processed/homemade-jalapeno_thumb.webp",
+    "original": "Sauces\\Homemade Jalapeno.jpg"
+  },
+  "homemade-pickled-onions": {
+    "url": "/uploads/processed/homemade-pickled-onions.webp",
+    "thumbUrl": "/uploads/processed/homemade-pickled-onions_thumb.webp",
+    "original": "Sauces\\Homemade Pickled Onions.heic"
+  },
+  "homemade-pickles": {
+    "url": "/uploads/processed/homemade-pickles.webp",
+    "thumbUrl": "/uploads/processed/homemade-pickles_thumb.webp",
+    "original": "Sauces\\Homemade Pickles.PNG"
+  },
+  "lemon-herbs-sauce": {
+    "url": "/uploads/processed/lemon-herbs-sauce.webp",
+    "thumbUrl": "/uploads/processed/lemon-herbs-sauce_thumb.webp",
+    "original": "Sauces\\Lemon & Herbs Sauce.PNG"
+  },
+  "lemon-pepper-sauce": {
+    "url": "/uploads/processed/lemon-pepper-sauce.webp",
+    "thumbUrl": "/uploads/processed/lemon-pepper-sauce_thumb.webp",
+    "original": "Sauces\\Lemon Pepper Sauce.heic"
+  },
+  "marinara-sauce": {
+    "url": "/uploads/processed/marinara-sauce.webp",
+    "thumbUrl": "/uploads/processed/marinara-sauce_thumb.webp",
+    "original": "Sauces\\Marinara Sauce.HEIC"
+  },
+  "mushroom-truffle-sauce": {
+    "url": "/uploads/processed/mushroom-truffle-sauce.webp",
+    "thumbUrl": "/uploads/processed/mushroom-truffle-sauce_thumb.webp",
+    "original": "Sauces\\Mushroom & Truffle sauce.heic"
+  },
+  "mushroom-sauce": {
+    "url": "/uploads/processed/mushroom-sauce.webp",
+    "thumbUrl": "/uploads/processed/mushroom-sauce_thumb.webp",
+    "original": "Sauces\\Mushroom Sauce.heic"
+  },
+  "nacho-cheese": {
+    "url": "/uploads/processed/nacho-cheese.webp",
+    "thumbUrl": "/uploads/processed/nacho-cheese_thumb.webp",
+    "original": "Sauces\\Nacho Cheese.heic"
+  },
+  "sour-cream": {
+    "url": "/uploads/processed/sour-cream.webp",
+    "thumbUrl": "/uploads/processed/sour-cream_thumb.webp",
+    "original": "Sauces\\Sour Cream.heic"
+  },
+  "special-bbq-sauce": {
+    "url": "/uploads/processed/special-bbq-sauce.webp",
+    "thumbUrl": "/uploads/processed/special-bbq-sauce_thumb.webp",
+    "original": "Sauces\\Special BBQ sauce.PNG"
+  },
+  "spicy-bbq-sauce": {
+    "url": "/uploads/processed/spicy-bbq-sauce.webp",
+    "thumbUrl": "/uploads/processed/spicy-bbq-sauce_thumb.webp",
+    "original": "Sauces\\Spicy BBQ Sauce.HEIC"
+  },
+  "spicy-shatta": {
+    "url": "/uploads/processed/spicy-shatta.webp",
+    "thumbUrl": "/uploads/processed/spicy-shatta_thumb.webp",
+    "original": "Sauces\\Spicy Shatta.HEIC"
+  },
+  "spicy-tahina": {
+    "url": "/uploads/processed/spicy-tahina.webp",
+    "thumbUrl": "/uploads/processed/spicy-tahina_thumb.webp",
+    "original": "Sauces\\Spicy Tahina.heic"
+  },
+  "steak-seasoning": {
+    "url": "/uploads/processed/steak-seasoning.webp",
+    "thumbUrl": "/uploads/processed/steak-seasoning_thumb.webp",
+    "original": "Sauces\\Steak Seasoning.PNG"
+  },
+  "tabasco-3-7ml": {
+    "url": "/uploads/processed/tabasco-3-7ml.webp",
+    "thumbUrl": "/uploads/processed/tabasco-3-7ml_thumb.webp",
+    "original": "Sauces\\Tabasco 3.7ml.HEIC"
+  },
+  "cajun-potato-wedges": {
+    "url": "/uploads/processed/cajun-potato-wedges.webp",
+    "thumbUrl": "/uploads/processed/cajun-potato-wedges_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Cajun potato wedges.heic"
+  },
+  "cheesy-baked-potato": {
+    "url": "/uploads/processed/cheesy-baked-potato.webp",
+    "thumbUrl": "/uploads/processed/cheesy-baked-potato_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Cheesy Baked Potato.heic"
+  },
+  "mac-cheese": {
+    "url": "/uploads/processed/mac-cheese.webp",
+    "thumbUrl": "/uploads/processed/mac-cheese_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Mac & Cheese.heic"
+  },
+  "mashed-potato": {
+    "url": "/uploads/processed/mashed-potato.webp",
+    "thumbUrl": "/uploads/processed/mashed-potato_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Mashed Potato.heic"
+  },
+  "mexican-rice": {
+    "url": "/uploads/processed/mexican-rice.webp",
+    "thumbUrl": "/uploads/processed/mexican-rice_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Mexican Rice.heic"
+  },
+  "potato-fries": {
+    "url": "/uploads/processed/potato-fries.webp",
+    "thumbUrl": "/uploads/processed/potato-fries_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Potato Fries.heic"
+  },
+  "sauted-vegetables": {
+    "url": "/uploads/processed/sauted-vegetables.webp",
+    "thumbUrl": "/uploads/processed/sauted-vegetables_thumb.webp",
+    "original": "Side Dishes\\Side Dishes\\Sauted vegetables.heic"
+  }
+}
