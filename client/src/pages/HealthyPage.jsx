@@ -6,7 +6,7 @@ import { HEALTHY_CONTENT } from "../content/healthy.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
-import balancedMealsImg from "../../pictures/balanced meals.jpeg";
+import balancedMealsImg from "../../pictures/balanced-meals.jpg";
 import {
   ScrollReveal,
   StaggerContainer,
@@ -64,8 +64,8 @@ export default function HealthyPage() {
         posterUrl={balancedMealsImg}
         fullHeight={true}
         contained={false}
-        imagePosition="center 64%"
-        imageScale={1.16}
+        imagePosition="52% 18%"
+        imageScale={1.03}
       />
 
       {/* ── Split Section: Balanced Options ────────────────────── */}
