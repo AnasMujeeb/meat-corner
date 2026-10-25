@@ -4,6 +4,7 @@ import { api } from "../api.js";
 import { useBranches, useSettings } from "../api/queries.js";
 import { CONTACT_CONTENT } from "../content/contact.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
+import getTouchedImg from "../../pictures/get touched updated.jpeg";
 import {
   ScrollReveal,
   StaggerContainer,
@@ -108,6 +109,12 @@ export default function ContactPage() {
         tag={CONTACT_CONTENT.reel.tag}
         title={CONTACT_CONTENT.reel.title}
         subtitle={CONTACT_CONTENT.reel.subtitle}
+        backgroundImage={getTouchedImg}
+        posterUrl={getTouchedImg}
+        fullHeight={true}
+        contained={false}
+        imagePosition="58% 30%"
+        imageScale={1.04}
       />
 
       {/* ── Locations Cards Section ─────────────────────────────── */}
