@@ -1,4 +1,4 @@
-﻿# DEPLOY_MAP — Meat Corner
+# DEPLOY_MAP — Meat Corner
 
 > Generated: 2026-10-24
 > Purpose: Full deployment audit before moving to production/Vercel.
@@ -212,7 +212,8 @@ All social icons (Instagram, TikTok, WhatsApp, Talabat, Snoonu, Keeta) are **inl
 | `family moments updated.jpeg` | 168 KB | `KidsPage.jsx` → PageMotionReel background | YES | No |
 | `family moments.jpeg` | 167 KB | not found in JSX imports | YES | No |
 | `kids.jpeg` | 302 KB | not found in JSX imports | YES | No |
-| `outside pic.jpeg` | 197 KB | `StoryPage.jsx` → img concept section | YES | No |
+| `our story.jpeg` | 443 KB | raw source photo | YES | No |
+| `our-story.webp` | 195 KB | `StoryPage.jsx` → img concept section | YES | No |
 
 #### client/src/assets/
 

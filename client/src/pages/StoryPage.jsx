@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { STORY_CONTENT } from "../content/story.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import craftsAtmosphereImg from "../../pictures/crafts and atmosphere.jpeg";
-import outsideImg from "../../pictures/outside pic.jpeg";
+import ourStoryImg from "../../pictures/our-story.webp";
 import {
   ScrollReveal,
   StaggerContainer,
@@ -120,10 +120,13 @@ export default function StoryPage() {
       <section className="story-split story-split--concept" aria-label="Our concept">
         <ScrollReveal className="story-split__media" delay={0.05} y={20}>
           <img
-            src={outsideImg}
-            alt="Meat Corner restaurant exterior"
+            src={ourStoryImg}
+            alt="Meat Corner restaurant storefront at night"
             loading="lazy"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            decoding="async"
+            width="1179"
+            height="1503"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 45%" }}
           />
         </ScrollReveal>
 
