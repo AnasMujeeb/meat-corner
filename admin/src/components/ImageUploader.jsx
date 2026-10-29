@@ -16,7 +16,16 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
   const [progress, setProgress] = useState(0);
 
   async function handleFiles(files) {
-    const fileArr = Array.from(files).filter((f) => f.type.startsWith('image/'));
+    const rawFiles = Array.from(files);
+    const hasHeic = rawFiles.some((f) => {
+      const ext = f.name ? f.name.slice(f.name.lastIndexOf('.')).toLowerCase() : '';
+      return ext === '.heic' || ext === '.heif' || f.type.includes('heic') || f.type.includes('heif');
+    });
+    if (hasHeic) {
+      toast.error('JPG ya PNG use karein (HEIC admin upload mein supported nahi hai).');
+      return;
+    }
+    const fileArr = rawFiles.filter((f) => f.type.startsWith('image/'));
     if (!fileArr.length) return;
     if (value.length + fileArr.length > maxImages) {
       toast.error(`Maximum ${maxImages} images allowed.`);
@@ -97,7 +106,7 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp,image/avif"
         multiple
         style={{ display: 'none' }}
         onChange={(e) => handleFiles(e.target.files)}

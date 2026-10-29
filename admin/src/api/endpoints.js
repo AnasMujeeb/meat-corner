@@ -132,3 +132,17 @@ export const importApi = {
       xhr.send(form);
     }),
 };
+
+export const optionsLibraryApi = {
+  list: (params) => {
+    const qs = new URLSearchParams(
+      Object.fromEntries(Object.entries(params || {}).filter(([, v]) => v !== undefined && v !== '' && v !== 'all'))
+    ).toString();
+    return api.get(`/admin/options-library${qs ? `?${qs}` : ''}`);
+  },
+  get: (id) => api.get(`/admin/options-library/${id}`),
+  create: (data) => api.post('/admin/options-library', data),
+  update: (id, data) => api.put(`/admin/options-library/${id}`, data),
+  delete: (id) => api.delete(`/admin/options-library/${id}`),
+};
+

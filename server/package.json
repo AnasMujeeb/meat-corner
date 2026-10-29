@@ -12,7 +12,8 @@
     "db:clean": "node scripts/clean-db.mjs",
     "smoke": "node scripts/smoke.mjs",
     "migrate:images": "node scripts/migrate-images-to-blob.mjs",
-    "restore:blobs": "node scripts/restore-missing-blobs.mjs"
+    "restore:blobs": "node scripts/restore-missing-blobs.mjs",
+    "seed:options": "node scripts/seed-options-library.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
@@ -35,5 +36,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "heic-convert": "^2.1.0"
   }
 }

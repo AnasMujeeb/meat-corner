@@ -32,6 +32,17 @@ import {
 import { upload, uploadImage, deleteUpload } from '../controllers/upload.controller.js';
 import { importUpload, importMenu, downloadImportTemplate } from '../controllers/import.controller.js';
 import { getStats } from '../controllers/stats.controller.js';
+import {
+  listOptionLibraryItems,
+  getOptionLibraryItem,
+  createOptionLibraryItem,
+  updateOptionLibraryItem,
+  deleteOptionLibraryItem,
+} from '../controllers/optionLibrary.controller.js';
+import {
+  createOptionLibraryItemSchema,
+  updateOptionLibraryItemSchema,
+} from '../validators/optionLibrary.validators.js';
 import { validate } from '../middleware/validate.js';
 import { createCategorySchema, updateCategorySchema, reorderCategoriesSchema } from '../validators/category.validators.js';
 import { createMenuItemSchema, updateMenuItemSchema, adminMenuQuerySchema } from '../validators/menuItem.validators.js';
@@ -82,5 +93,12 @@ router.put('/settings', validate(updateSettingsSchema), adminUpdateSettings);
 router.get('/submissions', validate(submissionQuerySchema, 'query'), listSubmissions);
 router.patch('/submissions/:id/status', validate(submissionStatusSchema), updateSubmissionStatus);
 router.delete('/submissions/:id', deleteSubmission);
+
+// ─── Option Library ────────────────────────────────────────────────────────────
+router.get('/options-library', listOptionLibraryItems);
+router.get('/options-library/:id', getOptionLibraryItem);
+router.post('/options-library', validate(createOptionLibraryItemSchema), createOptionLibraryItem);
+router.put('/options-library/:id', validate(updateOptionLibraryItemSchema), updateOptionLibraryItem);
+router.delete('/options-library/:id', deleteOptionLibraryItem);
 
 export default router;

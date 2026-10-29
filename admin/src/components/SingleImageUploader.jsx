@@ -16,7 +16,13 @@ export default function SingleImageUploader({ value = '', onChange, label = 'Ima
   const [progress, setProgress] = useState(0);
 
   async function handleFile(file) {
-    if (!file || !file.type.startsWith('image/')) {
+    if (!file) return;
+    const ext = file.name ? file.name.slice(file.name.lastIndexOf('.')).toLowerCase() : '';
+    if (ext === '.heic' || ext === '.heif' || file.type.includes('heic') || file.type.includes('heif')) {
+      toast.error('JPG ya PNG use karein (HEIC admin upload mein supported nahi hai).');
+      return;
+    }
+    if (!file.type.startsWith('image/')) {
       toast.error('Please select an image file.');
       return;
     }
@@ -104,7 +110,7 @@ export default function SingleImageUploader({ value = '', onChange, label = 'Ima
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp,image/avif"
         style={{ display: 'none' }}
         onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
         aria-hidden="true"

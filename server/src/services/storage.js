@@ -144,6 +144,7 @@ export async function isImageReferenced(url) {
     const MenuItem = mongoose.models.MenuItem || (await import('../models/MenuItem.js')).default;
     const Category = mongoose.models.Category || (await import('../models/Category.js')).default;
     const SiteSettings = mongoose.models.SiteSettings || (await import('../models/SiteSettings.js')).default;
+    const OptionLibraryItem = mongoose.models.OptionLibraryItem || (await import('../models/OptionLibraryItem.js')).default;
 
     const urlsToCheck = new Set();
     const cleanUrl = url.trim();
@@ -168,11 +169,13 @@ export async function isImageReferenced(url) {
 
     const urlList = Array.from(urlsToCheck);
 
-    const [inMenuItem, inCategory, inSiteSettings] = await Promise.all([
+    const [inMenuItem, inCategory, inSiteSettings, inOptionLibrary] = await Promise.all([
       MenuItem.exists({
         $or: [
           { 'images.url': { $in: urlList } },
           { 'images.thumbUrl': { $in: urlList } },
+          { 'options.choices.image.url': { $in: urlList } },
+          { 'options.choices.image.thumbUrl': { $in: urlList } },
         ],
       }),
       Category.exists({ image: { $in: urlList } }),
@@ -183,9 +186,15 @@ export async function isImageReferenced(url) {
           { heroVideoUrl: { $in: urlList } },
         ],
       }),
+      OptionLibraryItem.exists({
+        $or: [
+          { 'image.url': { $in: urlList } },
+          { 'image.thumbUrl': { $in: urlList } },
+        ],
+      }),
     ]);
 
-    return Boolean(inMenuItem || inCategory || inSiteSettings);
+    return Boolean(inMenuItem || inCategory || inSiteSettings || inOptionLibrary);
   } catch (err) {
     console.warn('⚠️  Failed to check if image is referenced:', err.message);
     return true; // err on the side of caution

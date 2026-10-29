@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
@@ -14,6 +14,7 @@ import {
   X,
   ChefHat,
   FileUp,
+  Layers,
 } from 'lucide-react';
 import { authApi, statsApi } from '../api/endpoints.js';
 import { useAuth } from '../hooks/useAuth.js';
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/categories', icon: Tag, label: 'Categories' },
   { to: '/menu', icon: UtensilsCrossed, label: 'Menu Items' },
+  { to: '/options-library', icon: Layers, label: 'Options Library' },
   { to: '/menu/import', icon: FileUp, label: 'Import Menu' },
   { to: '/branches', icon: GitBranchPlus, label: 'Branches' },
   { to: '/submissions', icon: MessageSquare, label: 'Submissions', badge: true },

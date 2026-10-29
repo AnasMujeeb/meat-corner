@@ -4,13 +4,66 @@ import { useCart } from "../hooks/useCart.js";
 function getInitialSelections(item) {
   const init = {};
   (item?.options || []).forEach((opt) => {
-    if (opt.type === "single" && opt.choices.length > 0) {
+    // Pre-select first choice only for text-based single required groups (like steak doneness)
+    if (
+      opt.type === "single" &&
+      opt.groupType !== "photo" &&
+      opt.required &&
+      opt.choices?.length > 0
+    ) {
       init[opt.name] = opt.choices[0].label;
+    } else if (opt.type === "single") {
+      init[opt.name] = "";
     } else {
       init[opt.name] = [];
     }
   });
   return init;
+}
+
+function getGroupHint(opt, selections) {
+  const sel = selections[opt.name];
+  const isSingle = opt.type === "single";
+  const target = isSingle ? 1 : (opt.maxSelections || opt.choices.length || 1);
+  const count = isSingle ? (sel ? 1 : 0) : (Array.isArray(sel) ? sel.length : 0);
+
+  if (count >= target && target > 0) {
+    return { text: "Done ✓", state: "done" };
+  }
+
+  if (opt.required) {
+    const remaining = target - count;
+    if (count === 0) {
+      return { text: target === 1 ? "Choose 1" : `Choose ${target}`, state: "pending" };
+    }
+    return {
+      text: remaining === 1 ? "Choose 1 more" : `Choose ${remaining} more`,
+      state: "progress",
+    };
+  }
+
+  if (target > 1) {
+    return { text: `Choose up to ${target}`, state: "optional" };
+  }
+  return { text: "Optional", state: "optional" };
+}
+
+function isGroupComplete(opt, selections) {
+  if (!opt.required) return true;
+  const sel = selections[opt.name];
+  if (opt.type === "single") {
+    return Boolean(sel && typeof sel === "string" && sel.trim() !== "");
+  }
+  const target = opt.maxSelections || 1;
+  return Array.isArray(sel) && sel.length >= target;
+}
+
+function isChoiceDisabled(opt, choiceLabel, selections) {
+  if (opt.type === "single") return false;
+  const cur = selections[opt.name] || [];
+  const max = opt.maxSelections || opt.choices.length || 999;
+  const isSelected = cur.includes(choiceLabel);
+  return !isSelected && cur.length >= max;
 }
 
 export default function ItemModal({ item, categoryName, onClose }) {
@@ -27,11 +80,26 @@ export default function ItemModal({ item, categoryName, onClose }) {
       }
     }
     document.addEventListener("keydown", handleKeyDown);
+
+    // Freeze background body scroll position for iOS Safari and mobile browsers
+    const scrollY = window.scrollY;
     const prevOverflow = document.body.style.overflow;
+    const prevPosition = document.body.style.position;
+    const prevTop = document.body.style.top;
+    const prevWidth = document.body.style.width;
+
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = prevOverflow;
+      document.body.style.position = prevPosition;
+      document.body.style.top = prevTop;
+      document.body.style.width = prevWidth;
+      window.scrollTo(0, scrollY);
     };
   }, [onClose]);
 
@@ -52,18 +120,24 @@ export default function ItemModal({ item, categoryName, onClose }) {
 
   const totalPrice = (item.price + extraPrice) * qty;
 
-  function toggleChoice(optName, choiceLabel, type) {
+  function toggleChoice(opt, choiceLabel) {
     setSelections((prev) => {
-      if (type === "single") {
-        return { ...prev, [optName]: choiceLabel };
+      if (opt.type === "single") {
+        if (prev[opt.name] === choiceLabel && !opt.required) {
+          return { ...prev, [opt.name]: "" };
+        }
+        return { ...prev, [opt.name]: choiceLabel };
       } else {
-        const cur = prev[optName] || [];
-        return {
-          ...prev,
-          [optName]: cur.includes(choiceLabel)
-            ? cur.filter((l) => l !== choiceLabel)
-            : [...cur, choiceLabel],
-        };
+        const cur = prev[opt.name] || [];
+        const max = opt.maxSelections || opt.choices.length || 999;
+        if (cur.includes(choiceLabel)) {
+          return { ...prev, [opt.name]: cur.filter((l) => l !== choiceLabel) };
+        } else {
+          if (cur.length >= max) {
+            return prev;
+          }
+          return { ...prev, [opt.name]: [...cur, choiceLabel] };
+        }
       }
     });
   }
@@ -74,22 +148,20 @@ export default function ItemModal({ item, categoryName, onClose }) {
       const sel = selections[opt.name];
       if (Array.isArray(sel) && sel.length > 0) {
         parts.push(`${opt.name}: ${sel.join(", ")}`);
-      } else if (typeof sel === "string" && sel) {
+      } else if (typeof sel === "string" && sel.trim()) {
         parts.push(`${opt.name}: ${sel}`);
       }
     });
     return parts.join(" · ");
   }
 
+  const allRequiredSatisfied = (item.options || []).every((opt) =>
+    isGroupComplete(opt, selections)
+  );
+
   function handleAdd() {
-    for (const opt of item.options || []) {
-      if (opt.required) {
-        const sel = selections[opt.name];
-        if (!sel || (Array.isArray(sel) && sel.length === 0)) {
-          alert(`Please select ${opt.name}`);
-          return;
-        }
-      }
+    if (!allRequiredSatisfied) {
+      return;
     }
     for (let i = 0; i < qty; i++) {
       addItem({
@@ -129,34 +201,37 @@ export default function ItemModal({ item, categoryName, onClose }) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className="item-modal" role="dialog" aria-modal="true" aria-label={item.name}>
-        {/* Modal Image */}
-        <div className="item-modal__img-container">
-          {imgSrc ? (
-            <img
-              src={imgSrc}
-              alt={imgAlt}
-              className="item-modal__img"
-              width="580"
-              height="326"
-              decoding="async"
-              loading="eager"
-            />
-          ) : (
-            <div className="item-modal__img-placeholder">
-              <span>MEAT CORNER</span>
-            </div>
-          )}
-          <button
-            onClick={onClose}
-            className="item-modal__close-btn"
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
+        {/* Pinned close button on top-right of popup */}
+        <button
+          onClick={onClose}
+          className="item-modal__close-btn"
+          aria-label="Close"
+        >
+          ✕
+        </button>
 
         <div className="item-modal__body">
-          <div className="item-modal__header">
+          {/* Modal Image inside scrollable body */}
+          <div className="item-modal__img-container">
+            {imgSrc ? (
+              <img
+                src={imgSrc}
+                alt={imgAlt}
+                className="item-modal__img"
+                width="580"
+                height="326"
+                decoding="async"
+                loading="eager"
+              />
+            ) : (
+              <div className="item-modal__img-placeholder">
+                <span>MEAT CORNER</span>
+              </div>
+            )}
+          </div>
+
+          <div className="item-modal__content">
+            <div className="item-modal__header">
             <div>
               {categoryName && <span className="item-modal__category">{categoryName}</span>}
               <h2 className="item-modal__name">{item.name}</h2>
@@ -230,51 +305,110 @@ export default function ItemModal({ item, categoryName, onClose }) {
             </details>
           )}
 
-          {/* Options */}
-          {(item.options || []).map((opt) => (
-            <div key={opt.name} className="item-modal__option-group">
-              <div className="item-modal__option-title">
-                {opt.name}
-                {opt.required && <span>REQUIRED</span>}
-              </div>
-              {opt.choices.map((choice) => {
-                const sel = selections[opt.name];
-                const isSelected =
-                  opt.type === "single"
-                    ? sel === choice.label
-                    : (sel || []).includes(choice.label);
-                return (
-                  <div
-                    key={choice.label}
-                    className="option-choice"
-                    onClick={() => toggleChoice(opt.name, choice.label, opt.type)}
-                    role={opt.type === "single" ? "radio" : "checkbox"}
-                    aria-checked={isSelected}
-                    tabIndex={0}
-                    onKeyDown={(e) =>
-                      e.key === "Enter" && toggleChoice(opt.name, choice.label, opt.type)
-                    }
-                  >
-                    <div className="option-choice__left">
-                      <div
-                        className={
-                          opt.type === "single"
-                            ? `option-choice__radio${isSelected ? " selected" : ""}`
-                            : `option-choice__check${isSelected ? " selected" : ""}`
-                        }
-                      >
-                        {isSelected && opt.type === "multiple" && "✓"}
-                      </div>
-                      <span className="option-choice__label">{choice.label}</span>
-                    </div>
-                    {choice.extraPrice > 0 && (
-                      <span className="option-choice__extra">+QAR {choice.extraPrice}</span>
-                    )}
+          {/* Option Groups */}
+          {(item.options || []).map((opt) => {
+            const isPhotoGroup = opt.groupType === "photo";
+            const isSingle = opt.type === "single";
+            const sel = selections[opt.name];
+            const hint = getGroupHint(opt, selections);
+
+            return (
+              <div key={opt.name} className="item-modal__option-group">
+                <div className="item-modal__option-header">
+                  <div className="item-modal__option-title">
+                    <span>{opt.name}</span>
+                    {opt.required && <span className="badge-required">REQUIRED</span>}
                   </div>
-                );
-              })}
-            </div>
-          ))}
+                  <div className={`option-hint-badge option-hint-badge--${hint.state}`}>
+                    {hint.text}
+                  </div>
+                </div>
+
+                {/* Photo-based 3-Column Grid */}
+                {isPhotoGroup ? (
+                  <div className="item-modal__photo-grid" role="group" aria-label={opt.name}>
+                    {opt.choices.map((choice) => {
+                      const isSelected = isSingle
+                        ? sel === choice.label
+                        : (sel || []).includes(choice.label);
+                      const disabled = isChoiceDisabled(opt, choice.label, selections);
+                      const imgUrl = choice.image?.thumbUrl || choice.image?.url;
+
+                      return (
+                        <button
+                          key={choice.label}
+                          type="button"
+                          className={`photo-option-tile${isSelected ? " selected" : ""}${disabled ? " disabled" : ""}`}
+                          onClick={() => !disabled && toggleChoice(opt, choice.label)}
+                          disabled={disabled}
+                          role={isSingle ? "radio" : "checkbox"}
+                          aria-checked={isSelected}
+                          aria-disabled={disabled}
+                        >
+                          <div className="photo-option-tile__img-wrap">
+                            {imgUrl ? (
+                              <img
+                                src={imgUrl}
+                                alt={choice.label}
+                                className="photo-option-tile__img"
+                                loading="lazy"
+                                decoding="async"
+                                width="140"
+                                height="140"
+                              />
+                            ) : (
+                              <div className="photo-option-tile__placeholder">
+                                <span>{choice.label.slice(0, 4).toUpperCase()}</span>
+                              </div>
+                            )}
+                            <div className={`photo-option-tile__check${isSelected ? " selected" : ""}`}>
+                              {isSelected ? "✓" : ""}
+                            </div>
+                          </div>
+                          <span className="photo-option-tile__name">{choice.label}</span>
+                          {choice.extraPrice > 0 && (
+                            <span className="photo-option-tile__extra">+QAR {choice.extraPrice}</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* Text-only Group (Doneness / Chips) */
+                  <div className="item-modal__text-grid" role="group" aria-label={opt.name}>
+                    {opt.choices.map((choice) => {
+                      const isSelected = isSingle
+                        ? sel === choice.label
+                        : (sel || []).includes(choice.label);
+                      const disabled = isChoiceDisabled(opt, choice.label, selections);
+
+                      return (
+                        <button
+                          key={choice.label}
+                          type="button"
+                          className={`text-choice-tile${isSelected ? " selected" : ""}${disabled ? " disabled" : ""}`}
+                          onClick={() => !disabled && toggleChoice(opt, choice.label)}
+                          disabled={disabled}
+                          role={isSingle ? "radio" : "checkbox"}
+                          aria-checked={isSelected}
+                          aria-disabled={disabled}
+                        >
+                          <span className={`text-choice-tile__indicator${isSelected ? " selected" : ""}`}>
+                            {isSelected ? "✓" : ""}
+                          </span>
+                          <span className="text-choice-tile__label">{choice.label}</span>
+                          {choice.extraPrice > 0 && (
+                            <span className="text-choice-tile__extra">+QAR {choice.extraPrice}</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          </div>
         </div>
 
         <div className="item-modal__footer">
@@ -297,11 +431,19 @@ export default function ItemModal({ item, categoryName, onClose }) {
           </div>
           <button
             className={`btn ${added ? "btn--outline" : "btn--primary"}`}
-            style={{ flex: 1 }}
+            style={{
+              flex: 1,
+              opacity: !allRequiredSatisfied && !added ? 0.65 : 1,
+              cursor: !allRequiredSatisfied && !added ? "not-allowed" : "pointer",
+            }}
             onClick={handleAdd}
-            disabled={added}
+            disabled={!allRequiredSatisfied || added}
           >
-            {added ? "ADDED ✓" : `ADD TO CART — QAR ${totalPrice}`}
+            {added
+              ? "ADDED ✓"
+              : allRequiredSatisfied
+              ? `ADD TO CART — QAR ${totalPrice}`
+              : "Select required to add item"}
           </button>
         </div>
       </div>

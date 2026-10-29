@@ -15,6 +15,10 @@ const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB (Vercel body limit is 4.5 MB)
 const storage = multer.memoryStorage();
 
 const fileFilter = (_req, file, cb) => {
+  const ext = path.extname(file.originalname || '').toLowerCase();
+  if (ext === '.heic' || ext === '.heif' || file.mimetype.includes('heic') || file.mimetype.includes('heif')) {
+    return cb(createError(400, 'JPG ya PNG use karein (HEIC admin upload mein supported nahi hai).'));
+  }
   if (ALLOWED_MIME.includes(file.mimetype)) {
     cb(null, true);
   } else {

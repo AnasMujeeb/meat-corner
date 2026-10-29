@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { imageSourceSchema } from './common.validators.js';
+import { imageSourceSchema, optionalImageSourceSchema } from './common.validators.js';
 
 const optionalNutritionNumber = z.preprocess((val) => {
   if (val === '' || val === null || val === undefined) return undefined;
@@ -25,11 +25,24 @@ const choiceSchema = z.object({
     (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
     z.number({ invalid_type_error: 'Extra price must be a number.' }).min(0).optional().default(0)
   ),
+  image: z
+    .object({
+      url: optionalImageSourceSchema,
+      thumbUrl: optionalImageSourceSchema,
+    })
+    .optional()
+    .default({ url: '', thumbUrl: '' }),
+  libraryItemId: z.string().nullable().optional().default(null),
 });
 
 const optionSchema = z.object({
   name: z.string().min(1, 'Option group name is required.'),
   type: z.enum(['single', 'multiple']),
+  groupType: z.enum(['text', 'photo']).optional().default('text'),
+  maxSelections: z.preprocess(
+    (v) => (v === '' || v === null || v === undefined ? 1 : Number(v)),
+    z.number({ invalid_type_error: 'Must be a number.' }).int().min(1).optional().default(1)
+  ),
   required: z.coerce.boolean().optional().default(false),
   choices: z.array(choiceSchema).min(1, 'Option must have at least one choice.'),
 });

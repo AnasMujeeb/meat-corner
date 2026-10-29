@@ -24,6 +24,15 @@ const choiceSchema = new mongoose.Schema(
   {
     label: { type: String, required: true, trim: true },
     extraPrice: { type: Number, default: 0 },
+    image: {
+      url: { type: String, default: '' },
+      thumbUrl: { type: String, default: '' },
+    },
+    libraryItemId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'OptionLibraryItem',
+      default: null,
+    },
   },
   { _id: false }
 );
@@ -32,6 +41,8 @@ const optionSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     type: { type: String, enum: ['single', 'multiple'], required: true },
+    groupType: { type: String, enum: ['text', 'photo'], default: 'text' },
+    maxSelections: { type: Number, default: 1 },
     required: { type: Boolean, default: false },
     choices: { type: [choiceSchema], default: [] },
   },

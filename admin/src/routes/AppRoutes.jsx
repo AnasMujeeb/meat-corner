@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
@@ -12,6 +12,7 @@ const MenuImportPage = lazy(() => import('../pages/MenuImportPage.jsx'));
 const BranchesPage = lazy(() => import('../pages/BranchesPage.jsx'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage.jsx'));
 const SubmissionsPage = lazy(() => import('../pages/SubmissionsPage.jsx'));
+const OptionsLibraryPage = lazy(() => import('../pages/OptionsLibraryPage.jsx'));
 
 function PageLoader() {
   return (
@@ -35,6 +36,7 @@ export default function AppRoutes() {
             <Route path="/menu/new" element={<MenuFormPage />} />
             <Route path="/menu/import" element={<MenuImportPage />} />
             <Route path="/menu/:id/edit" element={<MenuFormPage />} />
+            <Route path="/options-library" element={<OptionsLibraryPage />} />
             <Route path="/branches" element={<BranchesPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/submissions" element={<SubmissionsPage />} />
