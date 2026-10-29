@@ -1721,6 +1721,95 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff !important;
 }
 
+/* ── Menu Badge Filter Banner ──────────────────────────────────────────────── */
+.menu-badge-banner {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  position: sticky;
+  top: var(--navh, 64px);
+  z-index: 30;
+}
+
+.menu-badge-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.menu-badge-banner__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.menu-badge-banner__label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.menu-badge-banner__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1.5px solid var(--ink);
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.menu-badge-banner__icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.menu-badge-banner__title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.menu-badge-banner__clear {
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  padding: 6px 14px;
+  min-height: 38px;
+  border-radius: 0;
+}
+
+@media (max-width: 760px) {
+  .menu-badge-banner {
+    padding: 10px 0;
+  }
+  .menu-badge-banner__inner {
+    gap: 10px;
+  }
+  .menu-badge-banner__label {
+    font-size: 12px;
+  }
+  .menu-badge-banner__chip {
+    padding: 4px 10px;
+  }
+  .menu-badge-banner__title {
+    font-size: 12.5px;
+  }
+  .menu-badge-banner__clear {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
 /* ── Menu Section Spacing ─────────────────────────────────────────────────── */
 .site-section--menu-list {
   padding-top: 24px;
@@ -2016,6 +2105,72 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+.food-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.food-card__title-row .food-card__name {
+  margin-bottom: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.food-card__badges {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  margin-top: -8px;
+  margin-right: -6px;
+}
+
+.food-card__badge-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.food-card__badge-btn:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: scale(1.08);
+}
+
+.food-card__badge-btn:active {
+  transform: scale(0.96);
+}
+
+.food-card__badge-btn:focus-visible {
+  outline: 2px solid var(--red, #b31b1b);
+  outline-offset: 2px;
+}
+
+.food-card__badge-icon {
+  width: 26px;
+  height: 26px;
+  max-width: 28px;
+  max-height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
 @media (max-width: 760px) {
   .food-card__name {
     font-size: 12.5px;
@@ -2267,6 +2422,65 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: var(--ink);
   line-height: 1.15;
+}
+
+.item-modal__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.item-modal__title-row .item-modal__name {
+  margin-bottom: 0;
+}
+
+.item-modal__badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.item-modal__badge-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.item-modal__badge-btn:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  transform: scale(1.08);
+}
+
+.item-modal__badge-btn:active {
+  transform: scale(0.96);
+}
+
+.item-modal__badge-btn:focus-visible {
+  outline: 2px solid var(--red, #b31b1b);
+  outline-offset: 2px;
+}
+
+.item-modal__badge-icon {
+  width: 26px;
+  height: 26px;
+  max-width: 28px;
+  max-height: 28px;
+  object-fit: contain;
+  display: block;
 }
 
 .item-modal__price {

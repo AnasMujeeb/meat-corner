@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import ItemModal from "./ItemModal.jsx";
+import { BADGES } from "../constants/badges.js";
 
 /**
  * Shared Food Card component used across Home, Menu, Healthy, and Kids pages.
@@ -14,11 +16,22 @@ export default function FoodCard({
   categoryName,
   onSelect,
   onAdd,
+  onBadgeClick,
 }) {
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [internalModalOpen, setInternalModalOpen] = useState(false);
 
   if (!item) return null;
+
+  function handleBadgeClick(badgeId, e) {
+    e.stopPropagation();
+    if (onBadgeClick) {
+      onBadgeClick(badgeId);
+    } else {
+      navigate(`/menu?badge=${encodeURIComponent(badgeId)}`);
+    }
+  }
 
   const rawImg = item.images?.[0];
   const thumbUrl = typeof rawImg === "object" ? (rawImg?.thumbUrl || "") : "";
@@ -107,7 +120,48 @@ export default function FoodCard({
           {categoryTitle && (
             <span className="food-card__category">{categoryTitle}</span>
           )}
-          <h3 className="food-card__name">{item.name}</h3>
+          <div className="food-card__title-row">
+            <h3 className="food-card__name">{item.name}</h3>
+            {Array.isArray(item.badges) && item.badges.length > 0 && (
+              <div
+                className="food-card__badges"
+                role="group"
+                aria-label="Item badges"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {item.badges.map((bId) => {
+                  const b = BADGES[bId];
+                  if (!b) return null;
+                  return (
+                    <button
+                      key={b.id}
+                      type="button"
+                      className="food-card__badge-btn"
+                      aria-label={b.label}
+                      title={b.label}
+                      onClick={(e) => handleBadgeClick(b.id, e)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.stopPropagation();
+                        }
+                      }}
+                    >
+                      <img
+                        src={b.icon}
+                        alt=""
+                        aria-hidden="true"
+                        className="food-card__badge-icon"
+                        width="28"
+                        height="28"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
           <div className="food-card__footer">
             <span className="food-card__price">QAR {priceFormatted}</span>
@@ -127,6 +181,7 @@ export default function FoodCard({
         <ItemModal
           item={item}
           categoryName={categoryTitle}
+          onBadgeClick={onBadgeClick}
           onClose={() => setInternalModalOpen(false)}
         />
       )}

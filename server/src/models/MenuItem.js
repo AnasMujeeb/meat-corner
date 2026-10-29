@@ -96,6 +96,12 @@ const menuItemSchema = new mongoose.Schema(
       default: [],
       index: true,
     },
+    badges: {
+      type: [String],
+      enum: ['wagyu', 'chicken', 'healthy', 'fish'],
+      default: [],
+      index: true,
+    },
     options: {
       type: [optionSchema],
       default: [],

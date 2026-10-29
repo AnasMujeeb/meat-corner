@@ -65,6 +65,7 @@ export const createMenuItemSchema = z.object({
   nutrition: nutritionSchema,
   allergens: z.array(z.string()).nullable().optional().transform((v) => v ?? []),
   tags: z.array(z.string()).nullable().optional().transform((v) => v ?? []),
+  badges: z.array(z.enum(['wagyu', 'chicken', 'healthy', 'fish'])).nullable().optional().transform((v) => v ?? []),
   options: z.array(optionSchema).nullable().optional().transform((v) => v ?? []),
   isAvailable: z.coerce.boolean().optional().default(true),
   order: z.coerce.number().int().min(0).optional().default(0),
@@ -75,6 +76,7 @@ export const updateMenuItemSchema = createMenuItemSchema.partial();
 export const menuQuerySchema = z.object({
   category: z.string().optional(),
   tag: z.string().optional(),
+  badge: z.string().optional(),
   q: z.string().optional(),
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),

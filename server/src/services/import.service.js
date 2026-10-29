@@ -190,6 +190,11 @@ export async function importMenuItems(buffer, mimetype) {
 
       const allergens = splitCSV(row.allergens);
       const tags = splitCSV(row.tags);
+      const ALLOWED_BADGES = ['wagyu', 'chicken', 'healthy', 'fish'];
+      const hasBadgesCol = row.badges !== undefined && row.badges !== '';
+      const badges = splitCSV(row.badges)
+        .map((b) => b.toLowerCase())
+        .filter((b) => ALLOWED_BADGES.includes(b));
       const isAvailable =
         String(row.available ?? 'true').trim().toLowerCase() !== 'false';
 
@@ -197,17 +202,21 @@ export async function importMenuItems(buffer, mimetype) {
       const existingItem = await MenuItem.findOne({ slug: baseSlug }).lean();
 
       if (existingItem) {
+        const updateFields = {
+          name,
+          description: String(row.description ?? '').trim(),
+          category: category._id,
+          price,
+          nutrition,
+          allergens,
+          tags,
+          isAvailable,
+        };
+        if (hasBadgesCol) {
+          updateFields.badges = badges;
+        }
         await MenuItem.findByIdAndUpdate(existingItem._id, {
-          $set: {
-            name,
-            description: String(row.description ?? '').trim(),
-            category: category._id,
-            price,
-            nutrition,
-            allergens,
-            tags,
-            isAvailable,
-          },
+          $set: updateFields,
         });
         summary.updated++;
       } else {
@@ -221,6 +230,7 @@ export async function importMenuItems(buffer, mimetype) {
           nutrition,
           allergens,
           tags,
+          badges,
           isAvailable,
         });
         summary.created++;
@@ -243,7 +253,7 @@ export async function generateImportTemplate() {
   const headers = [
     'name', 'category', 'description', 'price',
     'calories', 'fat', 'protein', 'carbs', 'fiber',
-    'allergens', 'tags', 'available',
+    'allergens', 'tags', 'badges', 'available',
   ];
 
   ws.columns = headers.map((h) => ({
@@ -274,6 +284,7 @@ export async function generateImportTemplate() {
     fiber: 3,
     allergens: 'gluten, dairy, eggs',
     tags: 'featured, kids',
+    badges: 'wagyu',
     available: 'true',
   });
 

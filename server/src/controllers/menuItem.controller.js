@@ -9,7 +9,7 @@ import { deleteImage } from '../services/storage.js';
 // ─── Public ───────────────────────────────────────────────────────────────────
 
 export const publicListMenu = asyncHandler(async (req, res) => {
-  const { category, tag, q, page, limit } = req.query;
+  const { category, tag, badge, q, page, limit } = req.query;
 
   const filter = { isAvailable: true };
 
@@ -27,6 +27,10 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     filter.tags = tag;
   }
 
+  if (badge) {
+    filter.badges = String(badge).toLowerCase().trim();
+  }
+
   if (q) {
     filter.$text = { $search: q };
   }
@@ -34,7 +38,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
   const projection = {
     name: 1, slug: 1, description: 1, category: 1,
     price: 1, images: 1, tags: 1, allergens: 1,
-    nutrition: 1, options: 1, order: 1,
+    nutrition: 1, options: 1, order: 1, badges: 1,
   };
 
   const sort = q ? { score: { $meta: 'textScore' } } : { order: 1, createdAt: 1 };
@@ -69,7 +73,7 @@ export const publicGetMenuItem = asyncHandler(async (req, res) => {
 // ─── Admin – List / Get ───────────────────────────────────────────────────────
 
 export const adminListMenu = asyncHandler(async (req, res) => {
-  const { category, tag, q, page, limit, available } = req.query;
+  const { category, tag, badge, q, page, limit, available } = req.query;
 
   const filter = {};
 
@@ -78,6 +82,7 @@ export const adminListMenu = asyncHandler(async (req, res) => {
     if (cat) filter.category = cat._id;
   }
   if (tag) filter.tags = tag;
+  if (badge) filter.badges = String(badge).toLowerCase().trim();
   if (available === 'true') filter.isAvailable = true;
   if (available === 'false') filter.isAvailable = false;
   if (q) filter.$text = { $search: q };

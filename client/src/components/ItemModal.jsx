@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
+import { BADGES } from "../constants/badges.js";
 
 function getInitialSelections(item) {
   const init = {};
@@ -66,11 +68,21 @@ function isChoiceDisabled(opt, choiceLabel, selections) {
   return !isSelected && cur.length >= max;
 }
 
-export default function ItemModal({ item, categoryName, onClose }) {
+export default function ItemModal({ item, categoryName, onBadgeClick, onClose }) {
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [selections, setSelections] = useState(() => getInitialSelections(item));
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+
+  function handleBadgeClick(badgeId) {
+    onClose?.();
+    if (onBadgeClick) {
+      onBadgeClick(badgeId);
+    } else {
+      navigate(`/menu?badge=${encodeURIComponent(badgeId)}`);
+    }
+  }
 
   // Close on Escape key & Lock body scroll
   useEffect(() => {
@@ -210,6 +222,7 @@ export default function ItemModal({ item, categoryName, onClose }) {
           ✕
         </button>
 
+
         <div className="item-modal__body">
           {/* Modal Image inside scrollable body */}
           <div className="item-modal__img-container">
@@ -232,12 +245,42 @@ export default function ItemModal({ item, categoryName, onClose }) {
 
           <div className="item-modal__content">
             <div className="item-modal__header">
-            <div>
-              {categoryName && <span className="item-modal__category">{categoryName}</span>}
-              <h2 className="item-modal__name">{item.name}</h2>
+              <div style={{ flex: '1 1 auto', minWidth: 0 }}>
+                {categoryName && <span className="item-modal__category">{categoryName}</span>}
+                <div className="item-modal__title-row">
+                  <h2 className="item-modal__name">{item.name}</h2>
+                  {Array.isArray(item.badges) && item.badges.length > 0 && (
+                    <div className="item-modal__badges" role="group" aria-label="Item badges">
+                      {item.badges.map((bId) => {
+                        const b = BADGES[bId];
+                        if (!b) return null;
+                        return (
+                          <button
+                            key={b.id}
+                            type="button"
+                            className="item-modal__badge-btn"
+                            aria-label={b.label}
+                            title={`Filter by ${b.label}`}
+                            onClick={() => handleBadgeClick(b.id)}
+                          >
+                            <img
+                              src={b.icon}
+                              alt=""
+                              aria-hidden="true"
+                              className="item-modal__badge-icon"
+                              width="28"
+                              height="28"
+                              decoding="async"
+                            />
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="item-modal__price">QAR {item.price + extraPrice}</div>
             </div>
-            <div className="item-modal__price">QAR {item.price + extraPrice}</div>
-          </div>
 
           {/* Allergens Chips */}
           {item.allergens?.length > 0 && (

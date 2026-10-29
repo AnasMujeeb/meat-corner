@@ -1,4 +1,4 @@
-﻿import { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Upload, Download, FileText, CheckCircle, XCircle, AlertTriangle, Info } from 'lucide-react';
 import { importApi } from '../api/endpoints.js';
@@ -16,6 +16,7 @@ const COLUMNS = [
   { name: 'fiber', required: false, desc: 'Fiber in grams.' },
   { name: 'allergens', required: false, desc: 'Comma-separated list, e.g. "gluten,dairy,nuts".' },
   { name: 'tags', required: false, desc: 'Comma-separated list, e.g. "featured,new".' },
+  { name: 'badges', required: false, desc: 'Optional comma-separated badges: wagyu, chicken, healthy, fish.' },
   { name: 'available', required: false, desc: 'true or false (defaults to true).' },
 ];
 

@@ -15,6 +15,17 @@ import ChipInput from '../components/ChipInput.jsx';
 import ImageUploader from '../components/ImageUploader.jsx';
 import { SkeletonCard } from '../components/Skeleton.jsx';
 import { imageSourceSchema, optionalImageSourceSchema } from '../utils/validation.js';
+import wagyuBadge from '../assets/badges/badge-wagyu.svg';
+import chickenBadge from '../assets/badges/badge-chicken.svg';
+import healthyBadge from '../assets/badges/badge-healthy.svg';
+import fishBadge from '../assets/badges/badge-fish.svg';
+
+const AVAILABLE_BADGES = [
+  { id: 'wagyu', label: 'Wagyu', icon: wagyuBadge },
+  { id: 'chicken', label: 'Chicken', icon: chickenBadge },
+  { id: 'healthy', label: 'Healthy', icon: healthyBadge },
+  { id: 'fish', label: 'Fish', icon: fishBadge },
+];
 
 // ─── Zod Schema (mirrors server validators exactly) ──────────────────────────
 
@@ -84,6 +95,7 @@ const schema = z.object({
   nutrition: nutritionSchema,
   allergens: z.array(z.string()).nullable().optional().default([]),
   tags: z.array(z.string()).nullable().optional().default([]),
+  badges: z.array(z.enum(['wagyu', 'chicken', 'healthy', 'fish'])).nullable().optional().default([]),
   options: z.array(optionSchema).nullable().optional().default([]),
   isAvailable: z.boolean().optional().default(true),
 });
@@ -642,6 +654,7 @@ export default function MenuFormPage() {
       nutrition: {},
       allergens: [],
       tags: [],
+      badges: [],
       options: [],
       isAvailable: true,
     },
@@ -662,6 +675,7 @@ export default function MenuFormPage() {
         nutrition: item.nutrition || {},
         allergens: item.allergens || [],
         tags: item.tags || [],
+        badges: item.badges || [],
         options: (item.options || []).map((opt) => ({
           name: opt.name || '',
           type: opt.type || 'single',
@@ -706,6 +720,7 @@ export default function MenuFormPage() {
       images: Array.isArray(data.images) ? data.images : [],
       allergens: Array.isArray(data.allergens) ? data.allergens : [],
       tags: Array.isArray(data.tags) ? data.tags : [],
+      badges: Array.isArray(data.badges) ? data.badges : [],
       isAvailable: data.isAvailable ?? true,
     };
 
@@ -1025,6 +1040,68 @@ export default function MenuFormPage() {
                 <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>
                   Type or select from suggestions
                 </p>
+              </div>
+            </div>
+
+            {/* Badges */}
+            <div className="card" style={{ marginBottom: 16 }}>
+              <div className="card-header"><h2 className="section-title">Badges</h2></div>
+              <div className="card-body">
+                <p style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 10 }}>
+                  Select highlight badge(s) for this menu item
+                </p>
+                <Controller
+                  name="badges"
+                  control={control}
+                  render={({ field }) => {
+                    const selected = Array.isArray(field.value) ? field.value : [];
+                    return (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        {AVAILABLE_BADGES.map((b) => {
+                          const isChecked = selected.includes(b.id);
+                          return (
+                            <label
+                              key={b.id}
+                              htmlFor={`badge-${b.id}`}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                padding: '8px 12px',
+                                borderRadius: 6,
+                                border: isChecked ? '1px solid var(--primary, #b31b1b)' : '1px solid var(--border)',
+                                background: isChecked ? 'rgba(179, 27, 27, 0.05)' : 'var(--bg-surface, #fff)',
+                                cursor: 'pointer',
+                                transition: 'all 0.15s ease',
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <img
+                                  src={b.icon}
+                                  alt=""
+                                  style={{ width: 24, height: 24, objectFit: 'contain' }}
+                                />
+                                <span style={{ fontWeight: 500, fontSize: 13, color: 'var(--text)' }}>
+                                  {b.label}
+                                </span>
+                              </div>
+                              <Toggle
+                                id={`badge-${b.id}`}
+                                checked={isChecked}
+                                onChange={(checked) => {
+                                  const next = checked
+                                    ? [...selected, b.id]
+                                    : selected.filter((x) => x !== b.id);
+                                  field.onChange(next);
+                                }}
+                              />
+                            </label>
+                          );
+                        })}
+                      </div>
+                    );
+                  }}
+                />
               </div>
             </div>
 

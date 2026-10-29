@@ -12,6 +12,7 @@ import {
 } from "../components/motion/ScrollReveal.jsx";
 import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 import { MENU_CONTENT } from "../content/menu.js";
+import { BADGES } from "../constants/badges.js";
 
 const QUICK_TAGS = [
   { id: "all", label: "All Items" },
@@ -24,6 +25,8 @@ export default function MenuPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category") || "";
   const tagParam = searchParams.get("tag") || "";
+  const badgeParam = searchParams.get("badge") || "";
+  const activeBadge = BADGES[badgeParam.toLowerCase()];
 
   const [page, setPage] = useState(1);
   const [accumulatedItems, setAccumulatedItems] = useState([]);
@@ -41,10 +44,14 @@ export default function MenuPage() {
   // Query params for current fetch
   const queryParams = useMemo(() => {
     const p = { page, limit: 24 };
-    if (categoryParam) p.category = categoryParam;
-    if (tagParam && tagParam !== "all") p.tag = tagParam;
+    if (badgeParam) {
+      p.badge = badgeParam.toLowerCase();
+    } else {
+      if (categoryParam) p.category = categoryParam;
+      if (tagParam && tagParam !== "all") p.tag = tagParam;
+    }
     return p;
-  }, [categoryParam, tagParam, page]);
+  }, [categoryParam, tagParam, badgeParam, page]);
 
   // placeholderData: keepPreviousData keeps old category items visible while the new
   // fetch is in-flight, preventing the blank/empty flash on mobile filter taps.
@@ -53,7 +60,7 @@ export default function MenuPage() {
   });
 
   // Manage accumulated items for "Load More" pagination
-  const currentKey = `${categoryParam}__${tagParam}`;
+  const currentKey = `${categoryParam}__${tagParam}__${badgeParam}`;
 
   // Reset pagination and accumulated state cleanly when current filter key changes
   useEffect(() => {
@@ -153,6 +160,7 @@ export default function MenuPage() {
       next.set("category", catSlug);
     }
     next.delete("tag"); // Reset tag filter when switching category
+    next.delete("badge"); // Clear badge filter when switching category
     setSearchParams(next);
   }
 
@@ -169,6 +177,32 @@ export default function MenuPage() {
     } else {
       next.set("tag", tagId);
     }
+    next.delete("badge"); // Clear badge filter when switching tag
+    setSearchParams(next);
+  }
+
+  function handleSelectBadge(badgeId) {
+    setPage(1);
+    setAccumulatedItems([]);
+    setSearchQuery("");
+    setIsTransitioning(true);
+    clearTimeout(transitionTimerRef.current);
+    transitionTimerRef.current = setTimeout(() => setIsTransitioning(false), 5000);
+    const next = new URLSearchParams(searchParams);
+    next.set("badge", badgeId);
+    next.delete("category");
+    next.delete("tag");
+    setSearchParams(next);
+  }
+
+  function handleClearBadge() {
+    setPage(1);
+    setAccumulatedItems([]);
+    setIsTransitioning(true);
+    clearTimeout(transitionTimerRef.current);
+    transitionTimerRef.current = setTimeout(() => setIsTransitioning(false), 5000);
+    const next = new URLSearchParams(searchParams);
+    next.delete("badge");
     setSearchParams(next);
   }
 
@@ -238,67 +272,102 @@ export default function MenuPage() {
         />
       )}
 
-      {/* ── Category Filter Strip ─────────────────────────────────────── */}
-      <motion.div
-        className="category-bar"
-        role="tablist"
-        aria-label="Menu categories"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.15, ease: LUXURY_EASE }}
-      >
-        <button
-          type="button"
-          role="tab"
-          aria-selected={!categoryParam}
-          className={`category-bar__tab${!categoryParam ? " category-bar__tab--active" : ""}`}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(""))}
-          onClick={() => handleOptimizedClick(() => handleSelectCategory(""))}
+      {/* ── Category Filter Strip & Quick Tags OR Badge Filter Banner ── */}
+      {activeBadge ? (
+        <motion.div
+          className="menu-badge-banner"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: LUXURY_EASE }}
         >
-          All Categories
-        </button>
-        {categories.map((cat) => (
-          <button
-            key={cat._id || cat.slug}
-            type="button"
-            role="tab"
-            aria-selected={categoryParam === cat.slug}
-            className={`category-bar__tab${categoryParam === cat.slug ? " category-bar__tab--active" : ""}`}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(cat.slug))}
-            onClick={() => handleOptimizedClick(() => handleSelectCategory(cat.slug))}
+          <div className="site-container menu-badge-banner__inner">
+            <div className="menu-badge-banner__left">
+              <span className="menu-badge-banner__label">Filtered by badge:</span>
+              <div className="menu-badge-banner__chip">
+                <img
+                  src={activeBadge.icon}
+                  alt=""
+                  className="menu-badge-banner__icon"
+                  width="26"
+                  height="26"
+                />
+                <span className="menu-badge-banner__title">{activeBadge.label}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="btn btn--outline btn--sm menu-badge-banner__clear"
+              onClick={handleClearBadge}
+            >
+              Show full menu ✕
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+        <>
+          {/* ── Category Filter Strip ─────────────────────────────────────── */}
+          <motion.div
+            className="category-bar"
+            role="tablist"
+            aria-label="Menu categories"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: LUXURY_EASE }}
           >
-            {cat.name}
-          </button>
-        ))}
-      </motion.div>
-
-      {/* ── Quick Tags Strip ────────────────────────────────────────── */}
-      <motion.div
-        className="quick-tags-bar"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
-      >
-        <div className="site-container quick-tags-bar__inner">
-          {QUICK_TAGS.map((t) => {
-            const isSelected = (!tagParam && t.id === "all") || tagParam === t.id;
-            return (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={!categoryParam}
+              className={`category-bar__tab${!categoryParam ? " category-bar__tab--active" : ""}`}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(""))}
+              onClick={() => handleOptimizedClick(() => handleSelectCategory(""))}
+            >
+              All Categories
+            </button>
+            {categories.map((cat) => (
               <button
-                key={t.id}
+                key={cat._id || cat.slug}
                 type="button"
+                role="tab"
+                aria-selected={categoryParam === cat.slug}
+                className={`category-bar__tab${categoryParam === cat.slug ? " category-bar__tab--active" : ""}`}
                 onTouchStart={handleTouchStart}
-                onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectTag(t.id))}
-                onClick={() => handleOptimizedClick(() => handleSelectTag(t.id))}
-                className={`quick-tags-bar__pill${isSelected ? " quick-tags-bar__pill--active" : ""}`}
+                onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(cat.slug))}
+                onClick={() => handleOptimizedClick(() => handleSelectCategory(cat.slug))}
               >
-                {t.label}
+                {cat.name}
               </button>
-            );
-          })}
-        </div>
-      </motion.div>
+            ))}
+          </motion.div>
+
+          {/* ── Quick Tags Strip ────────────────────────────────────────── */}
+          <motion.div
+            className="quick-tags-bar"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
+          >
+            <div className="site-container quick-tags-bar__inner">
+              {QUICK_TAGS.map((t) => {
+                const isSelected = (!tagParam && t.id === "all") || tagParam === t.id;
+                return (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectTag(t.id))}
+                    onClick={() => handleOptimizedClick(() => handleSelectTag(t.id))}
+                    className={`quick-tags-bar__pill${isSelected ? " quick-tags-bar__pill--active" : ""}`}
+                  >
+                    {t.label}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        </>
+      )}
 
       {/* ── Menu Grid Listing ────────────────────────────────────────── */}
       <section className="site-section site-section--menu-list">
@@ -313,19 +382,27 @@ export default function MenuPage() {
           ) : filteredItems.length === 0 && !isFetching && !itemsLoading && !isTransitioning ? (
             // Only show "No Dishes Found" when we are definitively done fetching and idle
             <div className="menu-empty-state">
-              <h2 className="heading-md" style={{ marginBottom: 12 }}>{MENU_CONTENT.emptyState.title}</h2>
+              <h2 className="heading-md" style={{ marginBottom: 12 }}>
+                {activeBadge ? `No ${activeBadge.label} Dishes Found` : MENU_CONTENT.emptyState.title}
+              </h2>
               <p className="body-text" style={{ margin: "0 auto 24px" }}>
-                {MENU_CONTENT.emptyState.desc}
+                {activeBadge
+                  ? `There are currently no dishes marked with the ${activeBadge.label} badge.`
+                  : MENU_CONTENT.emptyState.desc}
               </p>
               <button
                 type="button"
                 className="btn btn--primary btn--sm"
                 onClick={() => {
                   setSearchQuery("");
-                  setSearchParams({});
+                  if (activeBadge) {
+                    handleClearBadge();
+                  } else {
+                    setSearchParams({});
+                  }
                 }}
               >
-                RESET ALL FILTERS
+                {activeBadge ? "SHOW FULL MENU" : "RESET ALL FILTERS"}
               </button>
             </div>
           ) : filteredItems.length === 0 && (isFetching || isTransitioning) ? (
@@ -337,7 +414,7 @@ export default function MenuPage() {
             </div>
           ) : (
             <StaggerContainer
-              key={`${categoryParam}__${tagParam}__${page}`}
+              key={`${categoryParam}__${tagParam}__${badgeParam}__${page}`}
               className="menu-section-grid"
               staggerDelay={0.04}
               animate="visible"
@@ -350,6 +427,7 @@ export default function MenuPage() {
                       item={item}
                       index={idx + 1}
                       categoryName={cat?.name}
+                      onBadgeClick={handleSelectBadge}
                       onSelect={(it) => {
                         setSelectedItem(it);
                         setSelectedCatName(cat?.name || "");
@@ -382,6 +460,10 @@ export default function MenuPage() {
         <ItemModal
           item={selectedItem}
           categoryName={selectedCatName}
+          onBadgeClick={(bId) => {
+            setSelectedItem(null);
+            handleSelectBadge(bId);
+          }}
           onClose={() => setSelectedItem(null)}
         />
       )}
