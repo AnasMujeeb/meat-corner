@@ -432,7 +432,6 @@ export default function ItemModal({ item, categoryName, onClose }) {
           <button
             className={`btn ${added ? "btn--outline" : "btn--primary"}`}
             style={{
-              flex: 1,
               opacity: !allRequiredSatisfied && !added ? 0.65 : 1,
               cursor: !allRequiredSatisfied && !added ? "not-allowed" : "pointer",
             }}
@@ -443,7 +442,7 @@ export default function ItemModal({ item, categoryName, onClose }) {
               ? "ADDED ✓"
               : allRequiredSatisfied
               ? `ADD TO CART — QAR ${totalPrice}`
-              : "Select required to add item"}
+              : "Select required options"}
           </button>
         </div>
       </div>

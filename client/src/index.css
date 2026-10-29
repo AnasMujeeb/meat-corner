@@ -2208,19 +2208,20 @@ h1, h2, h3, h4, h5, h6 {
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  background: rgba(18, 18, 18, 0.85);
+  background: rgba(18, 18, 18, 0.88);
   color: #fff;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
   transition: background var(--ease), transform var(--ease);
   z-index: 25;
   touch-action: manipulation;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
 }
 
 .item-modal__close-btn:hover {
@@ -2701,6 +2702,25 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
   position: relative;
   z-index: 10;
+}
+
+.item-modal__footer .btn {
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  padding: 0 16px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  white-space: normal;
+  line-height: 1.25;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Stepper Component */
@@ -4417,6 +4437,25 @@ h1, h2, h3, h4, h5, h6 {
     gap: 10px !important;
     z-index: 10;
   }
+
+  .item-modal__footer .btn {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.03em !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
 }
 
 @media (max-width: 360px) {
@@ -4429,23 +4468,25 @@ h1, h2, h3, h4, h5, h6 {
     gap: 8px !important;
   }
   .item-modal__footer .qty-stepper {
-    height: 40px !important;
-    min-height: 40px !important;
+    height: 42px !important;
+    min-height: 42px !important;
   }
   .item-modal__footer .qty-stepper__btn {
     width: 34px !important;
     min-width: 34px !important;
-    height: 40px !important;
-    min-height: 40px !important;
+    height: 42px !important;
+    min-height: 42px !important;
   }
   .item-modal__footer .qty-stepper__val {
     width: 26px !important;
   }
   .item-modal__footer .btn {
-    min-height: 40px !important;
-    padding: 0 8px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+    padding: 0 6px !important;
     font-size: 11px !important;
-    letter-spacing: 0.04em !important;
+    letter-spacing: 0.02em !important;
     white-space: normal !important;
     line-height: 1.2 !important;
   }
