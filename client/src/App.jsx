@@ -8,6 +8,7 @@ import Footer from "./components/Footer.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import MobileBottomNav from "./components/MobileBottomNav.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 // Lazy-loaded pages for code splitting & performance
 const HomePage = lazy(() => import("./pages/HomePage.jsx"));
@@ -62,6 +63,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
+        <ScrollToTop />
         <CartProvider>
           <div className="site-wrapper" style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
             {/* Header */}

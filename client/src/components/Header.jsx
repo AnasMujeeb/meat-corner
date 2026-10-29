@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useSettings } from "../api/queries.js";
@@ -18,6 +18,10 @@ export default function Header({ onCartOpen }) {
   const { totalQty } = useCart();
   const { data: settings } = useSettings();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
