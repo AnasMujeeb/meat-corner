@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { api } from "../api.js";
 import { useBranches, useSettings } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { CONTACT_CONTENT } from "../content/contact.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import getTouchedImg from "../../pictures/get touched updated.jpeg";
@@ -15,6 +16,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 export default function ContactPage() {
   const { data: branches = [] } = useBranches();
   const { data: settings = {} } = useSettings();
+  const { t } = useLanguage();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -50,13 +52,13 @@ export default function ContactPage() {
 
       const res = await api.contact(payload);
       if (res && res.success === false) {
-        setError(res.message || "Failed to submit message. Please try again.");
+        setError(res.message || t("contact.form.errorGeneric"));
       } else {
         setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", message: "", website: "" });
       }
     } catch (err) {
-      setError(err.message || "Network error. Please try again later.");
+      setError(err.message || t("contact.form.errorNetwork"));
     } finally {
       setLoading(false);
     }
@@ -81,7 +83,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            {CONTACT_CONTENT.hero.eyebrow}
+            {t("contact.hero.eyebrow")}
           </motion.span>
           <motion.h1
             className="heading-xl"
@@ -90,7 +92,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASE }}
           >
-            {CONTACT_CONTENT.hero.heading}
+            {t("contact.hero.heading")}
           </motion.h1>
           <motion.p
             className="body-text"
@@ -99,16 +101,16 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: LUXURY_EASE }}
           >
-            {CONTACT_CONTENT.hero.intro}
+            {t("contact.hero.intro")}
           </motion.p>
         </div>
       </section>
 
       {/* ── Motion Video Banner ─────────────────────────────────── */}
       <PageMotionReel
-        tag={CONTACT_CONTENT.reel.tag}
-        title={CONTACT_CONTENT.reel.title}
-        subtitle={CONTACT_CONTENT.reel.subtitle}
+        tag={t("contact.reel.tag")}
+        title={t("contact.reel.title")}
+        subtitle={t("contact.reel.subtitle")}
         backgroundImage={getTouchedImg}
         posterUrl={getTouchedImg}
         fullHeight={true}
@@ -122,11 +124,11 @@ export default function ContactPage() {
         <div className="site-container">
           <ScrollReveal className="site-section__header branch-head">
             <div>
-              <span className="eyebrow">{CONTACT_CONTENT.branches.eyebrow}</span>
-              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{CONTACT_CONTENT.branches.heading}</h2>
+              <span className="eyebrow">{t("contact.branches.eyebrow")}</span>
+              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{t("contact.branches.heading")}</h2>
             </div>
             <p className="site-section__intro">
-              {CONTACT_CONTENT.branches.intro}
+              {t("contact.branches.intro")}
             </p>
           </ScrollReveal>
 
@@ -150,7 +152,7 @@ export default function ContactPage() {
                     target="_blank"
                     style={{ marginTop: "auto" }}
                   >
-                    Open directions ↗
+                    {t("contact.branches.directions")}
                   </a>
                 )}
               </StaggerItem>
@@ -158,25 +160,25 @@ export default function ContactPage() {
 
             {/* General Contact Info Card */}
             <StaggerItem className="contact-card">
-              <h3>{CONTACT_CONTENT.branches.directContactTitle}</h3>
+              <h3>{t("contact.directContact")}</h3>
               <p>
                 {settings?.contactPhone && (
                   <>
-                    <b>Phone</b><br />
+                    <b>{t("contact.phone")}</b><br />
                     <a href={`tel:${settings.contactPhone}`}>{settings.contactPhone}</a>
                     <br /><br />
                   </>
                 )}
                 {settings?.contactEmail && (
                   <>
-                    <b>Email</b><br />
+                    <b>{t("contact.email")}</b><br />
                     <a href={`mailto:${settings.contactEmail}`}>{settings.contactEmail}</a>
                     <br /><br />
                   </>
                 )}
                 {settings?.socials?.instagram && (
                   <>
-                    <b>Instagram</b><br />
+                    <b>{t("contact.instagram")}</b><br />
                     <a href={settings.socials.instagram} target="_blank" rel="noopener noreferrer">
                       @meatcorner.qa
                     </a>
@@ -205,21 +207,21 @@ export default function ContactPage() {
         <div className="site-container" style={{ maxWidth: 920 }}>
           <ScrollReveal className="site-section__header" style={{ marginBottom: 28 }}>
             <div>
-              <span className="eyebrow">{CONTACT_CONTENT.formSection.eyebrow}</span>
-              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{CONTACT_CONTENT.formSection.heading}</h2>
+              <span className="eyebrow">{t("contact.form.eyebrow")}</span>
+              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{t("contact.form.heading")}</h2>
             </div>
           </ScrollReveal>
 
           {submitted ? (
             <ScrollReveal className="form-status-box form-status-box--success">
               <h3 className="heading-sm" style={{ color: "var(--red)", marginBottom: 8 }}>
-                {CONTACT_CONTENT.formSection.successTitle}
+                {t("contact.form.successTitle")}
               </h3>
               <p className="body-text" style={{ marginBottom: 16 }}>
-                {CONTACT_CONTENT.formSection.successMessage}
+                {t("contact.form.successMessage")}
               </p>
               <button className="btn btn--primary btn--sm" onClick={() => setSubmitted(false)}>
-                {CONTACT_CONTENT.formSection.resetBtnText}
+                {t("contact.form.resetBtn")}
               </button>
             </ScrollReveal>
           ) : (
@@ -242,13 +244,13 @@ export default function ContactPage() {
               />
 
               <div className="form-field">
-                <label className="form-label" htmlFor="contact-name">Name <span>*</span></label>
+                <label className="form-label" htmlFor="contact-name">{t("contact.form.nameLabel")} <span>*</span></label>
                 <input
                   id="contact-name"
                   type="text"
                   name="name"
                   className="form-input"
-                  placeholder="e.g. Abdullah Al-Thani"
+                  placeholder={t("contact.form.namePlaceholder")}
                   required
                   value={formData.name}
                   onChange={handleChange}
@@ -256,13 +258,13 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="contact-phone">Phone <span>*</span></label>
+                <label className="form-label" htmlFor="contact-phone">{t("contact.form.phoneLabel")} <span>*</span></label>
                 <input
                   id="contact-phone"
                   type="tel"
                   name="phone"
                   className="form-input"
-                  placeholder="+974 5500 0000"
+                  placeholder={t("contact.form.phonePlaceholder")}
                   required
                   value={formData.phone}
                   onChange={handleChange}
@@ -270,13 +272,13 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field form-field--full">
-                <label className="form-label" htmlFor="contact-email">Email Address <span>*</span></label>
+                <label className="form-label" htmlFor="contact-email">{t("contact.form.emailLabel")} <span>*</span></label>
                 <input
                   id="contact-email"
                   type="email"
                   name="email"
                   className="form-input"
-                  placeholder="you@example.com"
+                  placeholder={t("contact.form.emailPlaceholder")}
                   required
                   value={formData.email}
                   onChange={handleChange}
@@ -284,12 +286,12 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field form-field--full">
-                <label className="form-label" htmlFor="contact-message">Message <span>*</span></label>
+                <label className="form-label" htmlFor="contact-message">{t("contact.form.messageLabel")} <span>*</span></label>
                 <textarea
                   id="contact-message"
                   name="message"
                   className="form-textarea"
-                  placeholder="Write your message here..."
+                  placeholder={t("contact.form.messagePlaceholder")}
                   rows={5}
                   required
                   value={formData.message}
@@ -304,7 +306,7 @@ export default function ContactPage() {
                   disabled={loading}
                   style={{ minHeight: 52 }}
                 >
-                  {loading ? CONTACT_CONTENT.formSection.submittingBtnText : CONTACT_CONTENT.formSection.submitBtnText}
+                  {loading ? t("contact.form.submittingBtn") : t("contact.form.submitBtn")}
                 </button>
               </div>
             </ScrollReveal>

@@ -156,7 +156,7 @@ export default function Footer({ settings: propSettings }) {
 
             {/* Social media links */}
             {activeSocials.length > 0 && (
-              <div className="site-footer__social-list" aria-label="Social media links">
+              <div className="site-footer__social-list" aria-label={t("footer.socialAria")}>
                 {activeSocials.map(({ key, label, icon: Icon }) => {
                   const rawUrl = settings.socials[key];
                   const href = key === "whatsapp" ? formatWhatsappUrl(rawUrl) : rawUrl;
@@ -181,14 +181,14 @@ export default function Footer({ settings: propSettings }) {
 
             {/* Distinct "To Place Order" section with vibrant delivery platform logos */}
             <div className="site-footer__order-group">
-              <h4 className="site-footer__group-title">To Place Order</h4>
-              <div className="site-footer__delivery-list" aria-label="To Place Order platforms">
+              <h4 className="site-footer__group-title">{t("footer.order")}</h4>
+              <div className="site-footer__delivery-list" aria-label={t("footer.orderPlatformsAria")}>
                 {/* Talabat logo */}
                 {talabatUrl ? (
                   <a
                     href={talabatUrl}
                     className="site-footer__brand-badge"
-                    aria-label="Order on Talabat"
+                    aria-label={t("footer.orderTalabat")}
                     title="Talabat"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -210,7 +210,7 @@ export default function Footer({ settings: propSettings }) {
                   <a
                     href={snoonuUrl}
                     className="site-footer__brand-badge"
-                    aria-label="Order on Snoonu"
+                    aria-label={t("footer.orderSnoonu")}
                     title="Snoonu"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -233,10 +233,10 @@ export default function Footer({ settings: propSettings }) {
 
           <div className="site-footer__col">
             <h4>{t("footer.explore") || "Explore"}</h4>
-            <nav className="site-footer__nav-links" aria-label="Explore navigation">
+            <nav className="site-footer__nav-links" aria-label={t("footer.exploreAria")}>
               <Link to="/menu">{t("nav.menu") || "Menu"}</Link>
               <Link to="/healthy">{t("nav.healthy") || "Healthy"}</Link>
-              <Link to="/kids">{t("nav.kids") || "Kids Menu"}</Link>
+              <Link to="/kids">{t("nav.kids") || "Kids"}</Link>
               {/* <Link to="/catering">Catering</Link> */}
             </nav>
           </div>
@@ -282,7 +282,7 @@ export default function Footer({ settings: propSettings }) {
                 Snoonu ↗
               </a>
             )}
-            <span className="site-footer__static-text">Keeta (App only)</span>
+            <span className="site-footer__static-text">{t("footer.keetaAppOnly")}</span>
             {settings?.socials?.whatsapp && formatWhatsappUrl(settings.socials.whatsapp) && (
               <a
                 href={formatWhatsappUrl(settings.socials.whatsapp)}

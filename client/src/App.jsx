@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CartProvider } from "./context/CartProvider.jsx";
 import { LanguageProvider } from "./context/LanguageProvider.jsx";
+import { useLanguage } from "./hooks/useLanguage.js";
 
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -32,6 +33,8 @@ const queryClient = new QueryClient({
 });
 
 function PageLoader() {
+  const { t } = useLanguage();
+
   return (
     <div
       style={{
@@ -52,7 +55,7 @@ function PageLoader() {
           color: "var(--ink)",
         }}
       >
-        LOADING...
+        {t("common.loading") || "LOADING..."}
       </div>
     </div>
   );

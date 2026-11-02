@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { STORY_CONTENT } from "../content/story.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import craftsAtmosphereImg from "../../pictures/crafts and atmosphere.jpeg";
@@ -13,6 +14,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 
 export default function StoryPage() {
   const { story, reel, concept } = STORY_CONTENT;
+  const { t } = useLanguage();
 
   return (
     <div className="story-page">
@@ -25,7 +27,7 @@ export default function StoryPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            {story.eyebrow}
+            {t("story.hero.eyebrow")}
           </motion.span>
 
           <motion.h1
@@ -35,7 +37,7 @@ export default function StoryPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASE }}
           >
-            {story.heading}
+            {t("story.hero.heading")}
           </motion.h1>
 
           <motion.div
@@ -45,7 +47,7 @@ export default function StoryPage() {
             transition={{ duration: 0.75, delay: 0.32, ease: LUXURY_EASE }}
           >
             <p className="story-lead-text">
-              {story.lead}
+              {t("story.hero.lead")}
             </p>
           </motion.div>
         </div>
@@ -56,9 +58,9 @@ export default function StoryPage() {
         <div className="site-container">
           <ScrollReveal className="site-section__header" style={{ marginBottom: 20 }}>
             <div>
-              <span className="eyebrow">THE JOURNEY</span>
+              <span className="eyebrow">{t("story.journey.eyebrow")}</span>
               <h2 className="heading-md" style={{ letterSpacing: "-0.01em" }}>
-                FROM MADINAT KHALIFA TO CENTRO DOHA
+                {t("story.journey.heading")}
               </h2>
             </div>
           </ScrollReveal>
@@ -66,17 +68,18 @@ export default function StoryPage() {
           <StaggerContainer className="story-journey-grid" staggerDelay={0.12}>
             {story.milestones.map((m, idx) => {
               const isToday = idx === 2;
+              const mNum = idx + 1;
               return (
                 <StaggerItem
                   key={m.year}
                   className={`story-milestone-card${isToday ? " story-milestone-card--featured" : ""}`}
                 >
                   <div className="story-milestone-card__head">
-                    <span className="story-milestone-card__year">{m.year}</span>
-                    <span className="story-milestone-card__location">{m.location}</span>
+                    <span className="story-milestone-card__year">{t(`story.journey.m${mNum}.year`) || m.year}</span>
+                    <span className="story-milestone-card__location">{t(`story.journey.m${mNum}.location`) || m.location}</span>
                   </div>
-                  <h3 className="story-milestone-card__title">{m.subtitle}</h3>
-                  <p className="story-milestone-card__text">{m.text}</p>
+                  <h3 className="story-milestone-card__title">{t(`story.journey.m${mNum}.subtitle`) || m.subtitle}</h3>
+                  <p className="story-milestone-card__text">{t(`story.journey.m${mNum}.text`) || m.text}</p>
                 </StaggerItem>
               );
             })}
@@ -85,14 +88,14 @@ export default function StoryPage() {
       </section>
 
       {/* ── Crafts and Atmosphere Section ───────────────────────────────────── */}
-      <section className="site-section story-atmosphere-section" aria-label="Crafts and Atmosphere">
+      <section className="site-section story-atmosphere-section" aria-label={t("story.atmosphere.aria")}>
         <div className="site-container">
           {/* Section image directly above the Crafts and Atmosphere heading */}
           <ScrollReveal y={24} duration={0.8}>
             <div className="story-atmosphere-card">
               <img
                 src={craftsAtmosphereImg}
-                alt="Meat Corner restaurant atmosphere and dining interior"
+                alt={t("story.atmosphere.imgAlt")}
                 className="story-atmosphere-img"
                 loading="lazy"
                 decoding="async"
@@ -105,23 +108,23 @@ export default function StoryPage() {
 
           {/* Crafts and Atmosphere section heading */}
           <ScrollReveal className="story-atmosphere-header" delay={0.15} y={20}>
-            <span className="eyebrow">{reel.tag}</span>
+            <span className="eyebrow">{t("story.reel.tag")}</span>
             <h2 className="heading-lg" style={{ marginTop: 8, marginBottom: 12 }}>
-              {reel.title}
+              {t("story.reel.title")}
             </h2>
             <p className="body-text" style={{ maxWidth: 640 }}>
-              {reel.subtitle}
+              {t("story.reel.subtitle")}
             </p>
           </ScrollReveal>
         </div>
       </section>
 
       {/* ── Our Concept Section: A Steakhouse for Different Lifestyles ───────── */}
-      <section className="story-split story-split--concept" aria-label="Our concept">
+      <section className="story-split story-split--concept" aria-label={t("story.concept.aria")}>
         <ScrollReveal className="story-split__media" delay={0.05} y={20}>
           <img
             src={ourStoryImg}
-            alt="Meat Corner restaurant storefront at night"
+            alt={t("story.concept.imgAlt")}
             loading="lazy"
             decoding="async"
             width="1179"
@@ -132,29 +135,29 @@ export default function StoryPage() {
 
         <ScrollReveal className="story-split__content" delay={0.15} y={20}>
           <span className="eyebrow" style={{ color: "var(--red2)" }}>
-            {concept.eyebrow}
+            {t("story.concept.eyebrow")}
           </span>
           <h2 style={{ whiteSpace: "pre-line" }}>
-            {concept.heading}
+            {t("story.concept.heading")}
           </h2>
 
           {concept.paragraphs.map((p, i) => (
             <p key={i} className="concept-paragraph">
-              {p}
+              {t(`story.concept.p${i + 1}`) || p}
             </p>
           ))}
 
           <div className="concept-chips">
-            {concept.features.map((feat) => (
+            {concept.features.map((feat, i) => (
               <span key={feat} className="concept-chip">
-                {feat}
+                {t(`story.concept.feat${i + 1}`) || feat}
               </span>
             ))}
           </div>
 
           <div className="story-split__actions">
             <Link to={concept.ctaLink} className="btn btn--primary" id="story-menu-btn">
-              {concept.ctaText} →
+              {t("story.concept.cta")} →
             </Link>
           </div>
         </ScrollReveal>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMenu } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { HEALTHY_CONTENT } from "../content/healthy.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
@@ -16,6 +17,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 
 export default function HealthyPage() {
   const [selectedItem, setSelectedItem] = useState(null);
+  const { t } = useLanguage();
 
   // Fetch only real items tagged "healthy"
   const { data: menuData, isLoading } = useMenu({ tag: "healthy", limit: 24 });
@@ -32,7 +34,7 @@ export default function HealthyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            {HEALTHY_CONTENT.hero.eyebrow}
+            {t("healthy.hero.eyebrow")}
           </motion.span>
           <motion.h1
             className="heading-xl"
@@ -41,7 +43,7 @@ export default function HealthyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASE }}
           >
-            {HEALTHY_CONTENT.hero.heading}
+            {t("healthy.hero.heading")}
           </motion.h1>
           <motion.p
             className="body-text"
@@ -50,16 +52,16 @@ export default function HealthyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: LUXURY_EASE }}
           >
-            {HEALTHY_CONTENT.hero.intro}
+            {t("healthy.hero.intro")}
           </motion.p>
         </div>
       </section>
 
       {/* ── Motion Video Banner ─────────────────────────────────── */}
       <PageMotionReel
-        tag={HEALTHY_CONTENT.reel.tag}
-        title={HEALTHY_CONTENT.reel.title}
-        subtitle={HEALTHY_CONTENT.reel.subtitle}
+        tag={t("healthy.reel.tag")}
+        title={t("healthy.reel.title")}
+        subtitle={t("healthy.reel.subtitle")}
         backgroundImage={balancedMealsImg}
         posterUrl={balancedMealsImg}
         fullHeight={true}
@@ -69,14 +71,14 @@ export default function HealthyPage() {
       />
 
       {/* ── Split Section: Balanced Options ────────────────────── */}
-      <section className="story-split" aria-label="Balanced options">
+      <section className="story-split" aria-label={t("healthy.split.aria")}>
         <ScrollReveal className="story-split__media" delay={0.05} y={20}>
-          <img src="/uploads/processed/chicken-shawarma-bowl.webp" alt="Healthy selections at Meat Corner" loading="lazy" decoding="async" width="800" height="600" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <img src="/uploads/processed/chicken-shawarma-bowl.webp" alt={t("healthy.split.imgAlt")} loading="lazy" decoding="async" width="800" height="600" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </ScrollReveal>
         <ScrollReveal className="story-split__content" delay={0.15} y={20}>
-          <span className="eyebrow">{HEALTHY_CONTENT.split.eyebrow}</span>
-          <h2 style={{ whiteSpace: "pre-line" }}>{HEALTHY_CONTENT.split.heading}</h2>
-          <p>{HEALTHY_CONTENT.split.body}</p>
+          <span className="eyebrow">{t("healthy.split.eyebrow")}</span>
+          <h2 style={{ whiteSpace: "pre-line" }}>{t("healthy.split.heading")}</h2>
+          <p>{t("healthy.split.body")}</p>
         </ScrollReveal>
       </section>
 
@@ -85,11 +87,11 @@ export default function HealthyPage() {
         <div className="site-container">
           <ScrollReveal className="site-section__header" style={{ marginBottom: 24 }}>
             <div>
-              <span className="eyebrow">{HEALTHY_CONTENT.listing.eyebrow}</span>
-              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{HEALTHY_CONTENT.listing.heading}</h2>
+              <span className="eyebrow">{t("healthy.listing.eyebrow")}</span>
+              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{t("healthy.listing.heading")}</h2>
             </div>
             <Link to="/menu" className="btn btn--outline" style={{ alignSelf: "flex-end" }}>
-              {HEALTHY_CONTENT.listing.viewAllText}
+              {t("healthy.listing.viewAll")}
             </Link>
           </ScrollReveal>
 
@@ -101,12 +103,12 @@ export default function HealthyPage() {
             </div>
           ) : items.length === 0 ? (
             <div className="menu-empty-state">
-              <h3 className="heading-md" style={{ marginBottom: 12 }}>{HEALTHY_CONTENT.emptyState.title}</h3>
+              <h3 className="heading-md" style={{ marginBottom: 12 }}>{t("healthy.empty.title")}</h3>
               <p className="body-text" style={{ margin: "0 auto 20px" }}>
-                {HEALTHY_CONTENT.emptyState.desc}
+                {t("healthy.empty.desc")}
               </p>
               <Link to="/menu" className="btn btn--primary btn--sm">
-                BROWSE FULL MENU
+                {t("healthy.browseMenu")}
               </Link>
             </div>
           ) : (
@@ -116,7 +118,7 @@ export default function HealthyPage() {
                   <FoodCard
                     item={item}
                     index={idx + 1}
-                    categoryName="Healthy Dishes"
+                    categoryName={t("healthy.categoryName")}
                     onSelect={(it) => setSelectedItem(it)}
                   />
                 </StaggerItem>
@@ -130,7 +132,7 @@ export default function HealthyPage() {
       {selectedItem && (
         <ItemModal
           item={selectedItem}
-          categoryName="Healthy Dishes"
+          categoryName={t("healthy.categoryName")}
           onClose={() => setSelectedItem(null)}
         />
       )}

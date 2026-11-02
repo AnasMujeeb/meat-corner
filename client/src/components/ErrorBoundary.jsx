@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { LanguageContext } from "../context/LanguageProvider.jsx";
 
 /**
  * ErrorBoundary
@@ -11,6 +12,8 @@ import { Component } from "react";
  *   </ErrorBoundary>
  */
 export default class ErrorBoundary extends Component {
+  static contextType = LanguageContext;
+
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -32,6 +35,8 @@ export default class ErrorBoundary extends Component {
       if (this.props.fallback) {
         return this.props.fallback;
       }
+
+      const t = this.context?.t || ((k) => k);
 
       return (
         <div
@@ -56,7 +61,7 @@ export default class ErrorBoundary extends Component {
               marginBottom: 20,
             }}
           >
-            Something went wrong loading this section.
+            {t("common.errorTitle") || "Something went wrong loading this section."}
           </p>
           <button
             className="btn btn--primary btn--sm"
@@ -65,7 +70,7 @@ export default class ErrorBoundary extends Component {
               window.location.reload();
             }}
           >
-            RELOAD PAGE
+            {t("common.reloadPage") || "RELOAD PAGE"}
           </button>
         </div>
       );

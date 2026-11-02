@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSettings } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { ScrollReveal } from "./motion/ScrollReveal.jsx";
 
 /**
@@ -24,6 +25,7 @@ export default function PageMotionReel({
   style = {},
 }) {
   const { data: settings } = useSettings();
+  const { t } = useLanguage();
   const [canPlayVideo, setCanPlayVideo] = useState(false);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function PageMotionReel({
     <section
       className={`menu-video-reel ${fullHeight ? "menu-video-reel--full-hero" : ""} ${className}`.trim()}
       style={sectionStyle}
-      aria-label={title || "Hero banner"}
+      aria-label={title || t("common.heroBanner")}
     >
       <div className="menu-video-reel__frame">
         {canPlayVideo && video ? (
@@ -98,7 +100,7 @@ export default function PageMotionReel({
               <div className="menu-video-reel__stage">
                 <img
                   src={poster}
-                  alt={title || "Hero banner"}
+                  alt={title || t("common.heroBanner")}
                   className="menu-video-reel__poster-contained"
                   loading="eager"
                   fetchPriority="high"
@@ -111,7 +113,7 @@ export default function PageMotionReel({
           ) : (
             <img
               src={poster}
-              alt={title || "Hero banner"}
+              alt={title || t("common.heroBanner")}
               className="menu-video-reel__poster"
               loading="eager"
               fetchPriority="high"

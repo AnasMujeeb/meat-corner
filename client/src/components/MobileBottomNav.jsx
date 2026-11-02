@@ -8,7 +8,7 @@ export default function MobileBottomNav({ onCartOpen }) {
   const { t } = useLanguage();
 
   return (
-    <nav className="mobile-nav-bar" aria-label="Quick navigation">
+    <nav className="mobile-nav-bar" aria-label={t("mobileNav.quickNavAria")}>
       <Link
         to="/menu"
         className={`mobile-nav-bar__item${pathname === "/menu" ? " mobile-nav-bar__item--active" : ""}`}
@@ -31,7 +31,7 @@ export default function MobileBottomNav({ onCartOpen }) {
         type="button"
         className="mobile-nav-bar__item"
         onClick={onCartOpen}
-        aria-label={`${t("nav.cart") || "Cart"}, ${totalQty} items`}
+        aria-label={t("mobileNav.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
       >
         <span className="mobile-nav-bar__icon">🛒</span>
         <span className="mobile-nav-bar__label">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { api } from "../api.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { CATERING_CONTENT } from "../content/catering.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import {
@@ -10,6 +11,7 @@ import {
 import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 
 export default function CateringPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,7 +54,7 @@ export default function CateringPage() {
 
       const res = await api.catering(payload);
       if (res && res.success === false) {
-        setError(res.message || "Failed to send catering request. Please check your details.");
+        setError(res.message || t("catering.form.errorGeneric"));
       } else {
         setSubmitted(true);
         setFormData({
@@ -66,7 +68,7 @@ export default function CateringPage() {
         });
       }
     } catch (err) {
-      setError(err.message || "A network error occurred. Please try again or reach us via WhatsApp.");
+      setError(err.message || t("catering.form.errorNetwork"));
     } finally {
       setLoading(false);
     }
@@ -75,7 +77,7 @@ export default function CateringPage() {
   return (
     <div className="catering-page">
       {/* ── Luxury "COMING SOON!" Hero Layout ────────────────────── */}
-      <section className="catering-coming-soon" aria-label="Catering Coming Soon">
+      <section className="catering-coming-soon" aria-label={t("catering.comingSoon.aria")}>
         <img
           src="/uploads/processed/meat-corner-nachos.webp"
           alt=""
@@ -92,7 +94,7 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            CATERING SERVICES · MEAT CORNER
+            {t("catering.comingSoon.eyebrow")}
           </motion.span>
 
           <motion.h1
@@ -101,7 +103,7 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASE }}
           >
-            COMING SOON!
+            {t("catering.comingSoon.title")}
           </motion.h1>
 
           <motion.div
@@ -117,7 +119,7 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASE }}
           >
-            We are preparing an elevated, bespoke catering experience for your private events, gatherings, and corporate banquets across Doha.
+            {t("catering.comingSoon.subtext")}
           </motion.p>
 
           <motion.div
@@ -127,10 +129,10 @@ export default function CateringPage() {
             transition={{ duration: 0.6, delay: 0.55, ease: LUXURY_EASE }}
           >
             <Link to="/menu" className="btn btn--primary">
-              EXPLORE OUR MENU
+              {t("catering.comingSoon.exploreMenu")}
             </Link>
             <Link to="/" className="btn btn--outline-white">
-              BACK TO HOME
+              {t("catering.comingSoon.backHome")}
             </Link>
           </motion.div>
         </div>
@@ -150,7 +152,7 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            {CATERING_CONTENT.hero.eyebrow}
+            {t("catering.hero.eyebrow")}
           </motion.span>
           <motion.h1
             className="heading-xl"
@@ -159,7 +161,7 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: LUXURY_EASE }}
           >
-            {CATERING_CONTENT.hero.heading}
+            {t("catering.hero.heading")}
           </motion.h1>
           <motion.p
             className="body-text"
@@ -168,25 +170,25 @@ export default function CateringPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: LUXURY_EASE }}
           >
-            {CATERING_CONTENT.hero.intro}
+            {t("catering.hero.intro")}
           </motion.p>
         </div>
       </section>
 
       <PageMotionReel
-        tag={CATERING_CONTENT.reel.tag}
-        title={CATERING_CONTENT.reel.title}
-        subtitle={CATERING_CONTENT.reel.subtitle}
+        tag={t("catering.reel.tag")}
+        title={t("catering.reel.title")}
+        subtitle={t("catering.reel.subtitle")}
       />
 
-      <section className="story-split" aria-label="Tailored catering selections">
+      <section className="story-split" aria-label={t("catering.split.aria")}>
         <ScrollReveal className="story-split__media" delay={0.05} y={20}>
-          <img src="/uploads/processed/shashlik-tenderloin.webp" alt="Meat Corner catering setup" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <img src="/uploads/processed/shashlik-tenderloin.webp" alt={t("catering.split.imgAlt")} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </ScrollReveal>
         <ScrollReveal className="story-split__content" delay={0.15} y={20}>
-          <span className="eyebrow">{CATERING_CONTENT.split.eyebrow}</span>
-          <h2 style={{ whiteSpace: "pre-line" }}>{CATERING_CONTENT.split.heading}</h2>
-          <p>{CATERING_CONTENT.split.body}</p>
+          <span className="eyebrow">{t("catering.split.eyebrow")}</span>
+          <h2 style={{ whiteSpace: "pre-line" }}>{t("catering.split.heading")}</h2>
+          <p>{t("catering.split.body")}</p>
         </ScrollReveal>
       </section>
 
@@ -194,21 +196,21 @@ export default function CateringPage() {
         <div className="site-container" style={{ maxWidth: 920 }}>
           <ScrollReveal className="site-section__header" style={{ marginBottom: 28 }}>
             <div>
-              <span className="eyebrow">{CATERING_CONTENT.formSection.eyebrow}</span>
-              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{CATERING_CONTENT.formSection.heading}</h2>
+              <span className="eyebrow">{t("catering.form.eyebrow")}</span>
+              <h2 className="heading-lg" style={{ whiteSpace: "pre-line" }}>{t("catering.form.heading")}</h2>
             </div>
           </ScrollReveal>
 
           {submitted ? (
             <ScrollReveal className="form-status-box form-status-box--success">
               <h3 className="heading-sm" style={{ color: "var(--red)", marginBottom: 8 }}>
-                {CATERING_CONTENT.formSection.successTitle}
+                {t("catering.form.successTitle")}
               </h3>
               <p className="body-text" style={{ marginBottom: 16 }}>
-                {CATERING_CONTENT.formSection.successMessage}
+                {t("catering.form.successMessage")}
               </p>
               <button className="btn btn--primary btn--sm" onClick={() => setSubmitted(false)}>
-                {CATERING_CONTENT.formSection.resetBtnText}
+                {t("catering.form.resetBtn")}
               </button>
             </ScrollReveal>
           ) : (
@@ -230,49 +232,49 @@ export default function CateringPage() {
               />
 
               <div className="form-field">
-                <label className="form-label" htmlFor="catering-name">Name <span>*</span></label>
+                <label className="form-label" htmlFor="catering-name">{t("catering.form.nameLabel")} <span>*</span></label>
                 <input
                   id="catering-name"
                   type="text"
                   name="name"
                   className="form-input"
                   required
-                  placeholder="e.g. Fatima Al-Kuwari"
+                  placeholder={t("catering.form.namePlaceholder")}
                   value={formData.name}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="catering-phone">Phone <span>*</span></label>
+                <label className="form-label" htmlFor="catering-phone">{t("catering.form.phoneLabel")} <span>*</span></label>
                 <input
                   id="catering-phone"
                   type="tel"
                   name="phone"
                   className="form-input"
                   required
-                  placeholder="+974 5500 0000"
+                  placeholder={t("catering.form.phonePlaceholder")}
                   value={formData.phone}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="catering-email">Email <span>*</span></label>
+                <label className="form-label" htmlFor="catering-email">{t("catering.form.emailLabel")} <span>*</span></label>
                 <input
                   id="catering-email"
                   type="email"
                   name="email"
                   className="form-input"
                   required
-                  placeholder="you@example.com"
+                  placeholder={t("catering.form.emailPlaceholder")}
                   value={formData.email}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="catering-date">Tentative Event Date</label>
+                <label className="form-label" htmlFor="catering-date">{t("catering.form.dateLabel")}</label>
                 <input
                   id="catering-date"
                   type="date"
@@ -284,26 +286,26 @@ export default function CateringPage() {
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="catering-guests">Estimated Guests</label>
+                <label className="form-label" htmlFor="catering-guests">{t("catering.form.guestsLabel")}</label>
                 <input
                   id="catering-guests"
                   type="number"
                   name="guestCount"
                   min="10"
                   className="form-input"
-                  placeholder="e.g. 50"
+                  placeholder={t("catering.form.guestsPlaceholder")}
                   value={formData.guestCount}
                   onChange={handleChange}
                 />
               </div>
 
               <div className="form-field form-field--full">
-                <label className="form-label" htmlFor="catering-message">Notes & Requests <span>*</span></label>
+                <label className="form-label" htmlFor="catering-message">{t("catering.form.messageLabel")} <span>*</span></label>
                 <textarea
                   id="catering-message"
                   name="message"
                   className="form-textarea"
-                  placeholder="Tell us about service style, timing, venue, budget or special requests..."
+                  placeholder={t("catering.form.messagePlaceholder")}
                   rows={5}
                   required
                   value={formData.message}
@@ -318,7 +320,7 @@ export default function CateringPage() {
                   disabled={loading}
                   style={{ minHeight: 52 }}
                 >
-                  {loading ? CATERING_CONTENT.formSection.submittingBtnText : CATERING_CONTENT.formSection.submitBtnText}
+                  {loading ? t("catering.form.submittingBtn") : t("catering.form.submitBtn")}
                 </button>
               </div>
             </ScrollReveal>

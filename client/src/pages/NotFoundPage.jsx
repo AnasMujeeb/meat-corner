@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LUXURY_EASE } from "../components/motion/motionTokens.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 export default function NotFoundPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="not-found-page site-section">
       <div
@@ -24,7 +27,7 @@ export default function NotFoundPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
         >
-          404 · PAGE NOT FOUND
+          {t("notfound.eyebrow")}
         </motion.span>
 
         <motion.h1
@@ -34,7 +37,7 @@ export default function NotFoundPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.1, ease: LUXURY_EASE }}
         >
-          OFF THE MENU
+          {t("notfound.heading")}
         </motion.h1>
 
         <motion.p
@@ -44,7 +47,7 @@ export default function NotFoundPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.2, ease: LUXURY_EASE }}
         >
-          The cut or page you requested isn't available. Explore our prime steaks and signature dishes on the menu instead.
+          {t("notfound.desc")}
         </motion.p>
 
         <motion.div
@@ -54,10 +57,10 @@ export default function NotFoundPage() {
           transition={{ duration: 0.6, delay: 0.3, ease: LUXURY_EASE }}
         >
           <Link to="/menu" className="btn btn--primary">
-            EXPLORE MENU
+            {t("notfound.exploreMenu")}
           </Link>
           <Link to="/" className="btn btn--outline">
-            BACK TO HOME
+            {t("notfound.backHome")}
           </Link>
         </motion.div>
       </div>

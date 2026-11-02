@@ -33,7 +33,7 @@ export default function Header({ onCartOpen }) {
           <Link
             to="/"
             className="site-header__brand"
-            aria-label="Meat Corner - Home"
+            aria-label={t("header.brandAria")}
             onClick={() => setMobileMenuOpen(false)}
           >
             {settings?.logo ? (
@@ -47,7 +47,7 @@ export default function Header({ onCartOpen }) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="site-header__nav" aria-label="Main navigation">
+          <nav className="site-header__nav" aria-label={t("header.mainNavAria")}>
             {NAV.map(({ to, key, defaultLabel }) => {
               const isActive = pathname === to;
               return (
@@ -70,7 +70,7 @@ export default function Header({ onCartOpen }) {
               type="button"
               className="site-header__lang-btn site-header__lang-btn--desktop"
               onClick={() => setLang(lang === "en" ? "ar" : "en")}
-              aria-label={lang === "en" ? "Switch to Arabic" : "Switch to English"}
+              aria-label={lang === "en" ? t("header.switchToAr") : t("header.switchToEn")}
               title={lang === "en" ? "العربية" : "English"}
             >
               {lang === "en" ? "العربية" : "EN"}
@@ -80,7 +80,7 @@ export default function Header({ onCartOpen }) {
             <button
               className={`site-header__cart-btn${totalQty > 0 ? " site-header__cart-btn--has-items" : ""}`}
               onClick={onCartOpen}
-              aria-label={`${t("header.openCart") || "Open cart"}, ${totalQty} items`}
+              aria-label={t("header.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
             >
               <span>{t("nav.cart") || "Cart"}</span>
               {totalQty > 0 && (
@@ -103,11 +103,11 @@ export default function Header({ onCartOpen }) {
 
       {/* Mobile Full Nav Panel */}
       {mobileMenuOpen && (
-        <div className="mobile-nav-panel mobile-nav-panel--open" role="dialog" aria-label="Mobile navigation panel">
+        <div className="mobile-nav-panel mobile-nav-panel--open" role="dialog" aria-label={t("header.mobileNavAria")}>
           {/* Mobile Language Switcher Row */}
           <div className="mobile-nav-panel__lang-row">
             <span className="mobile-nav-panel__lang-label">
-              {lang === "en" ? "Language" : "اللغة"}
+              {lang === "en" ? t("header.langLabel") : "اللغة"}
             </span>
             <button
               type="button"
@@ -116,7 +116,7 @@ export default function Header({ onCartOpen }) {
                 setLang(lang === "en" ? "ar" : "en");
                 setMobileMenuOpen(false);
               }}
-              aria-label={lang === "en" ? "Switch to Arabic" : "Switch to English"}
+              aria-label={lang === "en" ? t("header.switchToAr") : t("header.switchToEn")}
             >
               {lang === "en" ? "العربية" : "EN"}
             </button>

@@ -5,7 +5,7 @@ import ar from "../i18n/ar.js";
 const STORAGE_KEY = "meat_corner_lang";
 const SUPPORTED_LANGS = ["en", "ar"];
 
-const LanguageContext = createContext({
+export const LanguageContext = createContext({
   lang: "en",
   setLang: () => {},
   t: (key) => key,
@@ -29,16 +29,25 @@ export function LanguageProvider({ children }) {
 
   const dir = lang === "ar" ? "rtl" : "ltr";
 
-  // Keep <html> attributes in sync with current language & direction
+  // Keep <html> attributes in sync with current language & direction, and update SEO title/meta
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = dir;
+    const title = t("seo.title");
+    if (title) {
+      document.title = title;
+    }
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const desc = t("seo.description");
+    if (metaDesc && desc) {
+      metaDesc.setAttribute("content", desc);
+    }
     try {
       localStorage.setItem(STORAGE_KEY, lang);
     } catch {
       // Ignore storage write errors
     }
-  }, [lang, dir]);
+  }, [lang, dir, t]);
 
   const setLang = useCallback((nextLang) => {
     if (SUPPORTED_LANGS.includes(nextLang)) {

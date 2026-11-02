@@ -297,7 +297,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
 
           {/* Allergens Chips */}
           {item.allergens?.length > 0 && (
-            <div className="item-modal__allergens" aria-label="Allergens">
+            <div className="item-modal__allergens" aria-label={t("itemModal.allergensAria")}>
               <span className="allergens-label">{t("itemModal.contains")}</span>
               {item.allergens.map((alg) => (
                 <span key={alg} className="chip chip-allergen">
