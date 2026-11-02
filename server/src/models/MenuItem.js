@@ -23,6 +23,7 @@ const nutritionSchema = new mongoose.Schema(
 const choiceSchema = new mongoose.Schema(
   {
     label: { type: String, required: true, trim: true },
+    labelAr: { type: String, default: '', trim: true },
     extraPrice: { type: Number, default: 0 },
     image: {
       url: { type: String, default: '' },
@@ -40,6 +41,7 @@ const choiceSchema = new mongoose.Schema(
 const optionSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
+    nameAr: { type: String, default: '', trim: true },
     type: { type: String, enum: ['single', 'multiple'], required: true },
     groupType: { type: String, enum: ['text', 'photo'], default: 'text' },
     maxSelections: { type: Number, default: 1 },
@@ -56,6 +58,11 @@ const menuItemSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    nameAr: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     slug: {
       type: String,
       required: true,
@@ -64,6 +71,11 @@ const menuItemSchema = new mongoose.Schema(
       trim: true,
     },
     description: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    descriptionAr: {
       type: String,
       default: '',
       trim: true,

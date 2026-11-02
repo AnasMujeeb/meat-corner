@@ -20,7 +20,8 @@ const nutritionSchema = z
   .transform((v) => v ?? {});
 
 const choiceSchema = z.object({
-  label: z.string().min(1, 'Choice label is required.'),
+  label: z.string().min(1, 'Choice label is required.').max(100),
+  labelAr: z.string().max(100).nullable().optional().transform((v) => (v ? v.trim() : '')),
   extraPrice: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
     z.number({ invalid_type_error: 'Extra price must be a number.' }).min(0).optional().default(0)
@@ -36,7 +37,8 @@ const choiceSchema = z.object({
 });
 
 const optionSchema = z.object({
-  name: z.string().min(1, 'Option group name is required.'),
+  name: z.string().min(1, 'Option group name is required.').max(100),
+  nameAr: z.string().max(100).nullable().optional().transform((v) => (v ? v.trim() : '')),
   type: z.enum(['single', 'multiple']),
   groupType: z.enum(['text', 'photo']).optional().default('text'),
   maxSelections: z.preprocess(
@@ -55,7 +57,10 @@ const imageSchema = z.object({
 
 export const createMenuItemSchema = z.object({
   name: z.string().min(1, 'Name is required.').max(200),
-  description: z.string().max(1000).nullable().optional().transform((v) => v ?? ''),
+  nameAr: z.string().max(200).nullable().optional().transform((v) => (v ? v.trim() : '')),
+  description: z.string().max(1000).nullable().optional().transform((v) => (v ? v.trim() : '')),
+  descriptionAr: z.string().max(1000).nullable().optional().transform((v) => (v ? v.trim() : '')),
+  description_ar: z.string().max(1000).nullable().optional().transform((v) => (v ? v.trim() : '')),
   category: z.string().min(1, 'Category ID is required.'),
   price: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? undefined : Number(v)),

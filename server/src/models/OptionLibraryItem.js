@@ -8,6 +8,11 @@ const optionLibraryItemSchema = new mongoose.Schema(
       trim: true,
       unique: true,
     },
+    nameAr: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     category: {
       type: String,
       enum: ['sauce', 'side', 'other'],

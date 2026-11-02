@@ -10,7 +10,7 @@ import { deleteImage } from '../services/storage.js';
 
 export const publicListCategories = asyncHandler(async (req, res) => {
   const categories = await Category.find({ isActive: true })
-    .select('name slug description image order')
+    .select('name nameAr slug description descriptionAr image order')
     .sort({ order: 1, createdAt: 1 })
     .lean();
 

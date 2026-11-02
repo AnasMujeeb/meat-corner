@@ -8,7 +8,7 @@ import { setCacheHeaders } from '../utils/helpers.js';
 
 export const publicListBranches = asyncHandler(async (req, res) => {
   const branches = await Branch.find({ isActive: true })
-    .select('name slug address phone mapUrl openingHours order')
+    .select('name nameAr slug address addressAr phone mapUrl openingHours openingHoursAr order')
     .sort({ order: 1 })
     .lean();
 

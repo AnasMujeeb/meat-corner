@@ -7,6 +7,11 @@ const branchSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    nameAr: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     slug: {
       type: String,
       required: true,
@@ -15,6 +20,11 @@ const branchSchema = new mongoose.Schema(
       trim: true,
     },
     address: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    addressAr: {
       type: String,
       default: '',
       trim: true,
@@ -31,6 +41,11 @@ const branchSchema = new mongoose.Schema(
     openingHours: {
       type: String,
       default: '',
+    },
+    openingHoursAr: {
+      type: String,
+      default: '',
+      trim: true,
     },
     order: {
       type: Number,

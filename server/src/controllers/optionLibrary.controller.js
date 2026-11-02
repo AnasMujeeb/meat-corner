@@ -32,7 +32,7 @@ export const getOptionLibraryItem = asyncHandler(async (req, res) => {
  * POST /api/admin/options-library
  */
 export const createOptionLibraryItem = asyncHandler(async (req, res) => {
-  const { name, category, image, price, isAvailable, order } = req.body;
+  const { name, nameAr, category, image, price, isAvailable, order } = req.body;
 
   const existing = await OptionLibraryItem.findOne({ name: name.trim() });
   if (existing) {
@@ -41,6 +41,7 @@ export const createOptionLibraryItem = asyncHandler(async (req, res) => {
 
   const item = await OptionLibraryItem.create({
     name: name.trim(),
+    nameAr: nameAr !== undefined ? nameAr.trim() : '',
     category: category || 'sauce',
     image: image || { url: '', thumbUrl: '' },
     price: price || 0,
@@ -59,7 +60,7 @@ export const updateOptionLibraryItem = asyncHandler(async (req, res) => {
   const item = await OptionLibraryItem.findById(req.params.id);
   if (!item) throw createError(404, 'Option library item not found.');
 
-  const { name, category, image, price, isAvailable, order } = req.body;
+  const { name, nameAr, category, image, price, isAvailable, order } = req.body;
 
   if (name && name.trim() !== item.name) {
     const duplicate = await OptionLibraryItem.findOne({
@@ -72,6 +73,7 @@ export const updateOptionLibraryItem = asyncHandler(async (req, res) => {
     item.name = name.trim();
   }
 
+  if (nameAr !== undefined) item.nameAr = nameAr.trim();
   if (category !== undefined) item.category = category;
   if (image !== undefined) item.image = image;
   if (price !== undefined) item.price = price;
@@ -92,6 +94,9 @@ export const updateOptionLibraryItem = asyncHandler(async (req, res) => {
         opt.choices.forEach((choice) => {
           if (choice.libraryItemId && choice.libraryItemId.toString() === item._id.toString()) {
             choice.label = item.name;
+            if (item.nameAr !== undefined) {
+              choice.labelAr = item.nameAr;
+            }
             if (item.image?.url) {
               choice.image = {
                 url: item.image.url,

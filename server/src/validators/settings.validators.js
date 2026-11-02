@@ -69,4 +69,5 @@ export const updateSettingsSchema = z.object({
     z.literal(''),
   ]).optional(),
   aboutText: z.string().max(5000).optional(),
+  aboutTextAr: z.string().max(5000).nullable().optional().transform((v) => (v ? v.trim() : '')),
 });

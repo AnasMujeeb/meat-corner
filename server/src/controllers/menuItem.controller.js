@@ -6,6 +6,12 @@ import { toSlug, uniqueSlug } from '../utils/slug.js';
 import { setCacheHeaders, paginate } from '../utils/helpers.js';
 import { deleteImage } from '../services/storage.js';
 
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const ARABIC_CHAR_REGEX = /[\u0600-\u06FF]/;
+
 // ─── Public ───────────────────────────────────────────────────────────────────
 
 export const publicListMenu = asyncHandler(async (req, res) => {
@@ -31,17 +37,28 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     filter.badges = String(badge).toLowerCase().trim();
   }
 
+  let sort = { order: 1, createdAt: 1 };
   if (q) {
-    filter.$text = { $search: q };
+    if (ARABIC_CHAR_REGEX.test(q)) {
+      const escaped = escapeRegex(q.trim());
+      const arRegex = new RegExp(escaped, 'i');
+      filter.$or = [
+        { nameAr: arRegex },
+        { descriptionAr: arRegex },
+        { name: arRegex },
+      ];
+      sort = { order: 1, createdAt: 1 };
+    } else {
+      filter.$text = { $search: q };
+      sort = { score: { $meta: 'textScore' } };
+    }
   }
 
   const projection = {
-    name: 1, slug: 1, description: 1, category: 1,
+    name: 1, nameAr: 1, slug: 1, description: 1, descriptionAr: 1, category: 1,
     price: 1, images: 1, tags: 1, allergens: 1,
     nutrition: 1, options: 1, order: 1, badges: 1,
   };
-
-  const sort = q ? { score: { $meta: 'textScore' } } : { order: 1, createdAt: 1 };
 
   const result = await paginate({
     Model: MenuItem,
@@ -85,9 +102,23 @@ export const adminListMenu = asyncHandler(async (req, res) => {
   if (badge) filter.badges = String(badge).toLowerCase().trim();
   if (available === 'true') filter.isAvailable = true;
   if (available === 'false') filter.isAvailable = false;
-  if (q) filter.$text = { $search: q };
 
-  const sort = q ? { score: { $meta: 'textScore' } } : { order: 1, createdAt: 1 };
+  let sort = { order: 1, createdAt: 1 };
+  if (q) {
+    if (ARABIC_CHAR_REGEX.test(q)) {
+      const escaped = escapeRegex(q.trim());
+      const arRegex = new RegExp(escaped, 'i');
+      filter.$or = [
+        { nameAr: arRegex },
+        { descriptionAr: arRegex },
+        { name: arRegex },
+      ];
+      sort = { order: 1, createdAt: 1 };
+    } else {
+      filter.$text = { $search: q };
+      sort = { score: { $meta: 'textScore' } };
+    }
+  }
 
   const result = await paginate({
     Model: MenuItem,

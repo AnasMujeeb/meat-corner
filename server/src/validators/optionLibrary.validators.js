@@ -3,6 +3,7 @@ import { optionalImageSourceSchema } from './common.validators.js';
 
 export const createOptionLibraryItemSchema = z.object({
   name: z.string().min(1, 'Name is required.').max(100),
+  nameAr: z.string().max(100).nullable().optional().transform((v) => (v ? v.trim() : '')),
   category: z.enum(['sauce', 'side', 'other']).default('sauce'),
   image: z
     .object({

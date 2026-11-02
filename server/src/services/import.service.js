@@ -198,6 +198,13 @@ export async function importMenuItems(buffer, mimetype) {
       const isAvailable =
         String(row.available ?? 'true').trim().toLowerCase() !== 'false';
 
+      // Optional Arabic fields with aliases
+      const rawNameAr = row.namear ?? row.name_ar ?? row['name arabic'];
+      const nameAr = rawNameAr !== undefined ? String(rawNameAr).trim() : '';
+
+      const rawDescAr = row.descriptionar ?? row.description_ar;
+      const descriptionAr = rawDescAr !== undefined ? String(rawDescAr).trim() : '';
+
       const baseSlug = toSlug(name);
       const existingItem = await MenuItem.findOne({ slug: baseSlug }).lean();
 
@@ -215,6 +222,12 @@ export async function importMenuItems(buffer, mimetype) {
         if (hasBadgesCol) {
           updateFields.badges = badges;
         }
+        if (rawNameAr !== undefined) {
+          updateFields.nameAr = nameAr;
+        }
+        if (rawDescAr !== undefined) {
+          updateFields.descriptionAr = descriptionAr;
+        }
         await MenuItem.findByIdAndUpdate(existingItem._id, {
           $set: updateFields,
         });
@@ -223,8 +236,10 @@ export async function importMenuItems(buffer, mimetype) {
         const slug = await uniqueSlug(MenuItem, baseSlug);
         await MenuItem.create({
           name,
+          nameAr,
           slug,
           description: String(row.description ?? '').trim(),
+          descriptionAr,
           category: category._id,
           price,
           nutrition,
@@ -251,7 +266,7 @@ export async function generateImportTemplate() {
   const ws = wb.addWorksheet('Menu Items');
 
   const headers = [
-    'name', 'category', 'description', 'price',
+    'name', 'nameAr', 'category', 'description', 'descriptionAr', 'price',
     'calories', 'fat', 'protein', 'carbs', 'fiber',
     'allergens', 'tags', 'badges', 'available',
   ];
@@ -274,8 +289,10 @@ export async function generateImportTemplate() {
   // Sample data row
   ws.addRow({
     name: 'Classic Smash Burger',
+    nameAr: 'كلاسيك سماش برجر',
     category: 'Burgers',
     description: 'Two smashed beef patties, cheddar, pickles, special sauce',
+    descriptionAr: 'شريحتا لحم بقري مهروس، جبنة شيدر، مخلل، صلصة خاصة',
     price: 48,
     calories: 820,
     fat: 42,

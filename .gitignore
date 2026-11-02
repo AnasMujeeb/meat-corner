@@ -39,6 +39,9 @@ Thumbs.db
 # Coverage
 coverage/
 
+# Server scripts output
+server/scripts/out/
+
 # Local raw scratch dumps & media
 *.pdf
 pdf_extracted_text.txt
