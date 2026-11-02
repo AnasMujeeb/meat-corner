@@ -36,6 +36,7 @@ const schema = z.object({
     z.literal(''),
   ]).optional().default(''),
   aboutText: z.string().max(5000).optional().default(''),
+  aboutTextAr: z.string().max(5000).optional().default(''),
   socials: z.object({
     instagram: optionalAbsoluteUrlSchema,
     tiktok: optionalAbsoluteUrlSchema,
@@ -99,6 +100,7 @@ export default function SettingsPage() {
       contactPhone: '',
       contactEmail: '',
       aboutText: '',
+      aboutTextAr: '',
       socials: {
         instagram: '',
         tiktok: '',
@@ -119,6 +121,7 @@ export default function SettingsPage() {
         contactPhone: settings.contactPhone || '',
         contactEmail: settings.contactEmail || '',
         aboutText: settings.aboutText || '',
+        aboutTextAr: settings.aboutTextAr || '',
         socials: {
           instagram: settings.socials?.instagram || '',
           tiktok: settings.socials?.tiktok || '',
@@ -140,6 +143,7 @@ export default function SettingsPage() {
         contactPhone: formData.contactPhone,
         contactEmail: formData.contactEmail,
         aboutText: formData.aboutText,
+        aboutTextAr: formData.aboutTextAr,
         socials: {
           instagram: formData.socials?.instagram ?? '',
           tiktok: formData.socials?.tiktok ?? '',
@@ -164,6 +168,7 @@ export default function SettingsPage() {
           contactPhone: s.contactPhone || '',
           contactEmail: s.contactEmail || '',
           aboutText: s.aboutText || '',
+          aboutTextAr: s.aboutTextAr || '',
           socials: {
             instagram: s.socials?.instagram || '',
             tiktok: s.socials?.tiktok || '',
@@ -333,7 +338,7 @@ export default function SettingsPage() {
                 />
               </div>
             </div>
-            <div className="form-group" style={{ margin: 0 }}>
+            <div className="form-group" style={{ margin: 0, marginBottom: 16 }}>
               <label className="label" htmlFor="settings-aboutText">About Text</label>
               <textarea
                 id="settings-aboutText"
@@ -341,6 +346,21 @@ export default function SettingsPage() {
                 rows={5}
                 placeholder="Tell your story…"
                 {...register('aboutText')}
+              />
+            </div>
+            <div className="form-group" style={{ margin: 0 }}>
+              <label className="label" htmlFor="settings-aboutTextAr">
+                About text (Arabic) (نبذة عن المطعم بالعربية) <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-muted)' }}>(optional, shown on the Arabic site; if empty the English text is shown)</span>
+              </label>
+              <textarea
+                id="settings-aboutTextAr"
+                className="textarea"
+                dir="rtl"
+                lang="ar"
+                rows={5}
+                placeholder="اكتب نبذة عن قصة المطعم هنا..."
+                style={{ textAlign: 'right' }}
+                {...register('aboutTextAr')}
               />
             </div>
           </div>

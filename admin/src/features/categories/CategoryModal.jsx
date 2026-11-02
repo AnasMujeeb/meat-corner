@@ -14,7 +14,9 @@ import { optionalImageSourceSchema } from '../../utils/validation.js';
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required.').max(100),
+  nameAr: z.string().max(100).optional().default(''),
   description: z.string().max(500).optional().default(''),
+  descriptionAr: z.string().max(500).optional().default(''),
   image: optionalImageSourceSchema,
   isActive: z.boolean().optional().default(true),
 });
@@ -31,7 +33,7 @@ export default function CategoryModal({ isOpen, onClose, category }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', description: '', image: '', isActive: true },
+    defaultValues: { name: '', nameAr: '', description: '', descriptionAr: '', image: '', isActive: true },
   });
 
   // Populate form when editing
@@ -41,11 +43,13 @@ export default function CategoryModal({ isOpen, onClose, category }) {
         category
           ? {
               name: category.name,
+              nameAr: category.nameAr || '',
               description: category.description || '',
+              descriptionAr: category.descriptionAr || '',
               image: category.image || '',
               isActive: category.isActive,
             }
-          : { name: '', description: '', image: '', isActive: true }
+          : { name: '', nameAr: '', description: '', descriptionAr: '', image: '', isActive: true }
       );
     }
   }, [isOpen, category, reset]);
@@ -111,6 +115,19 @@ export default function CategoryModal({ isOpen, onClose, category }) {
         </div>
 
         <div className="form-group">
+          <Input
+            id="cat-nameAr"
+            label="Arabic name (الاسم بالعربية) (optional, shown on the Arabic site; if empty the English text is shown)"
+            placeholder="مثال: برجر"
+            dir="rtl"
+            lang="ar"
+            style={{ textAlign: 'right' }}
+            error={errors.nameAr?.message}
+            {...register('nameAr')}
+          />
+        </div>
+
+        <div className="form-group">
           <label className="label" htmlFor="cat-description">Description</label>
           <textarea
             id="cat-description"
@@ -119,6 +136,22 @@ export default function CategoryModal({ isOpen, onClose, category }) {
             {...register('description')}
           />
           {errors.description && <p className="field-error">{errors.description.message}</p>}
+        </div>
+
+        <div className="form-group">
+          <label className="label" htmlFor="cat-descriptionAr">
+            Arabic description (الوصف بالعربية) <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-muted)' }}>(optional, shown on the Arabic site; if empty the English text is shown)</span>
+          </label>
+          <textarea
+            id="cat-descriptionAr"
+            className={`textarea${errors.descriptionAr ? ' error' : ''}`}
+            dir="rtl"
+            lang="ar"
+            placeholder="وصف قصير للقسم بالعربية..."
+            style={{ textAlign: 'right' }}
+            {...register('descriptionAr')}
+          />
+          {errors.descriptionAr && <p className="field-error">{errors.descriptionAr.message}</p>}
         </div>
 
         <div className="form-group">

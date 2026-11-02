@@ -6,8 +6,10 @@ import Button from '../components/Button.jsx';
 
 const COLUMNS = [
   { name: 'name', required: true, desc: 'Menu item name (used to match existing items for update).' },
+  { name: 'nameAr', required: false, desc: 'Arabic item name (optional, alias: name_ar).' },
   { name: 'category', required: true, desc: 'Category name. Will be created if it does not exist.' },
   { name: 'description', required: false, desc: 'Short description of the item.' },
+  { name: 'descriptionAr', required: false, desc: 'Arabic description (optional, alias: description_ar).' },
   { name: 'price', required: true, desc: 'Price in QAR (number, e.g. 45 or 45.50).' },
   { name: 'calories', required: false, desc: 'Calorie count (number).' },
   { name: 'fat', required: false, desc: 'Fat in grams.' },

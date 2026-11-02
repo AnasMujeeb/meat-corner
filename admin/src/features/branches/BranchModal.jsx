@@ -13,10 +13,13 @@ import { optionalAbsoluteUrlSchema } from '../../utils/validation.js';
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required.').max(100),
+  nameAr: z.string().max(100).optional().default(''),
   address: z.string().max(500).optional().default(''),
+  addressAr: z.string().max(500).optional().default(''),
   phone: z.string().max(30).optional().default(''),
   mapUrl: optionalAbsoluteUrlSchema,
   openingHours: z.string().max(200).optional().default(''),
+  openingHoursAr: z.string().max(200).optional().default(''),
   order: z.coerce.number().int().min(0).optional().default(0),
   isActive: z.boolean().optional().default(true),
 });
@@ -33,7 +36,7 @@ export default function BranchModal({ isOpen, onClose, branch }) {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', address: '', phone: '', mapUrl: '', openingHours: '', order: 0, isActive: true },
+    defaultValues: { name: '', nameAr: '', address: '', addressAr: '', phone: '', mapUrl: '', openingHours: '', openingHoursAr: '', order: 0, isActive: true },
   });
 
   useEffect(() => {
@@ -42,14 +45,17 @@ export default function BranchModal({ isOpen, onClose, branch }) {
         branch
           ? {
               name: branch.name,
+              nameAr: branch.nameAr || '',
               address: branch.address || '',
+              addressAr: branch.addressAr || '',
               phone: branch.phone || '',
               mapUrl: branch.mapUrl || '',
               openingHours: branch.openingHours || '',
+              openingHoursAr: branch.openingHoursAr || '',
               order: branch.order ?? 0,
               isActive: branch.isActive,
             }
-          : { name: '', address: '', phone: '', mapUrl: '', openingHours: '', order: 0, isActive: true }
+          : { name: '', nameAr: '', address: '', addressAr: '', phone: '', mapUrl: '', openingHours: '', openingHoursAr: '', order: 0, isActive: true }
       );
     }
   }, [isOpen, branch, reset]);
@@ -110,11 +116,37 @@ export default function BranchModal({ isOpen, onClose, branch }) {
 
         <div className="form-group">
           <Input
+            id="branch-nameAr"
+            label="Arabic name (الاسم بالعربية) (optional, shown on the Arabic site; if empty the English text is shown)"
+            placeholder="مثال: مدينة خليفة"
+            dir="rtl"
+            lang="ar"
+            style={{ textAlign: 'right' }}
+            error={errors.nameAr?.message}
+            {...register('nameAr')}
+          />
+        </div>
+
+        <div className="form-group">
+          <Input
             id="branch-address"
             label="Address"
             placeholder="e.g. Madinat Khalifa, Doha"
             error={errors.address?.message}
             {...register('address')}
+          />
+        </div>
+
+        <div className="form-group">
+          <Input
+            id="branch-addressAr"
+            label="Arabic address (العنوان بالعربية) (optional, shown on the Arabic site; if empty the English text is shown)"
+            placeholder="مثال: مدينة خليفة، الدوحة"
+            dir="rtl"
+            lang="ar"
+            style={{ textAlign: 'right' }}
+            error={errors.addressAr?.message}
+            {...register('addressAr')}
           />
         </div>
 
@@ -157,6 +189,19 @@ export default function BranchModal({ isOpen, onClose, branch }) {
             placeholder="e.g. Sat–Thu 12PM–11PM, Fri 1PM–12AM"
             error={errors.openingHours?.message}
             {...register('openingHours')}
+          />
+        </div>
+
+        <div className="form-group">
+          <Input
+            id="branch-openingHoursAr"
+            label="Arabic opening hours (ساعات العمل بالعربية) (optional, shown on the Arabic site; if empty the English text is shown)"
+            placeholder="مثال: السبت–الخميس ١٢م–١١م، الجمعة ١م–١٢ص"
+            dir="rtl"
+            lang="ar"
+            style={{ textAlign: 'right' }}
+            error={errors.openingHoursAr?.message}
+            {...register('openingHoursAr')}
           />
         </div>
 

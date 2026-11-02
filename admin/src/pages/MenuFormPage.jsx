@@ -56,6 +56,7 @@ const nutritionSchema = z
 
 const choiceSchema = z.object({
   label: z.string().min(1, 'Choice label is required.'),
+  labelAr: z.string().optional().default(''),
   extraPrice: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
     z.number({ invalid_type_error: 'Extra price must be a number.' }).min(0, 'Extra price must be non-negative.')
@@ -72,6 +73,7 @@ const choiceSchema = z.object({
 
 const optionSchema = z.object({
   name: z.string().min(1, 'Option group name is required.'),
+  nameAr: z.string().optional().default(''),
   type: z.enum(['single', 'multiple']),
   groupType: z.enum(['text', 'photo']).optional().default('text'),
   maxSelections: z.preprocess(
@@ -84,8 +86,10 @@ const optionSchema = z.object({
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required.').max(200, 'Name cannot exceed 200 characters.'),
+  nameAr: z.string().max(200, 'Arabic name cannot exceed 200 characters.').optional().default(''),
   category: z.string().min(1, 'Category is required.'),
   description: z.string().max(1000, 'Description cannot exceed 1000 characters.').nullable().optional().default(''),
+  descriptionAr: z.string().max(1000, 'Arabic description cannot exceed 1000 characters.').nullable().optional().default(''),
   price: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? undefined : Number(v)),
     z.number({ required_error: 'Price is required.', invalid_type_error: 'Price must be a valid number.' })
@@ -380,6 +384,7 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
     for (const libItem of selectedLibraryItems) {
       appendChoice({
         label: libItem.name,
+        labelAr: libItem.nameAr || '',
         extraPrice: libItem.price || 0,
         image: {
           url: libItem.image?.url || '',
@@ -403,6 +408,7 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
           updateChoice(idx, {
             ...choice,
             label: fresh.name,
+            labelAr: fresh.nameAr !== undefined ? fresh.nameAr : (choice.labelAr || ''),
             image: {
               url: fresh.image?.url || choice.image?.url || '',
               thumbUrl: fresh.image?.thumbUrl || fresh.image?.url || choice.image?.thumbUrl || '',
@@ -427,6 +433,16 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
           style={{ flex: '1 1 180px', minWidth: 160 }}
           {...register(`options.${optIdx}.name`)}
           aria-label="Option group title"
+        />
+
+        <input
+          className="input"
+          placeholder="Arabic group title (عنوان المجموعة بالعربية)"
+          dir="rtl"
+          lang="ar"
+          style={{ flex: '1 1 180px', minWidth: 160, textAlign: 'right' }}
+          {...register(`options.${optIdx}.nameAr`)}
+          aria-label="Option group Arabic title"
         />
 
         {/* Display Type: Text-Only vs Photo Cards */}
@@ -555,6 +571,16 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
                 />
 
                 <input
+                  className="input"
+                  placeholder="Arabic label (الاسم بالعربية)"
+                  dir="rtl"
+                  lang="ar"
+                  style={{ flex: 1, textAlign: 'right' }}
+                  {...register(`options.${optIdx}.choices.${ci}.labelAr`)}
+                  aria-label="Choice Arabic label"
+                />
+
+                <input
                   type="number"
                   min="0"
                   step="0.01"
@@ -647,8 +673,10 @@ export default function MenuFormPage() {
     resolver: zodResolver(schema),
     defaultValues: {
       name: '',
+      nameAr: '',
       category: '',
       description: '',
+      descriptionAr: '',
       price: '',
       images: [],
       nutrition: {},
@@ -668,8 +696,10 @@ export default function MenuFormPage() {
     if (item) {
       reset({
         name: item.name,
+        nameAr: item.nameAr || '',
         category: item.category?._id || item.category || '',
         description: item.description || '',
+        descriptionAr: item.descriptionAr || '',
         price: item.price,
         images: item.images || [],
         nutrition: item.nutrition || {},
@@ -678,12 +708,14 @@ export default function MenuFormPage() {
         badges: item.badges || [],
         options: (item.options || []).map((opt) => ({
           name: opt.name || '',
+          nameAr: opt.nameAr || '',
           type: opt.type || 'single',
           groupType: opt.groupType || 'text',
           maxSelections: opt.maxSelections || 1,
           required: !!opt.required,
           choices: (opt.choices || []).map((c) => ({
             label: c.label || '',
+            labelAr: c.labelAr || '',
             extraPrice: c.extraPrice || 0,
             image: {
               url: c.image?.url || '',
@@ -714,9 +746,11 @@ export default function MenuFormPage() {
   const onValid = (data) => {
     const payload = {
       name: data.name.trim(),
+      nameAr: data.nameAr ? data.nameAr.trim() : '',
       category: data.category,
       price: Number(data.price),
       description: data.description ? data.description.trim() : '',
+      descriptionAr: data.descriptionAr ? data.descriptionAr.trim() : '',
       images: Array.isArray(data.images) ? data.images : [],
       allergens: Array.isArray(data.allergens) ? data.allergens : [],
       tags: Array.isArray(data.tags) ? data.tags : [],
@@ -741,12 +775,14 @@ export default function MenuFormPage() {
     if (Array.isArray(data.options)) {
       payload.options = data.options.map((opt) => ({
         name: opt.name.trim(),
+        nameAr: opt.nameAr ? opt.nameAr.trim() : '',
         type: opt.type || 'single',
         groupType: opt.groupType || 'text',
         maxSelections: Number(opt.maxSelections) || 1,
         required: !!opt.required,
         choices: (opt.choices || []).map((c) => ({
           label: c.label.trim(),
+          labelAr: c.labelAr ? c.labelAr.trim() : '',
           extraPrice: c.extraPrice !== '' && c.extraPrice !== null && c.extraPrice !== undefined ? Number(c.extraPrice) : 0,
           image: {
             url: c.image?.url || '',
@@ -881,6 +917,19 @@ export default function MenuFormPage() {
                   </div>
                 </div>
 
+                <div className="form-group" style={{ marginBottom: 16 }}>
+                  <Input
+                    id="item-nameAr"
+                    label="Arabic name (الاسم بالعربية) (optional, shown on the Arabic site; if empty the English text is shown)"
+                    placeholder="مثال: كلاسيك سماش برجر"
+                    dir="rtl"
+                    lang="ar"
+                    style={{ textAlign: 'right' }}
+                    error={errors.nameAr?.message}
+                    {...register('nameAr')}
+                  />
+                </div>
+
                 <div className="form-group">
                   <label className="label" htmlFor="item-description">Description</label>
                   <textarea
@@ -890,6 +939,22 @@ export default function MenuFormPage() {
                     {...register('description')}
                   />
                   {errors.description && <p className="field-error">{errors.description.message}</p>}
+                </div>
+
+                <div className="form-group">
+                  <label className="label" htmlFor="item-descriptionAr">
+                    Arabic description (الوصف بالعربية) <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-muted)' }}>(optional, shown on the Arabic site; if empty the English text is shown)</span>
+                  </label>
+                  <textarea
+                    id="item-descriptionAr"
+                    className={`textarea${errors.descriptionAr ? ' error' : ''}`}
+                    dir="rtl"
+                    lang="ar"
+                    placeholder="وصف الصنف بالعربية..."
+                    style={{ textAlign: 'right' }}
+                    {...register('descriptionAr')}
+                  />
+                  {errors.descriptionAr && <p className="field-error">{errors.descriptionAr.message}</p>}
                 </div>
 
                 <div className="form-group" style={{ marginBottom: 0 }}>

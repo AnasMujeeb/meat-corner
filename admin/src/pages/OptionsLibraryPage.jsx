@@ -72,6 +72,7 @@ export default function OptionsLibraryPage() {
     setEditingItem(null);
     setFormData({
       name: '',
+      nameAr: '',
       category: activeCategory !== 'all' ? activeCategory : 'sauce',
       image: { url: '', thumbUrl: '' },
       price: 0,
@@ -84,6 +85,7 @@ export default function OptionsLibraryPage() {
     setEditingItem(item);
     setFormData({
       name: item.name || '',
+      nameAr: item.nameAr || '',
       category: item.category || 'sauce',
       image: item.image || { url: '', thumbUrl: '' },
       price: item.price || 0,
@@ -106,6 +108,7 @@ export default function OptionsLibraryPage() {
 
     const payload = {
       name: formData.name.trim(),
+      nameAr: (formData.nameAr || '').trim(),
       category: formData.category,
       image: formData.image,
       price: Number(formData.price) || 0,
@@ -323,6 +326,11 @@ export default function OptionsLibraryPage() {
                   <h3 style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', margin: '0 0 4px' }}>
                     {item.name}
                   </h3>
+                  {item.nameAr && (
+                    <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 4 }} dir="rtl" lang="ar">
+                      {item.nameAr}
+                    </div>
+                  )}
                   <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                     {item.price > 0 ? `+QAR ${item.price}` : 'Free / Included'}
                   </div>
@@ -414,6 +422,24 @@ export default function OptionsLibraryPage() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
+                />
+              </div>
+
+              {/* Arabic Name */}
+              <div style={{ marginBottom: 16 }}>
+                <label className="label" htmlFor="lib-item-name-ar">
+                  Arabic Name (الاسم بالعربية) <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-muted)' }}>(optional, shown on the Arabic site; if empty the English text is shown)</span>
+                </label>
+                <input
+                  id="lib-item-name-ar"
+                  type="text"
+                  className="input"
+                  dir="rtl"
+                  lang="ar"
+                  placeholder="مثال: صلصة طحينة حارة"
+                  style={{ textAlign: 'right' }}
+                  value={formData.nameAr}
+                  onChange={(e) => setFormData({ ...formData, nameAr: e.target.value })}
                 />
               </div>
 
