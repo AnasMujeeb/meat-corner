@@ -5173,4 +5173,215 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   BILINGUAL & RTL INFRASTRUCTURE (Phase 1)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Header Language Button ──────────────────────────────────────────────── */
+.site-header__lang-btn {
+  height: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--ease);
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+.site-header__lang-btn:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* Hide desktop lang button when hamburger menu is active */
+@media (max-width: 900px) {
+  .site-header__lang-btn--desktop {
+    display: none !important;
+  }
+}
+
+/* Header open state dark mode styling */
+.site-header--menu-open .site-header__lang-btn {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* Mobile Nav Drawer Language Row */
+.mobile-nav-panel__lang-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mobile-nav-panel__lang-label {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mobile-nav-panel__lang-btn {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.mobile-nav-panel__lang-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ── Arabic Typography & Direction ([dir="rtl"]) ────────────────────────── */
+[dir="rtl"] {
+  --font-heading: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Cairo', monospace;
+  font-family: var(--font-body);
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] .heading-xl,
+[dir="rtl"] .heading-lg,
+[dir="rtl"] .heading-md,
+[dir="rtl"] .heading-sm,
+[dir="rtl"] .site-header__brand-fallback,
+[dir="rtl"] .site-header__nav-link,
+[dir="rtl"] .site-header__cart-btn,
+[dir="rtl"] .site-header__lang-btn,
+[dir="rtl"] .category-bar__tab,
+[dir="rtl"] .quick-tags-bar__pill,
+[dir="rtl"] .food-card__name,
+[dir="rtl"] .food-card__category,
+[dir="rtl"] .btn,
+[dir="rtl"] .eyebrow,
+[dir="rtl"] .cart-drawer__title,
+[dir="rtl"] .cart-item__name,
+[dir="rtl"] .mobile-nav-panel__link {
+  font-family: var(--font-heading);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* ── Cart Drawer in RTL ─────────────────────────────────────────────────── */
+[dir="rtl"] .cart-drawer {
+  right: auto;
+  left: 0;
+  transform: translateX(-100%);
+  box-shadow: 8px 0 32px rgba(18, 18, 18, 0.15);
+}
+
+[dir="rtl"] .cart-drawer.open {
+  transform: translateX(0);
+}
+
+/* ── Item Modal in RTL ──────────────────────────────────────────────────── */
+[dir="rtl"] .item-modal__close-btn {
+  right: auto;
+  left: 12px;
+}
+
+@media (max-width: 760px) {
+  [dir="rtl"] .item-modal__close-btn {
+    right: auto !important;
+    left: 12px !important;
+  }
+}
+
+[dir="rtl"] .photo-option-tile__check {
+  right: auto;
+  left: 4px;
+}
+
+/* ── Food Card in RTL ───────────────────────────────────────────────────── */
+[dir="rtl"] .food-card__badge-num {
+  left: auto;
+  right: 10px;
+}
+
+@media (max-width: 760px) {
+  [dir="rtl"] .food-card__badge-num {
+    left: auto;
+    right: 6px;
+  }
+}
+
+[dir="rtl"] .food-card__badges {
+  margin-right: 0;
+  margin-left: -6px;
+}
+
+/* ── Mobile Nav Panel in RTL ────────────────────────────────────────────── */
+[dir="rtl"] .mobile-nav-panel__link:hover,
+[dir="rtl"] .mobile-nav-panel__link--active {
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+/* ── Numbers, Prices & Phone Numbers Bidi Isolation ─────────────────────── */
+[dir="rtl"] .food-card__price,
+[dir="rtl"] .item-modal__price,
+[dir="rtl"] .cart-item__price,
+[dir="rtl"] .cart-item__price-right,
+[dir="rtl"] .cart-drawer__total-price,
+[dir="rtl"] .food-card__badge-num,
+[dir="rtl"] a[href^="tel:"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* ── Story Page & Split Layout Borders in RTL ────────────────────────────── */
+[dir="rtl"] .story-lead-block {
+  padding-left: 0;
+  padding-right: 20px;
+  border-left: none;
+  border-right: 3px solid var(--red);
+}
+
+[dir="rtl"] .story-milestone-card--featured {
+  border-left: none;
+  border-right: 4px solid var(--red);
+}
+
+@media (min-width: 901px) {
+  [dir="rtl"] .hero-banner__content {
+    border-right: none;
+    border-left: 1px solid var(--line);
+  }
+  [dir="rtl"] .story-split__media {
+    border-right: none;
+    border-left: 1px solid var(--line);
+  }
+}
+
+[dir="rtl"] .hero-banner__location-stamp {
+  left: auto;
+  right: 24px;
+}
+
+[dir="rtl"] .hero-banner__live-tag {
+  right: auto;
+  left: 24px;
+}
+
+
 

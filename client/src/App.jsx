@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CartProvider } from "./context/CartProvider.jsx";
+import { LanguageProvider } from "./context/LanguageProvider.jsx";
 
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -62,9 +63,10 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <ScrollToTop />
-        <CartProvider>
+      <LanguageProvider>
+        <Router>
+          <ScrollToTop />
+          <CartProvider>
           <div className="site-wrapper" style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
             {/* Header */}
             <Header onCartOpen={() => setCartOpen(true)} />
@@ -99,6 +101,7 @@ export default function App() {
           </div>
         </CartProvider>
       </Router>
-    </QueryClientProvider>
+    </LanguageProvider>
+  </QueryClientProvider>
   );
 }

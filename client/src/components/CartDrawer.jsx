@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 function CartItem({ item }) {
   const { setQty } = useCart();
@@ -50,6 +51,7 @@ function CartItem({ item }) {
 
 export default function CartDrawer({ open, onClose }) {
   const { items, totalPrice } = useCart();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -64,7 +66,7 @@ export default function CartDrawer({ open, onClose }) {
         role="complementary"
       >
         <div className="cart-drawer__header">
-          <span className="cart-drawer__title">Cart</span>
+          <span className="cart-drawer__title">{t("cart.title") || "Cart"}</span>
           <button
             className="cart-drawer__close"
             onClick={onClose}
@@ -82,8 +84,10 @@ export default function CartDrawer({ open, onClose }) {
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
               </svg>
-              <span>Your cart is empty</span>
-              <button className="btn btn--primary btn--sm" onClick={onClose}>Browse Menu</button>
+              <span>{t("cart.empty") || "Your cart is empty"}</span>
+              <button className="btn btn--primary btn--sm" onClick={onClose}>
+                {t("cart.browse") || "Browse Menu"}
+              </button>
             </div>
           ) : (
             items.map((item) => <CartItem key={item._cartKey} item={item} />)
@@ -93,11 +97,13 @@ export default function CartDrawer({ open, onClose }) {
         {items.length > 0 && (
           <div className="cart-drawer__footer">
             <div className="cart-drawer__total-row">
-              <span className="cart-drawer__total-label">Total</span>
-              <span className="cart-drawer__total-price">QAR {totalPrice}</span>
+              <span className="cart-drawer__total-label">{t("cart.total") || "Total"}</span>
+              <span className="cart-drawer__total-price" style={{ direction: "ltr", display: "inline-block" }}>
+                QAR {totalPrice}
+              </span>
             </div>
             <Link to="/cart" className="btn btn--primary btn--full" onClick={onClose}>
-              SHOW TO WAITER
+              {t("cart.showWaiter") || "SHOW TO WAITER"}
             </Link>
           </div>
         )}

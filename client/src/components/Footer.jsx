@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSettings, useBranches } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 
 function InstagramIcon({ size = 36 }) {
   return (
@@ -121,6 +122,7 @@ function formatWhatsappUrl(raw) {
 export default function Footer({ settings: propSettings }) {
   const { data: fetchedSettings } = useSettings();
   const { data: branches = [] } = useBranches();
+  const { t } = useLanguage();
   const settings = propSettings || fetchedSettings || {};
 
   // Filter only defined, non-empty social links from settings
@@ -230,17 +232,17 @@ export default function Footer({ settings: propSettings }) {
           </div>
 
           <div className="site-footer__col">
-            <h4>Explore</h4>
+            <h4>{t("footer.explore") || "Explore"}</h4>
             <nav className="site-footer__nav-links" aria-label="Explore navigation">
-              <Link to="/menu">Menu</Link>
-              <Link to="/healthy">Healthy</Link>
-              <Link to="/kids">Kids Menu</Link>
+              <Link to="/menu">{t("nav.menu") || "Menu"}</Link>
+              <Link to="/healthy">{t("nav.healthy") || "Healthy"}</Link>
+              <Link to="/kids">{t("nav.kids") || "Kids Menu"}</Link>
               {/* <Link to="/catering">Catering</Link> */}
             </nav>
           </div>
 
           <div className="site-footer__col">
-            <h4>Visit</h4>
+            <h4>{t("footer.visit") || "Visit"}</h4>
             {branches.length > 0 ? (
               branches.map((b) => (
                 <a
@@ -259,7 +261,9 @@ export default function Footer({ settings: propSettings }) {
               </>
             )}
             {settings?.contactPhone && (
-              <a href={`tel:${settings.contactPhone}`}>{settings.contactPhone}</a>
+              <a href={`tel:${settings.contactPhone}`} style={{ direction: "ltr", display: "inline-block" }}>
+                {settings.contactPhone}
+              </a>
             )}
             {settings?.contactEmail && (
               <a href={`mailto:${settings.contactEmail}`}>{settings.contactEmail}</a>
@@ -267,7 +271,7 @@ export default function Footer({ settings: propSettings }) {
           </div>
 
           <div className="site-footer__col">
-            <h4>To Place Order</h4>
+            <h4>{t("footer.order") || "To Place Order"}</h4>
             {talabatUrl && (
               <a href={talabatUrl} target="_blank" rel="noopener noreferrer">
                 Talabat ↗
@@ -288,7 +292,7 @@ export default function Footer({ settings: propSettings }) {
                 WhatsApp ↗
               </a>
             )}
-            <Link to="/contact">Directions ↗</Link>
+            <Link to="/contact">{t("footer.directions") || "Directions ↗"}</Link>
           </div>
         </div>
 
