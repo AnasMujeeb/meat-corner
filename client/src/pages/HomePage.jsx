@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useMenu, useCategories, useBranches, useSettings } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import LazyVideo from "../components/LazyVideo.jsx";
@@ -93,6 +94,7 @@ function TickerStrip() {
 export default function HomePage({ settings: propSettings, branches: propBranches }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedCat, setSelectedCat] = useState(null);
+  const { t } = useLanguage();
 
   const { data: fetchedSettings } = useSettings();
   const { data: fetchedBranches } = useBranches();
@@ -109,23 +111,23 @@ export default function HomePage({ settings: propSettings, branches: propBranche
   return (
     <div className="home-page">
       {/* ── Hero Banner ──────────────────────────────────────────────────────── */}
-      <section className="hero-banner overflow-hidden" aria-label="Hero">
+      <section className="hero-banner overflow-hidden" aria-label={t("home.hero.aria")}>
         <div className="hero-banner__content h-full">
           <span className="eyebrow home-hero-anim home-hero-anim--eyebrow">
-            {HERO_CONTENT.eyebrow}
+            {t("home.hero.eyebrow")}
           </span>
           <h1
             style={{ whiteSpace: "pre-line" }}
             className="home-hero-anim home-hero-anim--heading"
           >
-            {HERO_CONTENT.heading}
+            {t("home.hero.heading")}
           </h1>
           <p className="home-hero-anim home-hero-anim--subtext">
-            {HERO_CONTENT.subtext}
+            {t("home.hero.subtext")}
           </p>
           <div className="hero-banner__actions home-hero-anim home-hero-anim--actions">
             <Link to={HERO_CONTENT.ctaLink} className="btn btn--primary" id="hero-explore-btn">
-              {HERO_CONTENT.ctaText}
+              {t("home.hero.cta")}
             </Link>
           </div>
         </div>
@@ -146,7 +148,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
             {branches?.find((b) => /centro/i.test(b.name || b.slug))?.name ? `${branches.find((b) => /centro/i.test(b.name || b.slug)).name} • Doha` : "CENTRO • DOHA"}
           </div>
           <div className="hero-banner__live-tag home-hero-anim home-hero-anim--tag">
-            {HERO_CONTENT.liveTag}
+            {t("home.hero.liveTag")}
           </div>
         </div>
       </section>
@@ -160,13 +162,13 @@ export default function HomePage({ settings: propSettings, branches: propBranche
           <div className="site-container">
             <ScrollReveal className="site-section__header">
               <div>
-                <span className="eyebrow">{STORIES_SECTION.eyebrow}</span>
+                <span className="eyebrow">{t("home.stories.eyebrow")}</span>
                 <h2 id="stories-heading" style={{ whiteSpace: "pre-line" }}>
-                  {STORIES_SECTION.heading}
+                  {t("home.stories.heading")}
                 </h2>
               </div>
               <p className="site-section__intro">
-                {STORIES_SECTION.intro}
+                {t("home.stories.intro")}
               </p>
             </ScrollReveal>
 
@@ -206,8 +208,8 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                     )}
                     <div className="video-story-overlay">
                       <span>{card.step}</span>
-                      <strong>{card.title}</strong>
-                      <p>{card.desc}</p>
+                      <strong>{idx === 0 ? t("home.stories.kitchenTitle") : idx === 1 ? t("home.stories.selectionTitle") : t("home.stories.gatheringTitle")}</strong>
+                      <p>{idx === 0 ? t("home.stories.kitchenDesc") : idx === 1 ? t("home.stories.selectionDesc") : t("home.stories.gatheringDesc")}</p>
                     </div>
                   </article>
                 </StaggerItem>
@@ -223,13 +225,13 @@ export default function HomePage({ settings: propSettings, branches: propBranche
           <div className="site-container">
             <ScrollReveal className="site-section__header">
               <div>
-                <span className="eyebrow">{FEATURED_SECTION.eyebrow}</span>
+                <span className="eyebrow">{t("home.featured.eyebrow")}</span>
                 <h2 id="featured-heading" style={{ whiteSpace: "pre-line" }}>
-                  {FEATURED_SECTION.heading}
+                  {t("home.featured.heading")}
                 </h2>
               </div>
               <p className="site-section__intro">
-                {FEATURED_SECTION.intro}
+                {t("home.featured.intro")}
               </p>
             </ScrollReveal>
 
@@ -260,9 +262,9 @@ export default function HomePage({ settings: propSettings, branches: propBranche
         <div className="site-container">
           <ScrollReveal className="site-section__header">
             <div>
-              <span className="eyebrow">{CATEGORIES_SECTION.eyebrow}</span>
+              <span className="eyebrow">{t("home.categories.eyebrow")}</span>
               <h2 id="corner-heading" style={{ whiteSpace: "pre-line" }}>
-                {CATEGORIES_SECTION.heading}
+                {t("home.categories.heading")}
               </h2>
             </div>
           </ScrollReveal>
@@ -285,7 +287,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                     <Link
                       to={`/menu?category=${cat.slug}`}
                       className="category-card"
-                      aria-label={`Browse ${cat.name}`}
+                      aria-label={t("home.categories.browseAria", { name: cat.name })}
                     >
                       {catImg ? (
                         <img
@@ -309,7 +311,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
       </section>
 
       {/* ── Story / Split Section ────────────────────────────────────────────── */}
-      <section className="story-split story-split--home-story md:h-[400px] lg:h-[420px]" aria-label="Our story">
+      <section className="story-split story-split--home-story md:h-[400px] lg:h-[420px]" aria-label={t("home.story.aria")}>
         <ScrollReveal className="story-split__media h-full min-h-0" delay={0.05}>
           <LazyVideo
             src="/videos/img3084-540p.mp4"
@@ -319,26 +321,26 @@ export default function HomePage({ settings: propSettings, branches: propBranche
         </ScrollReveal>
 
         <ScrollReveal className="story-split__content story-split__content--accent h-full min-h-0" delay={0.15}>
-          <span className="eyebrow" style={{ color: "#fff" }}>{STORY_SECTION.eyebrow}</span>
-          <h2 style={{ whiteSpace: "pre-line" }}>{STORY_SECTION.heading}</h2>
-          <p>{settings?.aboutText || STORY_SECTION.body}</p>
+          <span className="eyebrow" style={{ color: "#fff" }}>{t("home.story.eyebrow")}</span>
+          <h2 style={{ whiteSpace: "pre-line" }}>{t("home.story.heading")}</h2>
+          <p>{settings?.aboutText || t("home.story.body")}</p>
           <div className="story-split__actions">
             <Link to={STORY_SECTION.ctaLink} className="btn btn--outline-white" id="our-story-btn">
-              {STORY_SECTION.ctaText}
+              {t("home.story.cta")}
             </Link>
           </div>
         </ScrollReveal>
       </section>
 
       {/* ── Catering Split Section ────────────────────────────────────────────── */}
-      <section className="story-split story-split--reverse" aria-label="Catering by Meat Corner">
+      <section className="story-split story-split--reverse" aria-label={t("home.catering.aria")}>
         <ScrollReveal className="story-split__content" delay={0.05}>
-          <span className="eyebrow">{CATERING_SECTION.eyebrow}</span>
-          <h2 style={{ whiteSpace: "pre-line" }}>{CATERING_SECTION.heading}</h2>
-          <p>{CATERING_SECTION.body}</p>
+          <span className="eyebrow">{t("home.catering.eyebrow")}</span>
+          <h2 style={{ whiteSpace: "pre-line" }}>{t("home.catering.heading")}</h2>
+          <p>{t("home.catering.body")}</p>
           <div className="story-split__actions">
             <Link to={CATERING_SECTION.ctaLink} className="btn btn--primary" id="home-catering-btn">
-              {CATERING_SECTION.ctaText}
+              {t("home.catering.cta")}
             </Link>
           </div>
         </ScrollReveal>
@@ -348,7 +350,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
             src="/uploads/processed/meat-corner-nachos.webp"
             srcSet="/uploads/processed/meat-corner-nachos_thumb.webp 400w, /uploads/processed/meat-corner-nachos.webp 1200w"
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt="Meat Corner catering"
+            alt={t("home.catering.imgAlt")}
             width="800"
             height="600"
             decoding="async"
@@ -364,11 +366,11 @@ export default function HomePage({ settings: propSettings, branches: propBranche
           <div className="site-container">
             <ScrollReveal className="site-section__header locations-section__header">
               <div>
-                <span className="eyebrow">{LOCATIONS_SECTION.eyebrow}</span>
-                <h2 id="locations-heading" style={{ whiteSpace: "pre-line" }}>{LOCATIONS_SECTION.heading}</h2>
+                <span className="eyebrow">{t("home.locations.eyebrow")}</span>
+                <h2 id="locations-heading" style={{ whiteSpace: "pre-line" }}>{t("home.locations.heading")}</h2>
               </div>
               <p className="site-section__intro">
-                {LOCATIONS_SECTION.intro}
+                {t("home.locations.intro")}
               </p>
             </ScrollReveal>
 
@@ -382,7 +384,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                     rel="noopener noreferrer"
                   >
                     <span>{String(idx + 1).padStart(2, "0")} · {b.name}</span>
-                    <strong>{LOCATIONS_SECTION.directionsLabel}</strong>
+                    <strong>{t("home.locations.directions")}</strong>
                   </a>
                 </StaggerItem>
               ))}

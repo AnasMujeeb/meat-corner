@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import { BADGES } from "../constants/badges.js";
 
 function getInitialSelections(item) {
@@ -23,31 +24,41 @@ function getInitialSelections(item) {
   return init;
 }
 
-function getGroupHint(opt, selections) {
+function getGroupHint(opt, selections, t) {
   const sel = selections[opt.name];
   const isSingle = opt.type === "single";
   const target = isSingle ? 1 : (opt.maxSelections || opt.choices.length || 1);
   const count = isSingle ? (sel ? 1 : 0) : (Array.isArray(sel) ? sel.length : 0);
 
   if (count >= target && target > 0) {
-    return { text: "Done ✓", state: "done" };
+    return { text: t ? t("itemModal.done") : "Done ✓", state: "done" };
   }
 
   if (opt.required) {
     const remaining = target - count;
     if (count === 0) {
-      return { text: target === 1 ? "Choose 1" : `Choose ${target}`, state: "pending" };
+      return {
+        text: target === 1
+          ? (t ? t("itemModal.chooseOne") : "Choose 1")
+          : (t ? t("itemModal.chooseCount", { count: target }) : `Choose ${target}`),
+        state: "pending",
+      };
     }
     return {
-      text: remaining === 1 ? "Choose 1 more" : `Choose ${remaining} more`,
+      text: remaining === 1
+        ? (t ? t("itemModal.chooseOneMore") : "Choose 1 more")
+        : (t ? t("itemModal.chooseCountMore", { count: remaining }) : `Choose ${remaining} more`),
       state: "progress",
     };
   }
 
   if (target > 1) {
-    return { text: `Choose up to ${target}`, state: "optional" };
+    return {
+      text: t ? t("itemModal.chooseUpTo", { count: target }) : `Choose up to ${target}`,
+      state: "optional",
+    };
   }
-  return { text: "Optional", state: "optional" };
+  return { text: t ? t("itemModal.optional") : "Optional", state: "optional" };
 }
 
 function isGroupComplete(opt, selections) {
@@ -70,6 +81,7 @@ function isChoiceDisabled(opt, choiceLabel, selections) {
 
 export default function ItemModal({ item, categoryName, onBadgeClick, onClose }) {
   const { addItem } = useCart();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [selections, setSelections] = useState(() => getInitialSelections(item));
   const [qty, setQty] = useState(1);
@@ -217,7 +229,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
         <button
           onClick={onClose}
           className="item-modal__close-btn"
-          aria-label="Close"
+          aria-label={t("itemModal.close")}
         >
           ✕
         </button>
@@ -250,17 +262,18 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                 <div className="item-modal__title-row">
                   <h2 className="item-modal__name">{item.name}</h2>
                   {Array.isArray(item.badges) && item.badges.length > 0 && (
-                    <div className="item-modal__badges" role="group" aria-label="Item badges">
+                    <div className="item-modal__badges" role="group" aria-label={t("badge.badgesAria")}>
                       {item.badges.map((bId) => {
                         const b = BADGES[bId];
                         if (!b) return null;
+                        const badgeLabel = t(`badge.${b.id}`) || b.label;
                         return (
                           <button
                             key={b.id}
                             type="button"
                             className="item-modal__badge-btn"
-                            aria-label={b.label}
-                            title={`Filter by ${b.label}`}
+                            aria-label={badgeLabel}
+                            title={t("itemModal.filterByBadge", { badge: badgeLabel })}
                             onClick={() => handleBadgeClick(b.id)}
                           >
                             <img
@@ -285,7 +298,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           {/* Allergens Chips */}
           {item.allergens?.length > 0 && (
             <div className="item-modal__allergens" aria-label="Allergens">
-              <span className="allergens-label">Contains:</span>
+              <span className="allergens-label">{t("itemModal.contains")}</span>
               {item.allergens.map((alg) => (
                 <span key={alg} className="chip chip-allergen">
                   {alg}
@@ -310,38 +323,38 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           {hasNutrition && (
             <details className="item-modal__nutrition-details">
               <summary className="item-modal__nutrition-summary">
-                <span>Nutrition Details</span>
+                <span>{t("itemModal.nutritionTitle")}</span>
                 <span className="toggle-indicator">▾</span>
               </summary>
               <div className="item-modal__nutrition-grid">
                 {nut.calories != null && (
                   <div className="nutrition-stat">
                     <span className="nutrition-stat__val">{nut.calories}</span>
-                    <span className="nutrition-stat__lbl">Calories (kcal)</span>
+                    <span className="nutrition-stat__lbl">{t("itemModal.nutritionCalories")}</span>
                   </div>
                 )}
                 {nut.protein != null && (
                   <div className="nutrition-stat">
                     <span className="nutrition-stat__val">{nut.protein}g</span>
-                    <span className="nutrition-stat__lbl">Protein</span>
+                    <span className="nutrition-stat__lbl">{t("itemModal.nutritionProtein")}</span>
                   </div>
                 )}
                 {nut.fat != null && (
                   <div className="nutrition-stat">
                     <span className="nutrition-stat__val">{nut.fat}g</span>
-                    <span className="nutrition-stat__lbl">Fat</span>
+                    <span className="nutrition-stat__lbl">{t("itemModal.nutritionFat")}</span>
                   </div>
                 )}
                 {nut.carbs != null && (
                   <div className="nutrition-stat">
                     <span className="nutrition-stat__val">{nut.carbs}g</span>
-                    <span className="nutrition-stat__lbl">Carbohydrates</span>
+                    <span className="nutrition-stat__lbl">{t("itemModal.nutritionCarbs")}</span>
                   </div>
                 )}
                 {nut.fiber != null && (
                   <div className="nutrition-stat">
                     <span className="nutrition-stat__val">{nut.fiber}g</span>
-                    <span className="nutrition-stat__lbl">Dietary Fiber</span>
+                    <span className="nutrition-stat__lbl">{t("itemModal.nutritionFiber")}</span>
                   </div>
                 )}
               </div>
@@ -353,14 +366,14 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             const isPhotoGroup = opt.groupType === "photo";
             const isSingle = opt.type === "single";
             const sel = selections[opt.name];
-            const hint = getGroupHint(opt, selections);
+            const hint = getGroupHint(opt, selections, t);
 
             return (
               <div key={opt.name} className="item-modal__option-group">
                 <div className="item-modal__option-header">
                   <div className="item-modal__option-title">
                     <span>{opt.name}</span>
-                    {opt.required && <span className="badge-required">REQUIRED</span>}
+                    {opt.required && <span className="badge-required">{t("itemModal.required")}</span>}
                   </div>
                   <div className={`option-hint-badge option-hint-badge--${hint.state}`}>
                     {hint.text}
@@ -459,7 +472,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             <button
               className="qty-stepper__btn"
               onClick={() => setQty((q) => Math.max(1, q - 1))}
-              aria-label="Decrease quantity"
+              aria-label={t("itemModal.decreaseQty")}
             >
               −
             </button>
@@ -467,7 +480,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             <button
               className="qty-stepper__btn"
               onClick={() => setQty((q) => q + 1)}
-              aria-label="Increase quantity"
+              aria-label={t("itemModal.increaseQty")}
             >
               +
             </button>
@@ -482,10 +495,10 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             disabled={!allRequiredSatisfied || added}
           >
             {added
-              ? "ADDED ✓"
+              ? t("itemModal.added")
               : allRequiredSatisfied
-              ? `ADD TO CART — QAR ${totalPrice}`
-              : "Select required options"}
+              ? t("itemModal.addToCart", { price: totalPrice })
+              : t("itemModal.selectRequired")}
           </button>
         </div>
       </div>

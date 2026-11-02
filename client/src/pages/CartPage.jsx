@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCart } from "../hooks/useCart.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import {
   ScrollReveal,
 } from "../components/motion/ScrollReveal.jsx";
@@ -9,6 +10,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 
 export default function CartPage({ _settings }) {
   const { items, totalPrice, totalQty, setQty, removeItem, clear } = useCart();
+  const { t } = useLanguage();
   const [tableNumber, setTableNumber] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
   const [waiterModalOpen, setWaiterModalOpen] = useState(false);
@@ -24,13 +26,13 @@ export default function CartPage({ _settings }) {
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
           </div>
-          <h1 className="heading-md" style={{ marginBottom: 12 }}>YOUR CART IS EMPTY</h1>
+          <h1 className="heading-md" style={{ marginBottom: 12 }}>{t("cart.emptyTitle")}</h1>
           {/* TODO: CLIENT TO CONFIRM */}
           <p className="body-text" style={{ margin: "0 auto 28px" }}>
-            Explore our menu to add items to your cart.
+            {t("cart.emptySubtitle")}
           </p>
           <Link to="/menu" className="btn btn--primary btn--full">
-            EXPLORE THE MENU
+            {t("cart.exploreMenu")}
           </Link>
         </ScrollReveal>
       </div>
@@ -48,7 +50,7 @@ export default function CartPage({ _settings }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
           >
-            TABLE & DINE-IN SERVICE
+            {t("cart.headerEyebrow")}
           </motion.span>
           <motion.h1
             className="heading-lg"
@@ -56,7 +58,7 @@ export default function CartPage({ _settings }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.2, ease: LUXURY_EASE }}
           >
-            REVIEW YOUR ORDER
+            {t("cart.headerTitle")}
           </motion.h1>
         </div>
       </div>
@@ -66,12 +68,12 @@ export default function CartPage({ _settings }) {
           {/* ── Left Column: Items List ─────────────────────────── */}
           <ScrollReveal className="cart-layout__left" delay={0.05} y={16}>
             <div className="cart-layout__items-head">
-              <h2 className="heading-sm">SELECTED ITEMS ({totalQty})</h2>
+              <h2 className="heading-sm">{t("cart.selectedItems", { count: totalQty })}</h2>
               <button
                 onClick={clear}
                 className="cart-clear-btn"
               >
-                CLEAR ALL
+                {t("cart.clearAll")}
               </button>
             </div>
 
@@ -112,7 +114,7 @@ export default function CartPage({ _settings }) {
                         </div>
                       )}
                       <div className="cart-card-item__unit-price">
-                        QAR {unitPrice} each
+                        {t("cart.unitPriceEach", { price: unitPrice })}
                       </div>
                     </div>
 
@@ -125,7 +127,7 @@ export default function CartPage({ _settings }) {
                         <button
                           onClick={() => removeItem(item._cartKey)}
                           className="cart-card-item__remove"
-                          aria-label={`Remove ${item.name} from cart`}
+                          aria-label={t("cart.removeItemAria", { name: item.name })}
                         >
                           ✕
                         </button>
@@ -134,7 +136,7 @@ export default function CartPage({ _settings }) {
                         <button
                           className="qty-stepper__btn"
                           onClick={() => setQty(item._cartKey, item.qty - 1)}
-                          aria-label="Decrease quantity"
+                          aria-label={t("cart.decreaseQty")}
                         >
                           −
                         </button>
@@ -142,7 +144,7 @@ export default function CartPage({ _settings }) {
                         <button
                           className="qty-stepper__btn"
                           onClick={() => setQty(item._cartKey, item.qty + 1)}
-                          aria-label="Increase quantity"
+                          aria-label={t("cart.increaseQty")}
                         >
                           +
                         </button>
@@ -155,7 +157,7 @@ export default function CartPage({ _settings }) {
 
             <div style={{ marginTop: 24 }}>
               <Link to="/menu" className="btn btn--outline btn--sm">
-                ← ADD MORE ITEMS
+                {t("cart.addMoreItems")}
               </Link>
             </div>
           </ScrollReveal>
@@ -163,27 +165,27 @@ export default function CartPage({ _settings }) {
           {/* ── Right Column: Summary & Table Show ───────────────── */}
           <ScrollReveal className="cart-layout__right" delay={0.15} y={16}>
             <div className="cart-summary-card">
-              <div className="cart-summary-card__tag">DINE-IN ORDER SUMMARY</div>
-              <h2 className="heading-sm" style={{ marginBottom: 20 }}>READY TO ORDER</h2>
+              <div className="cart-summary-card__tag">{t("cart.summaryTag")}</div>
+              <h2 className="heading-sm" style={{ marginBottom: 20 }}>{t("cart.readyToOrder")}</h2>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="table-number">Table / Seat Number (Optional)</label>
+                <label className="form-label" htmlFor="table-number">{t("cart.tableNumberLabel")}</label>
                 <input
                   id="table-number"
                   type="text"
                   className="form-input"
-                  placeholder="e.g. Table 04, Booth B"
+                  placeholder={t("cart.tableNumberPlaceholder")}
                   value={tableNumber}
                   onChange={(e) => setTableNumber(e.target.value)}
                 />
               </div>
 
               <div className="form-field">
-                <label className="form-label" htmlFor="order-notes">Special Instructions for Kitchen</label>
+                <label className="form-label" htmlFor="order-notes">{t("cart.orderNotesLabel")}</label>
                 <textarea
                   id="order-notes"
                   className="form-textarea"
-                  placeholder="e.g. Medium rare steak, extra sauce on the side, no onions..."
+                  placeholder={t("cart.orderNotesPlaceholder")}
                   rows={3}
                   value={orderNotes}
                   onChange={(e) => setOrderNotes(e.target.value)}
@@ -192,16 +194,16 @@ export default function CartPage({ _settings }) {
 
               <div className="cart-summary-totals">
                 <div className="cart-summary-totals__row">
-                  <span>Subtotal ({totalQty} items)</span>
+                  <span>{t("cart.subtotal", { count: totalQty })}</span>
                   <span>QAR {totalPrice}</span>
                 </div>
                 <div className="cart-summary-totals__row">
-                  <span>Service & Tax</span>
-                  <span>Included</span>
+                  <span>{t("cart.serviceTax")}</span>
+                  <span>{t("cart.included")}</span>
                 </div>
                 <div className="cart-summary-totals__divider" />
                 <div className="cart-summary-totals__final">
-                  <span>TOTAL</span>
+                  <span>{t("cart.totalCaps")}</span>
                   <span className="cart-summary-totals__price">QAR {totalPrice}</span>
                 </div>
               </div>
@@ -211,11 +213,11 @@ export default function CartPage({ _settings }) {
                 style={{ padding: "18px 24px", fontSize: 14 }}
                 onClick={() => setWaiterModalOpen(true)}
               >
-                SHOW TO WAITER
+                {t("cart.showToWaiter")}
               </button>
 
               <p className="cart-summary-card__hint">
-                Tap above when the waiter arrives at your table to display a clean, high-contrast order screen.
+                {t("cart.waiterHint")}
               </p>
             </div>
           </ScrollReveal>
@@ -234,11 +236,11 @@ export default function CartPage({ _settings }) {
           >
             <div className="waiter-modal-card__header">
               <div>
-                <span className="eyebrow" style={{ color: "var(--red)" }}>MEAT CORNER DINE-IN</span>
-                <h2 className="heading-md">WAITER ORDER TICKET</h2>
+                <span className="eyebrow" style={{ color: "var(--red)" }}>{t("cart.waiterModalEyebrow")}</span>
+                <h2 className="heading-md">{t("cart.waiterTicketTitle")}</h2>
                 {tableNumber && (
                   <div className="waiter-modal-card__table-tag">
-                    📍 TABLE: {tableNumber}
+                    {t("cart.waiterTableTag", { tableNumber })}
                   </div>
                 )}
               </div>
@@ -246,7 +248,7 @@ export default function CartPage({ _settings }) {
                 onClick={() => setWaiterModalOpen(false)}
                 className="waiter-modal-card__close"
               >
-                ✕ CLOSE
+                {t("cart.waiterClose")}
               </button>
             </div>
 
@@ -269,13 +271,13 @@ export default function CartPage({ _settings }) {
 
             {orderNotes && (
               <div className="waiter-modal-card__kitchen-notes">
-                <div className="waiter-modal-card__notes-title">KITCHEN NOTES:</div>
+                <div className="waiter-modal-card__notes-title">{t("cart.kitchenNotes")}</div>
                 <div className="waiter-modal-card__notes-body">{orderNotes}</div>
               </div>
             )}
 
             <div className="waiter-modal-card__total-wrap">
-              <span className="waiter-modal-card__total-lbl">TOTAL AMOUNT:</span>
+              <span className="waiter-modal-card__total-lbl">{t("cart.totalAmount")}</span>
               <span className="waiter-modal-card__total-val">
                 QAR {totalPrice}
               </span>
@@ -285,7 +287,7 @@ export default function CartPage({ _settings }) {
               className="btn btn--dark btn--full"
               onClick={() => setWaiterModalOpen(false)}
             >
-              DONE / BACK TO ORDER
+              {t("cart.waiterDone")}
             </button>
           </div>
         </div>

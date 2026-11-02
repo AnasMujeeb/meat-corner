@@ -46,16 +46,23 @@ export function LanguageProvider({ children }) {
     }
   }, []);
 
-  // Translation function with fallback: Arabic -> English -> Key
-  const t = useCallback((key) => {
+  // Translation function with fallback: Arabic -> English -> Key + placeholder replacement
+  const t = useCallback((key, params) => {
     if (!key || typeof key !== "string") return "";
+    let str = "";
     if (lang === "ar" && ar[key] !== undefined) {
-      return ar[key];
+      str = ar[key];
+    } else if (en[key] !== undefined) {
+      str = en[key];
+    } else {
+      str = key;
     }
-    if (en[key] !== undefined) {
-      return en[key];
+    if (params && typeof params === "object") {
+      Object.entries(params).forEach(([k, v]) => {
+        str = str.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
+      });
     }
-    return key;
+    return str;
   }, [lang]);
 
   const value = useMemo(() => ({

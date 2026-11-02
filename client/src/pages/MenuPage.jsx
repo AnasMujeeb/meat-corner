@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useCategories, useMenu, useSettings } from "../api/queries.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
@@ -15,14 +16,15 @@ import { MENU_CONTENT } from "../content/menu.js";
 import { BADGES } from "../constants/badges.js";
 
 const QUICK_TAGS = [
-  { id: "all", label: "All Items" },
-  { id: "featured", label: "Featured" },
-  { id: "healthy", label: "Healthy" },
-  { id: "kids", label: "Kids" },
+  { id: "all", labelKey: "menu.tagAll" },
+  { id: "featured", labelKey: "menu.tagFeatured" },
+  { id: "healthy", labelKey: "menu.tagHealthy" },
+  { id: "kids", labelKey: "menu.tagKids" },
 ];
 
 export default function MenuPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useLanguage();
   const categoryParam = searchParams.get("category") || "";
   const tagParam = searchParams.get("tag") || "";
   const badgeParam = searchParams.get("badge") || "";
@@ -239,8 +241,8 @@ export default function MenuPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: LUXURY_EASE }}
             >
-              <span className="eyebrow">{MENU_CONTENT.eyebrow}</span>
-              <h1 className="heading-lg">{MENU_CONTENT.heading}</h1>
+              <span className="eyebrow">{t("menu.eyebrow")}</span>
+              <h1 className="heading-lg">{t("menu.heading")}</h1>
             </motion.div>
 
             {/* Search Input (Grid only, list toggle removed) */}
@@ -253,10 +255,10 @@ export default function MenuPage() {
               <input
                 type="search"
                 className="form-input menu-search-input"
-                placeholder="Search cuts, burgers, dishes..."
+                placeholder={t("menu.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Search menu"
+                aria-label={t("menu.searchAria")}
               />
             </motion.div>
           </div>
@@ -266,9 +268,9 @@ export default function MenuPage() {
       {/* ── Video Section (directly under THE MENU. heading) ──────── */}
       {showVideoSection && (
         <PageMotionReel
-          tag={MENU_CONTENT.reel.tag}
-          title={MENU_CONTENT.reel.title}
-          subtitle={MENU_CONTENT.reel.subtitle}
+          tag={t("menu.reelTag")}
+          title={t("menu.reelTitle")}
+          subtitle={t("menu.reelSubtitle")}
         />
       )}
 
@@ -282,7 +284,7 @@ export default function MenuPage() {
         >
           <div className="site-container menu-badge-banner__inner">
             <div className="menu-badge-banner__left">
-              <span className="menu-badge-banner__label">Filtered by badge:</span>
+              <span className="menu-badge-banner__label">{t("menu.filteredByBadge")}</span>
               <div className="menu-badge-banner__chip">
                 <img
                   src={activeBadge.icon}
@@ -299,7 +301,7 @@ export default function MenuPage() {
               className="btn btn--outline btn--sm menu-badge-banner__clear"
               onClick={handleClearBadge}
             >
-              Show full menu ✕
+              {t("menu.showFullMenu")}
             </button>
           </div>
         </motion.div>
@@ -309,7 +311,7 @@ export default function MenuPage() {
           <motion.div
             className="category-bar"
             role="tablist"
-            aria-label="Menu categories"
+            aria-label={t("menu.categoriesAria")}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: LUXURY_EASE }}
@@ -323,7 +325,7 @@ export default function MenuPage() {
               onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(""))}
               onClick={() => handleOptimizedClick(() => handleSelectCategory(""))}
             >
-              All Categories
+              {t("menu.allCategories")}
             </button>
             {categories.map((cat) => (
               <button
@@ -349,18 +351,18 @@ export default function MenuPage() {
             transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
           >
             <div className="site-container quick-tags-bar__inner">
-              {QUICK_TAGS.map((t) => {
-                const isSelected = (!tagParam && t.id === "all") || tagParam === t.id;
+              {QUICK_TAGS.map((tag) => {
+                const isSelected = (!tagParam && tag.id === "all") || tagParam === tag.id;
                 return (
                   <button
-                    key={t.id}
+                    key={tag.id}
                     type="button"
                     onTouchStart={handleTouchStart}
-                    onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectTag(t.id))}
-                    onClick={() => handleOptimizedClick(() => handleSelectTag(t.id))}
+                    onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectTag(tag.id))}
+                    onClick={() => handleOptimizedClick(() => handleSelectTag(tag.id))}
                     className={`quick-tags-bar__pill${isSelected ? " quick-tags-bar__pill--active" : ""}`}
                   >
-                    {t.label}
+                    {t(tag.labelKey)}
                   </button>
                 );
               })}
@@ -383,12 +385,12 @@ export default function MenuPage() {
             // Only show "No Dishes Found" when we are definitively done fetching and idle
             <div className="menu-empty-state">
               <h2 className="heading-md" style={{ marginBottom: 12 }}>
-                {activeBadge ? `No ${activeBadge.label} Dishes Found` : MENU_CONTENT.emptyState.title}
+                {activeBadge ? t("menu.noBadgeDishesFound", { badge: activeBadge.label }) : t("menu.emptyTitle")}
               </h2>
               <p className="body-text" style={{ margin: "0 auto 24px" }}>
                 {activeBadge
-                  ? `There are currently no dishes marked with the ${activeBadge.label} badge.`
-                  : MENU_CONTENT.emptyState.desc}
+                  ? t("menu.noBadgeDishesDesc", { badge: activeBadge.label })
+                  : t("menu.emptyDesc")}
               </p>
               <button
                 type="button"
@@ -402,7 +404,7 @@ export default function MenuPage() {
                   }
                 }}
               >
-                {activeBadge ? "SHOW FULL MENU" : "RESET ALL FILTERS"}
+                {activeBadge ? t("menu.showFullMenuBtn") : t("menu.resetFilters")}
               </button>
             </div>
           ) : filteredItems.length === 0 && (isFetching || isTransitioning) ? (
@@ -448,7 +450,7 @@ export default function MenuPage() {
                 onClick={handleLoadMore}
                 disabled={isFetching}
               >
-                {isFetching ? "LOADING..." : "LOAD MORE DISHES"}
+                {isFetching ? t("menu.loading") : t("menu.loadMore")}
               </button>
             </div>
           )}

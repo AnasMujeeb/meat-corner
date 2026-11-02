@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
+import { useLanguage } from "../hooks/useLanguage.js";
 import ItemModal from "./ItemModal.jsx";
 import { BADGES } from "../constants/badges.js";
 
@@ -19,6 +20,7 @@ export default function FoodCard({
   onBadgeClick,
 }) {
   const { addItem } = useCart();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [internalModalOpen, setInternalModalOpen] = useState(false);
 
@@ -92,7 +94,7 @@ export default function FoodCard({
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
-        aria-label={`${item.name}, QAR ${priceFormatted}`}
+        aria-label={t("foodCard.itemAria", { name: item.name, price: priceFormatted })}
       >
         <div className="food-card__media">
           {defaultImg ? (
@@ -126,19 +128,20 @@ export default function FoodCard({
               <div
                 className="food-card__badges"
                 role="group"
-                aria-label="Item badges"
+                aria-label={t("badge.badgesAria")}
                 onClick={(e) => e.stopPropagation()}
               >
                 {item.badges.map((bId) => {
                   const b = BADGES[bId];
                   if (!b) return null;
+                  const label = t(`badge.${b.id}`) || b.label;
                   return (
                     <button
                       key={b.id}
                       type="button"
                       className="food-card__badge-btn"
-                      aria-label={b.label}
-                      title={b.label}
+                      aria-label={label}
+                      title={label}
                       onClick={(e) => handleBadgeClick(b.id, e)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") {
@@ -168,7 +171,7 @@ export default function FoodCard({
             <button
               type="button"
               className="food-card__add-btn"
-              aria-label={`Add ${item.name} to cart`}
+              aria-label={t("foodCard.addToCart", { name: item.name })}
               onClick={handleAddClick}
             >
               +

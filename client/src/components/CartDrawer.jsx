@@ -4,6 +4,7 @@ import { useLanguage } from "../hooks/useLanguage.js";
 
 function CartItem({ item }) {
   const { setQty } = useCart();
+  const { t } = useLanguage();
   const img = item.images?.[0];
   const lineTotal = (item.price + (item._extraPrice ?? 0)) * item.qty;
 
@@ -35,13 +36,13 @@ function CartItem({ item }) {
           <button
             className="qty-stepper__btn"
             onClick={() => setQty(item._cartKey, item.qty - 1)}
-            aria-label="Decrease quantity"
+            aria-label={t("cart.decreaseQty")}
           >−</button>
-          <span className="qty-stepper__val" aria-label={`Quantity: ${item.qty}`}>{item.qty}</span>
+          <span className="qty-stepper__val" aria-label={t("cart.quantityAria", { count: item.qty })}>{item.qty}</span>
           <button
             className="qty-stepper__btn"
             onClick={() => setQty(item._cartKey, item.qty + 1)}
-            aria-label="Increase quantity"
+            aria-label={t("cart.increaseQty")}
           >+</button>
         </div>
       </div>
@@ -62,7 +63,7 @@ export default function CartDrawer({ open, onClose }) {
       />
       <aside
         className={`cart-drawer${open ? " open" : ""}`}
-        aria-label="Shopping cart"
+        aria-label={t("cart.drawerAria")}
         role="complementary"
       >
         <div className="cart-drawer__header">
@@ -70,7 +71,7 @@ export default function CartDrawer({ open, onClose }) {
           <button
             className="cart-drawer__close"
             onClick={onClose}
-            aria-label="Close cart"
+            aria-label={t("cart.closeAria")}
           >
             ✕
           </button>
