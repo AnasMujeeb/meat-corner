@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { api } from "../api.js";
 import { useBranches, useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { localized } from "../utils/localization.js";
 import { CONTACT_CONTENT } from "../content/contact.js";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import getTouchedImg from "../../pictures/get touched updated.jpeg";
@@ -16,7 +17,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 export default function ContactPage() {
   const { data: branches = [] } = useBranches();
   const { data: settings = {} } = useSettings();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -133,30 +134,35 @@ export default function ContactPage() {
           </ScrollReveal>
 
           <StaggerContainer className="contact-branches-grid" staggerDelay={0.08}>
-            {branches.map((b, idx) => (
-              <StaggerItem key={b._id || b.name} className="contact-card branch-card">
-                <span className="branch-number">{String(idx + 1).padStart(2, "0")}</span>
-                <h3>{b.name}</h3>
-                <p>
-                  {b.address && <>{b.address}<br /></>}
-                  {b.openingHours && <>{b.openingHours}<br /></>}
-                  {b.phone && (
-                    <a href={`tel:${b.phone}`}>{b.phone}</a>
+            {branches.map((b, idx) => {
+              const bName = localized(b, "name", lang);
+              const bAddress = localized(b, "address", lang);
+              const bHours = localized(b, "openingHours", lang);
+              return (
+                <StaggerItem key={b._id || b.name} className="contact-card branch-card">
+                  <span className="branch-number">{String(idx + 1).padStart(2, "0")}</span>
+                  <h3>{bName}</h3>
+                  <p>
+                    {bAddress && <>{bAddress}<br /></>}
+                    {bHours && <>{bHours}<br /></>}
+                    {b.phone && (
+                      <a href={`tel:${b.phone}`}>{b.phone}</a>
+                    )}
+                  </p>
+                  {b.mapUrl && (
+                    <a
+                      className="btn btn--primary"
+                      href={b.mapUrl}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      style={{ marginTop: "auto" }}
+                    >
+                      {t("contact.branches.directions")}
+                    </a>
                   )}
-                </p>
-                {b.mapUrl && (
-                  <a
-                    className="btn btn--primary"
-                    href={b.mapUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    style={{ marginTop: "auto" }}
-                  >
-                    {t("contact.branches.directions")}
-                  </a>
-                )}
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
 
             {/* General Contact Info Card */}
             <StaggerItem className="contact-card">

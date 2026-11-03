@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSettings, useBranches } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { localized } from "../utils/localization.js";
 
 function InstagramIcon({ size = 36 }) {
   return (
@@ -122,7 +123,7 @@ function formatWhatsappUrl(raw) {
 export default function Footer({ settings: propSettings }) {
   const { data: fetchedSettings } = useSettings();
   const { data: branches = [] } = useBranches();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const settings = propSettings || fetchedSettings || {};
 
   // Filter only defined, non-empty social links from settings
@@ -251,7 +252,7 @@ export default function Footer({ settings: propSettings }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {b.name} ↗
+                  {localized(b, "name", lang)} ↗
                 </a>
               ))
             ) : (
