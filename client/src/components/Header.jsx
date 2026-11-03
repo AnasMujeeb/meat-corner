@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 
 const NAV = [
   { to: "/",         key: "nav.home",    defaultLabel: "Home"      },
@@ -19,6 +20,7 @@ export default function Header({ onCartOpen }) {
   const { totalQty } = useCart();
   const { data: settings } = useSettings();
   const { lang, setLang, t } = useLanguage();
+  const { isDelivery } = useMode();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -76,17 +78,19 @@ export default function Header({ onCartOpen }) {
               {lang === "en" ? "العربية" : "EN"}
             </button>
 
-            {/* Cart Button */}
-            <button
-              className={`site-header__cart-btn${totalQty > 0 ? " site-header__cart-btn--has-items" : ""}`}
-              onClick={onCartOpen}
-              aria-label={t("header.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
-            >
-              <span>{t("nav.cart") || "Cart"}</span>
-              {totalQty > 0 && (
-                <span className="site-header__cart-count" aria-hidden="true">{totalQty}</span>
-              )}
-            </button>
+            {/* Cart Button (hidden in Delivery mode) */}
+            {!isDelivery && (
+              <button
+                className={`site-header__cart-btn${totalQty > 0 ? " site-header__cart-btn--has-items" : ""}`}
+                onClick={onCartOpen}
+                aria-label={t("header.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
+              >
+                <span>{t("nav.cart") || "Cart"}</span>
+                {totalQty > 0 && (
+                  <span className="site-header__cart-count" aria-hidden="true">{totalQty}</span>
+                )}
+              </button>
+            )}
 
             {/* Mobile Hamburger Button */}
             <button

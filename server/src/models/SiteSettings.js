@@ -7,6 +7,7 @@ const socialsSchema = new mongoose.Schema(
     whatsapp: { type: String, default: '' },
     talabat: { type: String, default: '' },
     snoonu: { type: String, default: '' },
+    keeta: { type: String, default: '' },
   },
   { _id: false }
 );

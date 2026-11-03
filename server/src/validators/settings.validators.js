@@ -48,6 +48,7 @@ const socialsSchema = z
     whatsapp: optionalUpdateWhatsapp,
     talabat: optionalUpdateSocialUrl,
     snoonu: optionalUpdateSocialUrl,
+    keeta: optionalUpdateSocialUrl,
   })
   .partial()
   .optional();
@@ -63,6 +64,7 @@ export const updateSettingsSchema = z.object({
   'socials.whatsapp': optionalUpdateWhatsapp,
   'socials.talabat': optionalUpdateSocialUrl,
   'socials.snoonu': optionalUpdateSocialUrl,
+  'socials.keeta': optionalUpdateSocialUrl,
   contactPhone: z.string().max(30).optional(),
   contactEmail: z.union([
     z.string().email().max(150),

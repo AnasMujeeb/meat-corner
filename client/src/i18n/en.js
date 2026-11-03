@@ -57,6 +57,23 @@ export default {
   "badge.fish": "Fish",
   "badge.badgesAria": "Item badges",
 
+  // Menu Modes
+  "mode.chooserEyebrow": "CHOOSE YOUR EXPERIENCE",
+  "mode.chooserHeading": "HOW WOULD YOU LIKE\nTO ORDER?",
+  "mode.dineInTitle": "View Menu – Dine In",
+  "mode.dineInDesc": "Order at your table, customize your dishes, and show your ticket to the waiter.",
+  "mode.dineInAction": "EXPLORE DINE IN",
+  "mode.deliveryTitle": "View Menu – Delivery",
+  "mode.deliveryDesc": "Browse our full menu and order directly via Talabat, Snoonu, or Keeta.",
+  "mode.deliveryAction": "EXPLORE DELIVERY",
+  "mode.switchMode": "Switch Mode",
+  "mode.currentMode": "Mode: {mode}",
+  "mode.dineInLabel": "Dine In",
+  "mode.deliveryLabel": "Delivery",
+  "mode.orderOnline": "Order Online for Delivery:",
+  "mode.viewOnlyBadge": "DELIVERY (VIEW ONLY)",
+  "mode.orderOnKeeta": "Order on Keeta",
+
   // Food Card
   "foodCard.itemAria": "{name}, QAR {price}",
   "foodCard.addToCart": "Add {name} to cart",

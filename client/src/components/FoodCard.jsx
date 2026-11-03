@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 import ItemModal from "./ItemModal.jsx";
 import { BADGES } from "../constants/badges.js";
 import { localized, getCurrency } from "../utils/localization.js";
@@ -22,6 +23,7 @@ export default function FoodCard({
 }) {
   const { addItem } = useCart();
   const { t, lang } = useLanguage();
+  const { isDelivery } = useMode();
   const navigate = useNavigate();
   const [internalModalOpen, setInternalModalOpen] = useState(false);
 
@@ -174,14 +176,16 @@ export default function FoodCard({
 
           <div className="food-card__footer">
             <span className="food-card__price">{currency} {priceFormatted}</span>
-            <button
-              type="button"
-              className="food-card__add-btn"
-              aria-label={t("foodCard.addToCart", { name: itemName })}
-              onClick={handleAddClick}
-            >
-              +
-            </button>
+            {!isDelivery && (
+              <button
+                type="button"
+                className="food-card__add-btn"
+                aria-label={t("foodCard.addToCart", { name: itemName })}
+                onClick={handleAddClick}
+              >
+                +
+              </button>
+            )}
           </div>
         </div>
       </article>

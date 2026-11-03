@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 import { BADGES } from "../constants/badges.js";
 import { localized, getCurrency } from "../utils/localization.js";
 
@@ -83,6 +84,7 @@ function isChoiceDisabled(opt, choiceLabel, selections) {
 export default function ItemModal({ item, categoryName, onBadgeClick, onClose }) {
   const { addItem } = useCart();
   const { t, lang } = useLanguage();
+  const { isDelivery } = useMode();
   const navigate = useNavigate();
   const [selections, setSelections] = useState(() => getInitialSelections(item));
   const [qty, setQty] = useState(1);
@@ -473,40 +475,42 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           </div>
         </div>
 
-        <div className="item-modal__footer">
-          <div className="qty-stepper">
+        {!isDelivery && (
+          <div className="item-modal__footer">
+            <div className="qty-stepper">
+              <button
+                className="qty-stepper__btn"
+                onClick={() => setQty((q) => Math.max(1, q - 1))}
+                aria-label={t("itemModal.decreaseQty")}
+              >
+                −
+              </button>
+              <span className="qty-stepper__val">{qty}</span>
+              <button
+                className="qty-stepper__btn"
+                onClick={() => setQty((q) => q + 1)}
+                aria-label={t("itemModal.increaseQty")}
+              >
+                +
+              </button>
+            </div>
             <button
-              className="qty-stepper__btn"
-              onClick={() => setQty((q) => Math.max(1, q - 1))}
-              aria-label={t("itemModal.decreaseQty")}
+              className={`btn ${added ? "btn--outline" : "btn--primary"}`}
+              style={{
+                opacity: !allRequiredSatisfied && !added ? 0.65 : 1,
+                cursor: !allRequiredSatisfied && !added ? "not-allowed" : "pointer",
+              }}
+              onClick={handleAdd}
+              disabled={!allRequiredSatisfied || added}
             >
-              −
-            </button>
-            <span className="qty-stepper__val">{qty}</span>
-            <button
-              className="qty-stepper__btn"
-              onClick={() => setQty((q) => q + 1)}
-              aria-label={t("itemModal.increaseQty")}
-            >
-              +
+              {added
+                ? t("itemModal.added")
+                : allRequiredSatisfied
+                ? (lang === "ar" ? `أضف إلى السلة - ${currency} ${totalPrice}` : `ADD TO CART - ${currency} ${totalPrice}`)
+                : t("itemModal.selectRequired")}
             </button>
           </div>
-          <button
-            className={`btn ${added ? "btn--outline" : "btn--primary"}`}
-            style={{
-              opacity: !allRequiredSatisfied && !added ? 0.65 : 1,
-              cursor: !allRequiredSatisfied && !added ? "not-allowed" : "pointer",
-            }}
-            onClick={handleAdd}
-            disabled={!allRequiredSatisfied || added}
-          >
-            {added
-              ? t("itemModal.added")
-              : allRequiredSatisfied
-              ? (lang === "ar" ? `أضف إلى السلة - ${currency} ${totalPrice}` : `ADD TO CART - ${currency} ${totalPrice}`)
-              : t("itemModal.selectRequired")}
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );

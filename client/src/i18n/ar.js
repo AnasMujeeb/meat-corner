@@ -57,6 +57,23 @@ export default {
   "badge.fish": "سمك",
   "badge.badgesAria": "شارات الطبق",
 
+  // Menu Modes
+  "mode.chooserEyebrow": "اختر تجربتك",
+  "mode.chooserHeading": "كيف تود\nالطلب اليوم؟",
+  "mode.dineInTitle": "عرض القائمة – تناول في المطعم",
+  "mode.dineInDesc": "اطلب من طاولتك، خصص وجباتك، وقدم طلبك للمضيف مباشرة.",
+  "mode.dineInAction": "قائمة المطعم",
+  "mode.deliveryTitle": "عرض القائمة – التوصيل",
+  "mode.deliveryDesc": "تصفح قائمتنا الكاملة واطلب مباشرة عبر طلبات، سنونو، أو كيتا.",
+  "mode.deliveryAction": "قائمة التوصيل",
+  "mode.switchMode": "تغيير التجربة",
+  "mode.currentMode": "التجربة: {mode}",
+  "mode.dineInLabel": "في المطعم",
+  "mode.deliveryLabel": "توصيل",
+  "mode.orderOnline": "اطلب الآن عبر التطبيقات:",
+  "mode.viewOnlyBadge": "توصيل (للتصفح فقط)",
+  "mode.orderOnKeeta": "اطلب عبر كيتا",
+
   // Food Card
   "foodCard.itemAria": "{name}، QAR {price}",
   "foodCard.addToCart": "أضف {name} إلى السلة",

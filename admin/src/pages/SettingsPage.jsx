@@ -50,6 +50,7 @@ const schema = z.object({
       }),
     talabat: optionalAbsoluteUrlSchema,
     snoonu: optionalAbsoluteUrlSchema,
+    keeta: optionalAbsoluteUrlSchema,
   }).optional().default({}),
 });
 
@@ -107,6 +108,7 @@ export default function SettingsPage() {
         whatsapp: '',
         talabat: '',
         snoonu: '',
+        keeta: '',
       },
     },
   });
@@ -128,6 +130,7 @@ export default function SettingsPage() {
           whatsapp: settings.socials?.whatsapp || '',
           talabat: settings.socials?.talabat || '',
           snoonu: settings.socials?.snoonu || '',
+          keeta: settings.socials?.keeta || '',
         },
       });
     }
@@ -150,6 +153,7 @@ export default function SettingsPage() {
           whatsapp: formData.socials?.whatsapp ?? '',
           talabat: formData.socials?.talabat ?? '',
           snoonu: formData.socials?.snoonu ?? '',
+          keeta: formData.socials?.keeta ?? '',
         },
       };
       return settingsApi.update(payload);
@@ -175,6 +179,7 @@ export default function SettingsPage() {
             whatsapp: s.socials?.whatsapp || '',
             talabat: s.socials?.talabat || '',
             snoonu: s.socials?.snoonu || '',
+            keeta: s.socials?.keeta || '',
           },
         });
       }
@@ -408,6 +413,13 @@ export default function SettingsPage() {
               <SocialField
                 id="socials.snoonu"
                 label="Snoonu"
+                placeholder="https://..."
+                register={register}
+                errors={errors}
+              />
+              <SocialField
+                id="socials.keeta"
+                label="Keeta"
                 placeholder="https://..."
                 register={register}
                 errors={errors}
