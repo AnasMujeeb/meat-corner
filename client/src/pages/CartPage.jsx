@@ -222,7 +222,7 @@ export default function CartPage({ _settings }) {
               <div className="cart-summary-totals">
                 <div className="cart-summary-totals__row">
                   <span>{t("cart.subtotal", { count: totalQty })}</span>
-                  <span>QAR {totalPrice}</span>
+                  <span>{currency} {totalPrice}</span>
                 </div>
                 <div className="cart-summary-totals__row">
                   <span>{t("cart.serviceTax")}</span>
@@ -231,7 +231,7 @@ export default function CartPage({ _settings }) {
                 <div className="cart-summary-totals__divider" />
                 <div className="cart-summary-totals__final">
                   <span>{t("cart.totalCaps")}</span>
-                  <span className="cart-summary-totals__price">QAR {totalPrice}</span>
+                  <span className="cart-summary-totals__price">{currency} {totalPrice}</span>
                 </div>
               </div>
 
@@ -281,19 +281,23 @@ export default function CartPage({ _settings }) {
 
             {/* List */}
             <div className="waiter-modal-card__list">
-              {items.map((item, idx) => (
-                <div key={idx} className="waiter-modal-card__row">
-                  <div className="waiter-modal-card__row-main">
-                    <span>{item.qty} × {item.name}</span>
-                    <span>QAR {(item.price + (item._extraPrice ?? 0)) * item.qty}</span>
-                  </div>
-                  {item._optionNote && (
-                    <div className="waiter-modal-card__row-note">
-                      ↳ {item._optionNote}
+              {items.map((item, idx) => {
+                const itemName = (item.itemRef ? localized(item.itemRef, "name", lang) : "") || (lang === "ar" && item.nameAr ? item.nameAr : item.name);
+                const optionNote = getLocalizedOptionNote(item, lang);
+                return (
+                  <div key={idx} className="waiter-modal-card__row">
+                    <div className="waiter-modal-card__row-main">
+                      <span>{item.qty} × {itemName}</span>
+                      <span>{currency} {(item.price + (item._extraPrice ?? 0)) * item.qty}</span>
                     </div>
-                  )}
-                </div>
-              ))}
+                    {optionNote && (
+                      <div className="waiter-modal-card__row-note">
+                        ↳ {optionNote}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {orderNotes && (
@@ -306,7 +310,7 @@ export default function CartPage({ _settings }) {
             <div className="waiter-modal-card__total-wrap">
               <span className="waiter-modal-card__total-lbl">{t("cart.totalAmount")}</span>
               <span className="waiter-modal-card__total-val">
-                QAR {totalPrice}
+                {currency} {totalPrice}
               </span>
             </div>
 

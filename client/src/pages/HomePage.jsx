@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useMenu, useCategories, useBranches, useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { localized } from "../utils/localization.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import LazyVideo from "../components/LazyVideo.jsx";
@@ -94,7 +95,7 @@ function TickerStrip() {
 export default function HomePage({ settings: propSettings, branches: propBranches }) {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedCat, setSelectedCat] = useState(null);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const { data: fetchedSettings } = useSettings();
   const { data: fetchedBranches } = useBranches();
@@ -145,7 +146,14 @@ export default function HomePage({ settings: propSettings, branches: propBranche
           <div className="hero-banner__shade" />
 
           <div className="hero-banner__location-stamp home-hero-anim home-hero-anim--stamp">
-            {branches?.find((b) => /centro/i.test(b.name || b.slug))?.name ? `${branches.find((b) => /centro/i.test(b.name || b.slug)).name} • Doha` : "CENTRO • DOHA"}
+            {(() => {
+              const centroBranch = branches?.find((b) => /centro/i.test(b.name || b.slug));
+              if (centroBranch) {
+                const bName = localized(centroBranch, "name", lang);
+                return `${bName} • Doha`;
+              }
+              return "CENTRO • DOHA";
+            })()}
           </div>
           <div className="hero-banner__live-tag home-hero-anim home-hero-anim--tag">
             {t("home.hero.liveTag")}
@@ -238,15 +246,16 @@ export default function HomePage({ settings: propSettings, branches: propBranche
             <StaggerContainer className="menu-section-grid">
               {featured.slice(0, 4).map((item, index) => {
                 const cat = categories.find((c) => c._id === (item.category?._id || item.category));
+                const catLocalizedName = cat ? localized(cat, "name", lang) : "";
                 return (
                   <StaggerItem key={item._id} delay={index * 0.08} className="food-card-motion-wrap">
                     <FoodCard
                       item={item}
                       index={index + 1}
-                      categoryName={cat?.name}
+                      categoryName={catLocalizedName}
                       onSelect={(it) => {
                         setSelectedItem(it);
-                        setSelectedCat(cat?.name);
+                        setSelectedCat(catLocalizedName);
                       }}
                     />
                   </StaggerItem>
@@ -281,18 +290,19 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                 const catImg = rawImg.includes("/uploads/processed/") && !rawImg.includes("_thumb.webp")
                   ? rawImg.replace(/\.webp$/, "_thumb.webp")
                   : rawImg;
+                const catLocalizedName = localized(cat, "name", lang);
 
                 return (
                   <StaggerItem key={cat._id || cat.slug} delay={idx * 0.08} className="category-card-motion-wrap">
                     <Link
                       to={`/menu?category=${cat.slug}`}
                       className="category-card"
-                      aria-label={t("home.categories.browseAria", { name: cat.name })}
+                      aria-label={t("home.categories.browseAria", { name: catLocalizedName })}
                     >
                       {catImg ? (
                         <img
                           src={catImg}
-                          alt={cat.name}
+                          alt={catLocalizedName}
                           loading="lazy"
                           width="400"
                           height="300"
@@ -301,7 +311,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                       ) : (
                         <div style={{ background: "linear-gradient(135deg, #1f1f1f, #141414)", width: "100%", height: "100%", position: "absolute", inset: 0 }} />
                       )}
-                      <strong>{cat.name}</strong>
+                      <strong>{catLocalizedName}</strong>
                     </Link>
                   </StaggerItem>
                 );
@@ -383,7 +393,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span>{String(idx + 1).padStart(2, "0")} · {b.name}</span>
+                    <span>{String(idx + 1).padStart(2, "0")} · {localized(b, "name", lang)}</span>
                     <strong>{t("home.locations.directions")}</strong>
                   </a>
                 </StaggerItem>

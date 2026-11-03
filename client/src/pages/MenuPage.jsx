@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useCategories, useMenu, useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { localized } from "../utils/localization.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
@@ -24,7 +25,7 @@ const QUICK_TAGS = [
 
 export default function MenuPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const categoryParam = searchParams.get("category") || "";
   const tagParam = searchParams.get("tag") || "";
   const badgeParam = searchParams.get("badge") || "";
@@ -217,8 +218,10 @@ export default function MenuPage() {
   const filteredItems = items.filter((item) => {
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
-    const nameMatch = item.name?.toLowerCase().includes(q);
-    const descMatch = item.description?.toLowerCase().includes(q);
+    const itemName = localized(item, "name", lang).toLowerCase();
+    const itemDesc = localized(item, "description", lang).toLowerCase();
+    const nameMatch = itemName.includes(q) || (lang === "ar" && item.name?.toLowerCase().includes(q));
+    const descMatch = itemDesc.includes(q) || (lang === "ar" && item.description?.toLowerCase().includes(q));
     return nameMatch || descMatch;
   });
 
@@ -338,7 +341,7 @@ export default function MenuPage() {
                 onTouchEnd={(e) => handleTouchEnd(e, () => handleSelectCategory(cat.slug))}
                 onClick={() => handleOptimizedClick(() => handleSelectCategory(cat.slug))}
               >
-                {cat.name}
+                {localized(cat, "name", lang)}
               </button>
             ))}
           </motion.div>
@@ -423,16 +426,17 @@ export default function MenuPage() {
             >
               {filteredItems.map((item, idx) => {
                 const cat = categories.find((c) => c._id === (item.category?._id || item.category));
+                const catLocalizedName = cat ? localized(cat, "name", lang) : "";
                 return (
                   <StaggerItem key={item._id} className="food-card-motion-wrap">
                     <FoodCard
                       item={item}
                       index={idx + 1}
-                      categoryName={cat?.name}
+                      categoryName={catLocalizedName}
                       onBadgeClick={handleSelectBadge}
                       onSelect={(it) => {
                         setSelectedItem(it);
-                        setSelectedCatName(cat?.name || "");
+                        setSelectedCatName(catLocalizedName);
                       }}
                     />
                   </StaggerItem>
