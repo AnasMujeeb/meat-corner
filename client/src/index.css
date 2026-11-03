@@ -5595,49 +5595,12 @@ h1, h2, h3, h4, h5, h6 {
 .mode-indicator-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 18px;
-  background: var(--white);
-  border: 1px solid var(--ink);
+  justify-content: flex-end;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   margin-bottom: 28px;
-  box-shadow: var(--card-shadow);
-}
-
-.mode-indicator-bar__info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.mode-indicator-bar__label {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-}
-
-.mode-indicator-bar__badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  font-family: var(--font-heading);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--ink);
-  color: #fff;
-  border: 1px solid var(--ink);
-}
-
-.mode-indicator-bar__badge--delivery {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
 }
 
 .mode-indicator-bar__switch-btn {
@@ -5677,23 +5640,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: rotate(180deg);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .mode-indicator-bar {
-    padding: 10px 14px;
-    gap: 12px;
-  }
-  .mode-indicator-bar__label {
-    font-size: 11px;
-  }
-  .mode-indicator-bar__badge {
-    font-size: 10px;
-    padding: 3px 8px;
+    justify-content: flex-end;
+    margin-bottom: 20px;
   }
   .mode-indicator-bar__switch-btn {
-    height: 38px;
-    min-height: 38px;
-    padding: 0 12px;
-    font-size: 11px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 11.5px;
     gap: 6px;
   }
 }
@@ -5750,8 +5706,6 @@ h1, h2, h3, h4, h5, h6 {
 [dir="rtl"] .food-card__category,
 [dir="rtl"] .btn,
 [dir="rtl"] .mode-indicator-bar__switch-btn,
-[dir="rtl"] .mode-indicator-bar__label,
-[dir="rtl"] .mode-indicator-bar__badge,
 [dir="rtl"] .eyebrow,
 [dir="rtl"] .cart-drawer__title,
 [dir="rtl"] .cart-item__name,

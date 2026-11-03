@@ -31,20 +31,6 @@ export default function ModeIndicatorBar() {
 
   return (
     <div className="mode-indicator-bar">
-      <div className="mode-indicator-bar__info">
-        <span className="mode-indicator-bar__label">
-          {t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:
-        </span>
-
-        <span
-          className={`mode-indicator-bar__badge ${
-            isDelivery ? "mode-indicator-bar__badge--delivery" : "mode-indicator-bar__badge--dine-in"
-          }`}
-        >
-          {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
-        </span>
-      </div>
-
       <button
         type="button"
         className="mode-indicator-bar__switch-btn"
