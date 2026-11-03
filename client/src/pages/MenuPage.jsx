@@ -1,12 +1,14 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useCategories, useMenu, useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 import { localized } from "../utils/localization.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
+import ModeChooser from "../components/ModeChooser.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import {
   StaggerContainer,
@@ -23,9 +25,18 @@ const QUICK_TAGS = [
   { id: "kids", labelKey: "menu.tagKids" },
 ];
 
-export default function MenuPage() {
+export default function MenuPage({ initialMode }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const { t, lang } = useLanguage();
+  const { mode, setMode, isDelivery, isDineIn } = useMode();
+
+  // If initialMode prop is provided (from /menu/dine-in or /menu/delivery route), sync it
+  useEffect(() => {
+    if (initialMode && mode !== initialMode) {
+      setMode(initialMode);
+    }
+  }, [initialMode, mode, setMode]);
   const categoryParam = searchParams.get("category") || "";
   const tagParam = searchParams.get("tag") || "";
   const badgeParam = searchParams.get("badge") || "";
@@ -233,11 +244,42 @@ export default function MenuPage() {
   // const showVideoSection = Boolean(validVideo);
   const showVideoSection = false;
 
+  // If no mode is active, render the Dine In / Delivery chooser instead of items
+  if (!mode) {
+    return (
+      <ModeChooser
+        onSelectMode={(selected) => {
+          navigate(`/menu/${selected}${location.search || ""}`);
+        }}
+      />
+    );
+  }
+
   return (
     <div className="menu-page">
       {/* ── Page Header ────────────────────────────────────────────── */}
       <section className="site-section site-section--compact" style={{ paddingBottom: 0 }}>
         <div className="site-container">
+          {/* Mode Indicator & Switch Mode Bar */}
+          <div className="mode-indicator-bar">
+            <div className="mode-indicator-bar__info">
+              <span>{t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:</span>
+              <span className={`mode-indicator-bar__badge ${isDelivery ? "mode-indicator-bar__badge--delivery" : ""}`}>
+                {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
+              </span>
+            </div>
+            <button
+              type="button"
+              className="switch-mode-link"
+              onClick={() => {
+                setMode(null);
+                navigate("/menu");
+              }}
+            >
+              🔄 {t("mode.switchMode")}
+            </button>
+          </div>
+
           <div className="site-section__header menu-header-wrap" style={{ marginBottom: 20 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

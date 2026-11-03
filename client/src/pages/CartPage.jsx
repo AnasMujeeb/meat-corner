@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 import {
   ScrollReveal,
 } from "../components/motion/ScrollReveal.jsx";
@@ -33,12 +34,18 @@ function getLocalizedOptionNote(item, lang) {
 }
 
 export default function CartPage({ _settings }) {
+  const { isDelivery } = useMode();
   const { items, totalQty, setQty, removeItem, clear } = useCart();
   const { t, lang } = useLanguage();
   const [tableNumber, setTableNumber] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
   const [waiterModalOpen, setWaiterModalOpen] = useState(false);
   const currency = getCurrency(lang);
+
+  // In delivery mode, cart is not available — redirect to menu
+  if (isDelivery) {
+    return <Navigate to="/menu/delivery" replace />;
+  }
 
   if (items.length === 0) {
     return (

@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMenu } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { useMode } from "../hooks/useMode.js";
 import { HEALTHY_CONTENT } from "../content/healthy.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
+import ModeChooser from "../components/ModeChooser.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import balancedMealsImg from "../../pictures/balanced-meals.jpg";
 import {
@@ -18,16 +20,48 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 export default function HealthyPage() {
   const [selectedItem, setSelectedItem] = useState(null);
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const { mode, setMode, isDelivery } = useMode();
 
   // Fetch only real items tagged "healthy"
   const { data: menuData, isLoading } = useMenu({ tag: "healthy", limit: 24 });
   const items = menuData?.items || [];
+
+  if (!mode) {
+    return (
+      <ModeChooser
+        onSelectMode={(selected) => {
+          navigate(`/healthy`);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="healthy-page">
       {/* ── Page Header ────────────────────────────────────────── */}
       <section className="site-section page-hero">
         <div className="site-container">
+          {/* Mode Indicator & Switch Mode Bar */}
+          <div className="mode-indicator-bar">
+            <div className="mode-indicator-bar__info">
+              <span>{t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:</span>
+              <span className={`mode-indicator-bar__badge ${isDelivery ? "mode-indicator-bar__badge--delivery" : ""}`}>
+                {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
+              </span>
+            </div>
+            <button
+              type="button"
+              className="switch-mode-link"
+              onClick={() => {
+                setMode(null);
+                navigate("/menu");
+              }}
+            >
+              🔄 {t("mode.switchMode")}
+            </button>
+          </div>
+
           <motion.span
             className="eyebrow"
             initial={{ opacity: 0, y: 14 }}
