@@ -8,6 +8,8 @@ import { KIDS_CONTENT } from "../content/kids.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import ModeChooser from "../components/ModeChooser.jsx";
+import ModeIndicatorBar from "../components/ModeIndicatorBar.jsx";
+import ModeTransitionView from "../components/ModeTransitionView.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import familyMomentsImg from "../../pictures/family moments updated.jpeg";
 import {
@@ -20,8 +22,7 @@ import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 export default function KidsPage() {
   const [selectedItem, setSelectedItem] = useState(null);
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const { mode, setMode, isDelivery } = useMode();
+  const { mode } = useMode();
 
   // Fetch only real items tagged "kids"
   const { data: menuData, isLoading } = useMenu({ tag: "kids", limit: 24 });
@@ -30,8 +31,8 @@ export default function KidsPage() {
   if (!mode) {
     return (
       <ModeChooser
-        onSelectMode={(selected) => {
-          navigate(`/kids`);
+        onSelectMode={() => {
+          // Mode was set, stay on /kids
         }}
       />
     );
@@ -39,30 +40,18 @@ export default function KidsPage() {
 
   return (
     <div className="kids-page">
-      {/* ── Page Header ────────────────────────────────────────── */}
-      <section className="site-section page-hero">
+      {/* ── Mode Bar Header Area (Fixed/Unanimating) ── */}
+      <section className="site-section site-section--compact" style={{ paddingBottom: 0 }}>
         <div className="site-container">
-          {/* Mode Indicator & Switch Mode Bar */}
-          <div className="mode-indicator-bar">
-            <div className="mode-indicator-bar__info">
-              <span>{t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:</span>
-              <span className={`mode-indicator-bar__badge ${isDelivery ? "mode-indicator-bar__badge--delivery" : ""}`}>
-                {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
-              </span>
-            </div>
-            <button
-              type="button"
-              className="switch-mode-link"
-              onClick={() => {
-                setMode(null);
-                navigate("/menu");
-              }}
-            >
-              🔄 {t("mode.switchMode")}
-            </button>
-          </div>
+          <ModeIndicatorBar />
+        </div>
+      </section>
 
-          <motion.span
+      {/* ── Animated Mode Content Area ── */}
+      <ModeTransitionView>
+        <section className="site-section page-hero" style={{ paddingTop: 20 }}>
+          <div className="site-container">
+            <motion.span
             className="eyebrow"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -166,6 +155,7 @@ export default function KidsPage() {
           <img src="/uploads/processed/mac-cheese.webp" alt={t("kids.split.imgAlt")} loading="lazy" decoding="async" width="800" height="600" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </ScrollReveal>
       </section>
+      </ModeTransitionView>
 
       {/* Item Modal */}
       {selectedItem && (

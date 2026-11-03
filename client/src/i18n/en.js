@@ -67,6 +67,8 @@ export default {
   "mode.deliveryDesc": "Browse our full menu and order directly via Talabat, Snoonu, or Keeta.",
   "mode.deliveryAction": "EXPLORE DELIVERY",
   "mode.switchMode": "Switch Mode",
+  "mode.switchToDelivery": "Switch to Delivery",
+  "mode.switchToDineIn": "Switch to Dine In",
   "mode.currentMode": "Mode: {mode}",
   "mode.dineInLabel": "Dine In",
   "mode.deliveryLabel": "Delivery",

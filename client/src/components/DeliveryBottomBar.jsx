@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from "framer-motion";
 import { useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 
@@ -51,6 +52,7 @@ function KeetaIcon({ size = 22 }) {
 export default function DeliveryBottomBar() {
   const { data: settings = {} } = useSettings();
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
 
   const talabatUrl = settings?.socials?.talabat || "";
   const snoonuUrl = settings?.socials?.snoonu || "";
@@ -60,7 +62,16 @@ export default function DeliveryBottomBar() {
   if (!hasAnyLink) return null;
 
   return (
-    <div className="delivery-bottom-bar" role="region" aria-label={t("mode.orderOnline")}>
+    <motion.div
+      className="delivery-bottom-bar"
+      role="region"
+      aria-label={t("mode.orderOnline")}
+      initial={{ y: shouldReduceMotion ? 0 : "100%", opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: shouldReduceMotion ? 0 : "100%", opacity: 0 }}
+      transition={{ duration: shouldReduceMotion ? 0.15 : 0.25, ease: "easeOut" }}
+      style={{ willChange: "transform, opacity" }}
+    >
       <div className="delivery-bottom-bar__inner site-container">
         <span className="delivery-bottom-bar__prompt">
           {t("mode.orderOnline")}
@@ -104,7 +115,6 @@ export default function DeliveryBottomBar() {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
-

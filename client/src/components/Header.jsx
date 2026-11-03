@@ -20,8 +20,10 @@ export default function Header({ onCartOpen }) {
   const { totalQty } = useCart();
   const { data: settings } = useSettings();
   const { lang, setLang, t } = useLanguage();
-  const { isDelivery } = useMode();
+  const { mode, isDelivery } = useMode();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const menuHref = mode ? `/menu/${mode}` : "/menu";
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -51,11 +53,12 @@ export default function Header({ onCartOpen }) {
           {/* Desktop Nav */}
           <nav className="site-header__nav" aria-label={t("header.mainNavAria")}>
             {NAV.map(({ to, key, defaultLabel }) => {
-              const isActive = pathname === to;
+              const targetHref = to === "/menu" ? menuHref : to;
+              const isActive = to === "/menu" ? pathname.startsWith("/menu") : pathname === to;
               return (
                 <Link
                   key={to}
-                  to={to}
+                  to={targetHref}
                   className={`site-header__nav-link${isActive ? " site-header__nav-link--active" : ""}`}
                   aria-current={isActive ? "page" : undefined}
                 >
@@ -128,11 +131,12 @@ export default function Header({ onCartOpen }) {
 
           <div className="mobile-nav-panel__links">
             {NAV.map(({ to, key, defaultLabel }) => {
-              const isActive = pathname === to;
+              const targetHref = to === "/menu" ? menuHref : to;
+              const isActive = to === "/menu" ? pathname.startsWith("/menu") : pathname === to;
               return (
                 <Link
                   key={to}
-                  to={to}
+                  to={targetHref}
                   className={`mobile-nav-panel__link${isActive ? " mobile-nav-panel__link--active" : ""}`}
                   aria-current={isActive ? "page" : undefined}
                   onClick={() => setMobileMenuOpen(false)}

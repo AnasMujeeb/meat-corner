@@ -1,3 +1,4 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useMode } from "../hooks/useMode.js";
@@ -6,11 +7,16 @@ import { LUXURY_EASE } from "./motion/motionTokens.js";
 export default function ModeChooser({ onSelectMode }) {
   const { t } = useLanguage();
   const { setMode } = useMode();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   function handleChoose(selected) {
     setMode(selected);
     if (onSelectMode) {
       onSelectMode(selected);
+    } else {
+      const search = location.search || "";
+      navigate(`/menu/${selected}${search}`);
     }
   }
 
@@ -96,4 +102,3 @@ export default function ModeChooser({ onSelectMode }) {
     </section>
   );
 }
-

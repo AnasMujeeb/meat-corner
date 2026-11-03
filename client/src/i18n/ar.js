@@ -67,6 +67,8 @@ export default {
   "mode.deliveryDesc": "تصفح قائمتنا الكاملة واطلب مباشرة عبر طلبات، سنونو، أو كيتا.",
   "mode.deliveryAction": "قائمة التوصيل",
   "mode.switchMode": "تغيير التجربة",
+  "mode.switchToDelivery": "التحويل إلى توصيل",
+  "mode.switchToDineIn": "التحويل إلى طلب مطعم",
   "mode.currentMode": "التجربة: {mode}",
   "mode.dineInLabel": "في المطعم",
   "mode.deliveryLabel": "توصيل",

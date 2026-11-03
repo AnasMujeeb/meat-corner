@@ -9,6 +9,8 @@ import { localized } from "../utils/localization.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import ModeChooser from "../components/ModeChooser.jsx";
+import ModeIndicatorBar from "../components/ModeIndicatorBar.jsx";
+import ModeTransitionView from "../components/ModeTransitionView.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import {
   StaggerContainer,
@@ -29,7 +31,7 @@ export default function MenuPage({ initialMode }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { t, lang } = useLanguage();
-  const { mode, setMode, isDelivery, isDineIn } = useMode();
+  const { mode, setMode } = useMode();
 
   // If initialMode prop is provided (from /menu/dine-in or /menu/delivery route), sync it
   useEffect(() => {
@@ -246,41 +248,23 @@ export default function MenuPage({ initialMode }) {
 
   // If no mode is active, render the Dine In / Delivery chooser instead of items
   if (!mode) {
-    return (
-      <ModeChooser
-        onSelectMode={(selected) => {
-          navigate(`/menu/${selected}${location.search || ""}`);
-        }}
-      />
-    );
+    return <ModeChooser />;
   }
 
   return (
     <div className="menu-page">
-      {/* ── Page Header ────────────────────────────────────────────── */}
+      {/* ── Mode Bar Header Area (Fixed/Unanimating) ── */}
       <section className="site-section site-section--compact" style={{ paddingBottom: 0 }}>
         <div className="site-container">
-          {/* Mode Indicator & Switch Mode Bar */}
-          <div className="mode-indicator-bar">
-            <div className="mode-indicator-bar__info">
-              <span>{t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:</span>
-              <span className={`mode-indicator-bar__badge ${isDelivery ? "mode-indicator-bar__badge--delivery" : ""}`}>
-                {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
-              </span>
-            </div>
-            <button
-              type="button"
-              className="switch-mode-link"
-              onClick={() => {
-                setMode(null);
-                navigate("/menu");
-              }}
-            >
-              🔄 {t("mode.switchMode")}
-            </button>
-          </div>
+          <ModeIndicatorBar />
+        </div>
+      </section>
 
-          <div className="site-section__header menu-header-wrap" style={{ marginBottom: 20 }}>
+      {/* ── Animated Mode Content Area ── */}
+      <ModeTransitionView>
+        <section className="site-section site-section--compact" style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <div className="site-container">
+            <div className="site-section__header menu-header-wrap" style={{ marginBottom: 20 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -502,6 +486,7 @@ export default function MenuPage({ initialMode }) {
           )}
         </div>
       </section>
+      </ModeTransitionView>
 
       {/* Item Detail Modal */}
       {selectedItem && (

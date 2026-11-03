@@ -7,12 +7,14 @@ export default function MobileBottomNav({ onCartOpen }) {
   const { pathname } = useLocation();
   const { totalQty } = useCart();
   const { t } = useLanguage();
-  const { isDelivery } = useMode();
+  const { mode, isDelivery } = useMode();
+
+  const menuHref = mode ? `/menu/${mode}` : "/menu";
 
   return (
     <nav className="mobile-nav-bar" aria-label={t("mobileNav.quickNavAria")}>
       <Link
-        to="/menu"
+        to={menuHref}
         className={`mobile-nav-bar__item${pathname.startsWith("/menu") ? " mobile-nav-bar__item--active" : ""}`}
         aria-current={pathname.startsWith("/menu") ? "page" : undefined}
       >

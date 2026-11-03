@@ -7,6 +7,7 @@ const VALID_MODES = ["dine-in", "delivery"];
 export const ModeContext = createContext({
   mode: null, // "dine-in" | "delivery" | null
   setMode: () => {},
+  switchMode: () => {},
   isDineIn: false,
   isDelivery: false,
 });
@@ -26,8 +27,9 @@ function getInitialMode() {
 export function ModeProvider({ children }) {
   const [mode, setModeState] = useState(getInitialMode);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Sync mode whenever URL path matches /menu/dine-in or /menu/delivery
+  // Sync mode whenever URL path matches /menu/dine-in, /menu/delivery, or /menu
   useEffect(() => {
     const path = location.pathname.toLowerCase();
     if (path.startsWith("/menu/dine-in")) {
@@ -39,6 +41,12 @@ export function ModeProvider({ children }) {
       setModeState("delivery");
       try {
         sessionStorage.setItem(STORAGE_KEY, "delivery");
+      } catch {}
+    } else if (path === "/menu") {
+      // Explicitly on /menu chooser: clear mode so chooser is shown
+      setModeState(null);
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
       } catch {}
     }
   }, [location.pathname]);
@@ -56,12 +64,28 @@ export function ModeProvider({ children }) {
     }
   }, []);
 
+  // Directly toggles the mode: dine-in <-> delivery in ONE click
+  // On /menu/* navigates to /menu/<new mode>; on /healthy or /kids stays on same page.
+  const switchMode = useCallback(() => {
+    const nextMode = mode === "delivery" ? "dine-in" : "delivery";
+    setModeState(nextMode);
+    try {
+      sessionStorage.setItem(STORAGE_KEY, nextMode);
+    } catch {}
+
+    const path = location.pathname.toLowerCase();
+    if (path.startsWith("/menu")) {
+      navigate(`/menu/${nextMode}${location.search || ""}`);
+    }
+  }, [mode, location.pathname, location.search, navigate]);
+
   const value = useMemo(() => ({
     mode,
     setMode,
+    switchMode,
     isDineIn: mode === "dine-in",
     isDelivery: mode === "delivery",
-  }), [mode, setMode]);
+  }), [mode, setMode, switchMode]);
 
   return (
     <ModeContext.Provider value={value}>
@@ -77,4 +101,3 @@ export function useMode() {
   }
   return context;
 }
-
