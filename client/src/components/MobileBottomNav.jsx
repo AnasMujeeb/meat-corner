@@ -12,7 +12,10 @@ export default function MobileBottomNav({ onCartOpen }) {
   const menuHref = mode ? `/menu/${mode}` : "/menu";
 
   return (
-    <nav className="mobile-nav-bar" aria-label={t("mobileNav.quickNavAria")}>
+    <nav
+      className={`mobile-nav-bar${isDelivery ? " mobile-nav-bar--delivery" : ""}`}
+      aria-label={t("mobileNav.quickNavAria")}
+    >
       <Link
         to={menuHref}
         className={`mobile-nav-bar__item${pathname.startsWith("/menu") ? " mobile-nav-bar__item--active" : ""}`}
@@ -31,19 +34,22 @@ export default function MobileBottomNav({ onCartOpen }) {
         <span className="mobile-nav-bar__label">{t("nav.home") || "Home"}</span>
       </Link>
 
-      {!isDelivery && (
-        <button
-          type="button"
-          className="mobile-nav-bar__item"
-          onClick={onCartOpen}
-          aria-label={t("mobileNav.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
-        >
-          <span className="mobile-nav-bar__icon">🛒</span>
-          <span className="mobile-nav-bar__label">
-            {t("nav.cart") || "Cart"} {totalQty > 0 && <b className="mobile-nav-bar__badge">{totalQty}</b>}
-          </span>
-        </button>
-      )}
+      {/* Cart button stays in the DOM, CSS smoothly hides it without abrupt pop */}
+      <button
+        type="button"
+        className={`mobile-nav-bar__item mobile-nav-bar__item--cart${
+          isDelivery ? " mobile-nav-bar__item--cart-hidden" : ""
+        }`}
+        onClick={isDelivery ? undefined : onCartOpen}
+        aria-label={t("mobileNav.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
+        aria-hidden={isDelivery ? "true" : undefined}
+        tabIndex={isDelivery ? -1 : undefined}
+      >
+        <span className="mobile-nav-bar__icon">🛒</span>
+        <span className="mobile-nav-bar__label">
+          {t("nav.cart") || "Cart"} {totalQty > 0 && <b className="mobile-nav-bar__badge">{totalQty}</b>}
+        </span>
+      </button>
     </nav>
   );
 }

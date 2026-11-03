@@ -81,19 +81,22 @@ export default function Header({ onCartOpen }) {
               {lang === "en" ? "العربية" : "EN"}
             </button>
 
-            {/* Cart Button (hidden in Delivery mode) */}
-            {!isDelivery && (
-              <button
-                className={`site-header__cart-btn${totalQty > 0 ? " site-header__cart-btn--has-items" : ""}`}
-                onClick={onCartOpen}
-                aria-label={t("header.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
-              >
-                <span>{t("nav.cart") || "Cart"}</span>
-                {totalQty > 0 && (
-                  <span className="site-header__cart-count" aria-hidden="true">{totalQty}</span>
-                )}
-              </button>
-            )}
+            {/* Cart Button: stays in DOM, smoothly transitions in/out without layout jumps */}
+            <button
+              type="button"
+              className={`site-header__cart-btn${totalQty > 0 ? " site-header__cart-btn--has-items" : ""}${
+                isDelivery ? " site-header__cart-btn--hidden" : ""
+              }`}
+              onClick={isDelivery ? undefined : onCartOpen}
+              aria-label={t("header.cartAria", { cart: t("nav.cart") || "Cart", count: totalQty })}
+              aria-hidden={isDelivery ? "true" : undefined}
+              tabIndex={isDelivery ? -1 : undefined}
+            >
+              <span>{t("nav.cart") || "Cart"}</span>
+              {totalQty > 0 && (
+                <span className="site-header__cart-count" aria-hidden="true">{totalQty}</span>
+              )}
+            </button>
 
             {/* Mobile Hamburger Button */}
             <button

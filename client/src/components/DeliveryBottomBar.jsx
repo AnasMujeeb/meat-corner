@@ -1,7 +1,7 @@
 import { useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 
-function TalabatIcon({ size = 22 }) {
+function TalabatIcon({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="36" height="36" rx="8" fill="#FF5A00" />
@@ -13,7 +13,7 @@ function TalabatIcon({ size = 22 }) {
   );
 }
 
-function SnoonuIcon({ size = 22 }) {
+function SnoonuIcon({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="36" height="36" rx="8" fill="#D90217" />
@@ -27,7 +27,7 @@ function SnoonuIcon({ size = 22 }) {
   );
 }
 
-function KeetaIcon({ size = 22 }) {
+function KeetaIcon({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="36" height="36" rx="8" fill="#FFD100" />
@@ -52,6 +52,9 @@ function KeetaIcon({ size = 22 }) {
  * Always mounted in App.jsx. CSS transition handles show/hide via
  * `delivery-bottom-bar--hidden` class so there are no AnimatePresence
  * mount/unmount jumps.
+ *
+ * On mobile (<=768px), floats as a standalone card above the bottom navigation
+ * with an 8px gap and equal-width action buttons (>=44px tap target).
  */
 export default function DeliveryBottomBar({ hidden = false }) {
   const { data: settings = {} } = useSettings();

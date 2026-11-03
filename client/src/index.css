@@ -444,7 +444,20 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
   color: var(--ink);
   border-radius: 0;
-  transition: all var(--ease);
+  max-width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: opacity 250ms ease, transform 250ms ease, max-width 250ms ease, padding 250ms ease, border-color 250ms ease, background var(--ease), color var(--ease);
+}
+
+.site-header__cart-btn--hidden {
+  opacity: 0;
+  transform: scale(0.85);
+  max-width: 0;
+  padding: 0;
+  border-color: transparent;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .site-header__cart-btn:hover {
@@ -569,6 +582,19 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1px 5px;
   margin-left: 2px;
   border-radius: 0;
+}
+
+.mobile-nav-bar__item--cart {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 250ms ease, transform 250ms ease, color var(--ease), background var(--ease);
+}
+
+.mobile-nav-bar__item--cart-hidden {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  visibility: hidden;
 }
 
 @media (max-width: 760px) {
@@ -2252,6 +2278,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .food-card__add-btn:hover {
   background: var(--red);
+}
+
+/* In delivery mode, hide add buttons via CSS so cards do not re-render */
+[data-mode="delivery"] .food-card__add-btn,
+[data-mode="delivery"] .food-card-add {
+  display: none !important;
 }
 
 @media (max-width: 760px) {
@@ -4531,10 +4563,16 @@ h1, h2, h3, h4, h5, h6 {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Body content padding: push content above fixed bottom nav + safe area ── */
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   #main-content {
     /* Ensure content is never hidden behind the fixed bottom nav bar */
     padding-bottom: var(--mobile-nav-h, 64px) !important;
+  }
+
+  [data-mode="delivery"] #main-content,
+  .mode--delivery #main-content {
+    /* Floating delivery card (~106px) + 8px gap + bottom nav */
+    padding-bottom: calc(var(--mobile-nav-h, calc(64px + env(safe-area-inset-bottom, 0px))) + 116px) !important;
   }
 }
 
@@ -5422,28 +5460,71 @@ h1, h2, h3, h4, h5, h6 {
   color: #111111;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .delivery-bottom-bar {
-    /* Sit above the mobile bottom navigation bar */
-    bottom: var(--mobile-nav-h, 60px);
-    padding: 10px 0;
+    /* Separate floating card above bottom nav with 8px gap */
+    bottom: calc(var(--mobile-nav-h, calc(64px + env(safe-area-inset-bottom, 0px))) + 8px);
+    left: 12px;
+    right: 12px;
+    width: auto;
+    border-radius: 0;
+    border: 1px solid var(--ink);
+    background: #111111;
+    padding: 10px 12px;
+    box-shadow: var(--card-shadow), 0 8px 24px rgba(0, 0, 0, 0.4);
   }
+
+  .delivery-bottom-bar--hidden {
+    transform: translateY(calc(100% + 24px));
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .delivery-bottom-bar__inner {
-    justify-content: center;
-    gap: 10px;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    max-width: 100% !important;
   }
+
   .delivery-bottom-bar__prompt {
     width: 100%;
     text-align: center;
     font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    opacity: 0.9;
   }
+
   .delivery-bottom-bar__actions {
-    justify-content: center;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
     gap: 8px;
+    width: 100%;
+    flex-wrap: nowrap;
   }
+
   .delivery-pill {
-    padding: 6px 12px;
+    flex: 1 1 0;
+    min-width: 0;
+    height: 44px;
+    min-height: 44px;
+    padding: 0 4px;
+    border-radius: 0;
     font-size: 12px;
+    font-weight: 700;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    touch-action: manipulation;
+  }
+
+  .delivery-pill span {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

@@ -73,7 +73,7 @@ function AppContent() {
       <Header onCartOpen={() => setCartOpen(true)} />
 
       {/* Main View with Suspense code splitting + ErrorBoundary */}
-      <main id="main-content" style={{ flex: 1, paddingBottom: isDelivery ? "calc(var(--mobile-nav-h, 0px) + 70px)" : "var(--mobile-nav-h, 0px)" }}>
+      <main id="main-content" style={{ flex: 1, paddingBottom: isDelivery ? "70px" : undefined }}>
         <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>

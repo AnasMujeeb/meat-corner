@@ -36,6 +36,15 @@ export function ModeProvider({ children }) {
   // Prevent concurrent animations
   const isAnimating = useRef(false);
 
+  // Keep data-mode attribute on <html> in sync with current mode
+  useEffect(() => {
+    if (mode) {
+      document.documentElement.setAttribute("data-mode", mode);
+    } else {
+      document.documentElement.removeAttribute("data-mode");
+    }
+  }, [mode]);
+
   // Sync mode whenever URL path matches /menu/dine-in, /menu/delivery, or /menu
   useEffect(() => {
     const path = location.pathname.toLowerCase();
@@ -105,6 +114,10 @@ export function ModeProvider({ children }) {
    * Animated mode switch using Web Animations API.
    * Animates the wrapper registered via registerTransitionRef, then commits.
    * Ignores clicks while a transition is already running.
+   * Softer slide:
+   *  - exit: translateX 0 -> -40px (RTL +40px), opacity 1 -> 0.35, 150ms ease-in
+   *  - enter: from +40px (RTL -40px), opacity 0.35 -> 1, 200ms ease-out
+   * Never fades to fully blank.
    */
   const runModeSwitch = useCallback(() => {
     if (isAnimating.current) return;
@@ -125,16 +138,16 @@ export function ModeProvider({ children }) {
     isAnimating.current = true;
 
     const isRTL = document.documentElement.dir === "rtl";
-    const exitX = isRTL ? "60px" : "-60px";
-    const enterX = isRTL ? "-60px" : "60px";
+    const exitX = isRTL ? "40px" : "-40px";
+    const enterX = isRTL ? "-40px" : "40px";
 
-    // Exit animation: slide out + fade
+    // Exit animation: softer slide, never fully blank (opacity 1 -> 0.35)
     const exitAnim = wrapperEl.animate(
       [
         { transform: "translateX(0)", opacity: 1 },
-        { transform: `translateX(${exitX})`, opacity: 0 },
+        { transform: `translateX(${exitX})`, opacity: 0.35 },
       ],
-      { duration: 180, easing: "ease-in", fill: "forwards" }
+      { duration: 150, easing: "ease-in", fill: "forwards" }
     );
 
     exitAnim.finished.then(() => {
@@ -146,10 +159,10 @@ export function ModeProvider({ children }) {
         requestAnimationFrame(() => {
           const enterAnim = wrapperEl.animate(
             [
-              { transform: `translateX(${enterX})`, opacity: 0 },
+              { transform: `translateX(${enterX})`, opacity: 0.35 },
               { transform: "translateX(0)", opacity: 1 },
             ],
-            { duration: 220, easing: "ease-out", fill: "forwards" }
+            { duration: 200, easing: "ease-out", fill: "forwards" }
           );
 
           enterAnim.finished.then(() => {

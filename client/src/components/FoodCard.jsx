@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
-import { useMode } from "../hooks/useMode.js";
 import ItemModal from "./ItemModal.jsx";
 import { BADGES } from "../constants/badges.js";
 import { localized, getCurrency } from "../utils/localization.js";
@@ -12,8 +11,11 @@ import { localized, getCurrency } from "../utils/localization.js";
  * Displays a 2-digit numbered badge (01, 02...), fixed aspect ratio image,
  * tag / category (like "NEW ADDITIONS"), title, price, and a tap-friendly + add button.
  * Clicking the card opens the item detail modal to view full details and description.
+ *
+ * NOTE: Does NOT subscribe to mode context directly so all cards avoid re-rendering
+ * on mode switch. Instead, [data-mode="delivery"] .food-card__add-btn is hidden via CSS.
  */
-export default function FoodCard({
+function FoodCard({
   item,
   index,
   categoryName,
@@ -23,7 +25,6 @@ export default function FoodCard({
 }) {
   const { addItem } = useCart();
   const { t, lang } = useLanguage();
-  const { isDelivery } = useMode();
   const navigate = useNavigate();
   const [internalModalOpen, setInternalModalOpen] = useState(false);
 
@@ -176,16 +177,14 @@ export default function FoodCard({
 
           <div className="food-card__footer">
             <span className="food-card__price">{currency} {priceFormatted}</span>
-            {!isDelivery && (
-              <button
-                type="button"
-                className="food-card__add-btn"
-                aria-label={t("foodCard.addToCart", { name: itemName })}
-                onClick={handleAddClick}
-              >
-                +
-              </button>
-            )}
+            <button
+              type="button"
+              className="food-card__add-btn"
+              aria-label={t("foodCard.addToCart", { name: itemName })}
+              onClick={handleAddClick}
+            >
+              +
+            </button>
           </div>
         </div>
       </article>
@@ -201,3 +200,5 @@ export default function FoodCard({
     </>
   );
 }
+
+export default memo(FoodCard);
