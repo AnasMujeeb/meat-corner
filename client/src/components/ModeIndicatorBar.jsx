@@ -1,4 +1,3 @@
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useMode } from "../hooks/useMode.js";
 
@@ -24,8 +23,7 @@ function SwapArrowsIcon({ size = 15 }) {
 
 export default function ModeIndicatorBar() {
   const { t } = useLanguage();
-  const { mode, isDelivery, switchMode } = useMode();
-  const shouldReduceMotion = useReducedMotion();
+  const { isDelivery, runModeSwitch } = useMode();
 
   const switchActionLabel = isDelivery
     ? (t("mode.switchToDineIn") || "Switch to Dine In")
@@ -38,44 +36,23 @@ export default function ModeIndicatorBar() {
           {t("mode.currentMode", { mode: "" }).replace(":", "").trim()}:
         </span>
 
-        {/* Animate badge with mode change */}
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={mode}
-            className={`mode-indicator-bar__badge ${
-              isDelivery ? "mode-indicator-bar__badge--delivery" : "mode-indicator-bar__badge--dine-in"
-            }`}
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
-            transition={{ duration: shouldReduceMotion ? 0.15 : 0.35, ease: "easeOut" }}
-            style={{ willChange: "transform, opacity" }}
-          >
-            {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
-          </motion.span>
-        </AnimatePresence>
+        <span
+          className={`mode-indicator-bar__badge ${
+            isDelivery ? "mode-indicator-bar__badge--delivery" : "mode-indicator-bar__badge--dine-in"
+          }`}
+        >
+          {isDelivery ? t("mode.deliveryLabel") : t("mode.dineInLabel")}
+        </span>
       </div>
 
       <button
         type="button"
         className="mode-indicator-bar__switch-btn"
-        onClick={switchMode}
+        onClick={runModeSwitch}
         aria-label={switchActionLabel}
       >
         <SwapArrowsIcon size={14} />
-        {/* Animate button label with mode change */}
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.span
-            key={switchActionLabel}
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -6 }}
-            transition={{ duration: shouldReduceMotion ? 0.15 : 0.35, ease: "easeOut" }}
-            style={{ display: "inline-block", willChange: "transform, opacity" }}
-          >
-            {switchActionLabel}
-          </motion.span>
-        </AnimatePresence>
+        <span>{switchActionLabel}</span>
       </button>
     </div>
   );

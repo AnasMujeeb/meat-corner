@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const STORAGE_KEY = "mc_mode";
@@ -8,6 +8,8 @@ export const ModeContext = createContext({
   mode: null, // "dine-in" | "delivery" | null
   setMode: () => {},
   switchMode: () => {},
+  runModeSwitch: () => {},
+  registerTransitionRef: () => {},
   isDineIn: false,
   isDelivery: false,
 });
@@ -28,6 +30,11 @@ export function ModeProvider({ children }) {
   const [mode, setModeState] = useState(getInitialMode);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Ref to the animated wrapper registered by ModeTransitionView
+  const transitionRef = useRef(null);
+  // Prevent concurrent animations
+  const isAnimating = useRef(false);
 
   // Sync mode whenever URL path matches /menu/dine-in, /menu/delivery, or /menu
   useEffect(() => {
@@ -64,28 +71,106 @@ export function ModeProvider({ children }) {
     }
   }, []);
 
-  // Directly toggles the mode: dine-in <-> delivery in ONE click
-  // On /menu/* navigates to /menu/<new mode>; on /healthy or /kids stays on same page.
-  const switchMode = useCallback(() => {
-    const nextMode = mode === "delivery" ? "dine-in" : "delivery";
+  /** Called by ModeTransitionView to register its wrapper element */
+  const registerTransitionRef = useCallback((el) => {
+    transitionRef.current = el;
+  }, []);
+
+  /**
+   * Internal commit: update state + sessionStorage + navigate.
+   * Does NOT animate.
+   */
+  const commitSwitch = useCallback((nextMode, currentPath, currentSearch) => {
     setModeState(nextMode);
     try {
       sessionStorage.setItem(STORAGE_KEY, nextMode);
     } catch {}
-
-    const path = location.pathname.toLowerCase();
+    const path = currentPath.toLowerCase();
     if (path.startsWith("/menu")) {
-      navigate(`/menu/${nextMode}${location.search || ""}`);
+      navigate(`/menu/${nextMode}${currentSearch || ""}`);
     }
-  }, [mode, location.pathname, location.search, navigate]);
+  }, [navigate]);
+
+  /**
+   * Directly toggles the mode: dine-in <-> delivery in ONE click.
+   * Used by ModeChooser (which doesn't need animation).
+   * On /menu/* navigates to /menu/<new mode>; on /healthy or /kids stays on same page.
+   */
+  const switchMode = useCallback(() => {
+    const nextMode = mode === "delivery" ? "dine-in" : "delivery";
+    commitSwitch(nextMode, location.pathname, location.search);
+  }, [mode, location.pathname, location.search, commitSwitch]);
+
+  /**
+   * Animated mode switch using Web Animations API.
+   * Animates the wrapper registered via registerTransitionRef, then commits.
+   * Ignores clicks while a transition is already running.
+   */
+  const runModeSwitch = useCallback(() => {
+    if (isAnimating.current) return;
+
+    const nextMode = mode === "delivery" ? "dine-in" : "delivery";
+    const currentPath = location.pathname;
+    const currentSearch = location.search;
+
+    // Respect prefers-reduced-motion
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wrapperEl = transitionRef.current;
+
+    if (prefersReduced || !wrapperEl) {
+      commitSwitch(nextMode, currentPath, currentSearch);
+      return;
+    }
+
+    isAnimating.current = true;
+
+    const isRTL = document.documentElement.dir === "rtl";
+    const exitX = isRTL ? "60px" : "-60px";
+    const enterX = isRTL ? "-60px" : "60px";
+
+    // Exit animation: slide out + fade
+    const exitAnim = wrapperEl.animate(
+      [
+        { transform: "translateX(0)", opacity: 1 },
+        { transform: `translateX(${exitX})`, opacity: 0 },
+      ],
+      { duration: 180, easing: "ease-in", fill: "forwards" }
+    );
+
+    exitAnim.finished.then(() => {
+      // Commit the mode change (state + sessionStorage + navigate)
+      commitSwitch(nextMode, currentPath, currentSearch);
+
+      // Let React flush the new content before entering
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const enterAnim = wrapperEl.animate(
+            [
+              { transform: `translateX(${enterX})`, opacity: 0 },
+              { transform: "translateX(0)", opacity: 1 },
+            ],
+            { duration: 220, easing: "ease-out", fill: "forwards" }
+          );
+
+          enterAnim.finished.then(() => {
+            exitAnim.cancel();
+            enterAnim.cancel();
+            isAnimating.current = false;
+          });
+        });
+      });
+    });
+  }, [mode, location.pathname, location.search, commitSwitch]);
 
   const value = useMemo(() => ({
     mode,
     setMode,
     switchMode,
+    runModeSwitch,
+    registerTransitionRef,
     isDineIn: mode === "dine-in",
     isDelivery: mode === "delivery",
-  }), [mode, setMode, switchMode]);
+  }), [mode, setMode, switchMode, runModeSwitch, registerTransitionRef]);
 
   return (
     <ModeContext.Provider value={value}>

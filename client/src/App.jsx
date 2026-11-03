@@ -1,7 +1,6 @@
 import { useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AnimatePresence } from "framer-motion";
 import { CartProvider } from "./context/CartProvider.jsx";
 import { LanguageProvider } from "./context/LanguageProvider.jsx";
 import { ModeProvider, useMode } from "./context/ModeProvider.jsx";
@@ -94,10 +93,8 @@ function AppContent() {
         </ErrorBoundary>
       </main>
 
-      {/* Delivery Bottom Sticky Bar (Active only in delivery mode) */}
-      <AnimatePresence>
-        {isDelivery && <DeliveryBottomBar />}
-      </AnimatePresence>
+      {/* Delivery Bottom Sticky Bar — always mounted, CSS shows/hides */}
+      <DeliveryBottomBar hidden={!isDelivery} />
 
       {/* Footer */}
       <Footer />

@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 
@@ -49,28 +48,27 @@ function KeetaIcon({ size = 22 }) {
   );
 }
 
-export default function DeliveryBottomBar() {
+/**
+ * Always mounted in App.jsx. CSS transition handles show/hide via
+ * `delivery-bottom-bar--hidden` class so there are no AnimatePresence
+ * mount/unmount jumps.
+ */
+export default function DeliveryBottomBar({ hidden = false }) {
   const { data: settings = {} } = useSettings();
   const { t } = useLanguage();
-  const shouldReduceMotion = useReducedMotion();
 
   const talabatUrl = settings?.socials?.talabat || "";
   const snoonuUrl = settings?.socials?.snoonu || "";
   const keetaUrl = settings?.socials?.keeta || "";
 
   const hasAnyLink = Boolean(talabatUrl || snoonuUrl || keetaUrl);
-  if (!hasAnyLink) return null;
 
   return (
-    <motion.div
-      className="delivery-bottom-bar"
+    <div
+      className={`delivery-bottom-bar${hidden || !hasAnyLink ? " delivery-bottom-bar--hidden" : ""}`}
       role="region"
       aria-label={t("mode.orderOnline")}
-      initial={{ y: shouldReduceMotion ? 0 : "100%", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: shouldReduceMotion ? 0 : "100%", opacity: 0 }}
-      transition={{ duration: shouldReduceMotion ? 0.15 : 0.25, ease: "easeOut" }}
-      style={{ willChange: "transform, opacity" }}
+      aria-hidden={hidden || !hasAnyLink ? "true" : undefined}
     >
       <div className="delivery-bottom-bar__inner site-container">
         <span className="delivery-bottom-bar__prompt">
@@ -84,6 +82,7 @@ export default function DeliveryBottomBar() {
               rel="noopener noreferrer"
               className="delivery-pill delivery-pill--talabat"
               aria-label={t("footer.orderTalabat")}
+              tabIndex={hidden ? -1 : undefined}
             >
               <TalabatIcon size={20} />
               <span>Talabat</span>
@@ -96,6 +95,7 @@ export default function DeliveryBottomBar() {
               rel="noopener noreferrer"
               className="delivery-pill delivery-pill--snoonu"
               aria-label={t("footer.orderSnoonu")}
+              tabIndex={hidden ? -1 : undefined}
             >
               <SnoonuIcon size={20} />
               <span>Snoonu</span>
@@ -108,6 +108,7 @@ export default function DeliveryBottomBar() {
               rel="noopener noreferrer"
               className="delivery-pill delivery-pill--keeta"
               aria-label={t("mode.orderOnKeeta")}
+              tabIndex={hidden ? -1 : undefined}
             >
               <KeetaIcon size={20} />
               <span>KeeTa</span>
@@ -115,6 +116,6 @@ export default function DeliveryBottomBar() {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

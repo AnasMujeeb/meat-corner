@@ -5352,6 +5352,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 12px 0;
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
+  /* CSS transition — no AnimatePresence needed */
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 250ms ease-out, opacity 250ms ease-out;
+}
+
+.delivery-bottom-bar--hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .delivery-bottom-bar__inner {
@@ -5549,7 +5559,6 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: clip;
   width: 100%;
   position: relative;
-  min-height: 400px;
 }
 
 .mode-transition-content {
