@@ -496,7 +496,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   font-size: 16px;
   color: var(--ink);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
 }
 
 /* Mobile Nav Panel — early hide/show shim (canonical styles defined below in menu section) */
@@ -836,7 +836,7 @@ h1, h2, h3, h4, h5, h6 {
   aspect-ratio: 1;
   overflow: hidden;
   background: #222;
-  border-radius: 0;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: flex-end;
   padding: 20px;
@@ -1097,6 +1097,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   box-shadow: 0 2px 10px rgba(18, 18, 18, 0.04);
   transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease, border-color 0.32s ease;
+  border-radius: var(--radius-md);
 }
 
 .story-milestone-card:hover {
@@ -1301,6 +1302,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  border-radius: var(--radius-sm);
 }
 
 /* ── Location Grid ──────────────────────────────────────────────────────────── */
@@ -1313,7 +1315,7 @@ h1, h2, h3, h4, h5, h6 {
 .location-card {
   padding: 40px;
   background: var(--white);
-  border-radius: 0;
+  border-radius: var(--radius-md);
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
@@ -2303,6 +2305,7 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--white);
   border: 1px solid var(--line);
   box-shadow: var(--card-shadow);
+  border-radius: var(--radius-md);
 }
 
 /* ── Item Detail Modal ──────────────────────────────────────────────────────── */
@@ -3033,6 +3036,8 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--paper);
   z-index: 90;
   box-shadow: -8px 0 32px rgba(18, 18, 18, 0.15);
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
@@ -3074,7 +3079,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   font-size: 18px;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   transition: all var(--ease);
   touch-action: manipulation;
   cursor: pointer;
@@ -3138,7 +3143,8 @@ h1, h2, h3, h4, h5, h6 {
   padding: 14px;
   background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .cart-item__img {
@@ -3146,6 +3152,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px;
   object-fit: cover;
   flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 
 .cart-item__img-placeholder {
@@ -3153,6 +3160,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px;
   background: #eee;
   flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 
 .cart-item__info {
@@ -3226,7 +3234,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--line);
   box-shadow: var(--card-shadow);
   text-align: center;
-  border-radius: 0;
+  border-radius: var(--radius-md);
 }
 
 .cart-empty-panel__icon-wrap {
@@ -3282,7 +3290,8 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--white);
   border: 1px solid var(--line);
   box-shadow: var(--card-shadow);
-  border-radius: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .cart-card-item__img {
@@ -3291,6 +3300,7 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   flex-shrink: 0;
   border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
 }
 
 .cart-card-item__placeholder {
@@ -3305,6 +3315,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 12px;
   font-weight: 700;
   flex-shrink: 0;
+  border-radius: var(--radius-sm);
 }
 
 .cart-card-item__details {
@@ -3382,7 +3393,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--line);
   box-shadow: var(--card-shadow);
   padding: 28px;
-  border-radius: 0;
+  border-radius: var(--radius-md);
 }
 
 .cart-summary-card__tag {
@@ -3460,7 +3471,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .waiter-modal-card {
   background: var(--white);
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   border: 0;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
   max-width: 520px;
@@ -3490,7 +3501,7 @@ h1, h2, h3, h4, h5, h6 {
 .waiter-modal-card__close {
   padding: 6px 12px;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -3534,7 +3545,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--line);
   padding: 14px 16px;
   margin-bottom: 24px;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
 }
 
 .waiter-modal-card__notes-title {
@@ -3809,7 +3820,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 7px 26px rgba(18, 18, 18, 0.07);
   display: flex;
   flex-direction: column;
-  border-radius: 0;
+  border-radius: var(--radius-md);
 }
 
 .branch-number {
@@ -3827,7 +3838,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 7px 26px rgba(18, 18, 18, 0.07);
   display: flex;
   flex-direction: column;
-  border-radius: 0;
+  border-radius: var(--radius-md);
 }
 
 .contact-card h3 {
@@ -4747,7 +4758,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .waiter-modal-card {
     max-width: 100% !important;
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
     max-height: min(92dvh, 92vh) !important;
     padding: 24px 20px;
     padding-bottom: max(24px, calc(24px + env(safe-area-inset-bottom, 0px)));
@@ -5225,7 +5236,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.06em;
   background: transparent;
   color: var(--ink);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--ease);
   touch-action: manipulation;
@@ -5315,6 +5326,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
   position: relative;
+  border-radius: var(--radius-md);
 }
 
 .mode-card:hover {
@@ -5476,6 +5488,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--card-shadow);
   padding: 14px 16px;
   margin: 12px 0 20px;
+  border-radius: var(--radius-md);
 }
 
 @media (max-width: 768px) {
@@ -5514,7 +5527,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 46px;
   min-height: 46px;
   padding: 0 6px;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   font-size: 12px;
   font-weight: 700;
   justify-content: center;
@@ -5602,6 +5615,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--ink);
   margin-bottom: 28px;
   box-shadow: var(--card-shadow);
+  border-radius: var(--radius-md);
 }
 
 .mode-indicator-bar__info {
@@ -5632,6 +5646,7 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--ink);
   color: #fff;
   border: 1px solid var(--ink);
+  border-radius: var(--radius-sm);
 }
 
 .mode-indicator-bar__badge--delivery {
@@ -5660,6 +5675,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: background var(--ease), color var(--ease), border-color var(--ease);
   touch-action: manipulation;
   white-space: nowrap;
+  border-radius: var(--radius-sm);
 }
 
 .mode-indicator-bar__switch-btn:hover {
@@ -5767,6 +5783,10 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   transform: translateX(-100%);
   box-shadow: 8px 0 32px rgba(18, 18, 18, 0.15);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
 }
 
 [dir="rtl"] .cart-drawer.open {
