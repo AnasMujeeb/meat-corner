@@ -4568,12 +4568,6 @@ h1, h2, h3, h4, h5, h6 {
     /* Ensure content is never hidden behind the fixed bottom nav bar */
     padding-bottom: var(--mobile-nav-h, 64px) !important;
   }
-
-  [data-mode="delivery"] #main-content,
-  .mode--delivery #main-content {
-    /* Floating delivery card (~106px) + 8px gap + bottom nav */
-    padding-bottom: calc(var(--mobile-nav-h, calc(64px + env(safe-area-inset-bottom, 0px))) + 116px) !important;
-  }
 }
 
 /* ── Header: left/right safe-area inset for landscape notched phones ──────── */
@@ -5462,69 +5456,138 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   .delivery-bottom-bar {
-    /* Separate floating card above bottom nav with 8px gap */
-    bottom: calc(var(--mobile-nav-h, calc(64px + env(safe-area-inset-bottom, 0px))) + 8px);
-    left: 12px;
-    right: 12px;
-    width: auto;
-    border-radius: 0;
-    border: 1px solid var(--ink);
-    background: #111111;
-    padding: 10px 12px;
-    box-shadow: var(--card-shadow), 0 8px 24px rgba(0, 0, 0, 0.4);
+    display: none !important;
+  }
+}
+
+/* ── Shared Delivery Platform Actions & Buttons ────────────────── */
+.delivery-platform-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* ── Inline Mobile Delivery Banner ─────────────────────────────── */
+.mobile-delivery-banner {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--ink);
+  box-shadow: var(--card-shadow);
+  padding: 14px 16px;
+  margin: 12px 0 20px;
+}
+
+@media (max-width: 768px) {
+  .mobile-delivery-banner {
+    display: block;
+  }
+}
+
+.mobile-delivery-banner__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-delivery-banner__label {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.mobile-delivery-banner__actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+.mobile-delivery-banner__actions .delivery-pill,
+.item-modal__delivery-actions .delivery-pill {
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 46px;
+  min-height: 46px;
+  padding: 0 6px;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 700;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.mobile-delivery-banner__actions .delivery-pill span,
+.item-modal__delivery-actions .delivery-pill span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── ItemModal Delivery Mode Section ───────────────────────────── */
+.item-modal__footer--delivery {
+  padding: 14px 24px;
+}
+
+.item-modal__delivery-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.item-modal__delivery-prompt {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+
+.item-modal__delivery-actions {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .item-modal__footer--delivery {
+    padding: 12px 16px;
+    padding-bottom: max(12px, calc(12px + env(safe-area-inset-bottom, 0px)));
   }
 
-  .delivery-bottom-bar--hidden {
-    transform: translateY(calc(100% + 24px));
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .delivery-bottom-bar__inner {
-    padding: 0 !important;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    max-width: 100% !important;
-  }
-
-  .delivery-bottom-bar__prompt {
-    width: 100%;
-    text-align: center;
+  .item-modal__delivery-prompt {
     font-size: 11px;
-    letter-spacing: 0.08em;
-    color: #ffffff;
-    opacity: 0.9;
+    text-align: center;
   }
 
-  .delivery-bottom-bar__actions {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-    flex-wrap: nowrap;
+  .mobile-delivery-banner {
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-delivery-banner__actions,
+  .item-modal__delivery-actions {
+    gap: 6px;
   }
 
-  .delivery-pill {
-    flex: 1 1 0;
-    min-width: 0;
+  .mobile-delivery-banner__actions .delivery-pill,
+  .item-modal__delivery-actions .delivery-pill {
+    font-size: 11px;
+    padding: 0 4px;
+    gap: 4px;
     height: 44px;
     min-height: 44px;
-    padding: 0 4px;
-    border-radius: 0;
-    font-size: 12px;
-    font-weight: 700;
-    justify-content: center;
-    gap: 6px;
-    white-space: nowrap;
-    touch-action: manipulation;
-  }
-
-  .delivery-pill span {
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 

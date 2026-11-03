@@ -10,6 +10,7 @@ import FoodCard from "../components/FoodCard.jsx";
 import ModeChooser from "../components/ModeChooser.jsx";
 import ModeIndicatorBar from "../components/ModeIndicatorBar.jsx";
 import ModeTransitionView from "../components/ModeTransitionView.jsx";
+import MobileDeliveryBanner from "../components/MobileDeliveryBanner.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import familyMomentsImg from "../../pictures/family moments updated.jpeg";
 import {
@@ -44,6 +45,7 @@ export default function KidsPage() {
       <section className="site-section site-section--compact" style={{ paddingBottom: 0 }}>
         <div className="site-container">
           <ModeIndicatorBar />
+          {mode === "delivery" && <MobileDeliveryBanner />}
         </div>
       </section>
 
@@ -155,6 +157,13 @@ export default function KidsPage() {
           <img src="/uploads/processed/mac-cheese.webp" alt={t("kids.split.imgAlt")} loading="lazy" decoding="async" width="800" height="600" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </ScrollReveal>
       </section>
+
+      {/* Repeat mobile delivery banner before footer */}
+      {mode === "delivery" && (
+        <div className="site-container" style={{ marginTop: 40, marginBottom: 40 }}>
+          <MobileDeliveryBanner />
+        </div>
+      )}
       </ModeTransitionView>
 
       {/* Item Modal */}

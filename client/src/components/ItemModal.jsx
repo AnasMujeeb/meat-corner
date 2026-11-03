@@ -5,6 +5,7 @@ import { useLanguage } from "../hooks/useLanguage.js";
 import { useMode } from "../hooks/useMode.js";
 import { BADGES } from "../constants/badges.js";
 import { localized, getCurrency } from "../utils/localization.js";
+import { DeliveryPlatformActions } from "./MobileDeliveryBanner.jsx";
 
 function getInitialSelections(item) {
   const init = {};
@@ -475,7 +476,8 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           </div>
         </div>
 
-        {!isDelivery && (
+        {/* Footer: In dine-in mode show QTY + Add-to-cart; in delivery mode show Delivery links */}
+        {!isDelivery ? (
           <div className="item-modal__footer">
             <div className="qty-stepper">
               <button
@@ -509,6 +511,15 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                 ? (lang === "ar" ? `أضف إلى السلة - ${currency} ${totalPrice}` : `ADD TO CART - ${currency} ${totalPrice}`)
                 : t("itemModal.selectRequired")}
             </button>
+          </div>
+        ) : (
+          <div className="item-modal__footer item-modal__footer--delivery">
+            <div className="item-modal__delivery-inner">
+              <span className="item-modal__delivery-prompt">
+                {t("mode.orderOnline")}
+              </span>
+              <DeliveryPlatformActions className="item-modal__delivery-actions" />
+            </div>
           </div>
         )}
       </div>

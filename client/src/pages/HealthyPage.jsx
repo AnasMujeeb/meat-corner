@@ -10,6 +10,7 @@ import FoodCard from "../components/FoodCard.jsx";
 import ModeChooser from "../components/ModeChooser.jsx";
 import ModeIndicatorBar from "../components/ModeIndicatorBar.jsx";
 import ModeTransitionView from "../components/ModeTransitionView.jsx";
+import MobileDeliveryBanner from "../components/MobileDeliveryBanner.jsx";
 import PageMotionReel from "../components/PageMotionReel.jsx";
 import balancedMealsImg from "../../pictures/balanced-meals.jpg";
 import {
@@ -44,6 +45,7 @@ export default function HealthyPage() {
       <section className="site-section site-section--compact" style={{ paddingBottom: 0 }}>
         <div className="site-container">
           <ModeIndicatorBar />
+          {mode === "delivery" && <MobileDeliveryBanner />}
         </div>
       </section>
 
@@ -147,6 +149,13 @@ export default function HealthyPage() {
                 </StaggerItem>
               ))}
             </StaggerContainer>
+          )}
+
+          {/* Repeat mobile delivery banner before footer */}
+          {mode === "delivery" && (
+            <div style={{ marginTop: 40 }}>
+              <MobileDeliveryBanner />
+            </div>
           )}
         </div>
       </section>
