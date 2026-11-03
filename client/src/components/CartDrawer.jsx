@@ -1,19 +1,46 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
+import { localized, getCurrency } from "../utils/localization.js";
+
+function getLocalizedOptionNote(item, lang) {
+  if (item.itemRef && item.itemRef.options && item.selectedOptions) {
+    const parts = [];
+    item.itemRef.options.forEach((opt) => {
+      const sel = item.selectedOptions[opt.name];
+      const optTitle = localized(opt, "name", lang);
+      if (Array.isArray(sel) && sel.length > 0) {
+        const labels = sel.map((sLabel) => {
+          const choiceObj = opt.choices?.find((c) => c.label === sLabel);
+          return choiceObj ? localized(choiceObj, "label", lang) : sLabel;
+        });
+        parts.push(`${optTitle}: ${labels.join(", ")}`);
+      } else if (typeof sel === "string" && sel.trim()) {
+        const choiceObj = opt.choices?.find((c) => c.label === sel);
+        const label = choiceObj ? localized(choiceObj, "label", lang) : sel;
+        parts.push(`${optTitle}: ${label}`);
+      }
+    });
+    if (parts.length > 0) return parts.join(" · ");
+  }
+  return item._optionNote || "";
+}
 
 function CartItem({ item }) {
   const { setQty } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const img = item.images?.[0];
   const lineTotal = (item.price + (item._extraPrice ?? 0)) * item.qty;
+  const currency = getCurrency(lang);
+  const itemName = (item.itemRef ? localized(item.itemRef, "name", lang) : "") || (lang === "ar" && item.nameAr ? item.nameAr : item.name);
+  const optionNote = getLocalizedOptionNote(item, lang);
 
   return (
     <div className="cart-item">
       {img ? (
         <img
           src={img.thumbUrl || img.url}
-          alt={item.name}
+          alt={itemName}
           className="cart-item__img"
           loading="lazy"
         />
@@ -21,17 +48,17 @@ function CartItem({ item }) {
         <div className="cart-item__img-placeholder" aria-hidden="true" />
       )}
       <div className="cart-item__info">
-        <div className="cart-item__name">{item.name}</div>
+        <div className="cart-item__name">{itemName}</div>
         {item._categoryName && (
           <div className="cart-item__cat">{item._categoryName}</div>
         )}
-        {item._optionNote && (
-          <div className="cart-item__options-note">{item._optionNote}</div>
+        {optionNote && (
+          <div className="cart-item__options-note">{optionNote}</div>
         )}
-        <div className="cart-item__price">QAR {item.price + (item._extraPrice ?? 0)}</div>
+        <div className="cart-item__price">{currency} {item.price + (item._extraPrice ?? 0)}</div>
       </div>
       <div className="cart-item__right">
-        <div className="cart-item__price-right">QAR {lineTotal}</div>
+        <div className="cart-item__price-right">{currency} {lineTotal}</div>
         <div className="qty-stepper">
           <button
             className="qty-stepper__btn"
@@ -52,7 +79,8 @@ function CartItem({ item }) {
 
 export default function CartDrawer({ open, onClose }) {
   const { items, totalPrice } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const currency = getCurrency(lang);
 
   return (
     <>
@@ -99,8 +127,8 @@ export default function CartDrawer({ open, onClose }) {
           <div className="cart-drawer__footer">
             <div className="cart-drawer__total-row">
               <span className="cart-drawer__total-label">{t("cart.total") || "Total"}</span>
-              <span className="cart-drawer__total-price" style={{ direction: "ltr", display: "inline-block" }}>
-                QAR {totalPrice}
+              <span className="cart-drawer__total-price" style={{ display: "inline-block" }}>
+                {currency} {totalPrice}
               </span>
             </div>
             <Link to="/cart" className="btn btn--primary btn--full" onClick={onClose}>

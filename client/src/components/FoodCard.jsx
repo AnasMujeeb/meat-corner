@@ -4,6 +4,7 @@ import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 import ItemModal from "./ItemModal.jsx";
 import { BADGES } from "../constants/badges.js";
+import { localized, getCurrency } from "../utils/localization.js";
 
 /**
  * Shared Food Card component used across Home, Menu, Healthy, and Kids pages.
@@ -20,11 +21,14 @@ export default function FoodCard({
   onBadgeClick,
 }) {
   const { addItem } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const [internalModalOpen, setInternalModalOpen] = useState(false);
 
   if (!item) return null;
+
+  const itemName = localized(item, "name", lang);
+  const currency = getCurrency(lang);
 
   function handleBadgeClick(badgeId, e) {
     e.stopPropagation();
@@ -40,11 +44,14 @@ export default function FoodCard({
   const mainUrl = typeof rawImg === "string" ? rawImg : (rawImg?.url || rawImg?.thumbUrl || "");
   const defaultImg = thumbUrl || mainUrl || "";
   const srcSet = thumbUrl && mainUrl && thumbUrl !== mainUrl ? `${thumbUrl} 400w, ${mainUrl} 1200w` : undefined;
-  const imgAlt = typeof rawImg === "object" ? (rawImg?.alt || item.name) : item.name;
+  const imgAlt = typeof rawImg === "object" ? (rawImg?.alt || itemName) : itemName;
   const priceFormatted = Number(item.price).toFixed(2);
   const badgeNum = index != null ? String(index).padStart(2, "0") : null;
   const isEager = index != null && index <= 6;
   const isPriority = index != null && index <= 2;
+
+  const categoryTitle =
+    categoryName || localized(item.category, "name", lang) || item.tagline || (item.tags && item.tags[0]) || "";
 
   function handleClick() {
     if (onSelect) {
@@ -76,15 +83,14 @@ export default function FoodCard({
     addItem({
       _id: item._id,
       name: item.name,
+      nameAr: item.nameAr || "",
       price: item.price,
       images: item.images,
-      _categoryName: categoryName || item.category?.name || "",
+      itemRef: item,
+      _categoryName: categoryTitle,
       selectedOptions: {},
     });
   }
-
-  const categoryTitle =
-    categoryName || item.category?.name || item.tagline || (item.tags && item.tags[0]) || "";
 
   return (
     <>
@@ -94,7 +100,7 @@ export default function FoodCard({
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
-        aria-label={t("foodCard.itemAria", { name: item.name, price: priceFormatted })}
+        aria-label={t("foodCard.itemAria", { name: itemName, price: priceFormatted })}
       >
         <div className="food-card__media">
           {defaultImg ? (
@@ -123,7 +129,7 @@ export default function FoodCard({
             <span className="food-card__category">{categoryTitle}</span>
           )}
           <div className="food-card__title-row">
-            <h3 className="food-card__name">{item.name}</h3>
+            <h3 className="food-card__name">{itemName}</h3>
             {Array.isArray(item.badges) && item.badges.length > 0 && (
               <div
                 className="food-card__badges"
@@ -167,11 +173,11 @@ export default function FoodCard({
           </div>
 
           <div className="food-card__footer">
-            <span className="food-card__price">QAR {priceFormatted}</span>
+            <span className="food-card__price">{currency} {priceFormatted}</span>
             <button
               type="button"
               className="food-card__add-btn"
-              aria-label={t("foodCard.addToCart", { name: item.name })}
+              aria-label={t("foodCard.addToCart", { name: itemName })}
               onClick={handleAddClick}
             >
               +

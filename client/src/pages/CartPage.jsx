@@ -7,13 +7,38 @@ import {
   ScrollReveal,
 } from "../components/motion/ScrollReveal.jsx";
 import { LUXURY_EASE } from "../components/motion/motionTokens.js";
+import { localized, getCurrency } from "../utils/localization.js";
+
+function getLocalizedOptionNote(item, lang) {
+  if (item.itemRef && item.itemRef.options && item.selectedOptions) {
+    const parts = [];
+    item.itemRef.options.forEach((opt) => {
+      const sel = item.selectedOptions[opt.name];
+      const optTitle = localized(opt, "name", lang);
+      if (Array.isArray(sel) && sel.length > 0) {
+        const labels = sel.map((sLabel) => {
+          const choiceObj = opt.choices?.find((c) => c.label === sLabel);
+          return choiceObj ? localized(choiceObj, "label", lang) : sLabel;
+        });
+        parts.push(`${optTitle}: ${labels.join(", ")}`);
+      } else if (typeof sel === "string" && sel.trim()) {
+        const choiceObj = opt.choices?.find((c) => c.label === sel);
+        const label = choiceObj ? localized(choiceObj, "label", lang) : sel;
+        parts.push(`${optTitle}: ${label}`);
+      }
+    });
+    if (parts.length > 0) return parts.join(" · ");
+  }
+  return item._optionNote || "";
+}
 
 export default function CartPage({ _settings }) {
   const { items, totalPrice, totalQty, setQty, removeItem, clear } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [tableNumber, setTableNumber] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
   const [waiterModalOpen, setWaiterModalOpen] = useState(false);
+  const currency = getCurrency(lang);
 
   if (items.length === 0) {
     return (
@@ -82,6 +107,8 @@ export default function CartPage({ _settings }) {
                 const img = item.images?.[0];
                 const unitPrice = item.price + (item._extraPrice ?? 0);
                 const lineTotal = unitPrice * item.qty;
+                const itemName = (item.itemRef ? localized(item.itemRef, "name", lang) : "") || (lang === "ar" && item.nameAr ? item.nameAr : item.name);
+                const optionNote = getLocalizedOptionNote(item, lang);
 
                 return (
                   <div key={item._cartKey} className="cart-card-item">
@@ -89,7 +116,7 @@ export default function CartPage({ _settings }) {
                     {img ? (
                       <img
                         src={img.thumbUrl || img.url}
-                        alt={item.name}
+                        alt={itemName}
                         className="cart-card-item__img"
                       />
                     ) : (
@@ -101,20 +128,20 @@ export default function CartPage({ _settings }) {
                     {/* Details */}
                     <div className="cart-card-item__details">
                       <div className="cart-card-item__title">
-                        {item.name}
+                        {itemName}
                       </div>
                       {item._categoryName && (
                         <div className="cart-card-item__category">
                           {item._categoryName}
                         </div>
                       )}
-                      {item._optionNote && (
+                      {optionNote && (
                         <div className="cart-card-item__notes">
-                          {item._optionNote}
+                          {optionNote}
                         </div>
                       )}
                       <div className="cart-card-item__unit-price">
-                        {t("cart.unitPriceEach", { price: unitPrice })}
+                        {lang === "ar" ? `${currency} ${unitPrice} للواحدة` : `QAR ${unitPrice} each`}
                       </div>
                     </div>
 
@@ -122,12 +149,12 @@ export default function CartPage({ _settings }) {
                     <div className="cart-card-item__actions">
                       <div className="cart-card-item__top-row">
                         <div className="cart-card-item__total">
-                          QAR {lineTotal}
+                          {currency} {lineTotal}
                         </div>
                         <button
                           onClick={() => removeItem(item._cartKey)}
                           className="cart-card-item__remove"
-                          aria-label={t("cart.removeItemAria", { name: item.name })}
+                          aria-label={t("cart.removeItemAria", { name: itemName })}
                         >
                           ✕
                         </button>

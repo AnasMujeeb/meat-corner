@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { BADGES } from "../constants/badges.js";
+import { localized, getCurrency } from "../utils/localization.js";
 
 function getInitialSelections(item) {
   const init = {};
@@ -81,11 +82,15 @@ function isChoiceDisabled(opt, choiceLabel, selections) {
 
 export default function ItemModal({ item, categoryName, onBadgeClick, onClose }) {
   const { addItem } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const [selections, setSelections] = useState(() => getInitialSelections(item));
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+
+  const itemName = localized(item, "name", lang);
+  const itemDesc = localized(item, "description", lang) || item.tagline || "";
+  const currency = getCurrency(lang);
 
   function handleBadgeClick(badgeId) {
     onClose?.();
@@ -170,10 +175,17 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
     const parts = [];
     (item.options || []).forEach((opt) => {
       const sel = selections[opt.name];
+      const optTitle = localized(opt, "name", lang);
       if (Array.isArray(sel) && sel.length > 0) {
-        parts.push(`${opt.name}: ${sel.join(", ")}`);
+        const labels = sel.map((sLabel) => {
+          const choiceObj = opt.choices?.find((c) => c.label === sLabel);
+          return choiceObj ? localized(choiceObj, "label", lang) : sLabel;
+        });
+        parts.push(`${optTitle}: ${labels.join(", ")}`);
       } else if (typeof sel === "string" && sel.trim()) {
-        parts.push(`${opt.name}: ${sel}`);
+        const choiceObj = opt.choices?.find((c) => c.label === sel);
+        const label = choiceObj ? localized(choiceObj, "label", lang) : sel;
+        parts.push(`${optTitle}: ${label}`);
       }
     });
     return parts.join(" · ");
@@ -191,9 +203,11 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
       addItem({
         _id: item._id,
         name: item.name,
+        nameAr: item.nameAr || "",
         price: item.price,
         _extraPrice: extraPrice,
         images: item.images,
+        itemRef: item,
         _categoryName: categoryName,
         _optionNote: buildOptionNote(),
         selectedOptions: selections,
@@ -208,7 +222,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
 
   const rawImg = item.images?.[0];
   const imgSrc = typeof rawImg === "string" ? rawImg : (rawImg?.url || rawImg?.thumbUrl || "");
-  const imgAlt = typeof rawImg === "object" ? (rawImg?.alt || item.name) : item.name;
+  const imgAlt = typeof rawImg === "object" ? (rawImg?.alt || itemName) : itemName;
 
   // Nutrition entries that exist
   const nut = item.nutrition || {};
@@ -224,7 +238,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
       className="item-modal-backdrop"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="item-modal" role="dialog" aria-modal="true" aria-label={item.name}>
+      <div className="item-modal" role="dialog" aria-modal="true" aria-label={itemName}>
         {/* Pinned close button on top-right of popup */}
         <button
           onClick={onClose}
@@ -260,7 +274,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
               <div style={{ flex: '1 1 auto', minWidth: 0 }}>
                 {categoryName && <span className="item-modal__category">{categoryName}</span>}
                 <div className="item-modal__title-row">
-                  <h2 className="item-modal__name">{item.name}</h2>
+                  <h2 className="item-modal__name">{itemName}</h2>
                   {Array.isArray(item.badges) && item.badges.length > 0 && (
                     <div className="item-modal__badges" role="group" aria-label={t("badge.badgesAria")}>
                       {item.badges.map((bId) => {
@@ -292,7 +306,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                   )}
                 </div>
               </div>
-              <div className="item-modal__price">QAR {item.price + extraPrice}</div>
+              <div className="item-modal__price">{currency} {item.price + extraPrice}</div>
             </div>
 
           {/* Allergens Chips */}
@@ -307,15 +321,10 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             </div>
           )}
 
-          {/* Full Description */}
-          {(item.description || item.description_en || item.tagline) && (
+          {/* Full Description (localized, no separate redundant Arabic paragraph) */}
+          {itemDesc && (
             <p className="item-modal__desc">
-              {item.description || item.description_en || item.tagline}
-            </p>
-          )}
-          {(item.descriptionAr || item.description_ar) && (
-            <p className="item-modal__desc item-modal__desc--ar" dir="rtl">
-              {item.descriptionAr || item.description_ar}
+              {itemDesc}
             </p>
           )}
 
@@ -367,12 +376,13 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             const isSingle = opt.type === "single";
             const sel = selections[opt.name];
             const hint = getGroupHint(opt, selections, t);
+            const optTitle = localized(opt, "name", lang);
 
             return (
               <div key={opt.name} className="item-modal__option-group">
                 <div className="item-modal__option-header">
                   <div className="item-modal__option-title">
-                    <span>{opt.name}</span>
+                    <span>{optTitle}</span>
                     {opt.required && <span className="badge-required">{t("itemModal.required")}</span>}
                   </div>
                   <div className={`option-hint-badge option-hint-badge--${hint.state}`}>
@@ -382,13 +392,14 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
 
                 {/* Photo-based 3-Column Grid */}
                 {isPhotoGroup ? (
-                  <div className="item-modal__photo-grid" role="group" aria-label={opt.name}>
+                  <div className="item-modal__photo-grid" role="group" aria-label={optTitle}>
                     {opt.choices.map((choice) => {
                       const isSelected = isSingle
                         ? sel === choice.label
                         : (sel || []).includes(choice.label);
                       const disabled = isChoiceDisabled(opt, choice.label, selections);
                       const imgUrl = choice.image?.thumbUrl || choice.image?.url;
+                      const choiceLabel = localized(choice, "label", lang);
 
                       return (
                         <button
@@ -405,7 +416,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                             {imgUrl ? (
                               <img
                                 src={imgUrl}
-                                alt={choice.label}
+                                alt={choiceLabel}
                                 className="photo-option-tile__img"
                                 loading="lazy"
                                 decoding="async"
@@ -414,16 +425,16 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                               />
                             ) : (
                               <div className="photo-option-tile__placeholder">
-                                <span>{choice.label.slice(0, 4).toUpperCase()}</span>
+                                <span>{choiceLabel.slice(0, 4).toUpperCase()}</span>
                               </div>
                             )}
                             <div className={`photo-option-tile__check${isSelected ? " selected" : ""}`}>
                               {isSelected ? "✓" : ""}
                             </div>
                           </div>
-                          <span className="photo-option-tile__name">{choice.label}</span>
+                          <span className="photo-option-tile__name">{choiceLabel}</span>
                           {choice.extraPrice > 0 && (
-                            <span className="photo-option-tile__extra">+QAR {choice.extraPrice}</span>
+                            <span className="photo-option-tile__extra">+{currency} {choice.extraPrice}</span>
                           )}
                         </button>
                       );
@@ -431,12 +442,13 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                   </div>
                 ) : (
                   /* Text-only Group (Doneness / Chips) */
-                  <div className="item-modal__text-grid" role="group" aria-label={opt.name}>
+                  <div className="item-modal__text-grid" role="group" aria-label={optTitle}>
                     {opt.choices.map((choice) => {
                       const isSelected = isSingle
                         ? sel === choice.label
                         : (sel || []).includes(choice.label);
                       const disabled = isChoiceDisabled(opt, choice.label, selections);
+                      const choiceLabel = localized(choice, "label", lang);
 
                       return (
                         <button
@@ -452,9 +464,9 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
                           <span className={`text-choice-tile__indicator${isSelected ? " selected" : ""}`}>
                             {isSelected ? "✓" : ""}
                           </span>
-                          <span className="text-choice-tile__label">{choice.label}</span>
+                          <span className="text-choice-tile__label">{choiceLabel}</span>
                           {choice.extraPrice > 0 && (
-                            <span className="text-choice-tile__extra">+QAR {choice.extraPrice}</span>
+                            <span className="text-choice-tile__extra">+{currency} {choice.extraPrice}</span>
                           )}
                         </button>
                       );
@@ -497,7 +509,7 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
             {added
               ? t("itemModal.added")
               : allRequiredSatisfied
-              ? t("itemModal.addToCart", { price: totalPrice })
+              ? (lang === "ar" ? `أضف إلى السلة - ${currency} ${totalPrice}` : `ADD TO CART - ${currency} ${totalPrice}`)
               : t("itemModal.selectRequired")}
           </button>
         </div>
