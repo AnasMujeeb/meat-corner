@@ -40,6 +40,11 @@
   /* Transitions */
   --ease: 0.22s ease;
   --ease-slow: 0.4s ease;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 }
 
 @media (max-width: 760px) {
