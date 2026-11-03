@@ -1,0 +1,3665 @@
+{
+  "generatedAt": "2026-11-02T22:24:34.848Z",
+  "counts": {
+    "categories": 12,
+    "menuItems": 98,
+    "optionLibraryItems": 26,
+    "branches": 2,
+    "hasSettings": true
+  },
+  "allergens": [],
+  "tags": [
+    "featured",
+    "healthy",
+    "new",
+    "premium",
+    "wagyu"
+  ],
+  "items": [
+    {
+      "type": "category",
+      "key": "new-additions",
+      "english": {
+        "name": "New Additions",
+        "description": "Exclusive chef specials, signature Wagyu cuts, and exciting new culinary creations."
+      },
+      "arabic": {
+        "nameAr": "إضافات جديدة",
+        "descriptionAr": "أطباق حصرية من الشيف، وقطع واغيو مميزة، وابتكارات جديدة من المطبخ."
+      }
+    },
+    {
+      "type": "category",
+      "key": "wagyu-steaks-and-burgers",
+      "english": {
+        "name": "Wagyu Steaks & Burgers",
+        "description": "Premium Japanese & Australian Wagyu beef, marbled cuts, and juicy smash burgers."
+      },
+      "arabic": {
+        "nameAr": "ستيك وبرغر واغيو",
+        "descriptionAr": "لحم واغيو ياباني وأسترالي فاخر، وقطع مدهونة بالدهون الرخامية، وبرغر سماش طري وشهي."
+      }
+    },
+    {
+      "type": "category",
+      "key": "special-dishes",
+      "english": {
+        "name": "Special Dishes",
+        "description": "Signature steak boxes, supreme entrecôte platters, and specialty meat combinations."
+      },
+      "arabic": {
+        "nameAr": "أطباق مميزة",
+        "descriptionAr": "بوكس ستيك مميز، وأطباق أنتركوت سوبريم، وتشكيلات لحوم خاصة."
+      }
+    },
+    {
+      "type": "category",
+      "key": "main-courses",
+      "english": {
+        "name": "Main Courses",
+        "description": "Charcoal-grilled steaks, salmon fillets, flamed chicken breasts, and signature bowls."
+      },
+      "arabic": {
+        "nameAr": "الأطباق الرئيسية",
+        "descriptionAr": "ستيك مشوي على الفحم، وفيليه سلمون، وصدور دجاج مشوية على اللهب، وبولز مميزة."
+      }
+    },
+    {
+      "type": "category",
+      "key": "sandwiches-and-burgers",
+      "english": {
+        "name": "Sandwiches & Burgers",
+        "description": "Smoky pulled beef, philly cheesesteaks, truffle burgers, and artisan brioche rolls."
+      },
+      "arabic": {
+        "nameAr": "ساندويتشات وبرغر",
+        "descriptionAr": "لحم مسحّب مدخّن، وفيلي تشيز ستيك، وبرغر الكمأة، وخبز بريوش حرفي."
+      }
+    },
+    {
+      "type": "category",
+      "key": "healthy-dishes",
+      "english": {
+        "name": "Healthy Dishes",
+        "description": "Macro-balanced high-protein meals, grilled lean meats, clean carbs, and light dressings."
+      },
+      "arabic": {
+        "nameAr": "أطباق صحية",
+        "descriptionAr": "وجبات غنية بالبروتين ومتوازنة المغذيات، ولحوم مشوية قليلة الدهون، وكربوهيدرات صحية، وصلصات خفيفة."
+      }
+    },
+    {
+      "type": "category",
+      "key": "appetizers",
+      "english": {
+        "name": "Appetizers",
+        "description": "Crispy bites, loaded fries, cheesy appetizers, and savory starters to kick off your feast."
+      },
+      "arabic": {
+        "nameAr": "المقبلات",
+        "descriptionAr": "لقيمات مقرمشة، وبطاطس محمّلة، ومقبلات بالجبنة، وبدايات لذيذة لوليمتك."
+      }
+    },
+    {
+      "type": "category",
+      "key": "salads",
+      "english": {
+        "name": "Salads",
+        "description": "Farm-fresh vibrant greens, grilled tenderloin salads, nachos bowls, and house vinaigrettes."
+      },
+      "arabic": {
+        "nameAr": "السلطات",
+        "descriptionAr": "خضار طازجة من المزرعة، وسلطات بتندرلوين مشوي، وسلطة ناتشوز، وصلصات منزلية."
+      }
+    },
+    {
+      "type": "category",
+      "key": "side-dishes",
+      "english": {
+        "name": "Side Dishes",
+        "description": "Mac & cheese, cheesy baked potatoes, cajun wedges, mexican rice, and crispy fries."
+      },
+      "arabic": {
+        "nameAr": "الأطباق الجانبية",
+        "descriptionAr": "ماك أند تشيز، وبطاطس مشوية بالجبنة، وبطاطس ويدجز كاجون، وأرز مكسيكي، وبطاطس مقرمشة."
+      }
+    },
+    {
+      "type": "category",
+      "key": "beverages",
+      "english": {
+        "name": "Beverages",
+        "description": "Craft fruit mojitos, sparkling Kinza refreshers, fresh juices, and specialty iced teas."
+      },
+      "arabic": {
+        "nameAr": "المشروبات",
+        "descriptionAr": "موهيتو الفواكه المميز، ومنعشات كينزا الفوارة، وعصائر طازجة، وشاي مثلج مميز."
+      }
+    },
+    {
+      "type": "category",
+      "key": "sauces",
+      "english": {
+        "name": "Sauces",
+        "description": "House-made artisanal sauces, creamy mushroom truffle, chimichurri, cowboy butter, and dips."
+      },
+      "arabic": {
+        "nameAr": "الصلصات",
+        "descriptionAr": "صلصات منزلية حرفية، وصلصة الفطر والكمأة الكريمية، وتشيميتشوري، وزبدة الكاوبوي، ومغموسات."
+      }
+    },
+    {
+      "type": "category",
+      "key": "desserts",
+      "english": {
+        "name": "Desserts",
+        "description": "Indulgent sweet treats, golden caramelized banana pudding, and protein energy bites."
+      },
+      "arabic": {
+        "nameAr": "الحلويات",
+        "descriptionAr": "حلويات لذيذة، وبودينغ الموز بالكراميل الذهبي، وكرات الطاقة بالبروتين."
+      }
+    },
+    {
+      "type": "menuItem",
+      "key": "rib-eye-wagyu-6-to-7",
+      "english": {
+        "name": "Rib Eye Wagyu 6 To 7",
+        "description": "Savor the unmatched richness of our premium wagyu ribeye 250g, marble score 6–7, expertly grilled to enhance its buttery texture and deep, luxurious marbling. Served with your choice of two elegant sides and two gourmet sauces, and finished with a touch of rock salt for a refined, unforgettable wagyu steak experience."
+      },
+      "arabic": {
+        "nameAr": "ريب آي واغيو 6 إلى 7",
+        "descriptionAr": "استمتع بغنى شريحة الريب آي واغيو الفاخرة 250 غرام بدرجة تعرّق 6–7، مشوية بإتقان لتبرز قوامها الزبدي ودهونها الرخامية الفاخرة. تُقدَّم مع اختيارك من طبقين جانبيين وصلصتين مميزتين، وتُزيَّن بلمسة من ملح الصخر لتجربة واغيو راقية لا تُنسى."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Cheesy Baked Potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Mashed Potato",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican Rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Potato Fries",
+              "labelAr": "بطاطس مقلية"
+            },
+            {
+              "label": "Sauteed Vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Cajun Potato Wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Chimichurri Sauce",
+              "labelAr": "صلصة تشيميتشوري"
+            },
+            {
+              "label": "Cowboy Sauce",
+              "labelAr": "صلصة كاوبوي"
+            },
+            {
+              "label": "Entrecote Sauce",
+              "labelAr": "صلصة أنتركوت"
+            },
+            {
+              "label": "Homemade Jalapeno",
+              "labelAr": "هالابينو منزلي"
+            },
+            {
+              "label": "Homemade Pickled Onions",
+              "labelAr": "بصل مخلل منزلي"
+            },
+            {
+              "label": "Homemade Pickles",
+              "labelAr": "مخلل منزلي"
+            },
+            {
+              "label": "Lemon & Herbs Sauce",
+              "labelAr": "صلصة الليمون والأعشاب"
+            },
+            {
+              "label": "Lemon Pepper Sauce",
+              "labelAr": "صلصة الليمون والفلفل"
+            },
+            {
+              "label": "Marinara Sauce",
+              "labelAr": "صلصة مارينارا"
+            },
+            {
+              "label": "Mushroom & Truffle Sauce",
+              "labelAr": "صلصة الفطر والكمأة"
+            },
+            {
+              "label": "Mushroom Sauce",
+              "labelAr": "صلصة الفطر"
+            },
+            {
+              "label": "Nacho Cheese",
+              "labelAr": "جبنة ناتشوز"
+            },
+            {
+              "label": "Sour Cream",
+              "labelAr": "كريمة حامضة"
+            },
+            {
+              "label": "Special BBQ Sauce",
+              "labelAr": "صلصة الباربكيو الخاصة"
+            },
+            {
+              "label": "Spicy BBQ Sauce",
+              "labelAr": "صلصة باربكيو حارة"
+            },
+            {
+              "label": "Spicy Shatta",
+              "labelAr": "شطة حارة"
+            },
+            {
+              "label": "Spicy Tahina Sauce",
+              "labelAr": "صلصة الطحينة الحارة"
+            },
+            {
+              "label": "Steak Seasoning",
+              "labelAr": "بهارات الستيك"
+            },
+            {
+              "label": "Tabasco Sauce",
+              "labelAr": "صلصة تاباسكو"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-striploin-entrecote-steak-meat",
+      "english": {
+        "name": "Wagyu Striploin Entrecote Steak Meat",
+        "description": "Wagyu striploin mb 6-7 250 gram grilled marinated entrecote steak meat slices, topped with our fresh homemade entrecote sauce 1 ketchup container. Served with golden French fries, and three toasted garlic baguette bread slices. This meal is designed to deliver the unforgettable supreme steak experience"
+      },
+      "arabic": {
+        "nameAr": "شرائح ستيك أنتركوت واغيو ستريبلوين",
+        "descriptionAr": "شرائح ستيك أنتركوت واغيو ستريبلوين 250 غرام بدرجة تعرّق 6–7، متبّلة ومشوية، مغطاة بصلصة الأنتركوت المنزلية الطازجة مع علبة كاتشب. تُقدَّم مع بطاطس مقلية ذهبية وثلاث شرائح من خبز الباغيت المحمّص بالثوم. وجبة مصمّمة لتمنحك تجربة ستيك سوبريم لا تُنسى."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-ribeye-entrecote-steak",
+      "english": {
+        "name": "Wagyu Ribeye Entrecote Steak",
+        "description": "Premium Wagyu Ribeye MB 6-7, 250g of grilled and marinated entrecote steak slices, topped with our fresh, house-made entrecote sauce. Served with potato fries and ketchup"
+      },
+      "arabic": {
+        "nameAr": "ستيك أنتركوت واغيو ريب آي",
+        "descriptionAr": "شرائح أنتركوت من واغيو ريب آي فاخر بدرجة تعرّق 6–7، 250 غرام، متبّلة ومشوية، مغطاة بصلصة الأنتركوت المنزلية الطازجة. تُقدَّم مع بطاطس مقلية وكاتشب."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "1-kg-wagyu-tomahawk-steak",
+      "english": {
+        "name": "1 Kg Wagyu Tomahawk Steak",
+        "description": "Wagyu Tomahawk Steak 1kg MB 6-7 Slow-grilled bone- in ribeye with exceptional marbling and flavor with choices of 4 side dishes and choices of 4 premium sauces"
+      },
+      "arabic": {
+        "nameAr": "ستيك توماهوك واغيو 1 كجم",
+        "descriptionAr": "ستيك توماهوك واغيو 1 كجم بدرجة تعرّق 6–7. ريب آي بالعظم مشوي ببطء بدهون رخامية ونكهة استثنائية، مع اختيار 4 أطباق جانبية و4 صلصات مميزة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-premium-espetada",
+      "english": {
+        "name": "Wagyu Premium Espetada",
+        "description": "A premium 250g MB 6–7 wagyu skewer, char‑grilled and layered with vibrant red & green capsicum, tender white onion, and a long red chili. Served with warm garlic butter on the side, ready to drizzle. Includes your choice of two side dishes and two signature sauces for the perfect finish."
+      },
+      "arabic": {
+        "nameAr": "إسبيتادا واغيو فاخر",
+        "descriptionAr": "سيخ واغيو فاخر 250 غرام بدرجة تعرّق 6–7، مشوي على الفحم مع فلفل رومي أحمر وأخضر وبصل أبيض طري وفلفل أحمر طويل. يُقدَّم مع زبدة الثوم الدافئة على الجانب لتسكبها فوقه. يشمل اختيارك من طبقين جانبيين وصلصتين مميزتين لتكتمل التجربة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "banana-pudding",
+      "english": {
+        "name": "Banana Pudding",
+        "description": "A silky layer of custard cream sets the stage, rich and velvety, carrying a gentle sweetness. Nestled on top are soft egg cookies adding a delicate buttery bite. The finale comes with caramelized banana slices, golden and glossy, offering warm crispy sweetness and a melt in your mouth finish. A luscious dreamy dessert with every layer more irresistible than the last."
+      },
+      "arabic": {
+        "nameAr": "بودينغ الموز",
+        "descriptionAr": "طبقة ناعمة من كريمة الكاسترد الغنية والمخملية بحلاوة لطيفة. وفوقها بسكويت البيض الطري بنكهته الزبدية الخفيفة. وتُختَم بشرائح الموز المكرمل الذهبي اللامع بحلاوته الدافئة المقرمشة وقوامه الذائب في الفم. حلوى حالمة وشهية، وكل طبقة فيها أجمل من التي قبلها."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": "بدون"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-beef-shawarma-bowl",
+      "english": {
+        "name": "Tenderloin Beef Shawarma Bowl",
+        "description": "Succulent 150g marinated and grilled beef tenderloin over fluffy steamed rice, with romaine lettuce, cherry tomatoes, homemade pickles, pickled onions, and jalapeños, served with tahini and marinara."
+      },
+      "arabic": {
+        "nameAr": "بول شاورما تندرلوين لحم",
+        "descriptionAr": "150 غرام من تندرلوين اللحم المتبّل والمشوي والغني بالعصارة فوق أرز مطهو على البخار، مع خس روماني وطماطم كرزية ومخلل منزلي وبصل مخلل وهالابينو، ويُقدَّم مع الطحينة والمارينارا."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": "بدون"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-shawarma-bowl",
+      "english": {
+        "name": "Chicken Shawarma Bowl",
+        "description": "Juicy 180g grilled marinated chicken breast over fluffy steamed rice with romaine lettuce, cherry tomatoes, homemade pickles, pickled onions, and jalapeños served with tahini and marinara sauce."
+      },
+      "arabic": {
+        "nameAr": "بول شاورما دجاج",
+        "descriptionAr": "180 غرام من صدر الدجاج المتبّل والمشوي الطري فوق أرز مطهو على البخار، مع خس روماني وطماطم كرزية ومخلل منزلي وبصل مخلل وهالابينو، ويُقدَّم مع الطحينة وصلصة المارينارا."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": "بدون"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "black-angus-ribeye-entrecote-steak",
+      "english": {
+        "name": "Black Angus Ribeye Entrecote Steak",
+        "description": "Our Black angus ribeye steak slices 220 gram grilled marinated Entrecote Steak slices, served and topped with our fresh homemade Entrecote sauce 1 Ketchup container. Served with golden French fries, and three toasted garlic baguette slices. Designed to deliver the supreme steak experience"
+      },
+      "arabic": {
+        "nameAr": "ستيك أنتركوت بلاك أنغوس ريب آي",
+        "descriptionAr": "شرائح ريب آي بلاك أنغوس 220 غرام من ستيك الأنتركوت المتبّل والمشوي، تُقدَّم مغطاة بصلصة الأنتركوت المنزلية الطازجة مع علبة كاتشب. تُقدَّم مع بطاطس مقلية ذهبية وثلاث شرائح من الباغيت المحمّص بالثوم. مصمّم لتجربة ستيك سوبريم."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "black-angus-ribeye",
+      "english": {
+        "name": "Black Angus Ribeye",
+        "description": "Savor a perfectly grilled 220g black angus ribeye steak expertly seared to lock in its rich juicy flavors and tender texture. Each bite delivers a mouthwatering balance of smoky char and buttery succulence. Paired with your choice of two delicious sides and two premium sauces crafted to complement every savory note this dish is a true feast for steak lovers."
+      },
+      "arabic": {
+        "nameAr": "بلاك أنغوس ريب آي",
+        "descriptionAr": "استمتع بستيك ريب آي بلاك أنغوس 220 غرام مشوي بإتقان، مع تحميرة تحافظ على نكهته الغنية وعصارته وقوامه الطري. كل قضمة تجمع بين لمسة الشواء المدخّنة والقوام الزبدي الغني. يُقدَّم مع اختيارك من طبقين جانبيين وصلصتين فاخرتين تكمّلان كل نكهة، وهو وليمة حقيقية لعشاق الستيك."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-truffle-mushroom-sandwich",
+      "english": {
+        "name": "Tenderloin Truffle Mushroom Sandwich",
+        "description": "Tender 100g grilled beef tenderloin nestled in a warm buttery brioche bread roll layered with creamy mayonnaise melted mozzarella cheese and a rich truffle mushroom sauce. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "ساندويتش تندرلوين بالفطر والكمأة",
+        "descriptionAr": "100 غرام من تندرلوين اللحم المشوي الطري داخل رغيف بريوش زبدي دافئ، مع المايونيز الكريمي وجبنة الموزاريلا الذائبة وصلصة الفطر والكمأة الغنية. يُقدَّم مع بطاطس مقرمشة ذهبية متبّلة وكاتشب على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-kofta-sandwich",
+      "english": {
+        "name": "Wagyu Kofta Sandwich",
+        "description": "A juicy 120g grilled Wagyu beef kofta nestled in a soft buttery brioche bread roll mozzarella cheese sliced layered with creamy tahini sauce grilled tomato and grilled sliced onions. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "ساندويتش كفتة واغيو",
+        "descriptionAr": "كفتة لحم واغيو مشوية 120 غرام غنية بالعصارة داخل رغيف بريوش زبدي طري، مع شرائح جبنة الموزاريلا وصلصة الطحينة الكريمية والطماطم المشوية وشرائح البصل المشوي. تُقدَّم مع بطاطس مقرمشة ذهبية متبّلة وكاتشب على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "beef-loaded-sweet-potato",
+      "english": {
+        "name": "Beef Loaded Sweet Potato",
+        "description": "Sweet potato stuffed with angus beef and cheese A healthy twist on a classic comfort food dish: fresh, baked sweet potatoes, generously stuffed with seasoned ground angus beef and topped with a rich layer of our homemade marinara sauce. Covered with a golden layer of melted mozzarella and cheddar cheese, for the perfect balance of sweetness, spice, and melt-in-your-mouth deliciousness. A filling, rich, and full of irresistible flavor."
+      },
+      "arabic": {
+        "nameAr": "بطاطا حلوة محمّلة باللحم",
+        "descriptionAr": "بطاطا حلوة محشوة بلحم أنغوس والجبنة. لمسة صحية على طبق مريح كلاسيكي: بطاطا حلوة طازجة مخبوزة محشوة بسخاء بلحم أنغوس المفروم المتبّل، ومغطاة بطبقة غنية من صلصة المارينارا المنزلية. تُغطّى بطبقة ذهبية من جبنة الموزاريلا والشيدر الذائبة لتوازن مثالي بين الحلاوة والتوابل ونكهة تذوب في الفم. طبق مشبع وغني بنكهة لا تُقاوم."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "jalapeno-cheese-fries",
+      "english": {
+        "name": "Jalapeno Cheese Fries",
+        "description": "French fries with nachos cheese, ketchup and homemade Jalapenos ."
+      },
+      "arabic": {
+        "nameAr": "بطاطس بالجبنة والهالابينو",
+        "descriptionAr": "بطاطس مقلية مع جبنة الناتشوز والكاتشب وهالابينو منزلي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "jalapeno-mac-and-cheese-balls",
+      "english": {
+        "name": "Jalapeno Mac And Cheese Balls",
+        "description": "Mac and cheese with pickled jalapeno, red chili, mixed cheese coated with special flour panko bread crumbs mix with marinara dip on side."
+      },
+      "arabic": {
+        "nameAr": "كرات ماك أند تشيز بالهالابينو",
+        "descriptionAr": "ماك أند تشيز مع هالابينو مخلل وفلفل أحمر وجبنة مشكّلة، مغلّفة بخليط خاص من الدقيق وفتات خبز البانكو، مع مغمّس المارينارا على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cheesy-garlic-bread",
+      "english": {
+        "name": "Cheesy Garlic Bread",
+        "description": "Fresh garlic bread topped with mixed cheese and zaatar and ranch sauce on the side."
+      },
+      "arabic": {
+        "nameAr": "خبز بالثوم والجبنة",
+        "descriptionAr": "خبز بالثوم طازج مغطى بالجبنة المشكّلة والزعتر، مع صلصة الرانش على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-onion-rings",
+      "english": {
+        "name": "Homemade Onion Rings",
+        "description": "Freshly made coated onion rings with side of creamy sauce."
+      },
+      "arabic": {
+        "nameAr": "حلقات البصل المنزلية",
+        "descriptionAr": "حلقات بصل مغلّفة وطازجة التحضير، تُقدَّم مع صلصة كريمية على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "meat-corner-nachos",
+      "english": {
+        "name": "Meat Corner Nachos",
+        "description": "Original mexican tortilla chips with pineapple pico de gallo, mexican nacho cheese, cheetos powder, , pickled jalapeno, coriander leaves and sour cream, and marinara sauce."
+      },
+      "arabic": {
+        "nameAr": "ناتشوز ميت كورنر",
+        "descriptionAr": "رقائق التورتيلا المكسيكية الأصلية مع بيكو دي غايو بالأناناس، وجبنة الناتشوز المكسيكية، ومسحوق الشيتوس، وهالابينو مخلل، وأوراق الكزبرة، والكريمة الحامضة، وصلصة المارينارا."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "short-ribs-meat-nachos",
+      "english": {
+        "name": "Short Ribs Meat Nachos",
+        "description": "Pulled short ribs, nacho chips, nacho cheese, marinara sauce, pico de gallo and sour cream"
+      },
+      "arabic": {
+        "nameAr": "ناتشوز لحم الريبس القصيرة",
+        "descriptionAr": "ريبس قصيرة مسحّبة مع رقائق الناتشوز وجبنة الناتشوز وصلصة المارينارا وبيكو دي غايو والكريمة الحامضة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "angus-kofta-with-cheese",
+      "english": {
+        "name": "Angus Kofta With Cheese",
+        "description": "Grilled homemade kofta with special marinade and stuffed mozzarella cheese served with French fries."
+      },
+      "arabic": {
+        "nameAr": "كفتة أنغوس بالجبنة",
+        "descriptionAr": "كفتة منزلية مشوية بتتبيلة خاصة ومحشوة بجبنة الموزاريلا، تُقدَّم مع بطاطس مقلية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-angus-kofta-with-cheese",
+      "english": {
+        "name": "Spicy Angus Kofta with Cheese",
+        "description": "Grilled 150g of pure Angus homemade kofta with special marinade and stuffed spicy mozzarella cheese served with golden French fries and ketchup on the side"
+      },
+      "arabic": {
+        "nameAr": "كفتة أنغوس حارة بالجبنة",
+        "descriptionAr": "150 غرام من كفتة أنغوس الصافية المنزلية المشوية بتتبيلة خاصة ومحشوة بجبنة الموزاريلا الحارة، تُقدَّم مع بطاطس مقلية ذهبية وكاتشب على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "swiss-mushroom-burger",
+      "english": {
+        "name": "Swiss Mushroom Burger",
+        "description": "Soft burger buns with burger sauce, burger patty, emmental cheese, mushroom sauce topped with fresh sautee botoon mushroom."
+      },
+      "arabic": {
+        "nameAr": "برغر الفطر السويسري",
+        "descriptionAr": "خبز برغر طري مع صلصة البرغر وقرص البرغر وجبنة إمنتال وصلصة الفطر، مغطى بفطر الأزرار الطازج المسوتيه."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-burger",
+      "english": {
+        "name": "Grilled Chicken Burger",
+        "description": "Grilled marinated chicken breast with our special seasoning in herbs, homemade burger sauce, bionda lettuce, sliced tomato,and cheddar cheese."
+      },
+      "arabic": {
+        "nameAr": "برغر الدجاج المشوي",
+        "descriptionAr": "صدر دجاج متبّل ومشوي بتتبيلتنا الخاصة بالأعشاب، مع صلصة البرغر المنزلية وخس بيوندا وشرائح الطماطم وجبنة الشيدر."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "american-classic-beef-burger",
+      "english": {
+        "name": "American Classic Beef Burger",
+        "description": "Traditional burger made with beef burger patty, cheddar cheese , mustard , chopped onions , ketchup, and pickled cucumber."
+      },
+      "arabic": {
+        "nameAr": "برغر اللحم الأمريكي الكلاسيكي",
+        "descriptionAr": "برغر تقليدي بقرص لحم، وجبنة شيدر، ومستردة، وبصل مفروم، وكاتشب، ومخلل خيار."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-quesadilla",
+      "english": {
+        "name": "Chicken Quesadilla",
+        "description": "Grilled tender chicken breast with special spices and herbs, light mayo, mixed cheese placed inside the tortilla bread. Served with freshly made marinara sauce and French Fries"
+      },
+      "arabic": {
+        "nameAr": "كيساديا الدجاج",
+        "descriptionAr": "صدر دجاج مشوي طري بتوابل وأعشاب خاصة، ومايونيز خفيف، وجبنة مشكّلة داخل خبز التورتيلا. تُقدَّم مع صلصة المارينارا الطازجة والبطاطس المقلية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lokum-burger",
+      "english": {
+        "name": "Lokum Burger",
+        "description": "Try our new 100g tenderloin steak, marinated in our signature seasoning, then brushed with a rich BBQ sauce, topped with a layer of melting cheese, and a touch of our homemade burger sauce, all served in a soft, golden potato bun. A delicious combination of smoky, creamy, and savory flavors in every bite."
+      },
+      "arabic": {
+        "nameAr": "برغر لوكوم",
+        "descriptionAr": "جرّب ستيك التندرلوين الجديد 100 غرام، متبّل بتتبيلتنا المميزة ثم مدهون بصلصة الباربكيو الغنية، ومغطى بطبقة من الجبنة الذائبة ولمسة من صلصة البرغر المنزلية، كل ذلك داخل خبز بطاطس ذهبي طري. مزيج لذيذ من النكهات المدخّنة والكريمية والمالحة في كل قضمة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "beef-short-ribs-burger",
+      "english": {
+        "name": "Beef Short Ribs Burger.",
+        "description": "Slowly cooked beef shorts ribs in barbecue sauce in burger bun, ranch sauce and dill pickles."
+      },
+      "arabic": {
+        "nameAr": "برغر ريبس اللحم القصيرة",
+        "descriptionAr": "ريبس لحم قصيرة مطهوة ببطء في صلصة الباربكيو داخل خبز البرغر، مع صلصة الرانش ومخلل الشبت."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "philly-s-cheese-steak-sandwich",
+      "english": {
+        "name": "Philly's Cheese Steak Sandwich",
+        "description": "Juicy 120g thinly sliced grilled ribeye steak grilled green capsicum and grilled onion loaded into a soft buttery brioche bread roll with creamy mayonnaise melted mixed cheese and indulgent nacho cheese sauce. Served with crispy seasoned golden fries and ketchup."
+      },
+      "arabic": {
+        "nameAr": "ساندويتش فيلي تشيز ستيك",
+        "descriptionAr": "120 غرام من شرائح الريب آي المشوية الرقيقة الغنية بالعصارة، مع فلفل رومي أخضر مشوي وبصل مشوي، داخل رغيف بريوش زبدي طري مع مايونيز كريمي وجبنة مشكّلة ذائبة وصلصة جبنة الناتشوز. تُقدَّم مع بطاطس مقرمشة ذهبية متبّلة وكاتشب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "philly-s-cheese-steak-burger",
+      "english": {
+        "name": "Philly's Cheese Steak Burger",
+        "description": "A hearty traditional burger featuring a juicy beef angus patty topped with 60g of thinly sliced grilled ribeye steak, sharp cheddar cheese, tangy mustard, and classic ketchup. Loaded with grilled green capsicum, sweet white onions, a rich mix of cheeses, and finished with a warm drizzle of creamy nacho cheese sauce — a bold, indulgent bite in every layer."
+      },
+      "arabic": {
+        "nameAr": "برغر فيلي تشيز ستيك",
+        "descriptionAr": "برغر تقليدي شهي بقرص لحم أنغوس غني بالعصارة، مغطى بـ60 غرام من شرائح الريب آي المشوية الرقيقة، وجبنة شيدر حادة، ومستردة لاذعة، وكاتشب كلاسيكي. محمّل بفلفل رومي أخضر مشوي وبصل أبيض حلو ومزيج غني من الأجبان، ويُختَم بخيط دافئ من صلصة جبنة الناتشوز الكريمية، لقمة جريئة ولذيذة في كل طبقة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-shashlik-sandwich",
+      "english": {
+        "name": "Tenderloin Shashlik Sandwich",
+        "description": "Succulent 100g grilled beef tenderloin tucked into a warm and soft buttery brioche bread roll layered with creamy tahini sauce smoky grilled tomato and grilled sliced onions. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "ساندويتش شاشليك التندرلوين",
+        "descriptionAr": "100 غرام من تندرلوين اللحم المشوي الطري داخل رغيف بريوش زبدي دافئ وطري، مع صلصة الطحينة الكريمية والطماطم المشوية المدخّنة وشرائح البصل المشوي. يُقدَّم مع بطاطس مقرمشة ذهبية متبّلة وكاتشب على الجانب."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "angus-bbq-short-ribs",
+      "english": {
+        "name": "Angus BBQ Short Ribs",
+        "description": "Enjoy 400g of Angus beef short ribs, slow cooked to perfection and sizzled with our special BBQ sauce. Served with toasted bread slices, dill pickles, and crispy fries, plus your choice of one additional side and two sauces of your choice. A true masterpiece for barbecue lovers."
+      },
+      "arabic": {
+        "nameAr": "ريبس أنغوس بالباربكيو",
+        "descriptionAr": "استمتع بـ400 غرام من ريبس لحم أنغوس القصيرة المطهوة ببطء حتى النضج المثالي والمشوحة بصلصة الباربكيو الخاصة بنا. تُقدَّم مع شرائح خبز محمّص ومخلل الشبت وبطاطس مقرمشة، إضافةً إلى اختيارك من طبق جانبي إضافي وصلصتين. تحفة حقيقية لعشاق الباربكيو."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-rice-chicken-bowl",
+      "english": {
+        "name": "Mexican Rice Chicken Bowl",
+        "description": "Savor our signature Mexican rice, topped with 120g of marinated grilled chicken breast, served with a side of freshly made lemon and herbs sauce. A flavorful and wholesome dish with a zesty finish."
+      },
+      "arabic": {
+        "nameAr": "بول الدجاج بالأرز المكسيكي",
+        "descriptionAr": "استمتع بأرزنا المكسيكي المميز، مغطى بـ120 غرام من صدر الدجاج المتبّل والمشوي، ويُقدَّم مع صلصة الليمون والأعشاب الطازجة على الجانب. طبق غني بالنكهة ومفيد، ينتهي بلمسة منعشة من الليمون."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "classic-salmon",
+      "english": {
+        "name": "Classic Salmon",
+        "description": "Try our new 250g baked salmon seasoned with bold Cajun spices, served alongside sautéed vegetables. Choose two of our signature sauces and 1 delicious side dish to complete your gourmet meal"
+      },
+      "arabic": {
+        "nameAr": "سلمون كلاسيك",
+        "descriptionAr": "جرّب سلمون الفرن الجديد 250 غرام المتبّل بتوابل الكاجون الجريئة، ويُقدَّم مع خضار سوتيه. اختر اثنتين من صلصاتنا المميزة وطبقًا جانبيًا لذيذًا واحدًا لتكتمل وجبتك الفاخرة."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "striploin-steak",
+      "english": {
+        "name": "Striploin Steak",
+        "description": "Enjoy one of our classics 220g of expertly grilled striploin steak, now served with your choice of 2 side dishes and 2 signature sauces. A flavorful and satisfying steak experience and tailored to your taste"
+      },
+      "arabic": {
+        "nameAr": "ستيك ستريبلوين",
+        "descriptionAr": "استمتع بأحد كلاسيكياتنا: 220 غرام من ستيك الستريبلوين المشوي بإتقان، يُقدَّم الآن مع اختيارك من طبقين جانبيين وصلصتين مميزتين. تجربة ستيك لذيذة ومُرضية على ذوقك."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "flamed-grilled-chicken-breast",
+      "english": {
+        "name": "Flamed Grilled Chicken Breast",
+        "description": "Savor 220g of our signature plain-marinated grilled chicken breast tender, juicy and bursting with clean, wholesome flavor. Served with your choice of 2 side dishes and 2 signature sauces, it’s a satisfying, well balanced meal that delivers pure grilled goodness in every bite."
+      },
+      "arabic": {
+        "nameAr": "صدر دجاج مشوي على اللهب",
+        "descriptionAr": "استمتع بـ220 غرام من صدر الدجاج المشوي المتبّل تتبيلة بسيطة، طري وغني بالعصارة ونكهته نقية وصحية. يُقدَّم مع اختيارك من طبقين جانبيين وصلصتين مميزتين، وجبة متوازنة ومُشبعة تمنحك طعم المشاوي الأصيل في كل قضمة."
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "lokum-steak",
+      "english": {
+        "name": "Lokum Steak",
+        "description": "Enjoy 200g of our traditional lokum marinated beef tenderloin, grilled to perfection and served with your choice of 2 signature side dishes and 2choices of premium sauces rich and satisfying steak experience crafted for meat lovers"
+      },
+      "arabic": {
+        "nameAr": "ستيك لوكوم",
+        "descriptionAr": "استمتع بـ200 غرام من تندرلوين اللحم المتبّل على طريقة اللوكوم، مشوي بإتقان، ويُقدَّم مع اختيارك من طبقين جانبيين مميزين وصلصتين فاخرتين. تجربة ستيك غنية ومُشبعة صُنعت لعشاق اللحم."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "fillet-mignon-steak",
+      "english": {
+        "name": "Fillet Mignon Steak",
+        "description": "Fillet Tenderloin Steak 200, A signature flavor, now and juicier cut! Served with your choice of 2 premium side dishes and 2 signature sauces, it’s bold for true steak lovers."
+      },
+      "arabic": {
+        "nameAr": "ستيك فيليه مينيون",
+        "descriptionAr": "ستيك فيليه تندرلوين 200 غرام، نكهة مميزة وقطعة أكثر عصارة! يُقدَّم مع اختيارك من طبقين جانبيين فاخرين وصلصتين مميزتين، جريء لعشاق الستيك الحقيقيين."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "ribeye-steak",
+      "english": {
+        "name": "Ribeye Steak",
+        "description": "Enjoy One Of Our Classics — 220G Of Perfectly Grilled Ribeye Steak, Now Served With Your Choice Of 2 Side Dishes And 2 Signature Sauces. A Timeless Favorite Made Just The Way You Like It."
+      },
+      "arabic": {
+        "nameAr": "ستيك ريب آي",
+        "descriptionAr": "استمتع بأحد كلاسيكياتنا: 220 غرام من ستيك الريب آي المشوي بإتقان، يُقدَّم الآن مع اختيارك من طبقين جانبيين وصلصتين مميزتين. طبق مفضّل على مر الزمن، مُعدّ كما تحبه تمامًا."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "cowboy-giant-plate-with-grilled-meats",
+      "english": {
+        "name": "Cowboy Giant Plate with Grilled Meats",
+        "description": "Our Cowboy Ribeye Is Perfect For Big Appetites—400G Of Perfectly Grilled Ribeye, Served With Crispy golden fries and grilled shredded corn"
+      },
+      "arabic": {
+        "nameAr": "طبق الكاوبوي العملاق من المشاوي",
+        "descriptionAr": "ريب آي الكاوبوي مثالي لأصحاب الشهية الكبيرة: 400 غرام من الريب آي المشوي بإتقان، يُقدَّم مع بطاطس مقرمشة ذهبية وذرة مشوية."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "shashlik-tenderloin",
+      "english": {
+        "name": "Shashlik Tenderloin",
+        "description": "Indulge in our 200g thin-cut beef tenderloin, marinated in our bold signature shashlik blend and grilled to perfection. Served with your choice of 2 flavorful side dishes and 2 signature sauces hearty and satisfying meal crafted to satisfy every craving."
+      },
+      "arabic": {
+        "nameAr": "شاشليك تندرلوين",
+        "descriptionAr": "استمتع بـ200 غرام من شرائح تندرلوين اللحم الرقيقة المتبّلة بخلطة الشاشليك المميزة ومشوية بإتقان. تُقدَّم مع اختيارك من طبقين جانبيين لذيذين وصلصتين مميزتين، وجبة مُشبعة تلبي كل رغباتك."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "shredded-corn-with-cheetos",
+      "english": {
+        "name": "Shredded Corn With Cheetos",
+        "description": "American style Grilled shredded corn with cheetos powder on top"
+      },
+      "arabic": {
+        "nameAr": "ذرة مشوية بالشيتوس",
+        "descriptionAr": "ذرة مشوية على الطريقة الأمريكية مع مسحوق الشيتوس من الأعلى."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "shredded-corn",
+      "english": {
+        "name": "Shredded Corn",
+        "description": "220 grams, american style grilled corn with butter and special spices."
+      },
+      "arabic": {
+        "nameAr": "ذرة مشوية",
+        "descriptionAr": "220 غرام من الذرة المشوية على الطريقة الأمريكية مع الزبدة والتوابل الخاصة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-rice",
+      "english": {
+        "name": "Mexican Rice",
+        "description": "Enjoy 300g of Mexican-inspired rice, cooked with a vibrant blend of mixed vegetables and zesty tomato sauce. A hearty and flavorful dish bursting with color and taste."
+      },
+      "arabic": {
+        "nameAr": "أرز مكسيكي",
+        "descriptionAr": "استمتع بـ300 غرام من الأرز المستوحى من المطبخ المكسيكي، مطهو مع مزيج نابض من الخضار المشكّلة وصلصة الطماطم المنعشة. طبق مُشبع ولذيذ مليء بالألوان والنكهة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mac-and-cheese",
+      "english": {
+        "name": "Mac And Cheese",
+        "description": "Seasoned and boiled small pasta with cream cheese, mozzarella cheese, Mexican nacho cheese and special spices."
+      },
+      "arabic": {
+        "nameAr": "ماك أند تشيز",
+        "descriptionAr": "معكرونة صغيرة متبّلة ومسلوقة مع الجبنة الكريمية وجبنة الموزاريلا وجبنة الناتشوز المكسيكية والتوابل الخاصة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "side-salad",
+      "english": {
+        "name": "Side Salad",
+        "description": "200 grams, fresh and sanitised mixed lettuce romaine, iceberg and rocket leaves, fresh cucumber, red and yellow cherry tomatoes with citrus dressing."
+      },
+      "arabic": {
+        "nameAr": "سلطة جانبية",
+        "descriptionAr": "200 غرام من الخس الروماني والأيسبرغ وأوراق الجرجير المعقّمة الطازجة، مع خيار طازج وطماطم كرزية حمراء وصفراء وصلصة الحمضيات."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "potato-fries",
+      "english": {
+        "name": "Potato Fries",
+        "description": "Fried potato fries with homemade seasoning."
+      },
+      "arabic": {
+        "nameAr": "بطاطس مقلية",
+        "descriptionAr": "بطاطس مقلية بتتبيلة منزلية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "white-steamed-rice",
+      "english": {
+        "name": "White Steamed Rice",
+        "description": "Savor comforting bowl of fluffy boiled rice gently mixed with golden toasted vermicelli, bringing warm, nutty flavor and soft texture to every bite simple yet satisfying side that perfectly complements your main dish"
+      },
+      "arabic": {
+        "nameAr": "أرز أبيض مطهو على البخار",
+        "descriptionAr": "استمتع بوعاء مريح من الأرز المسلوق الهش الممزوج برفق بالشعيرية الذهبية المحمّصة، ما يمنح نكهة دافئة بطعم المكسرات وقوامًا طريًا في كل قضمة. طبق جانبي بسيط ومُشبع يكمّل طبقك الرئيسي تمامًا."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cheesy-baked-potato",
+      "english": {
+        "name": "Cheesy Baked Potato",
+        "description": "350 grams, fresh potato baked in homemade spice with sour cream, red cheddar cheese and mozzarella cheese."
+      },
+      "arabic": {
+        "nameAr": "بطاطس مشوية بالجبنة",
+        "descriptionAr": "350 غرام من البطاطس الطازجة المخبوزة بتتبيلة منزلية مع الكريمة الحامضة وجبنة الشيدر الحمراء وجبنة الموزاريلا."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "baked-sweet-potato",
+      "english": {
+        "name": "Baked Sweet Potato",
+        "description": "Freshly baked sweet potato 200g"
+      },
+      "arabic": {
+        "nameAr": "بطاطا حلوة مشوية",
+        "descriptionAr": "بطاطا حلوة طازجة مخبوزة 200 غرام."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mashed-potatoes",
+      "english": {
+        "name": "Mashed Potatoes",
+        "description": "Creamy and smooth mashed potatoes, perfectly seasoned for a healthy side dish."
+      },
+      "arabic": {
+        "nameAr": "بطاطس مهروسة",
+        "descriptionAr": "بطاطس مهروسة كريمية وناعمة، متبّلة بإتقان، طبق جانبي صحي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "saut-ed-vegetables",
+      "english": {
+        "name": "Sautéed Vegetables",
+        "description": "A colorful mix of fresh vegetables sautéed to perfection with light seasoning."
+      },
+      "arabic": {
+        "nameAr": "خضار سوتيه",
+        "descriptionAr": "مزيج ملوّن من الخضار الطازجة المسوتيه بإتقان مع تتبيلة خفيفة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "sweet-fries",
+      "english": {
+        "name": "Sweet Fries",
+        "description": "Crispy, golden fried sweet potatoes with a hint of natural sweetness."
+      },
+      "arabic": {
+        "nameAr": "بطاطا حلوة مقلية",
+        "descriptionAr": "بطاطا حلوة مقلية ذهبية ومقرمشة بلمسة من الحلاوة الطبيعية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cajun-potato-wedges",
+      "english": {
+        "name": "Cajun Potato Wedges",
+        "description": "Thick potato wedges coated in bold cajun spices for a flavorful kick."
+      },
+      "arabic": {
+        "nameAr": "بطاطس ويدجز كاجون",
+        "descriptionAr": "قطع بطاطس سميكة مغلّفة بتوابل الكاجون الجريئة لنكهة قوية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "meat-corner-salad",
+      "english": {
+        "name": "Meat Corner Salad",
+        "description": "The return of favorite meat corner salad by popular demand, our beloved salad is back. Vibrant medley of seasonal mixed lettuce, fresh cucumbers, fresh strawberries, crisp green apples, golden raisins, toasted walnuts, fresh tomato cherries and creamy feta cheese, all brought together with tangy-sweet raspberry vinaigrette. Harmony of textures and flavors in every bite."
+      },
+      "arabic": {
+        "nameAr": "سلطة ميت كورنر",
+        "descriptionAr": "عادت سلطة ميت كورنر المفضلة بطلب الجمهور، وعادت سلطتنا المحبوبة. مزيج نابض من الخس الموسمي المشكّل والخيار الطازج والفراولة الطازجة والتفاح الأخضر المقرمش والزبيب الذهبي وعين الجمل المحمّص والطماطم الكرزية الطازجة وجبنة الفيتا الكريمية، تجمعها صلصة التوت البري الحلوة اللاذعة. تناغم من القوام والنكهات في كل قضمة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-nachos-salad",
+      "english": {
+        "name": "Mexican Nachos Salad",
+        "description": "Authentic Mexican salad with sweet and spicy nachos, mixed lettuce, fresh carrots, fresh tomato , shredded corn, red kidney beans, shredded red cheddar and mozzarella cheese with creamy ranch dressing."
+      },
+      "arabic": {
+        "nameAr": "سلطة ناتشوز مكسيكية",
+        "descriptionAr": "سلطة مكسيكية أصيلة مع ناتشوز حلو وحار، وخس مشكّل، وجزر طازج، وطماطم طازجة، وذرة، وفاصولياء حمراء، وجبنة شيدر حمراء مبشورة وموزاريلا مع صلصة الرانش الكريمية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "house-tenderloin-salad",
+      "english": {
+        "name": "House Tenderloin Salad",
+        "description": "Grilled 120g beef tenderloin served over a vibrant bed of mixed lettuce (romaine, iceberg, and rocket leaves), paired with crisp cucumbers, juicy cherry tomatoes, roasted sweet potatoes, creamy feta cheese, and tender boiled broccoli. Comes with a side of tangy balsamic vinaigrette dressing — a hearty, wholesome, and flavorful salad."
+      },
+      "arabic": {
+        "nameAr": "سلطة التندرلوين الخاصة",
+        "descriptionAr": "120 غرام من تندرلوين اللحم المشوي فوق فراش نابض من الخس المشكّل (روماني وأيسبرغ وجرجير)، مع خيار مقرمش وطماطم كرزية غنية بالعصارة وبطاطا حلوة محمّصة وجبنة فيتا كريمية وبروكلي مسلوق طري. تُقدَّم مع صلصة البلسميك اللاذعة على الجانب، سلطة مُشبعة وصحية ولذيذة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-pasta-salad",
+      "english": {
+        "name": "Chicken Pasta Salad",
+        "description": "Grilled chicken breast 120g layered over al dente fusilli pasta, tossed with sweet cherry tomatoes, crisp green capsicum, and tender white onions. Finished with smoky grilled shredded corn and bright shredded carrots, all drizzled with a cool, creamy ranch dressing and crowned with a generous sprinkle of Parmesan cheese. A colorful, hearty bowl bursting with freshness, texture, and irresistible flavor."
+      },
+      "arabic": {
+        "nameAr": "سلطة الدجاج بالباستا",
+        "descriptionAr": "120 غرام من صدر الدجاج المشوي فوق معكرونة فوزيلي بقوام متماسك، مخلوطة مع طماطم كرزية حلوة وفلفل رومي أخضر مقرمش وبصل أبيض طري. مع ذرة مشوية مدخّنة وجزر مبشور منعش، يُرَش عليها صلصة الرانش الباردة الكريمية وتُتوَّج بكمية سخية من جبنة البارميزان. وعاء ملوّن ومُشبع مليء بالنضارة والقوام والنكهة التي لا تُقاوم."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "strawberry-mojito",
+      "english": {
+        "name": "Strawberry Mojito",
+        "description": "350 ml, fresh strawberry blend with squeeze of fresh lime, sprite, crushed ice and mint leaves."
+      },
+      "arabic": {
+        "nameAr": "موهيتو الفراولة",
+        "descriptionAr": "350 مل، مزيج الفراولة الطازجة مع عصرة ليمون طازج وسبرايت وثلج مجروش وأوراق النعناع."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "passion-fruit-mojito",
+      "english": {
+        "name": "Passion Fruit Mojito",
+        "description": "350 ml, fresh passion fruit with squeeze of fresh lime, sprite, crushed ice and mint leaves."
+      },
+      "arabic": {
+        "nameAr": "موهيتو الباشن فروت",
+        "descriptionAr": "350 مل، باشن فروت طازج مع عصرة ليمون طازج وسبرايت وثلج مجروش وأوراق النعناع."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "blueberry-mojito",
+      "english": {
+        "name": "Blueberry Mojito",
+        "description": "Blueberry blend mixed with lime juice, with crushed ice and mint leaves"
+      },
+      "arabic": {
+        "nameAr": "موهيتو التوت الأزرق",
+        "descriptionAr": "مزيج التوت الأزرق مع عصير الليمون والثلج المجروش وأوراق النعناع."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "strawberry-rosehip-iced-tea",
+      "english": {
+        "name": "Strawberry Rosehip Iced Tea",
+        "description": "A flavorful and healthy 330ml glass of mixed strawberry puree, rose hibiscus tea, refreshing orange pulp with drops of honey, and fresh strawberry, mint leaves, lime, and an ice cube طﻟا ﺔﻟوارﻔﻟﺎﺑ نﯾّزﻣو ،لﺳﻌﻟا نﻣ تارطﻗ ﻊﻣ شﻌﻧﻣﻟا لﺎﻘﺗرﺑﻟا بّﻟو دروﻟﺎﺑ ﮫﯾدﻛ"
+      },
+      "arabic": {
+        "nameAr": "شاي مثلج بالفراولة والورد",
+        "descriptionAr": "كوب 330 مل لذيذ وصحي من هريس الفراولة وشاي الورد والكركديه، مع لب البرتقال المنعش وقطرات من العسل، مزيّن بالفراولة الطازجة وأوراق النعناع والليمون ومكعب ثلج."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-jalape-o",
+      "english": {
+        "name": "Homemade Jalapeño",
+        "description": "Homemade Jalapeños made in the House for spicy food lover."
+      },
+      "arabic": {
+        "nameAr": "هالابينو منزلي",
+        "descriptionAr": "هالابينو منزلي الصنع في مطبخنا لعشاق الطعام الحار."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "special-bbq-sauce",
+      "english": {
+        "name": "Special BBQ Sauce",
+        "description": "30ml, gently cooked in fresh fruits flavors, homemade spice and herbs"
+      },
+      "arabic": {
+        "nameAr": "صلصة الباربكيو الخاصة",
+        "descriptionAr": "30 مل، مطهوة بهدوء بنكهات الفواكه الطازجة والتوابل والأعشاب المنزلية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-honey-bbq-sauce",
+      "english": {
+        "name": "Spicy Honey BBQ Sauce",
+        "description": "30 ml, gently cooked in fresh fruits, homemade spice and herbs, honey, hot sauce and spice mix."
+      },
+      "arabic": {
+        "nameAr": "صلصة باربكيو بالعسل الحار",
+        "descriptionAr": "30 مل، مطهوة بهدوء مع الفواكه الطازجة والتوابل والأعشاب المنزلية والعسل والصلصة الحارة وخلطة التوابل."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "marinara-sauce",
+      "english": {
+        "name": "Marinara Sauce",
+        "description": "30ml, freshly cut ripe tomatoes sauteed with herbs and spices and parmesan cheese."
+      },
+      "arabic": {
+        "nameAr": "صلصة مارينارا",
+        "descriptionAr": "30 مل، طماطم ناضجة مقطّعة طازجة مسوتية مع الأعشاب والتوابل وجبنة البارميزان."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lemon-and-herbs-sauce",
+      "english": {
+        "name": "Lemon And Herbs Sauce",
+        "description": "30ml, freshly cut mix herbs with lemon juice, spice and olive oil"
+      },
+      "arabic": {
+        "nameAr": "صلصة الليمون والأعشاب",
+        "descriptionAr": "30 مل، أعشاب مشكّلة مقطّعة طازجة مع عصير الليمون والتوابل وزيت الزيتون."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "nacho-cheese",
+      "english": {
+        "name": "Nacho Cheese",
+        "description": "Homemade mexican inspired cheddar cheese sauce"
+      },
+      "arabic": {
+        "nameAr": "جبنة ناتشوز",
+        "descriptionAr": "صلصة جبنة شيدر منزلية مستوحاة من المطبخ المكسيكي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "tahini-sauce",
+      "english": {
+        "name": "Tahini Sauce",
+        "description": "Our special tahini"
+      },
+      "arabic": {
+        "nameAr": "صلصة الطحينة",
+        "descriptionAr": "طحينتنا الخاصة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-sauce",
+      "english": {
+        "name": "Mushroom Sauce",
+        "description": "Fresh botton mushroom cooked in cooking cream"
+      },
+      "arabic": {
+        "nameAr": "صلصة الفطر",
+        "descriptionAr": "فطر أزرار طازج مطهو في كريمة الطبخ."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-tahina",
+      "english": {
+        "name": "Spicy Tahina",
+        "description": "Our Tahina in spicy flavor"
+      },
+      "arabic": {
+        "nameAr": "طحينة حارة",
+        "descriptionAr": "طحينتنا بنكهة حارة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-shatta",
+      "english": {
+        "name": "Spicy Shatta",
+        "description": "Special mix of spicy sauce"
+      },
+      "arabic": {
+        "nameAr": "شطة حارة",
+        "descriptionAr": "خلطة خاصة من الصلصة الحارة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-pickles",
+      "english": {
+        "name": "Homemade Pickles",
+        "description": "Enjoy the zesty crunch of our homemade pickles, crafted daily from fresh, crisp vegetables and a perfect blend of aromatic spices. Each bite delivers a tangy, flavorful punch that elevates your meal and awakens your palate — a refreshing, handcrafted touch to every dish."
+      },
+      "arabic": {
+        "nameAr": "مخلل منزلي",
+        "descriptionAr": "استمتع بقرمشة مخللاتنا المنزلية المنعشة، المصنوعة يوميًا من خضار طازجة ومقرمشة ومزيج متناسق من التوابل العطرية. كل قضمة تمنحك نكهة لاذعة غنية ترفع وجبتك وتوقظ حاسة التذوق، لمسة منعشة مصنوعة يدويًا لكل طبق."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "entrec-te-sauce",
+      "english": {
+        "name": "Entrecôte Sauce",
+        "description": "Indulge in the rich, velvety flavor of classic Entrecôte sauce, a buttery, herb-infused creation that melts beautifully over a juicy steak. Bursting with aromatic herbs, a hint of mustard, delicate shallots, and a whisper of spice, this creamy French sauce adds a bold, savory depth that perfectly complements every tender bite of beef. It's the ultimate finishing touch."
+      },
+      "arabic": {
+        "nameAr": "صلصة الأنتركوت",
+        "descriptionAr": "استمتع بالنكهة الغنية المخملية لصلصة الأنتركوت الكلاسيكية، صلصة زبدية معطّرة بالأعشاب تذوب بجمال فوق الستيك الغني بالعصارة. مليئة بالأعشاب العطرية ولمسة من المستردة والبصل الأخضر الرقيق وهمسة من التوابل، تمنح هذه الصلصة الفرنسية الكريمية عمقًا جريئًا ولذيذًا يكمّل كل قضمة من اللحم الطري. إنها اللمسة الأخيرة المثالية."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "sour-cream",
+      "english": {
+        "name": "Sour Cream",
+        "description": "Tangy dairy topping made by fermenting cream with lemon. It’s smooth, creamy, and slightly tart, adding a cool and refreshing contrast to bold or spicy dishes. Perfect for tacos, baked potatoes and nachos"
+      },
+      "arabic": {
+        "nameAr": "كريمة حامضة",
+        "descriptionAr": "طبقة ألبان لاذعة تُصنع بتخمير الكريمة مع الليمون. ناعمة وكريمية وحامضة قليلًا، تضيف تباينًا باردًا ومنعشًا للأطباق القوية أو الحارة. مثالية مع التاكو والبطاطس المشوية والناتشوز."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-pickled-onion",
+      "english": {
+        "name": "Homemade Pickled Onion",
+        "description": "Our homemade pickled onions are thinly sliced crisp and marinated in a tangy brine of vinegar a hint of sugar and select spices add a zesty slightly sweet crunch that brightens up any dish"
+      },
+      "arabic": {
+        "nameAr": "بصل مخلل منزلي",
+        "descriptionAr": "بصلنا المخلل المنزلي مقطّع شرائح رفيعة ومقرمش، ومتبّل في محلول لاذع من الخل مع لمسة سكر وتوابل مختارة، يضيف قرمشة منعشة حلوة قليلًا تُنعش أي طبق."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "chimichurri-sauce",
+      "english": {
+        "name": "Chimichurri Sauce",
+        "description": "A zesty mix of fresh parsley, garlic, oregano and sour vinegar, with a hint of spice, blended with olive oil. Perfect for adding bold flavor."
+      },
+      "arabic": {
+        "nameAr": "صلصة تشيميتشوري",
+        "descriptionAr": "مزيج منعش من البقدونس الطازج والثوم والأوريغانو والخل الحامض مع لمسة من التوابل، ممزوج بزيت الزيتون. مثالية لإضافة نكهة جريئة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cowboy-sauce",
+      "english": {
+        "name": "Cowboy Sauce",
+        "description": "A savory blend of butter, fresh herbs, and spices, delivering rich, special flavors with a smooth finish. Ideal for enhancing grilled steaks."
+      },
+      "arabic": {
+        "nameAr": "صلصة كاوبوي",
+        "descriptionAr": "مزيج لذيذ من الزبدة والأعشاب الطازجة والتوابل، يمنح نكهات غنية مميزة وقوامًا ناعمًا. مثالية لإبراز طعم الستيك المشوي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lemon-pepper-sauce",
+      "english": {
+        "name": "Lemon Pepper Sauce",
+        "description": "A creamy blend of fresh lemon, cracked pepper, mild red chili flakes, and herbs. a fun blend of tangy with a hint of spice"
+      },
+      "arabic": {
+        "nameAr": "صلصة الليمون والفلفل",
+        "descriptionAr": "مزيج كريمي من الليمون الطازج والفلفل المطحون ورقائق الفلفل الأحمر الخفيفة والأعشاب. مزيج ممتع من الحموضة مع لمسة خفيفة من الحرارة."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-truffle-sauce",
+      "english": {
+        "name": "Mushroom & Truffle Sauce",
+        "description": "Crafted with our house-made mushroom sauce and a touch of black truffle oil for an irresistibly rich and aromatic flavor."
+      },
+      "arabic": {
+        "nameAr": "صلصة الفطر والكمأة",
+        "descriptionAr": "مصنوعة من صلصة الفطر المنزلية ولمسة من زيت الكمأة السوداء لنكهة غنية وعطرة لا تُقاوم."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "energy-date-balls",
+      "english": {
+        "name": "Energy Date balls",
+        "description": "Boost your day with our energizing protein balls — made from medjool dates, rolled oats, crunchy pistachios, cashews, and a touch of vanilla flavoring, blended with 10g of protein powder and finished with a light dusting of coconut flakes. Protein: 18.7g | carbs: 51g | calories: 346 kcal. Perfect for a quick pick-me-up, pre-workout snack, or healthy indulgence — naturally sweet, rich in nutrients, and full of energy!"
+      },
+      "arabic": {
+        "nameAr": "كرات التمر للطاقة",
+        "descriptionAr": "عزّز يومك بكرات البروتين المنشّطة، المصنوعة من تمر المجدول والشوفان وفستق مقرمش وكاجو ولمسة من نكهة الفانيليا، ممزوجة مع 10 غرام من مسحوق البروتين وتُرَش عليها رقائق جوز الهند. البروتين: 18.7 غرام | الكربوهيدرات: 51 غرام | السعرات: 346 سعرة. مثالية كوجبة خفيفة سريعة أو قبل التمرين أو كحلوى صحية، حلوة بشكل طبيعي وغنية بالعناصر الغذائية ومليئة بالطاقة!"
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "supreme-entrec-te-steak",
+      "english": {
+        "name": "Supreme Entrecôte Steak",
+        "description": "Finally, It’S Here! Our 220-Gram Grilled Marinated Entrecôte Steak Slices, Paired With Two Containers Of Our Fresh Homemade Entrecôte Sauce & 1 Ketchup Container. Served With Golden French Fries, And Three Toasted French Baguette Slices. Designed To Deliver The Supreme Steak Experience!"
+      },
+      "arabic": {
+        "nameAr": "ستيك أنتركوت سوبريم",
+        "descriptionAr": "أخيرًا وصل! شرائح ستيك الأنتركوت المتبّلة والمشوية 220 غرام، مع علبتين من صلصة الأنتركوت المنزلية الطازجة وعلبة كاتشب. تُقدَّم مع بطاطس مقلية ذهبية وثلاث شرائح من الباغيت الفرنسي المحمّص. مصمّم ليمنحك تجربة الستيك السوبريم!"
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-steak-box-200-g",
+      "english": {
+        "name": "Tenderloin Steak Box 200 G",
+        "description": "Big appetite steak box featuring 200g of marinated beef tenderloin expertly grilled and served with crispy French fries choice of zesty lemon and herbs sauce or entrecote sauce and classic ketchup A bold and satisfying box made for serious cravings"
+      },
+      "arabic": {
+        "nameAr": "بوكس ستيك تندرلوين 200 غرام",
+        "descriptionAr": "بوكس ستيك لأصحاب الشهية الكبيرة، يضم 200 غرام من تندرلوين اللحم المتبّل والمشوي بإتقان، ويُقدَّم مع بطاطس مقلية مقرمشة، واختيارك بين صلصة الليمون والأعشاب المنعشة أو صلصة الأنتركوت، والكاتشب الكلاسيكي. بوكس جريء ومُشبع صُنع لأصحاب الشهية القوية."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "combination",
+              "labelAr": "تشكيلة"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-and-truffle-steak",
+      "english": {
+        "name": "Mushroom And Truffle Steak",
+        "description": "Beef Tenderloin Steak 200 grams topped in our house made mushroom sauce topped with black Truffle oil and potato fries with ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "ستيك الفطر والكمأة",
+        "descriptionAr": "ستيك تندرلوين لحم 200 غرام مغطى بصلصة الفطر المنزلية مع زيت الكمأة السوداء، وبطاطس مقلية مع الكاتشب على الجانب."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-mac-cheese",
+      "english": {
+        "name": "Grilled Chicken Mac & Cheese",
+        "description": "Our special mac n cheese, elbows small pasta cooked with 3 different kind of cheese topped with grilled chicken"
+      },
+      "arabic": {
+        "nameAr": "ماك أند تشيز بالدجاج المشوي",
+        "descriptionAr": "ماك أند تشيز الخاص بنا: معكرونة صغيرة مطهوة مع 3 أنواع من الجبنة ومغطاة بالدجاج المشوي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "santorini-striploin",
+      "english": {
+        "name": "Santorini Striploin",
+        "description": "Grilled marinated beef striploin steak 220 grams topped with our house-made lemon pepper sauce, with a mild hint of red chili for added flavor. Served with golden French fries a fresh and flavorful Mediterranean inspired dish."
+      },
+      "arabic": {
+        "nameAr": "ستريبلوين سانتوريني",
+        "descriptionAr": "ستيك ستريبلوين لحم متبّل ومشوي 220 غرام مغطى بصلصة الليمون والفلفل المنزلية مع لمسة خفيفة من الفلفل الأحمر لنكهة إضافية. يُقدَّم مع بطاطس مقلية ذهبية. طبق منعش ولذيذ مستوحى من المطبخ المتوسطي."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "luxurious-wagyu-tenderloin-mb-4-to-5",
+      "english": {
+        "name": "Luxurious Wagyu Tenderloin Mb 4 to 5",
+        "description": "Enjoy the unparalleled flavor of premium wagyu tenderloin, 250g marble 4 to 5, meticulously grilled to highlight its buttery texture and rich marbling. Served with two elegant sides, two gourmet sauces, and a touch of rock salt to add a touch of luxury and refined taste to every bite."
+      },
+      "arabic": {
+        "nameAr": "تندرلوين واغيو فاخر 4 إلى 5",
+        "descriptionAr": "استمتع بنكهة لا مثيل لها من تندرلوين واغيو الفاخر 250 غرام بدرجة تعرّق 4 إلى 5، مشوي بعناية ليبرز قوامه الزبدي ودهونه الرخامية الغنية. يُقدَّم مع طبقين جانبيين أنيقين وصلصتين فاخرتين ولمسة من ملح الصخر تضيف الفخامة والطعم الراقي لكل قضمة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-burger",
+      "english": {
+        "name": "Wagyu Burger",
+        "description": "Savor our wagyu burger featuring a 150g flame grilled patty bursting with rich, juicy flavor. Stacked with crisp iceberg lettuce, melted American cheese and our signature burger sauce. All nestled in a soft, golden potato bun finished with bold drizzle of burger sauce for the ultimate gourmet indulgence."
+      },
+      "arabic": {
+        "nameAr": "برغر واغيو",
+        "descriptionAr": "استمتع ببرغر الواغيو الخاص بنا بقرص مشوي على اللهب 150 غرام ممتلئ بنكهة غنية وعصارة. مع خس أيسبرغ مقرمش وجبنة أمريكية ذائبة وصلصة البرغر المميزة. كل ذلك داخل خبز بطاطس ذهبي طري، ويُختَم بخيط جريء من صلصة البرغر لتجربة فاخرة بامتياز."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-truffle-mushroom-burger",
+      "english": {
+        "name": "Wagyu Truffle Mushroom Burger",
+        "description": "Indulge in our luxurious wagyu truffle mushroom sauce burger, where rich flavor meets gourmet elegance. A 150g flame grilled wagyu patty topped with melted white cheese, fresh sauteed mushrooms, our creamy truffle mushroom sauce, and signature burger sauce all nestled in a soft, golden potato bun a bold, decadent burger experience in every bite."
+      },
+      "arabic": {
+        "nameAr": "برغر واغيو بالفطر والكمأة",
+        "descriptionAr": "استمتع ببرغر الواغيو الفاخر بصلصة الفطر والكمأة، حيث تلتقي النكهة الغنية بالأناقة الراقية. قرص واغيو مشوي على اللهب 150 غرام مغطى بجبنة بيضاء ذائبة وفطر طازج مسوتيه وصلصة الفطر والكمأة الكريمية وصلصة البرغر المميزة، كل ذلك داخل خبز بطاطس ذهبي طري، تجربة برغر جريئة وفاخرة في كل قضمة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "premium-wagyu-striploin-mb-6-to-7",
+      "english": {
+        "name": "Premium Wagyu Striploin MB 6 To 7",
+        "description": "Experience the exquisite tenderness of 250g premium wagyu striploin mb 6 to 7, grilled to perfection and paired with two refined sauces, two signature side dishes and touch of rock salt on the side. A premium wagyu marbling cut that delivers bold flavor, indulgence, and elegance in every bite."
+      },
+      "arabic": {
+        "nameAr": "واغيو ستريبلوين فاخر 6 إلى 7",
+        "descriptionAr": "جرّب الطراوة الرائعة لـ250 غرام من واغيو ستريبلوين الفاخر بدرجة تعرّق 6 إلى 7، مشوي بإتقان ويُقدَّم مع صلصتين راقيتين وطبقين جانبيين مميزين ولمسة من ملح الصخر على الجانب. قطعة واغيو فاخرة بدهون رخامية تمنحك نكهة جريئة وفخامة وأناقة في كل قضمة."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "اختيارات الأطباق الجانبية",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": "ماك أند تشيز"
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": "ذرة مشوية بالشيتوس"
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": "بطاطس مهروسة"
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": "أرز مكسيكي"
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": "خضار سوتيه"
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": "بطاطا حلوة مقلية"
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": "بطاطس ويدجز كاجون"
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": "بطاطس مشوية بالجبنة"
+            },
+            {
+              "label": "Side salad",
+              "labelAr": "سلطة جانبية"
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": "ذرة مشوية"
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "اختيارات الصلصات",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": "أنتركوت"
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": "تشيميتشوري"
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": "كاوبوي"
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": "الليمون والفلفل"
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": "الفطر والكمأة"
+            },
+            {
+              "label": "Bbq",
+              "labelAr": "باربكيو"
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": "باربكيو بالعسل الحار"
+            },
+            {
+              "label": "Marinara",
+              "labelAr": "مارينارا"
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": "الليمون والأعشاب"
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": "جبنة ناتشوز"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-beef-quesadilla",
+      "english": {
+        "name": "Wagyu Beef Quesadilla",
+        "description": "Premium 150g of Wagyu minced beef wrapped in warm tortilla bread, layered with melted American cheese, a mix of shredded cheeses, grilled green capsicum, and sweet white onions. Finished with a rich drizzle of nacho cheese and served with golden French fries, ketchup, and a fresh lemon wedge on the side. Indulgent, cheesy, and irresistibly satisfying."
+      },
+      "arabic": {
+        "nameAr": "كيساديا لحم الواغيو",
+        "descriptionAr": "150 غرام من لحم الواغيو المفروم الفاخر ملفوفة في خبز تورتيلا دافئ مع جبنة أمريكية ذائبة ومزيج من الأجبان المبشورة وفلفل رومي أخضر مشوي وبصل أبيض حلو. تُختَم بخيط غني من جبنة الناتشوز وتُقدَّم مع بطاطس مقلية ذهبية وكاتشب وشريحة ليمون طازجة على الجانب. لذيذة وغنية بالجبنة ومُشبعة بشكل لا يُقاوم."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-kofta-with-cheese",
+      "english": {
+        "name": "Wagyu Kofta with Cheese",
+        "description": "Wagyu kofta with mozzarella stuffing served alongside crispy fries ketchup, and fresh lemon wedges. The richness of premium Wagyu beef combined with gooey melted mozzarella creates an indulgent experience while fries and ketchup add familiar comfort. Bright lemon wedges cut through the richness with a burst of acidity for perfect balance."
+      },
+      "arabic": {
+        "nameAr": "كفتة واغيو بالجبنة",
+        "descriptionAr": "كفتة واغيو محشوة بالموزاريلا، تُقدَّم مع بطاطس مقرمشة وكاتشب وشرائح ليمون طازجة. غنى لحم الواغيو الفاخر مع الموزاريلا الذائبة يمنح تجربة لذيذة، بينما تضيف البطاطس والكاتشب طعمًا مألوفًا ومريحًا. وتقطع شرائح الليمون المنعشة غنى الطبق بلمسة من الحموضة لتوازن مثالي."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "creamy-mushroom-chicken-sauce-with-mashed-potato",
+      "english": {
+        "name": "Creamy Mushroom Chicken Sauce With Mashed Potato",
+        "description": "Enjoy our classic 120g grilled chicken breast topped with rich creamy mushroom sauce and served with smooth comforting mashed potatoes. A timeless hearty dish crafted with care and flavor. Protein 41.21g carbs 23.2g calories 353"
+      },
+      "arabic": {
+        "nameAr": "دجاج بصلصة الفطر الكريمية مع البطاطس المهروسة",
+        "descriptionAr": "استمتع بصدر الدجاج المشوي الكلاسيكي 120 غرام مغطى بصلصة الفطر الكريمية الغنية ويُقدَّم مع بطاطس مهروسة ناعمة ومريحة. طبق تقليدي مُشبع أُعدّ بعناية ونكهة. بروتين 41.21 غرام، كربوهيدرات 23.2 غرام، السعرات 353"
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-beef-tenderloin",
+      "english": {
+        "name": "Grilled Beef Tenderloin",
+        "description": "Seasoned grilled beef tenderloin 120 grams served with steamed vegetables and steamed rice 100 grams, green olives sauce on the side protein 29, carb 41, and calories 412"
+      },
+      "arabic": {
+        "nameAr": "تندرلوين لحم مشوي",
+        "descriptionAr": "تندرلوين لحم مشوي متبّل 120 غرام، يُقدَّم مع خضار على البخار و100 غرام من الأرز المطهو على البخار، وصلصة الزيتون الأخضر على الجانب. بروتين 29، كربوهيدرات 41، السعرات 412"
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-breast",
+      "english": {
+        "name": "Grilled Chicken Breast",
+        "description": "Pure grilled chicken breast 120 grams served with vegetables and steamed rice 100 grams, green olives sauce on the side; protein 35, carb 41, and calories 518."
+      },
+      "arabic": {
+        "nameAr": "صدر دجاج مشوي",
+        "descriptionAr": "صدر دجاج مشوي صافٍ 120 غرام، يُقدَّم مع خضار و100 غرام من الأرز المطهو على البخار، وصلصة الزيتون الأخضر على الجانب؛ بروتين 35، كربوهيدرات 41، السعرات 518."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "baked-salmon",
+      "english": {
+        "name": "Baked Salmon",
+        "description": "Seasoned baked salmon fish 120 grams served with boiled vegetables and steamed white rice 100 grams."
+      },
+      "arabic": {
+        "nameAr": "سلمون مخبوز",
+        "descriptionAr": "سمك سلمون مخبوز متبّل 120 غرام، يُقدَّم مع خضار مسلوقة و100 غرام من الأرز الأبيض المطهو على البخار."
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "healthy-chicken-shawarma",
+      "english": {
+        "name": "Healthy Chicken Shawarma",
+        "description": "Marinated grilled healthy chicken shawarma with tahini sauce in brown tortilla bread, in our healthy mix served with baked fresh potato wedges slices, pickles and marinara sauce, carbs 51, protein 45, calories 556"
+      },
+      "arabic": {
+        "nameAr": "شاورما الدجاج الصحية",
+        "descriptionAr": "شاورما دجاج صحية متبّلة ومشوية مع صلصة الطحينة في خبز تورتيلا بني، ضمن خلطتنا الصحية، تُقدَّم مع شرائح بطاطس ويدجز مخبوزة طازجة ومخلل وصلصة المارينارا، كربوهيدرات 51، بروتين 45، السعرات 556"
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-sauce-beef-with-mashed-potato",
+      "english": {
+        "name": "Mushroom Sauce Beef With Mashed Potato",
+        "description": "Grilled marinated beef tenderloin 120 grams with healthy mushroom sauce and mashed potato carbs 31 protein 30 calories 443."
+      },
+      "arabic": {
+        "nameAr": "لحم بصلصة الفطر مع البطاطس المهروسة",
+        "descriptionAr": "تندرلوين لحم متبّل ومشوي 120 غرام مع صلصة الفطر الصحية وبطاطس مهروسة؛ كربوهيدرات 31، بروتين 30، السعرات 443."
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "درجة استواء اللحم",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": "ريير"
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": "ميديوم ريير"
+            },
+            {
+              "label": "Medium",
+              "labelAr": "ميديوم"
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": "ميديوم ويل"
+            },
+            {
+              "label": "Well Done",
+              "labelAr": "ويل دَن"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "healthy-beef-tendeloin-shawarma-wrap",
+      "english": {
+        "name": "Healthy Beef Tendeloin Shawarma Wrap",
+        "description": "Marinated grilled no fat beef shawarma with tahini sauce in brown tortilla , in our healthy mix served with baked fresh potato wedges, pickles and Marinara Sauce, carbs 51, protein 30, calories 494."
+      },
+      "arabic": {
+        "nameAr": "راب شاورما تندرلوين اللحم الصحي",
+        "descriptionAr": "شاورما لحم متبّلة ومشوية خالية من الدهون مع صلصة الطحينة في تورتيلا بنية، ضمن خلطتنا الصحية، تُقدَّم مع بطاطس ويدجز مخبوزة طازجة ومخلل وصلصة المارينارا، كربوهيدرات 51، بروتين 30، السعرات 494."
+      },
+      "options": []
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Chimichuri Sauce",
+      "english": {
+        "name": "Chimichuri Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة تشيميتشوري"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cowboy Sauce",
+      "english": {
+        "name": "Cowboy Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة كاوبوي"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Entrecote Sauce",
+      "english": {
+        "name": "Entrecote Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة أنتركوت"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Jalapeno",
+      "english": {
+        "name": "Homemade Jalapeno",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "هالابينو منزلي"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Pickled Onions",
+      "english": {
+        "name": "Homemade Pickled Onions",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "بصل مخلل منزلي"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Pickles",
+      "english": {
+        "name": "Homemade Pickles",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "مخلل منزلي"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Lemon & Herbs Sauce",
+      "english": {
+        "name": "Lemon & Herbs Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة الليمون والأعشاب"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Lemon Pepper Sauce",
+      "english": {
+        "name": "Lemon Pepper Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة الليمون والفلفل"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Marinara Sauce",
+      "english": {
+        "name": "Marinara Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة مارينارا"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mushroom & Truffle Sauce",
+      "english": {
+        "name": "Mushroom & Truffle Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة الفطر والكمأة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mushroom Sauce",
+      "english": {
+        "name": "Mushroom Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة الفطر"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Nacho Cheese",
+      "english": {
+        "name": "Nacho Cheese",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "جبنة ناتشوز"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Sour Cream",
+      "english": {
+        "name": "Sour Cream",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "كريمة حامضة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Special BBQ Sauce",
+      "english": {
+        "name": "Special BBQ Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة الباربكيو الخاصة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy BBQ Sauce",
+      "english": {
+        "name": "Spicy BBQ Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "صلصة باربكيو حارة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy Shatta",
+      "english": {
+        "name": "Spicy Shatta",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "شطة حارة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy Tahina",
+      "english": {
+        "name": "Spicy Tahina",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "طحينة حارة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Steak Seasoning",
+      "english": {
+        "name": "Steak Seasoning",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "بهارات الستيك"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Tabasco 3.7ml",
+      "english": {
+        "name": "Tabasco 3.7ml",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": "تاباسكو 3.7 مل"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cajun Potato Wedges",
+      "english": {
+        "name": "Cajun Potato Wedges",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "بطاطس ويدجز كاجون"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cheesy Baked Potato",
+      "english": {
+        "name": "Cheesy Baked Potato",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "بطاطس مشوية بالجبنة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mac & Cheese",
+      "english": {
+        "name": "Mac & Cheese",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "ماك أند تشيز"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mashed Potato",
+      "english": {
+        "name": "Mashed Potato",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "بطاطس مهروسة"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mexican Rice",
+      "english": {
+        "name": "Mexican Rice",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "أرز مكسيكي"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Potato Fries",
+      "english": {
+        "name": "Potato Fries",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "بطاطس مقلية"
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Sauted Vegetables",
+      "english": {
+        "name": "Sauted Vegetables",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": "خضار سوتيه"
+      }
+    },
+    {
+      "type": "branch",
+      "key": "madinat-khalifa",
+      "english": {
+        "name": "Madinat Khalifa",
+        "address": "Madinat Khalifa South, Street 340, Doha, Qatar",
+        "openingHours": "Sat–Wed: 12:00 PM – 1:00 AM | Thu–Fri: 12:00 PM – 2:00 AM"
+      },
+      "arabic": {
+        "nameAr": "مدينة خليفة",
+        "addressAr": "مدينة خليفة الجنوبية، شارع 340، الدوحة، قطر",
+        "openingHoursAr": "السبت–الأربعاء: 12:00 ظهرًا – 1:00 صباحًا | الخميس–الجمعة: 12:00 ظهرًا – 2:00 صباحًا"
+      }
+    },
+    {
+      "type": "branch",
+      "key": "centro",
+      "english": {
+        "name": "Centro",
+        "address": "Centro Mall, Al Muntazah, Doha, Qatar",
+        "openingHours": "Sat–Wed: 12:00 PM – 1:00 AM | Thu–Fri: 12:00 PM – 2:00 AM"
+      },
+      "arabic": {
+        "nameAr": "سنترو",
+        "addressAr": "سنترو مول، المنتزه، الدوحة، قطر",
+        "openingHoursAr": "السبت–الأربعاء: 12:00 ظهرًا – 1:00 صباحًا | الخميس–الجمعة: 12:00 ظهرًا – 2:00 صباحًا"
+      }
+    },
+    {
+      "type": "settings",
+      "key": "singleton",
+      "english": {
+        "aboutText": "about text will come here"
+      },
+      "arabic": {
+        "aboutTextAr": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,3665 @@
+{
+  "generatedAt": "2026-11-02T22:24:34.848Z",
+  "counts": {
+    "categories": 12,
+    "menuItems": 98,
+    "optionLibraryItems": 26,
+    "branches": 2,
+    "hasSettings": true
+  },
+  "allergens": [],
+  "tags": [
+    "featured",
+    "healthy",
+    "new",
+    "premium",
+    "wagyu"
+  ],
+  "items": [
+    {
+      "type": "category",
+      "key": "new-additions",
+      "english": {
+        "name": "New Additions",
+        "description": "Exclusive chef specials, signature Wagyu cuts, and exciting new culinary creations."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "wagyu-steaks-and-burgers",
+      "english": {
+        "name": "Wagyu Steaks & Burgers",
+        "description": "Premium Japanese & Australian Wagyu beef, marbled cuts, and juicy smash burgers."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "special-dishes",
+      "english": {
+        "name": "Special Dishes",
+        "description": "Signature steak boxes, supreme entrecôte platters, and specialty meat combinations."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "main-courses",
+      "english": {
+        "name": "Main Courses",
+        "description": "Charcoal-grilled steaks, salmon fillets, flamed chicken breasts, and signature bowls."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "sandwiches-and-burgers",
+      "english": {
+        "name": "Sandwiches & Burgers",
+        "description": "Smoky pulled beef, philly cheesesteaks, truffle burgers, and artisan brioche rolls."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "healthy-dishes",
+      "english": {
+        "name": "Healthy Dishes",
+        "description": "Macro-balanced high-protein meals, grilled lean meats, clean carbs, and light dressings."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "appetizers",
+      "english": {
+        "name": "Appetizers",
+        "description": "Crispy bites, loaded fries, cheesy appetizers, and savory starters to kick off your feast."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "salads",
+      "english": {
+        "name": "Salads",
+        "description": "Farm-fresh vibrant greens, grilled tenderloin salads, nachos bowls, and house vinaigrettes."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "side-dishes",
+      "english": {
+        "name": "Side Dishes",
+        "description": "Mac & cheese, cheesy baked potatoes, cajun wedges, mexican rice, and crispy fries."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "beverages",
+      "english": {
+        "name": "Beverages",
+        "description": "Craft fruit mojitos, sparkling Kinza refreshers, fresh juices, and specialty iced teas."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "sauces",
+      "english": {
+        "name": "Sauces",
+        "description": "House-made artisanal sauces, creamy mushroom truffle, chimichurri, cowboy butter, and dips."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "category",
+      "key": "desserts",
+      "english": {
+        "name": "Desserts",
+        "description": "Indulgent sweet treats, golden caramelized banana pudding, and protein energy bites."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      }
+    },
+    {
+      "type": "menuItem",
+      "key": "rib-eye-wagyu-6-to-7",
+      "english": {
+        "name": "Rib Eye Wagyu 6 To 7",
+        "description": "Savor the unmatched richness of our premium wagyu ribeye 250g, marble score 6–7, expertly grilled to enhance its buttery texture and deep, luxurious marbling. Served with your choice of two elegant sides and two gourmet sauces, and finished with a touch of rock salt for a refined, unforgettable wagyu steak experience."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Cheesy Baked Potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed Potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican Rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Potato Fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed Vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun Potato Wedges",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Chimichurri Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Entrecote Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Homemade Jalapeno",
+              "labelAr": ""
+            },
+            {
+              "label": "Homemade Pickled Onions",
+              "labelAr": ""
+            },
+            {
+              "label": "Homemade Pickles",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & Herbs Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon Pepper Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & Truffle Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Sour Cream",
+              "labelAr": ""
+            },
+            {
+              "label": "Special BBQ Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy BBQ Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy Shatta",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy Tahina Sauce",
+              "labelAr": ""
+            },
+            {
+              "label": "Steak Seasoning",
+              "labelAr": ""
+            },
+            {
+              "label": "Tabasco Sauce",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-striploin-entrecote-steak-meat",
+      "english": {
+        "name": "Wagyu Striploin Entrecote Steak Meat",
+        "description": "Wagyu striploin mb 6-7 250 gram grilled marinated entrecote steak meat slices, topped with our fresh homemade entrecote sauce 1 ketchup container. Served with golden French fries, and three toasted garlic baguette bread slices. This meal is designed to deliver the unforgettable supreme steak experience"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-ribeye-entrecote-steak",
+      "english": {
+        "name": "Wagyu Ribeye Entrecote Steak",
+        "description": "Premium Wagyu Ribeye MB 6-7, 250g of grilled and marinated entrecote steak slices, topped with our fresh, house-made entrecote sauce. Served with potato fries and ketchup"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "1-kg-wagyu-tomahawk-steak",
+      "english": {
+        "name": "1 Kg Wagyu Tomahawk Steak",
+        "description": "Wagyu Tomahawk Steak 1kg MB 6-7 Slow-grilled bone- in ribeye with exceptional marbling and flavor with choices of 4 side dishes and choices of 4 premium sauces"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-premium-espetada",
+      "english": {
+        "name": "Wagyu Premium Espetada",
+        "description": "A premium 250g MB 6–7 wagyu skewer, char‑grilled and layered with vibrant red & green capsicum, tender white onion, and a long red chili. Served with warm garlic butter on the side, ready to drizzle. Includes your choice of two side dishes and two signature sauces for the perfect finish."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "banana-pudding",
+      "english": {
+        "name": "Banana Pudding",
+        "description": "A silky layer of custard cream sets the stage, rich and velvety, carrying a gentle sweetness. Nestled on top are soft egg cookies adding a delicate buttery bite. The finale comes with caramelized banana slices, golden and glossy, offering warm crispy sweetness and a melt in your mouth finish. A luscious dreamy dessert with every layer more irresistible than the last."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-beef-shawarma-bowl",
+      "english": {
+        "name": "Tenderloin Beef Shawarma Bowl",
+        "description": "Succulent 150g marinated and grilled beef tenderloin over fluffy steamed rice, with romaine lettuce, cherry tomatoes, homemade pickles, pickled onions, and jalapeños, served with tahini and marinara."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-shawarma-bowl",
+      "english": {
+        "name": "Chicken Shawarma Bowl",
+        "description": "Juicy 180g grilled marinated chicken breast over fluffy steamed rice with romaine lettuce, cherry tomatoes, homemade pickles, pickled onions, and jalapeños served with tahini and marinara sauce."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "none",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "black-angus-ribeye-entrecote-steak",
+      "english": {
+        "name": "Black Angus Ribeye Entrecote Steak",
+        "description": "Our Black angus ribeye steak slices 220 gram grilled marinated Entrecote Steak slices, served and topped with our fresh homemade Entrecote sauce 1 Ketchup container. Served with golden French fries, and three toasted garlic baguette slices. Designed to deliver the supreme steak experience"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "black-angus-ribeye",
+      "english": {
+        "name": "Black Angus Ribeye",
+        "description": "Savor a perfectly grilled 220g black angus ribeye steak expertly seared to lock in its rich juicy flavors and tender texture. Each bite delivers a mouthwatering balance of smoky char and buttery succulence. Paired with your choice of two delicious sides and two premium sauces crafted to complement every savory note this dish is a true feast for steak lovers."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-truffle-mushroom-sandwich",
+      "english": {
+        "name": "Tenderloin Truffle Mushroom Sandwich",
+        "description": "Tender 100g grilled beef tenderloin nestled in a warm buttery brioche bread roll layered with creamy mayonnaise melted mozzarella cheese and a rich truffle mushroom sauce. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-kofta-sandwich",
+      "english": {
+        "name": "Wagyu Kofta Sandwich",
+        "description": "A juicy 120g grilled Wagyu beef kofta nestled in a soft buttery brioche bread roll mozzarella cheese sliced layered with creamy tahini sauce grilled tomato and grilled sliced onions. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "beef-loaded-sweet-potato",
+      "english": {
+        "name": "Beef Loaded Sweet Potato",
+        "description": "Sweet potato stuffed with angus beef and cheese A healthy twist on a classic comfort food dish: fresh, baked sweet potatoes, generously stuffed with seasoned ground angus beef and topped with a rich layer of our homemade marinara sauce. Covered with a golden layer of melted mozzarella and cheddar cheese, for the perfect balance of sweetness, spice, and melt-in-your-mouth deliciousness. A filling, rich, and full of irresistible flavor."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "jalapeno-cheese-fries",
+      "english": {
+        "name": "Jalapeno Cheese Fries",
+        "description": "French fries with nachos cheese, ketchup and homemade Jalapenos ."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "jalapeno-mac-and-cheese-balls",
+      "english": {
+        "name": "Jalapeno Mac And Cheese Balls",
+        "description": "Mac and cheese with pickled jalapeno, red chili, mixed cheese coated with special flour panko bread crumbs mix with marinara dip on side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cheesy-garlic-bread",
+      "english": {
+        "name": "Cheesy Garlic Bread",
+        "description": "Fresh garlic bread topped with mixed cheese and zaatar and ranch sauce on the side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-onion-rings",
+      "english": {
+        "name": "Homemade Onion Rings",
+        "description": "Freshly made coated onion rings with side of creamy sauce."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "meat-corner-nachos",
+      "english": {
+        "name": "Meat Corner Nachos",
+        "description": "Original mexican tortilla chips with pineapple pico de gallo, mexican nacho cheese, cheetos powder, , pickled jalapeno, coriander leaves and sour cream, and marinara sauce."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "short-ribs-meat-nachos",
+      "english": {
+        "name": "Short Ribs Meat Nachos",
+        "description": "Pulled short ribs, nacho chips, nacho cheese, marinara sauce, pico de gallo and sour cream"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "angus-kofta-with-cheese",
+      "english": {
+        "name": "Angus Kofta With Cheese",
+        "description": "Grilled homemade kofta with special marinade and stuffed mozzarella cheese served with French fries."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-angus-kofta-with-cheese",
+      "english": {
+        "name": "Spicy Angus Kofta with Cheese",
+        "description": "Grilled 150g of pure Angus homemade kofta with special marinade and stuffed spicy mozzarella cheese served with golden French fries and ketchup on the side"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "swiss-mushroom-burger",
+      "english": {
+        "name": "Swiss Mushroom Burger",
+        "description": "Soft burger buns with burger sauce, burger patty, emmental cheese, mushroom sauce topped with fresh sautee botoon mushroom."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-burger",
+      "english": {
+        "name": "Grilled Chicken Burger",
+        "description": "Grilled marinated chicken breast with our special seasoning in herbs, homemade burger sauce, bionda lettuce, sliced tomato,and cheddar cheese."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "american-classic-beef-burger",
+      "english": {
+        "name": "American Classic Beef Burger",
+        "description": "Traditional burger made with beef burger patty, cheddar cheese , mustard , chopped onions , ketchup, and pickled cucumber."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-quesadilla",
+      "english": {
+        "name": "Chicken Quesadilla",
+        "description": "Grilled tender chicken breast with special spices and herbs, light mayo, mixed cheese placed inside the tortilla bread. Served with freshly made marinara sauce and French Fries"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lokum-burger",
+      "english": {
+        "name": "Lokum Burger",
+        "description": "Try our new 100g tenderloin steak, marinated in our signature seasoning, then brushed with a rich BBQ sauce, topped with a layer of melting cheese, and a touch of our homemade burger sauce, all served in a soft, golden potato bun. A delicious combination of smoky, creamy, and savory flavors in every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "beef-short-ribs-burger",
+      "english": {
+        "name": "Beef Short Ribs Burger.",
+        "description": "Slowly cooked beef shorts ribs in barbecue sauce in burger bun, ranch sauce and dill pickles."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "philly-s-cheese-steak-sandwich",
+      "english": {
+        "name": "Philly's Cheese Steak Sandwich",
+        "description": "Juicy 120g thinly sliced grilled ribeye steak grilled green capsicum and grilled onion loaded into a soft buttery brioche bread roll with creamy mayonnaise melted mixed cheese and indulgent nacho cheese sauce. Served with crispy seasoned golden fries and ketchup."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "philly-s-cheese-steak-burger",
+      "english": {
+        "name": "Philly's Cheese Steak Burger",
+        "description": "A hearty traditional burger featuring a juicy beef angus patty topped with 60g of thinly sliced grilled ribeye steak, sharp cheddar cheese, tangy mustard, and classic ketchup. Loaded with grilled green capsicum, sweet white onions, a rich mix of cheeses, and finished with a warm drizzle of creamy nacho cheese sauce — a bold, indulgent bite in every layer."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-shashlik-sandwich",
+      "english": {
+        "name": "Tenderloin Shashlik Sandwich",
+        "description": "Succulent 100g grilled beef tenderloin tucked into a warm and soft buttery brioche bread roll layered with creamy tahini sauce smoky grilled tomato and grilled sliced onions. Served with golden seasoned crispy fries and ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "angus-bbq-short-ribs",
+      "english": {
+        "name": "Angus BBQ Short Ribs",
+        "description": "Enjoy 400g of Angus beef short ribs, slow cooked to perfection and sizzled with our special BBQ sauce. Served with toasted bread slices, dill pickles, and crispy fries, plus your choice of one additional side and two sauces of your choice. A true masterpiece for barbecue lovers."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-rice-chicken-bowl",
+      "english": {
+        "name": "Mexican Rice Chicken Bowl",
+        "description": "Savor our signature Mexican rice, topped with 120g of marinated grilled chicken breast, served with a side of freshly made lemon and herbs sauce. A flavorful and wholesome dish with a zesty finish."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "classic-salmon",
+      "english": {
+        "name": "Classic Salmon",
+        "description": "Try our new 250g baked salmon seasoned with bold Cajun spices, served alongside sautéed vegetables. Choose two of our signature sauces and 1 delicious side dish to complete your gourmet meal"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "striploin-steak",
+      "english": {
+        "name": "Striploin Steak",
+        "description": "Enjoy one of our classics 220g of expertly grilled striploin steak, now served with your choice of 2 side dishes and 2 signature sauces. A flavorful and satisfying steak experience and tailored to your taste"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "flamed-grilled-chicken-breast",
+      "english": {
+        "name": "Flamed Grilled Chicken Breast",
+        "description": "Savor 220g of our signature plain-marinated grilled chicken breast tender, juicy and bursting with clean, wholesome flavor. Served with your choice of 2 side dishes and 2 signature sauces, it’s a satisfying, well balanced meal that delivers pure grilled goodness in every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "lokum-steak",
+      "english": {
+        "name": "Lokum Steak",
+        "description": "Enjoy 200g of our traditional lokum marinated beef tenderloin, grilled to perfection and served with your choice of 2 signature side dishes and 2choices of premium sauces rich and satisfying steak experience crafted for meat lovers"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "fillet-mignon-steak",
+      "english": {
+        "name": "Fillet Mignon Steak",
+        "description": "Fillet Tenderloin Steak 200, A signature flavor, now and juicier cut! Served with your choice of 2 premium side dishes and 2 signature sauces, it’s bold for true steak lovers."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "ribeye-steak",
+      "english": {
+        "name": "Ribeye Steak",
+        "description": "Enjoy One Of Our Classics — 220G Of Perfectly Grilled Ribeye Steak, Now Served With Your Choice Of 2 Side Dishes And 2 Signature Sauces. A Timeless Favorite Made Just The Way You Like It."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "cowboy-giant-plate-with-grilled-meats",
+      "english": {
+        "name": "Cowboy Giant Plate with Grilled Meats",
+        "description": "Our Cowboy Ribeye Is Perfect For Big Appetites—400G Of Perfectly Grilled Ribeye, Served With Crispy golden fries and grilled shredded corn"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "shashlik-tenderloin",
+      "english": {
+        "name": "Shashlik Tenderloin",
+        "description": "Indulge in our 200g thin-cut beef tenderloin, marinated in our bold signature shashlik blend and grilled to perfection. Served with your choice of 2 flavorful side dishes and 2 signature sauces hearty and satisfying meal crafted to satisfy every craving."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "shredded-corn-with-cheetos",
+      "english": {
+        "name": "Shredded Corn With Cheetos",
+        "description": "American style Grilled shredded corn with cheetos powder on top"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "shredded-corn",
+      "english": {
+        "name": "Shredded Corn",
+        "description": "220 grams, american style grilled corn with butter and special spices."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-rice",
+      "english": {
+        "name": "Mexican Rice",
+        "description": "Enjoy 300g of Mexican-inspired rice, cooked with a vibrant blend of mixed vegetables and zesty tomato sauce. A hearty and flavorful dish bursting with color and taste."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mac-and-cheese",
+      "english": {
+        "name": "Mac And Cheese",
+        "description": "Seasoned and boiled small pasta with cream cheese, mozzarella cheese, Mexican nacho cheese and special spices."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "side-salad",
+      "english": {
+        "name": "Side Salad",
+        "description": "200 grams, fresh and sanitised mixed lettuce romaine, iceberg and rocket leaves, fresh cucumber, red and yellow cherry tomatoes with citrus dressing."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "potato-fries",
+      "english": {
+        "name": "Potato Fries",
+        "description": "Fried potato fries with homemade seasoning."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "white-steamed-rice",
+      "english": {
+        "name": "White Steamed Rice",
+        "description": "Savor comforting bowl of fluffy boiled rice gently mixed with golden toasted vermicelli, bringing warm, nutty flavor and soft texture to every bite simple yet satisfying side that perfectly complements your main dish"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cheesy-baked-potato",
+      "english": {
+        "name": "Cheesy Baked Potato",
+        "description": "350 grams, fresh potato baked in homemade spice with sour cream, red cheddar cheese and mozzarella cheese."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "baked-sweet-potato",
+      "english": {
+        "name": "Baked Sweet Potato",
+        "description": "Freshly baked sweet potato 200g"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mashed-potatoes",
+      "english": {
+        "name": "Mashed Potatoes",
+        "description": "Creamy and smooth mashed potatoes, perfectly seasoned for a healthy side dish."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "saut-ed-vegetables",
+      "english": {
+        "name": "Sautéed Vegetables",
+        "description": "A colorful mix of fresh vegetables sautéed to perfection with light seasoning."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "sweet-fries",
+      "english": {
+        "name": "Sweet Fries",
+        "description": "Crispy, golden fried sweet potatoes with a hint of natural sweetness."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cajun-potato-wedges",
+      "english": {
+        "name": "Cajun Potato Wedges",
+        "description": "Thick potato wedges coated in bold cajun spices for a flavorful kick."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "meat-corner-salad",
+      "english": {
+        "name": "Meat Corner Salad",
+        "description": "The return of favorite meat corner salad by popular demand, our beloved salad is back. Vibrant medley of seasonal mixed lettuce, fresh cucumbers, fresh strawberries, crisp green apples, golden raisins, toasted walnuts, fresh tomato cherries and creamy feta cheese, all brought together with tangy-sweet raspberry vinaigrette. Harmony of textures and flavors in every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mexican-nachos-salad",
+      "english": {
+        "name": "Mexican Nachos Salad",
+        "description": "Authentic Mexican salad with sweet and spicy nachos, mixed lettuce, fresh carrots, fresh tomato , shredded corn, red kidney beans, shredded red cheddar and mozzarella cheese with creamy ranch dressing."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "house-tenderloin-salad",
+      "english": {
+        "name": "House Tenderloin Salad",
+        "description": "Grilled 120g beef tenderloin served over a vibrant bed of mixed lettuce (romaine, iceberg, and rocket leaves), paired with crisp cucumbers, juicy cherry tomatoes, roasted sweet potatoes, creamy feta cheese, and tender boiled broccoli. Comes with a side of tangy balsamic vinaigrette dressing — a hearty, wholesome, and flavorful salad."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "chicken-pasta-salad",
+      "english": {
+        "name": "Chicken Pasta Salad",
+        "description": "Grilled chicken breast 120g layered over al dente fusilli pasta, tossed with sweet cherry tomatoes, crisp green capsicum, and tender white onions. Finished with smoky grilled shredded corn and bright shredded carrots, all drizzled with a cool, creamy ranch dressing and crowned with a generous sprinkle of Parmesan cheese. A colorful, hearty bowl bursting with freshness, texture, and irresistible flavor."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "strawberry-mojito",
+      "english": {
+        "name": "Strawberry Mojito",
+        "description": "350 ml, fresh strawberry blend with squeeze of fresh lime, sprite, crushed ice and mint leaves."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "passion-fruit-mojito",
+      "english": {
+        "name": "Passion Fruit Mojito",
+        "description": "350 ml, fresh passion fruit with squeeze of fresh lime, sprite, crushed ice and mint leaves."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "blueberry-mojito",
+      "english": {
+        "name": "Blueberry Mojito",
+        "description": "Blueberry blend mixed with lime juice, with crushed ice and mint leaves"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "strawberry-rosehip-iced-tea",
+      "english": {
+        "name": "Strawberry Rosehip Iced Tea",
+        "description": "A flavorful and healthy 330ml glass of mixed strawberry puree, rose hibiscus tea, refreshing orange pulp with drops of honey, and fresh strawberry, mint leaves, lime, and an ice cube طﻟا ﺔﻟوارﻔﻟﺎﺑ نﯾّزﻣو ،لﺳﻌﻟا نﻣ تارطﻗ ﻊﻣ شﻌﻧﻣﻟا لﺎﻘﺗرﺑﻟا بّﻟو دروﻟﺎﺑ ﮫﯾدﻛ"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-jalape-o",
+      "english": {
+        "name": "Homemade Jalapeño",
+        "description": "Homemade Jalapeños made in the House for spicy food lover."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "special-bbq-sauce",
+      "english": {
+        "name": "Special BBQ Sauce",
+        "description": "30ml, gently cooked in fresh fruits flavors, homemade spice and herbs"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-honey-bbq-sauce",
+      "english": {
+        "name": "Spicy Honey BBQ Sauce",
+        "description": "30 ml, gently cooked in fresh fruits, homemade spice and herbs, honey, hot sauce and spice mix."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "marinara-sauce",
+      "english": {
+        "name": "Marinara Sauce",
+        "description": "30ml, freshly cut ripe tomatoes sauteed with herbs and spices and parmesan cheese."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lemon-and-herbs-sauce",
+      "english": {
+        "name": "Lemon And Herbs Sauce",
+        "description": "30ml, freshly cut mix herbs with lemon juice, spice and olive oil"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "nacho-cheese",
+      "english": {
+        "name": "Nacho Cheese",
+        "description": "Homemade mexican inspired cheddar cheese sauce"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "tahini-sauce",
+      "english": {
+        "name": "Tahini Sauce",
+        "description": "Our special tahini"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-sauce",
+      "english": {
+        "name": "Mushroom Sauce",
+        "description": "Fresh botton mushroom cooked in cooking cream"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-tahina",
+      "english": {
+        "name": "Spicy Tahina",
+        "description": "Our Tahina in spicy flavor"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "spicy-shatta",
+      "english": {
+        "name": "Spicy Shatta",
+        "description": "Special mix of spicy sauce"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-pickles",
+      "english": {
+        "name": "Homemade Pickles",
+        "description": "Enjoy the zesty crunch of our homemade pickles, crafted daily from fresh, crisp vegetables and a perfect blend of aromatic spices. Each bite delivers a tangy, flavorful punch that elevates your meal and awakens your palate — a refreshing, handcrafted touch to every dish."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "entrec-te-sauce",
+      "english": {
+        "name": "Entrecôte Sauce",
+        "description": "Indulge in the rich, velvety flavor of classic Entrecôte sauce, a buttery, herb-infused creation that melts beautifully over a juicy steak. Bursting with aromatic herbs, a hint of mustard, delicate shallots, and a whisper of spice, this creamy French sauce adds a bold, savory depth that perfectly complements every tender bite of beef. It's the ultimate finishing touch."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "sour-cream",
+      "english": {
+        "name": "Sour Cream",
+        "description": "Tangy dairy topping made by fermenting cream with lemon. It’s smooth, creamy, and slightly tart, adding a cool and refreshing contrast to bold or spicy dishes. Perfect for tacos, baked potatoes and nachos"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "homemade-pickled-onion",
+      "english": {
+        "name": "Homemade Pickled Onion",
+        "description": "Our homemade pickled onions are thinly sliced crisp and marinated in a tangy brine of vinegar a hint of sugar and select spices add a zesty slightly sweet crunch that brightens up any dish"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "chimichurri-sauce",
+      "english": {
+        "name": "Chimichurri Sauce",
+        "description": "A zesty mix of fresh parsley, garlic, oregano and sour vinegar, with a hint of spice, blended with olive oil. Perfect for adding bold flavor."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "cowboy-sauce",
+      "english": {
+        "name": "Cowboy Sauce",
+        "description": "A savory blend of butter, fresh herbs, and spices, delivering rich, special flavors with a smooth finish. Ideal for enhancing grilled steaks."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "lemon-pepper-sauce",
+      "english": {
+        "name": "Lemon Pepper Sauce",
+        "description": "A creamy blend of fresh lemon, cracked pepper, mild red chili flakes, and herbs. a fun blend of tangy with a hint of spice"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-truffle-sauce",
+      "english": {
+        "name": "Mushroom & Truffle Sauce",
+        "description": "Crafted with our house-made mushroom sauce and a touch of black truffle oil for an irresistibly rich and aromatic flavor."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "energy-date-balls",
+      "english": {
+        "name": "Energy Date balls",
+        "description": "Boost your day with our energizing protein balls — made from medjool dates, rolled oats, crunchy pistachios, cashews, and a touch of vanilla flavoring, blended with 10g of protein powder and finished with a light dusting of coconut flakes. Protein: 18.7g | carbs: 51g | calories: 346 kcal. Perfect for a quick pick-me-up, pre-workout snack, or healthy indulgence — naturally sweet, rich in nutrients, and full of energy!"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "supreme-entrec-te-steak",
+      "english": {
+        "name": "Supreme Entrecôte Steak",
+        "description": "Finally, It’S Here! Our 220-Gram Grilled Marinated Entrecôte Steak Slices, Paired With Two Containers Of Our Fresh Homemade Entrecôte Sauce & 1 Ketchup Container. Served With Golden French Fries, And Three Toasted French Baguette Slices. Designed To Deliver The Supreme Steak Experience!"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "tenderloin-steak-box-200-g",
+      "english": {
+        "name": "Tenderloin Steak Box 200 G",
+        "description": "Big appetite steak box featuring 200g of marinated beef tenderloin expertly grilled and served with crispy French fries choice of zesty lemon and herbs sauce or entrecote sauce and classic ketchup A bold and satisfying box made for serious cravings"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "combination",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-and-truffle-steak",
+      "english": {
+        "name": "Mushroom And Truffle Steak",
+        "description": "Beef Tenderloin Steak 200 grams topped in our house made mushroom sauce topped with black Truffle oil and potato fries with ketchup on the side."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-mac-cheese",
+      "english": {
+        "name": "Grilled Chicken Mac & Cheese",
+        "description": "Our special mac n cheese, elbows small pasta cooked with 3 different kind of cheese topped with grilled chicken"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "santorini-striploin",
+      "english": {
+        "name": "Santorini Striploin",
+        "description": "Grilled marinated beef striploin steak 220 grams topped with our house-made lemon pepper sauce, with a mild hint of red chili for added flavor. Served with golden French fries a fresh and flavorful Mediterranean inspired dish."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "luxurious-wagyu-tenderloin-mb-4-to-5",
+      "english": {
+        "name": "Luxurious Wagyu Tenderloin Mb 4 to 5",
+        "description": "Enjoy the unparalleled flavor of premium wagyu tenderloin, 250g marble 4 to 5, meticulously grilled to highlight its buttery texture and rich marbling. Served with two elegant sides, two gourmet sauces, and a touch of rock salt to add a touch of luxury and refined taste to every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-burger",
+      "english": {
+        "name": "Wagyu Burger",
+        "description": "Savor our wagyu burger featuring a 150g flame grilled patty bursting with rich, juicy flavor. Stacked with crisp iceberg lettuce, melted American cheese and our signature burger sauce. All nestled in a soft, golden potato bun finished with bold drizzle of burger sauce for the ultimate gourmet indulgence."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-truffle-mushroom-burger",
+      "english": {
+        "name": "Wagyu Truffle Mushroom Burger",
+        "description": "Indulge in our luxurious wagyu truffle mushroom sauce burger, where rich flavor meets gourmet elegance. A 150g flame grilled wagyu patty topped with melted white cheese, fresh sauteed mushrooms, our creamy truffle mushroom sauce, and signature burger sauce all nestled in a soft, golden potato bun a bold, decadent burger experience in every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "premium-wagyu-striploin-mb-6-to-7",
+      "english": {
+        "name": "Premium Wagyu Striploin MB 6 To 7",
+        "description": "Experience the exquisite tenderness of 250g premium wagyu striploin mb 6 to 7, grilled to perfection and paired with two refined sauces, two signature side dishes and touch of rock salt on the side. A premium wagyu marbling cut that delivers bold flavor, indulgence, and elegance in every bite."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Side Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Mac & Cheese",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn w/cheetos",
+              "labelAr": ""
+            },
+            {
+              "label": "Mashed potatoes",
+              "labelAr": ""
+            },
+            {
+              "label": "Mexican rice",
+              "labelAr": ""
+            },
+            {
+              "label": "Sauteed vegetables",
+              "labelAr": ""
+            },
+            {
+              "label": "Sweet fries",
+              "labelAr": ""
+            },
+            {
+              "label": "Cajun potato wedges",
+              "labelAr": ""
+            },
+            {
+              "label": "Cheesy baked potato",
+              "labelAr": ""
+            },
+            {
+              "label": "Side salad",
+              "labelAr": ""
+            },
+            {
+              "label": "Shredded corn",
+              "labelAr": ""
+            }
+          ]
+        },
+        {
+          "name": "Sauce Choices",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Entrecote",
+              "labelAr": ""
+            },
+            {
+              "label": "Chimichuri",
+              "labelAr": ""
+            },
+            {
+              "label": "Cowboy",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon pepper",
+              "labelAr": ""
+            },
+            {
+              "label": "Mushroom & truffle",
+              "labelAr": ""
+            },
+            {
+              "label": "Bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Spicy honey bbq",
+              "labelAr": ""
+            },
+            {
+              "label": "Marinara",
+              "labelAr": ""
+            },
+            {
+              "label": "Lemon & herbs",
+              "labelAr": ""
+            },
+            {
+              "label": "Nacho cheese",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-beef-quesadilla",
+      "english": {
+        "name": "Wagyu Beef Quesadilla",
+        "description": "Premium 150g of Wagyu minced beef wrapped in warm tortilla bread, layered with melted American cheese, a mix of shredded cheeses, grilled green capsicum, and sweet white onions. Finished with a rich drizzle of nacho cheese and served with golden French fries, ketchup, and a fresh lemon wedge on the side. Indulgent, cheesy, and irresistibly satisfying."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "wagyu-kofta-with-cheese",
+      "english": {
+        "name": "Wagyu Kofta with Cheese",
+        "description": "Wagyu kofta with mozzarella stuffing served alongside crispy fries ketchup, and fresh lemon wedges. The richness of premium Wagyu beef combined with gooey melted mozzarella creates an indulgent experience while fries and ketchup add familiar comfort. Bright lemon wedges cut through the richness with a burst of acidity for perfect balance."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "creamy-mushroom-chicken-sauce-with-mashed-potato",
+      "english": {
+        "name": "Creamy Mushroom Chicken Sauce With Mashed Potato",
+        "description": "Enjoy our classic 120g grilled chicken breast topped with rich creamy mushroom sauce and served with smooth comforting mashed potatoes. A timeless hearty dish crafted with care and flavor. Protein 41.21g carbs 23.2g calories 353"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-beef-tenderloin",
+      "english": {
+        "name": "Grilled Beef Tenderloin",
+        "description": "Seasoned grilled beef tenderloin 120 grams served with steamed vegetables and steamed rice 100 grams, green olives sauce on the side protein 29, carb 41, and calories 412"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "grilled-chicken-breast",
+      "english": {
+        "name": "Grilled Chicken Breast",
+        "description": "Pure grilled chicken breast 120 grams served with vegetables and steamed rice 100 grams, green olives sauce on the side; protein 35, carb 41, and calories 518."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "baked-salmon",
+      "english": {
+        "name": "Baked Salmon",
+        "description": "Seasoned baked salmon fish 120 grams served with boiled vegetables and steamed white rice 100 grams."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "healthy-chicken-shawarma",
+      "english": {
+        "name": "Healthy Chicken Shawarma",
+        "description": "Marinated grilled healthy chicken shawarma with tahini sauce in brown tortilla bread, in our healthy mix served with baked fresh potato wedges slices, pickles and marinara sauce, carbs 51, protein 45, calories 556"
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "menuItem",
+      "key": "mushroom-sauce-beef-with-mashed-potato",
+      "english": {
+        "name": "Mushroom Sauce Beef With Mashed Potato",
+        "description": "Grilled marinated beef tenderloin 120 grams with healthy mushroom sauce and mashed potato carbs 31 protein 30 calories 443."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": [
+        {
+          "name": "Meat Doneness",
+          "nameAr": "",
+          "choices": [
+            {
+              "label": "Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Rare",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium",
+              "labelAr": ""
+            },
+            {
+              "label": "Medium Well",
+              "labelAr": ""
+            },
+            {
+              "label": "Well Done",
+              "labelAr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "menuItem",
+      "key": "healthy-beef-tendeloin-shawarma-wrap",
+      "english": {
+        "name": "Healthy Beef Tendeloin Shawarma Wrap",
+        "description": "Marinated grilled no fat beef shawarma with tahini sauce in brown tortilla , in our healthy mix served with baked fresh potato wedges, pickles and Marinara Sauce, carbs 51, protein 30, calories 494."
+      },
+      "arabic": {
+        "nameAr": "",
+        "descriptionAr": ""
+      },
+      "options": []
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Chimichuri Sauce",
+      "english": {
+        "name": "Chimichuri Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cowboy Sauce",
+      "english": {
+        "name": "Cowboy Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Entrecote Sauce",
+      "english": {
+        "name": "Entrecote Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Jalapeno",
+      "english": {
+        "name": "Homemade Jalapeno",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Pickled Onions",
+      "english": {
+        "name": "Homemade Pickled Onions",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Homemade Pickles",
+      "english": {
+        "name": "Homemade Pickles",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Lemon & Herbs Sauce",
+      "english": {
+        "name": "Lemon & Herbs Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Lemon Pepper Sauce",
+      "english": {
+        "name": "Lemon Pepper Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Marinara Sauce",
+      "english": {
+        "name": "Marinara Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mushroom & Truffle Sauce",
+      "english": {
+        "name": "Mushroom & Truffle Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mushroom Sauce",
+      "english": {
+        "name": "Mushroom Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Nacho Cheese",
+      "english": {
+        "name": "Nacho Cheese",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Sour Cream",
+      "english": {
+        "name": "Sour Cream",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Special BBQ Sauce",
+      "english": {
+        "name": "Special BBQ Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy BBQ Sauce",
+      "english": {
+        "name": "Spicy BBQ Sauce",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy Shatta",
+      "english": {
+        "name": "Spicy Shatta",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Spicy Tahina",
+      "english": {
+        "name": "Spicy Tahina",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Steak Seasoning",
+      "english": {
+        "name": "Steak Seasoning",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Tabasco 3.7ml",
+      "english": {
+        "name": "Tabasco 3.7ml",
+        "category": "sauce"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cajun Potato Wedges",
+      "english": {
+        "name": "Cajun Potato Wedges",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Cheesy Baked Potato",
+      "english": {
+        "name": "Cheesy Baked Potato",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mac & Cheese",
+      "english": {
+        "name": "Mac & Cheese",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mashed Potato",
+      "english": {
+        "name": "Mashed Potato",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Mexican Rice",
+      "english": {
+        "name": "Mexican Rice",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Potato Fries",
+      "english": {
+        "name": "Potato Fries",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "optionLibraryItem",
+      "key": "Sauted Vegetables",
+      "english": {
+        "name": "Sauted Vegetables",
+        "category": "side"
+      },
+      "arabic": {
+        "nameAr": ""
+      }
+    },
+    {
+      "type": "branch",
+      "key": "madinat-khalifa",
+      "english": {
+        "name": "Madinat Khalifa",
+        "address": "Madinat Khalifa South, Street 340, Doha, Qatar",
+        "openingHours": "Sat–Wed: 12:00 PM – 1:00 AM | Thu–Fri: 12:00 PM – 2:00 AM"
+      },
+      "arabic": {
+        "nameAr": "",
+        "addressAr": "",
+        "openingHoursAr": ""
+      }
+    },
+    {
+      "type": "branch",
+      "key": "centro",
+      "english": {
+        "name": "Centro",
+        "address": "Centro Mall, Al Muntazah, Doha, Qatar",
+        "openingHours": "Sat–Wed: 12:00 PM – 1:00 AM | Thu–Fri: 12:00 PM – 2:00 AM"
+      },
+      "arabic": {
+        "nameAr": "",
+        "addressAr": "",
+        "openingHoursAr": ""
+      }
+    },
+    {
+      "type": "settings",
+      "key": "singleton",
+      "english": {
+        "aboutText": "about text will come here"
+      },
+      "arabic": {
+        "aboutTextAr": ""
+      }
+    }
+  ]
+}
