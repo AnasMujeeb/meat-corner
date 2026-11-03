@@ -110,25 +110,19 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
     }
     document.addEventListener("keydown", handleKeyDown);
 
-    // Freeze background body scroll position for iOS Safari and mobile browsers
+    // Lock scroll without position:fixed (avoids scroll-jump on close)
     const scrollY = window.scrollY;
     const prevOverflow = document.body.style.overflow;
-    const prevPosition = document.body.style.position;
-    const prevTop = document.body.style.top;
-    const prevWidth = document.body.style.width;
+    const prevDocOverflow = document.documentElement.style.overflowY;
 
     document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
+    document.documentElement.style.overflowY = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = prevOverflow;
-      document.body.style.position = prevPosition;
-      document.body.style.top = prevTop;
-      document.body.style.width = prevWidth;
-      window.scrollTo(0, scrollY);
+      document.documentElement.style.overflowY = prevDocOverflow;
+      window.scrollTo({ top: scrollY, behavior: "instant" });
     };
   }, [onClose]);
 
