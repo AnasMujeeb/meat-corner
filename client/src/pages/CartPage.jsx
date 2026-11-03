@@ -33,7 +33,7 @@ function getLocalizedOptionNote(item, lang) {
 }
 
 export default function CartPage({ _settings }) {
-  const { items, totalPrice, totalQty, setQty, removeItem, clear } = useCart();
+  const { items, totalQty, setQty, removeItem, clear } = useCart();
   const { t, lang } = useLanguage();
   const [tableNumber, setTableNumber] = useState("");
   const [orderNotes, setOrderNotes] = useState("");
@@ -220,18 +220,9 @@ export default function CartPage({ _settings }) {
               </div>
 
               <div className="cart-summary-totals">
-                <div className="cart-summary-totals__row">
-                  <span>{t("cart.subtotal", { count: totalQty })}</span>
-                  <span>{currency} {totalPrice}</span>
-                </div>
-                <div className="cart-summary-totals__row">
+                <div className="cart-summary-totals__row" style={{ marginBottom: 0 }}>
                   <span>{t("cart.serviceTax")}</span>
                   <span>{t("cart.included")}</span>
-                </div>
-                <div className="cart-summary-totals__divider" />
-                <div className="cart-summary-totals__final">
-                  <span>{t("cart.totalCaps")}</span>
-                  <span className="cart-summary-totals__price">{currency} {totalPrice}</span>
                 </div>
               </div>
 
@@ -306,13 +297,6 @@ export default function CartPage({ _settings }) {
                 <div className="waiter-modal-card__notes-body">{orderNotes}</div>
               </div>
             )}
-
-            <div className="waiter-modal-card__total-wrap">
-              <span className="waiter-modal-card__total-lbl">{t("cart.totalAmount")}</span>
-              <span className="waiter-modal-card__total-val">
-                {currency} {totalPrice}
-              </span>
-            </div>
 
             <button
               className="btn btn--dark btn--full"

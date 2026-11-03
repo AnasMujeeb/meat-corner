@@ -78,9 +78,8 @@ function CartItem({ item }) {
 }
 
 export default function CartDrawer({ open, onClose }) {
-  const { items, totalPrice } = useCart();
-  const { t, lang } = useLanguage();
-  const currency = getCurrency(lang);
+  const { items } = useCart();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -125,12 +124,6 @@ export default function CartDrawer({ open, onClose }) {
 
         {items.length > 0 && (
           <div className="cart-drawer__footer">
-            <div className="cart-drawer__total-row">
-              <span className="cart-drawer__total-label">{t("cart.total") || "Total"}</span>
-              <span className="cart-drawer__total-price" style={{ display: "inline-block" }}>
-                {currency} {totalPrice}
-              </span>
-            </div>
             <Link to="/cart" className="btn btn--primary btn--full" onClick={onClose}>
               {t("cart.showWaiter") || "SHOW TO WAITER"}
             </Link>

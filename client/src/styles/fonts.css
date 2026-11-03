@@ -21,6 +21,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Klapt';
+  src: url('/fonts/Klapt-Medium.otf') format('opentype'),
+       url('../assets/fonts/Klapt-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --font-heading: 'OCR A Extended', 'OCRAEXT', 'Space Mono', monospace;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
