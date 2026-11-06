@@ -66,40 +66,10 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use(cookieParser());
 
-// ─── Lazy DB Connection ───────────────────────────────────────────────────────
-app.use(async (_req, _res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
-
 // ─── Logging ──────────────────────────────────────────────────────────────────
 if (env.NODE_ENV !== 'test') {
   app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 }
-
-// ─── Global rate limit (all API routes) ──────────────────────────────────────
-const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: env.NODE_ENV === 'production' ? 300 : 5000,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { success: false, message: 'Too many requests, please try again later.' },
-});
-
-// Stricter limiter for auth endpoint
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 20,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { success: false, message: 'Too many login attempts. Please try again in 15 minutes.' },
-});
-
-app.use('/api', globalLimiter);
 
 // ─── Static uploads (local disk only, never on Vercel) ────────────────────────
 const isVercel = Boolean(process.env.VERCEL);
@@ -116,13 +86,56 @@ if (!isVercel && !env.BLOB_READ_WRITE_TOKEN) {
   );
 }
 
-// ─── Health check ─────────────────────────────────────────────────────────────
+// ─── Health check (no DB or limiter required) ────────────────────────────────
 app.get('/api/health', (_req, res) => {
   res.json({ success: true, status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// ─── Rate Limiters ────────────────────────────────────────────────────────────
+// Auth endpoint: strict limiter against brute force
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many login attempts. Please try again in 15 minutes.' },
+});
+
+// Public GET routes: generous for shared IPs (WiFi / mobile carriers)
+const publicGetLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: env.NODE_ENV === 'production' ? 600 : 10000,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => req.method !== 'GET' && req.method !== 'HEAD',
+  message: { success: false, message: 'Too many requests, please try again later.' },
+});
+
+// Admin routes: generous limit for backoffice management
+const adminLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: env.NODE_ENV === 'production' ? 1000 : 10000,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many requests, please try again later.' },
+});
+
+app.use('/api/auth', authLimiter);
+app.use('/api/public', publicGetLimiter);
+app.use('/api/admin', adminLimiter);
+
+// ─── Lazy DB Connection (runs only after rate limiters) ───────────────────────
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // ─── Routes ───────────────────────────────────────────────────────────────────
-app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/public', publicRoutes);
 app.use('/api/admin', requireAdmin, adminRoutes);
 

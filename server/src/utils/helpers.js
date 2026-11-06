@@ -14,7 +14,7 @@ import { createHash } from 'crypto';
  * @returns {boolean} - true if 304 was sent
  */
 export function setCacheHeaders(req, res, data, maxAgeSeconds = 60, staleWhileRevalidate = 30) {
-  res.set('Cache-Control', `public, max-age=${maxAgeSeconds}, stale-while-revalidate=${staleWhileRevalidate}`);
+  res.set('Cache-Control', `public, max-age=0, s-maxage=${maxAgeSeconds}, stale-while-revalidate=${staleWhileRevalidate}`);
 
   // Generate a strong ETag from the serialized response data
   const body = JSON.stringify(data);
