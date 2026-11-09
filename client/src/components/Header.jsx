@@ -44,9 +44,6 @@ export default function Header({ onCartOpen }) {
               <img
                 src={settings.logo}
                 alt={settings.brandName || "Meat Corner"}
-                width="76"
-                height="48"
-                decoding="async"
               />
             ) : (
               <span className="site-header__brand-fallback">MEAT CORNER</span>

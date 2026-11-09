@@ -42,10 +42,7 @@ function CartItem({ item }) {
           src={img.thumbUrl || img.url}
           alt={itemName}
           className="cart-item__img"
-          width="60"
-          height="60"
           loading="lazy"
-          decoding="async"
         />
       ) : (
         <div className="cart-item__img-placeholder" aria-hidden="true" />

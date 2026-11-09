@@ -125,10 +125,6 @@ export default function CartPage({ _settings }) {
                         src={img.thumbUrl || img.url}
                         alt={itemName}
                         className="cart-card-item__img"
-                        width="72"
-                        height="72"
-                        loading="lazy"
-                        decoding="async"
                       />
                     ) : (
                       <div className="cart-card-item__placeholder">

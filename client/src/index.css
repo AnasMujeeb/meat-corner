@@ -3935,7 +3935,6 @@ h1, h2, h3, h4, h5, h6 {
   align-items: start;
 }
 
-.site-footer__col h3,
 .site-footer__col h4 {
   font-family: var(--font-heading);
   font-size: 13px;
@@ -3951,7 +3950,6 @@ h1, h2, h3, h4, h5, h6 {
   align-items: flex-start;
 }
 
-.site-footer__col h3 + *,
 .site-footer__col h4 + * {
   margin-top: 0;
 }

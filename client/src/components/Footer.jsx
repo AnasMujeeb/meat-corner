@@ -145,10 +145,6 @@ export default function Footer({ settings: propSettings }) {
                 src={settings.logo}
                 alt={settings.brandName || "Meat Corner"}
                 className="site-footer__logo"
-                width="120"
-                height="76"
-                loading="lazy"
-                decoding="async"
               />
             ) : (
               <strong className="site-footer__brand-title">
@@ -186,7 +182,7 @@ export default function Footer({ settings: propSettings }) {
 
             {/* Distinct "To Place Order" section with vibrant delivery platform logos */}
             <div className="site-footer__order-group">
-              <h3 className="site-footer__group-title">{t("footer.order")}</h3>
+              <h4 className="site-footer__group-title">{t("footer.order")}</h4>
               <div className="site-footer__delivery-list" aria-label={t("footer.orderPlatformsAria")}>
                 {/* Talabat logo */}
                 {talabatUrl ? (
@@ -202,7 +198,6 @@ export default function Footer({ settings: propSettings }) {
                   </a>
                 ) : (
                   <span
-                    role="img"
                     className="site-footer__brand-badge site-footer__brand-badge--static"
                     title="Talabat"
                     aria-label="Talabat"
@@ -227,7 +222,6 @@ export default function Footer({ settings: propSettings }) {
 
                 {/* Keeta logo: rendered without anchor tag */}
                 <span
-                  role="img"
                   className="site-footer__brand-badge site-footer__brand-badge--static"
                   title="Keeta"
                   aria-label="Keeta"
@@ -239,7 +233,7 @@ export default function Footer({ settings: propSettings }) {
           </div>
 
           <div className="site-footer__col">
-            <h3>{t("footer.explore") || "Explore"}</h3>
+            <h4>{t("footer.explore") || "Explore"}</h4>
             <nav className="site-footer__nav-links" aria-label={t("footer.exploreAria")}>
               <Link to="/menu">{t("nav.menu") || "Menu"}</Link>
               <Link to="/healthy">{t("nav.healthy") || "Healthy"}</Link>
@@ -249,7 +243,7 @@ export default function Footer({ settings: propSettings }) {
           </div>
 
           <div className="site-footer__col">
-            <h3>{t("footer.visit") || "Visit"}</h3>
+            <h4>{t("footer.visit") || "Visit"}</h4>
             {branches.length > 0 ? (
               branches.map((b) => (
                 <a
@@ -278,7 +272,7 @@ export default function Footer({ settings: propSettings }) {
           </div>
 
           <div className="site-footer__col">
-            <h3>{t("footer.order") || "To Place Order"}</h3>
+            <h4>{t("footer.order") || "To Place Order"}</h4>
             {talabatUrl && (
               <a href={talabatUrl} target="_blank" rel="noopener noreferrer">
                 Talabat ↗

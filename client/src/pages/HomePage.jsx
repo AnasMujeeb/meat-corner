@@ -139,7 +139,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
         >
           <LazyVideo
             src="/videos/secondvideo.mp4"
-            poster={settings?.heroPoster || "/posters/secondvideo.webp"}
+            poster={settings?.heroPoster || "/posters/secondvideo.jpg"}
             className="w-full h-full object-cover"
           />
 
@@ -187,19 +187,19 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                     {idx === 0 ? (
                       <LazyVideo
                         src="/videos/fromthekitchen-540p.mp4"
-                        poster="/posters/fromthekitchen.webp"
+                        poster="/posters/fromthekitchen.jpg"
                         className="w-full h-full object-cover"
                       />
                     ) : idx === 1 ? (
                       <LazyVideo
                         src="/videos/selection-540p.mp4"
-                        poster="/posters/selection.webp"
+                        poster="/posters/selection.jpg"
                         className="w-full h-48 md:h-64 object-cover rounded-t-lg"
                       />
                     ) : idx === 2 || card.title === "THE GATHERING" ? (
                       <LazyVideo
                         src="/videos/img3129-540p.mp4"
-                        poster="/posters/img3129.webp"
+                        poster="/posters/img3129.jpg"
                         className="w-full h-full object-cover"
                       />
                     ) : card.video ? (
@@ -325,7 +325,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
         <ScrollReveal className="story-split__media h-full min-h-0" delay={0.05}>
           <LazyVideo
             src="/videos/img3084-540p.mp4"
-            poster="/posters/img3084.webp"
+            poster="/posters/img3084.jpg"
             className="w-full h-full object-cover"
           />
         </ScrollReveal>
