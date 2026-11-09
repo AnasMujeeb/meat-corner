@@ -83,6 +83,10 @@ export default function CateringPage() {
           alt=""
           className="catering-coming-soon__backdrop"
           aria-hidden="true"
+          width="1600"
+          height="900"
+          loading="eager"
+          decoding="async"
         />
         <div className="catering-coming-soon__shade" aria-hidden="true" />
 
@@ -183,7 +187,15 @@ export default function CateringPage() {
 
       <section className="story-split" aria-label={t("catering.split.aria")}>
         <ScrollReveal className="story-split__media" delay={0.05} y={20}>
-          <img src="/uploads/processed/shashlik-tenderloin.webp" alt={t("catering.split.imgAlt")} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <img
+            src="/uploads/processed/shashlik-tenderloin.webp"
+            alt={t("catering.split.imgAlt")}
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </ScrollReveal>
         <ScrollReveal className="story-split__content" delay={0.15} y={20}>
           <span className="eyebrow">{t("catering.split.eyebrow")}</span>

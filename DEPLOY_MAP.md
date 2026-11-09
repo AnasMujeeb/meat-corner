@@ -37,7 +37,7 @@ Meat Corner Code/
 │   ├── public/
 │   │   ├── favicon.svg       (244 B)
 │   │   ├── pictures/         7 JPEG (balanced meals, crafts, family*, kids)
-│   │   ├── posters/          5 JPEG (video poster frames)
+│   │   ├── posters/          5 WebP (video poster frames)
 │   │   └── videos/           18 video files (MOV/MP4)
 │   └── src/
 │       ├── api/              queries.js
@@ -248,11 +248,11 @@ All social icons (Instagram, TikTok, WhatsApp, Talabat, Snoonu, Keeta) are **inl
 
 | File | Size | Used by | Exists? | Gitignored? |
 |------|------|---------|---------|-------------|
-| `posters/secondvideo.jpg` | 176 KB | `HomePage.jsx` hero poster | YES | No |
-| `posters/fromthekitchen.jpg` | 191 KB | `HomePage.jsx` story card 0 poster | YES | No |
-| `posters/selection.jpg` | 217 KB | `HomePage.jsx` story card 1 poster | YES | No |
-| `posters/img3129.jpg` | 260 KB | `HomePage.jsx` story card 2 poster | YES | No |
-| `posters/img3084.jpg` | 231 KB | `HomePage.jsx` story split poster | YES | No |
+| `posters/secondvideo.webp` | ~28 KB | `HomePage.jsx` hero poster | YES | No |
+| `posters/fromthekitchen.webp` | ~33 KB | `HomePage.jsx` story card 0 poster | YES | No |
+| `posters/selection.webp` | ~34 KB | `HomePage.jsx` story card 1 poster | YES | No |
+| `posters/img3129.webp` | ~48 KB | `HomePage.jsx` story card 2 poster | YES | No |
+| `posters/img3084.webp` | ~44 KB | `HomePage.jsx` story split poster | YES | No |
 
 > Note: `settings.heroPoster` (from DB / SiteSettings) can override the hero poster at runtime.
 
