@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useMenu, useCategories, useBranches, useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { localized } from "../utils/localization.js";
+import { FEATURES } from "../config/features.js";
 import ItemModal from "../components/ItemModal.jsx";
 import FoodCard from "../components/FoodCard.jsx";
 import LazyVideo from "../components/LazyVideo.jsx";
@@ -81,10 +82,16 @@ function StaggerItem({ children, className = "", delay = 0, as: Tag = "div", ...
 }
 
 function TickerStrip() {
+  const filteredTicker = TICKER_ITEMS.filter((item) => {
+    if (!FEATURES.healthyPage && item === "HEALTHY DISHES") return false;
+    if (!FEATURES.kidsPage && item === "KIDS MENU") return false;
+    return true;
+  });
+
   return (
     <div className="promo-ticker" aria-hidden="true">
       <div className="promo-ticker__track">
-        {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+        {[...filteredTicker, ...filteredTicker, ...filteredTicker].map((item, i) => (
           <span key={i}>{item}</span>
         ))}
       </div>

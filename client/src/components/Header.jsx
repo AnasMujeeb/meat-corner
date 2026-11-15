@@ -4,12 +4,13 @@ import { useCart } from "../hooks/useCart.js";
 import { useSettings } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { useMode } from "../hooks/useMode.js";
+import { FEATURES } from "../config/features.js";
 
-const NAV = [
+const ALL_NAV = [
   { to: "/",         key: "nav.home",    defaultLabel: "Home"      },
   { to: "/menu",     key: "nav.menu",    defaultLabel: "Menu"      },
-  { to: "/healthy",  key: "nav.healthy", defaultLabel: "Healthy"   },
-  { to: "/kids",     key: "nav.kids",    defaultLabel: "Kids"      },
+  { to: "/healthy",  key: "nav.healthy", defaultLabel: "Healthy",   feature: "healthyPage" },
+  { to: "/kids",     key: "nav.kids",    defaultLabel: "Kids",      feature: "kidsPage"    },
   // { to: "/catering", key: "nav.catering", defaultLabel: "Catering" },
   { to: "/story",    key: "nav.story",   defaultLabel: "Our Story" },
   { to: "/contact",  key: "nav.contact", defaultLabel: "Contact"   },
@@ -24,6 +25,7 @@ export default function Header({ onCartOpen }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuHref = mode ? `/menu/${mode}` : "/menu";
+  const navItems = ALL_NAV.filter(item => !item.feature || FEATURES[item.feature]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -52,7 +54,7 @@ export default function Header({ onCartOpen }) {
 
           {/* Desktop Nav */}
           <nav className="site-header__nav" aria-label={t("header.mainNavAria")}>
-            {NAV.map(({ to, key, defaultLabel }) => {
+            {navItems.map(({ to, key, defaultLabel }) => {
               const targetHref = to === "/menu" ? menuHref : to;
               const isActive = to === "/menu" ? pathname.startsWith("/menu") : pathname === to;
               return (
@@ -133,7 +135,7 @@ export default function Header({ onCartOpen }) {
           </div>
 
           <div className="mobile-nav-panel__links">
-            {NAV.map(({ to, key, defaultLabel }) => {
+            {navItems.map(({ to, key, defaultLabel }) => {
               const targetHref = to === "/menu" ? menuHref : to;
               const isActive = to === "/menu" ? pathname.startsWith("/menu") : pathname === to;
               return (

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSettings, useBranches } from "../api/queries.js";
 import { useLanguage } from "../hooks/useLanguage.js";
 import { localized } from "../utils/localization.js";
+import { FEATURES } from "../config/features.js";
 
 function InstagramIcon({ size = 36 }) {
   return (
@@ -236,8 +237,8 @@ export default function Footer({ settings: propSettings }) {
             <h4>{t("footer.explore") || "Explore"}</h4>
             <nav className="site-footer__nav-links" aria-label={t("footer.exploreAria")}>
               <Link to="/menu">{t("nav.menu") || "Menu"}</Link>
-              <Link to="/healthy">{t("nav.healthy") || "Healthy"}</Link>
-              <Link to="/kids">{t("nav.kids") || "Kids"}</Link>
+              {FEATURES.healthyPage && <Link to="/healthy">{t("nav.healthy") || "Healthy"}</Link>}
+              {FEATURES.kidsPage && <Link to="/kids">{t("nav.kids") || "Kids"}</Link>}
               {/* <Link to="/catering">Catering</Link> */}
             </nav>
           </div>

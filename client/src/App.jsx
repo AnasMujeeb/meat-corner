@@ -5,6 +5,7 @@ import { CartProvider } from "./context/CartProvider.jsx";
 import { LanguageProvider } from "./context/LanguageProvider.jsx";
 import { ModeProvider, useMode } from "./context/ModeProvider.jsx";
 import { useLanguage } from "./hooks/useLanguage.js";
+import { FEATURES } from "./config/features.js";
 
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -81,8 +82,8 @@ function AppContent() {
               <Route path="/menu" element={<MenuPage />} />
               <Route path="/menu/dine-in" element={<MenuPage initialMode="dine-in" />} />
               <Route path="/menu/delivery" element={<MenuPage initialMode="delivery" />} />
-              <Route path="/healthy" element={<HealthyPage />} />
-              <Route path="/kids" element={<KidsPage />} />
+              <Route path="/healthy" element={FEATURES.healthyPage ? <HealthyPage /> : <Navigate to="/menu" replace />} />
+              <Route path="/kids" element={FEATURES.kidsPage ? <KidsPage /> : <Navigate to="/menu" replace />} />
               <Route path="/catering" element={<CateringPage />} />
               <Route path="/story" element={<StoryPage />} />
               <Route path="/contact" element={<ContactPage />} />

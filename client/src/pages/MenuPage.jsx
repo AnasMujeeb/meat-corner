@@ -20,6 +20,7 @@ import {
 import { LUXURY_EASE } from "../components/motion/motionTokens.js";
 import { MENU_CONTENT } from "../content/menu.js";
 import { BADGES } from "../constants/badges.js";
+import { FEATURES } from "../config/features.js";
 
 const QUICK_TAGS = [
   { id: "all", labelKey: "menu.tagAll" },
@@ -382,7 +383,11 @@ export default function MenuPage({ initialMode }) {
             transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
           >
             <div className="site-container quick-tags-bar__inner">
-              {QUICK_TAGS.map((tag) => {
+              {QUICK_TAGS.filter((tag) => {
+                if (!FEATURES.healthyPage && tag.id === "healthy") return false;
+                if (!FEATURES.kidsPage && tag.id === "kids") return false;
+                return true;
+              }).map((tag) => {
                 const isSelected = (!tagParam && tag.id === "all") || tagParam === tag.id;
                 return (
                   <button
