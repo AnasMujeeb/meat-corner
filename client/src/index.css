@@ -1577,6 +1577,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Sticky Category & Quick Tags Wrapper */
+.menu-sticky {
+  position: sticky;
+  top: var(--navh, 64px);
+  z-index: 30;
+}
+
 /* Category Filter Bar */
 .category-bar {
   display: flex;
@@ -1588,10 +1595,6 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid var(--line);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Sticky so the filter bar stays accessible while scrolling the menu grid */
-  position: sticky;
-  top: var(--navh, 64px);
-  z-index: 30;
 }
 
 .category-bar::-webkit-scrollbar {
@@ -1664,16 +1667,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
   background: var(--white);
-  /* Sticky just below the category bar */
-  position: sticky;
-  top: calc(var(--navh, 64px) + 44px + 2px); /* navh + category-bar height + borders */
-  z-index: 29;
-}
-
-@media (max-width: 760px) {
-  .quick-tags-bar {
-    top: calc(var(--navh, 64px) + 40px + 2px);
-  }
 }
 
 .quick-tags-bar__inner {
@@ -4924,6 +4917,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── OCR font: reduce letter-spacing on mobile so text fits ──────────────── */
 @media (max-width: 760px) {
+  .site-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: background var(--ease), box-shadow var(--ease);
+  }
+
   .eyebrow {
     letter-spacing: 0.1em;
   }

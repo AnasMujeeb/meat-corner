@@ -55,6 +55,9 @@ export default function MenuPage({ initialMode }) {
   // Tracks whether we are mid-transition between filter changes (show skeleton, not empty state)
   const [isTransitioning, setIsTransitioning] = useState(false);
   const transitionTimerRef = useRef(null);
+  const menuStickyRef = useRef(null);
+  const listContainerRef = useRef(null);
+  const isFirstMountRef = useRef(true);
 
   const { data: settings } = useSettings();
   const { data: categories = [], isLoading: _catsLoading } = useCategories();
@@ -91,6 +94,31 @@ export default function MenuPage({ initialMode }) {
       transitionTimerRef.current = setTimeout(() => setIsTransitioning(false), 5000);
     }
   }, [currentKey, lastQueryKey]);
+
+  // Reset scroll to list start on category change if scrolled past it
+  useEffect(() => {
+    if (isFirstMountRef.current) {
+      isFirstMountRef.current = false;
+      return;
+    }
+    const menuStickyEl = menuStickyRef.current;
+    const listEl = listContainerRef.current;
+    if (!menuStickyEl || !listEl) return;
+
+    const stickyBottom = menuStickyEl.getBoundingClientRect().bottom;
+    const listTop = listEl.getBoundingClientRect().top;
+
+    if (listTop < stickyBottom) {
+      const html = document.documentElement;
+      const prevBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+      window.scrollTo({
+        top: window.scrollY + listTop - stickyBottom,
+        behavior: "auto",
+      });
+      html.style.scrollBehavior = prevBehavior;
+    }
+  }, [categoryParam]);
 
   // Track fetch completion: clear transitioning state when fetch has genuinely resolved
   const isFetchingRef = useRef(isFetching);
@@ -338,15 +366,12 @@ export default function MenuPage({ initialMode }) {
           </div>
         </motion.div>
       ) : (
-        <>
+        <div className="menu-sticky" ref={menuStickyRef}>
           {/* ── Category Filter Strip ─────────────────────────────────────── */}
-          <motion.div
+          <div
             className="category-bar"
             role="tablist"
             aria-label={t("menu.categoriesAria")}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: LUXURY_EASE }}
           >
             <button
               type="button"
@@ -373,15 +398,10 @@ export default function MenuPage({ initialMode }) {
                 {localized(cat, "name", lang)}
               </button>
             ))}
-          </motion.div>
+          </div>
 
           {/* ── Quick Tags Strip ────────────────────────────────────────── */}
-          <motion.div
-            className="quick-tags-bar"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
-          >
+          <div className="quick-tags-bar">
             <div className="site-container quick-tags-bar__inner">
               {QUICK_TAGS.filter((tag) => {
                 if (!FEATURES.healthyPage && tag.id === "healthy") return false;
@@ -403,12 +423,12 @@ export default function MenuPage({ initialMode }) {
                 );
               })}
             </div>
-          </motion.div>
-        </>
+          </div>
+        </div>
       )}
 
       {/* ── Menu Grid Listing ────────────────────────────────────────── */}
-      <section className="site-section site-section--menu-list">
+      <section className="site-section site-section--menu-list" ref={listContainerRef}>
         <div className="site-container">
           {/* Show skeleton during initial load, active filter transition, or fetch */}
           {(itemsLoading && page === 1) || isTransitioning || (isFetching && page === 1 && filteredItems.length === 0) ? (
