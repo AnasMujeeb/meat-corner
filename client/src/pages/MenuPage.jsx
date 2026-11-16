@@ -338,15 +338,12 @@ export default function MenuPage({ initialMode }) {
           </div>
         </motion.div>
       ) : (
-        <>
+        <div className="menu-sticky">
           {/* ── Category Filter Strip ─────────────────────────────────────── */}
-          <motion.div
+          <div
             className="category-bar"
             role="tablist"
             aria-label={t("menu.categoriesAria")}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: LUXURY_EASE }}
           >
             <button
               type="button"
@@ -373,15 +370,10 @@ export default function MenuPage({ initialMode }) {
                 {localized(cat, "name", lang)}
               </button>
             ))}
-          </motion.div>
+          </div>
 
           {/* ── Quick Tags Strip ────────────────────────────────────────── */}
-          <motion.div
-            className="quick-tags-bar"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: LUXURY_EASE }}
-          >
+          <div className="quick-tags-bar">
             <div className="site-container quick-tags-bar__inner">
               {QUICK_TAGS.filter((tag) => {
                 if (!FEATURES.healthyPage && tag.id === "healthy") return false;
@@ -403,8 +395,8 @@ export default function MenuPage({ initialMode }) {
                 );
               })}
             </div>
-          </motion.div>
-        </>
+          </div>
+        </div>
       )}
 
       {/* ── Menu Grid Listing ────────────────────────────────────────── */}
