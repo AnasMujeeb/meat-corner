@@ -260,6 +260,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                       item={item}
                       index={index + 1}
                       categoryName={catLocalizedName}
+                      showPrice={false}
                       onSelect={(it) => {
                         setSelectedItem(it);
                         setSelectedCat(catLocalizedName);

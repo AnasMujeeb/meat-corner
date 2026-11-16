@@ -5162,6 +5162,10 @@ h1, h2, h3, h4, h5, h6 {
   gap: 10px !important;
 }
 
+.food-card__footer--no-price {
+  justify-content: flex-end !important;
+}
+
 .food-card__price {
   white-space: nowrap !important;
   flex-shrink: 0 !important;
