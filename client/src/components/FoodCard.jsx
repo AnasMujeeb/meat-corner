@@ -22,6 +22,7 @@ function FoodCard({
   onSelect,
   onAdd,
   onBadgeClick,
+  showPrice = true,
 }) {
   const { addItem } = useCart();
   const { t, lang } = useLanguage();
@@ -103,7 +104,11 @@ function FoodCard({
         onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
-        aria-label={t("foodCard.itemAria", { name: itemName, price: priceFormatted })}
+        aria-label={
+          showPrice
+            ? t("foodCard.itemAria", { name: itemName, price: priceFormatted })
+            : itemName
+        }
       >
         <div className="food-card__media">
           {defaultImg ? (
@@ -175,8 +180,16 @@ function FoodCard({
             )}
           </div>
 
-          <div className="food-card__footer">
-            <span className="food-card__price">{currency} {priceFormatted}</span>
+          <div
+            className={`food-card__footer${
+              !showPrice ? " food-card__footer--no-price" : ""
+            }`}
+          >
+            {showPrice && (
+              <span className="food-card__price">
+                {currency} {priceFormatted}
+              </span>
+            )}
             <button
               type="button"
               className="food-card__add-btn"
