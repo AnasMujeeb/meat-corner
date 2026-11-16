@@ -60,6 +60,7 @@ export default function CategoryModal({ isOpen, onClose, category }) {
     onSuccess: () => {
       toast.success(isEdit ? 'Category updated.' : 'Category created.');
       queryClient.invalidateQueries({ queryKey: ['categories'] });
+      queryClient.invalidateQueries({ queryKey: ['menu'] });
       onClose();
     },
     onError: (err) => {
