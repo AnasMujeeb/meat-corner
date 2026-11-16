@@ -116,6 +116,33 @@ export default function HomePage({ settings: propSettings, branches: propBranche
   const videoUrl = '';
   const showStories = Boolean(STORIES_SECTION.cards && STORIES_SECTION.cards.length > 0);
 
+  // Screen size check for story split video (desktop 16:9 side-by-side vs mobile 9:16 stacked)
+  // Breakpoint matches .story-split media query: max-width 760px
+  const [isDesktopStory, setIsDesktopStory] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(min-width: 761px)").matches;
+    }
+    return true;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(min-width: 761px)");
+    const handler = (e) => setIsDesktopStory(e.matches);
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handler);
+    } else {
+      mql.addListener(handler);
+    }
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", handler);
+      } else {
+        mql.removeListener(handler);
+      }
+    };
+  }, []);
+
   return (
     <div className="home-page">
       {/* ── Hero Banner ──────────────────────────────────────────────────────── */}
@@ -260,6 +287,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
                       item={item}
                       index={index + 1}
                       categoryName={catLocalizedName}
+                      showPrice={false}
                       onSelect={(it) => {
                         setSelectedItem(it);
                         setSelectedCat(catLocalizedName);
@@ -328,11 +356,12 @@ export default function HomePage({ settings: propSettings, branches: propBranche
       </section>
 
       {/* ── Story / Split Section ────────────────────────────────────────────── */}
-      <section className="story-split story-split--home-story md:h-[400px] lg:h-[420px]" aria-label={t("home.story.aria")}>
-        <ScrollReveal className="story-split__media h-full min-h-0" delay={0.05}>
+      <section className="story-split story-split--home-story" aria-label={t("home.story.aria")}>
+        <ScrollReveal className="story-split__media" delay={0.05}>
           <LazyVideo
-            src="/videos/img3084-540p.mp4"
-            poster="/posters/img3084.jpg"
+            src={isDesktopStory ? "/videos/story-landscape.mp4" : "/videos/story-portrait.mp4"}
+            poster={isDesktopStory ? "/posters/story-landscape.jpg" : "/posters/story-portrait.jpg"}
+            preload="metadata"
             className="w-full h-full object-cover"
           />
         </ScrollReveal>

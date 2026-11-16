@@ -7,7 +7,8 @@ export const createCategorySchema = z.object({
   description: z.string().max(500).nullable().optional().transform((v) => (v ? v.trim() : '')),
   descriptionAr: z.string().max(500).nullable().optional().transform((v) => (v ? v.trim() : '')),
   image: optionalImageSourceSchema,
-  order: z.coerce.number().int().min(0).optional().default(0),
+  sortOrder: z.coerce.number().int().min(0).optional(),
+  order: z.coerce.number().int().min(0).optional(),
   isActive: z.coerce.boolean().optional().default(true),
 });
 

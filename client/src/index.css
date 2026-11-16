@@ -964,22 +964,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Home Page 'Our Story' Section Tuning ───────────────────────────────────── */
 .story-split--home-story {
-  height: 400px;
-  max-height: 400px;
+  height: auto;
+  max-height: none;
   margin-bottom: clamp(48px, 6vw, 80px);
   overflow: hidden;
 }
 
-@media (min-width: 1024px) {
-  .story-split--home-story {
-    height: 420px;
-    max-height: 420px;
-  }
-}
-
 .story-split--home-story .story-split__media {
   min-height: 0;
-  height: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
@@ -987,6 +981,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
@@ -1031,7 +1026,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.08em;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 760px) {
   .story-split--home-story {
     height: auto;
     max-height: none;
@@ -1039,8 +1034,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .story-split--home-story .story-split__media {
-    height: clamp(220px, 36vh, 280px);
-    min-height: 200px;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    max-height: 85vh;
+    height: auto;
+    min-height: 0;
   }
 
   .story-split--home-story .story-split__content {
@@ -1579,6 +1577,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Sticky Category & Quick Tags Wrapper */
+.menu-sticky {
+  position: sticky;
+  top: var(--navh, 64px);
+  z-index: 30;
+}
+
 /* Category Filter Bar */
 .category-bar {
   display: flex;
@@ -1590,10 +1595,6 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid var(--line);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  /* Sticky so the filter bar stays accessible while scrolling the menu grid */
-  position: sticky;
-  top: var(--navh, 64px);
-  z-index: 30;
 }
 
 .category-bar::-webkit-scrollbar {
@@ -1666,16 +1667,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
   background: var(--white);
-  /* Sticky just below the category bar */
-  position: sticky;
-  top: calc(var(--navh, 64px) + 44px + 2px); /* navh + category-bar height + borders */
-  z-index: 29;
-}
-
-@media (max-width: 760px) {
-  .quick-tags-bar {
-    top: calc(var(--navh, 64px) + 40px + 2px);
-  }
 }
 
 .quick-tags-bar__inner {
@@ -4926,6 +4917,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── OCR font: reduce letter-spacing on mobile so text fits ──────────────── */
 @media (max-width: 760px) {
+  .site-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: background var(--ease), box-shadow var(--ease);
+  }
+
   .eyebrow {
     letter-spacing: 0.1em;
   }
@@ -5160,6 +5157,10 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center !important;
   justify-content: space-between !important;
   gap: 10px !important;
+}
+
+.food-card__footer--no-price {
+  justify-content: flex-end !important;
 }
 
 .food-card__price {

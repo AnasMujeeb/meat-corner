@@ -4,6 +4,7 @@ import {
   getCategory,
   createCategory,
   updateCategory,
+  toggleCategoryActive,
   deleteCategory,
   reorderCategories,
 } from '../controllers/category.controller.js';
@@ -64,6 +65,7 @@ router.get('/categories', listCategories);
 router.get('/categories/:id', getCategory);
 router.post('/categories', validate(createCategorySchema), createCategory);
 router.put('/categories/:id', validate(updateCategorySchema), updateCategory);
+router.patch('/categories/:id/toggle', toggleCategoryActive);
 router.delete('/categories/:id', deleteCategory);
 router.patch('/categories/reorder', validate(reorderCategoriesSchema), reorderCategories);
 
