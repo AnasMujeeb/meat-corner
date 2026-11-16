@@ -13,6 +13,7 @@ export default function LazyVideo({
   sources = [],
   className = "",
   style = {},
+  preload = "none",
   autoPlay = true,
   loop = true,
   muted = true,
@@ -90,7 +91,7 @@ export default function LazyVideo({
       className={className}
       style={style}
       poster={poster}
-      preload="none"
+      preload={preload}
       muted={muted}
       loop={loop}
       playsInline={playsInline}
