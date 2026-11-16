@@ -9,12 +9,18 @@ import { deleteImage } from '../services/storage.js';
 // ─── Public ───────────────────────────────────────────────────────────────────
 
 export const publicListCategories = asyncHandler(async (req, res) => {
-  const categories = await Category.find({ isActive: true })
-    .select('name nameAr slug description descriptionAr image order')
-    .sort({ order: 1, createdAt: 1 })
+  const categories = await Category.find({ isActive: { $ne: false } })
+    .select('name nameAr slug description descriptionAr image sortOrder order')
+    .sort({ sortOrder: 1, order: 1, createdAt: 1 })
     .lean();
 
-  const payload = { success: true, data: categories };
+  const formatted = categories.map((c) => ({
+    ...c,
+    sortOrder: c.sortOrder ?? c.order ?? 0,
+    order: c.order ?? c.sortOrder ?? 0,
+  }));
+
+  const payload = { success: true, data: formatted };
   if (setCacheHeaders(req, res, payload, 120, 60)) return;
   res.json(payload);
 });
@@ -22,24 +28,56 @@ export const publicListCategories = asyncHandler(async (req, res) => {
 // ─── Admin – List / Get ───────────────────────────────────────────────────────
 
 export const listCategories = asyncHandler(async (req, res) => {
-  const categories = await Category.find().sort({ order: 1, createdAt: 1 }).lean();
-  res.json({ success: true, data: categories });
+  const categories = await Category.find().sort({ sortOrder: 1, order: 1, createdAt: 1 }).lean();
+
+  const itemCounts = await MenuItem.aggregate([
+    { $group: { _id: '$category', count: { $sum: 1 } } },
+  ]);
+  const countMap = new Map(itemCounts.map((i) => [String(i._id), i.count]));
+
+  const data = categories.map((c) => ({
+    ...c,
+    itemCount: countMap.get(String(c._id)) || 0,
+    sortOrder: c.sortOrder ?? c.order ?? 0,
+    order: c.order ?? c.sortOrder ?? 0,
+  }));
+
+  res.json({ success: true, data });
 });
 
 export const getCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id).lean();
   if (!category) throw createError(404, 'Category not found.');
-  res.json({ success: true, data: category });
+  res.json({
+    success: true,
+    data: {
+      ...category,
+      sortOrder: category.sortOrder ?? category.order ?? 0,
+      order: category.order ?? category.sortOrder ?? 0,
+    },
+  });
 });
 
 // ─── Admin – Create / Update / Delete ────────────────────────────────────────
 
 export const createCategory = asyncHandler(async (req, res) => {
-  const { name, ...rest } = req.body;
+  const { name, sortOrder, order, ...rest } = req.body;
   const baseSlug = toSlug(name);
   const slug = await uniqueSlug(Category, baseSlug);
 
-  const category = await Category.create({ name, slug, ...rest });
+  let resolvedSortOrder = sortOrder ?? order;
+  if (resolvedSortOrder === undefined) {
+    const lastCategory = await Category.findOne().sort({ sortOrder: -1, order: -1 }).select('sortOrder order').lean();
+    resolvedSortOrder = lastCategory ? Math.max(lastCategory.sortOrder || 0, lastCategory.order || 0) + 1 : 0;
+  }
+
+  const category = await Category.create({
+    name,
+    slug,
+    sortOrder: resolvedSortOrder,
+    order: resolvedSortOrder,
+    ...rest,
+  });
   res.status(201).json({ success: true, data: category });
 });
 
@@ -47,12 +85,17 @@ export const updateCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);
   if (!category) throw createError(404, 'Category not found.');
 
-  const { name, ...rest } = req.body;
+  const { name, sortOrder, order, slug: _ignoredSlug, ...rest } = req.body;
 
-  if (name && name !== category.name) {
-    const baseSlug = toSlug(name);
-    category.slug = await uniqueSlug(Category, baseSlug, category._id);
+  // Name updates, but slug NEVER changes on rename
+  if (name) {
     category.name = name;
+  }
+
+  if (sortOrder !== undefined || order !== undefined) {
+    const val = sortOrder ?? order;
+    category.sortOrder = val;
+    category.order = val;
   }
 
   // If image is being replaced or removed, delete old file only after saving
@@ -71,16 +114,27 @@ export const updateCategory = asyncHandler(async (req, res) => {
   res.json({ success: true, data: category });
 });
 
+export const toggleCategoryActive = asyncHandler(async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (!category) throw createError(404, 'Category not found.');
+
+  const isActive = typeof req.body.isActive === 'boolean' ? req.body.isActive : !category.isActive;
+  category.isActive = isActive;
+  await category.save();
+
+  res.json({ success: true, data: category });
+});
+
 export const deleteCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);
   if (!category) throw createError(404, 'Category not found.');
 
-  // Prevent deletion if items are assigned
+  // Refuse if category still has items
   const itemCount = await MenuItem.countDocuments({ category: category._id });
   if (itemCount > 0) {
     throw createError(
       409,
-      `Cannot delete: ${itemCount} menu item(s) are assigned to this category.`
+      `Move or delete its ${itemCount} items first, or hide the category instead.`
     );
   }
 
@@ -103,7 +157,7 @@ export const reorderCategories = asyncHandler(async (req, res) => {
   const bulkOps = ids.map((id, index) => ({
     updateOne: {
       filter: { _id: id },
-      update: { $set: { order: index } },
+      update: { $set: { sortOrder: index, order: index } },
     },
   }));
 

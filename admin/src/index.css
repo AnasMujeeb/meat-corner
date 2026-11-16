@@ -916,6 +916,25 @@ tbody tr:hover { background: #fafaf9; }
 .category-desc { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 .category-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
+.category-order-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.category-step-buttons { display: flex; flex-direction: column; gap: 2px; }
+.category-step-btn { padding: 2px; height: 20px; width: 20px; min-height: 0; min-width: 0; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+.category-step-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.category-order-badge { font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 26px; text-align: center; }
+.category-name-group { display: flex; flex-direction: column; gap: 2px; }
+.category-name-ar { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.category-meta-line { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.category-item-count { display: inline-block; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 1px 7px; font-size: 11px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; }
+.category-meta-dot { color: var(--text-muted); }
+.category-toggle-wrap { flex-shrink: 0; }
+
+@media (max-width: 640px) {
+  .category-row { flex-wrap: wrap; gap: 10px; padding: 12px; }
+  .category-info { order: 2; flex-basis: calc(100% - 130px); }
+  .category-toggle-wrap { order: 3; margin-left: auto; }
+  .category-actions { order: 4; }
+}
+
 /* ─── Form Section ───────────────────────────────────────────────────────────── */
 .form-section { margin-bottom: 28px; }
 .form-section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }

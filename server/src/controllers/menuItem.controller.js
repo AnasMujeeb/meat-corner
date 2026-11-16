@@ -20,13 +20,17 @@ export const publicListMenu = asyncHandler(async (req, res) => {
   const filter = { isAvailable: true };
 
   if (category) {
-    const cat = await Category.findOne({ slug: category, isActive: true }).select('_id').lean();
+    const cat = await Category.findOne({ slug: category, isActive: { $ne: false } }).select('_id').lean();
     if (!cat) {
       const payload = { success: true, data: [], total: 0, page: 1, totalPages: 0 };
       if (setCacheHeaders(req, res, payload, 60, 30)) return;
       return res.json(payload);
     }
     filter.category = cat._id;
+  } else {
+    // Only return items belonging to active categories
+    const activeCategories = await Category.find({ isActive: { $ne: false } }).select('_id').lean();
+    filter.category = { $in: activeCategories.map((c) => c._id) };
   }
 
   if (tag) {

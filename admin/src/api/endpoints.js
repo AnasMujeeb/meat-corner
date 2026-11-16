@@ -15,6 +15,7 @@ export const categoriesApi = {
   get: (id) => api.get(`/admin/categories/${id}`),
   create: (data) => api.post('/admin/categories', data),
   update: (id, data) => api.put(`/admin/categories/${id}`, data),
+  toggleActive: (id, isActive) => api.patch(`/admin/categories/${id}/toggle`, { isActive }),
   delete: (id) => api.delete(`/admin/categories/${id}`),
   reorder: (ids) => api.patch('/admin/categories/reorder', { ids }),
 };
