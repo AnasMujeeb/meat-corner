@@ -1,11 +1,12 @@
 import { useRef, useState } from 'react';
-import { Upload, X, Star } from 'lucide-react';
+import { Upload, X, Star, Crop } from 'lucide-react';
 import { uploadApi } from '../api/endpoints.js';
 import { compressImage } from '../utils/imageCompressor.js';
+import ImageCropperModal from './ImageCropperModal.jsx';
 import toast from 'react-hot-toast';
 
 /**
- * Multi-image uploader.
+ * Multi-image uploader with crop/adjust support.
  * value: Array<{ url, thumbUrl, alt }>
  * onChange: (images) => void
  */
@@ -15,7 +16,22 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  async function handleFiles(files) {
+  // Cropper state
+  // cropperState: { isOpen: boolean, source: File|Blob|string|null, fileName: string, queue: File[], targetIndex?: number }
+  const [cropperState, setCropperState] = useState({
+    isOpen: false,
+    source: null,
+    fileName: 'photo.jpg',
+    queue: [],
+    targetIndex: null,
+  });
+
+  async function uploadSingleFile(file, onProgress) {
+    const compressed = await compressImage(file);
+    return await uploadApi.upload(compressed, onProgress);
+  }
+
+  function handleFiles(files) {
     const rawFiles = Array.from(files);
     const hasHeic = rawFiles.some((f) => {
       const ext = f.name ? f.name.slice(f.name.lastIndexOf('.')).toLowerCase() : '';
@@ -32,24 +48,111 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
       return;
     }
 
+    // Open cropper for the first file, queue the remaining
+    const [first, ...rest] = fileArr;
+    setCropperState({
+      isOpen: true,
+      source: first,
+      fileName: first.name || 'photo.jpg',
+      queue: rest,
+      targetIndex: null,
+    });
+  }
+
+  async function handleCroppedResult(fileToUpload) {
+    const { queue, targetIndex } = cropperState;
+
+    if (targetIndex !== null && targetIndex !== undefined) {
+      // Adjusting an existing image at targetIndex
+      setCropperState({ isOpen: false, source: null, fileName: '', queue: [], targetIndex: null });
+      setUploading(true);
+      setProgress(0);
+      try {
+        const result = await uploadSingleFile(fileToUpload, setProgress);
+        const oldImg = value[targetIndex];
+        if (oldImg?.url) {
+          uploadApi.delete(oldImg.url).catch(() => {});
+        }
+        const updated = [...value];
+        updated[targetIndex] = {
+          url: result.url,
+          thumbUrl: result.thumbUrl,
+          alt: oldImg?.alt || '',
+        };
+        onChange(updated);
+        toast.success('Photo updated successfully');
+      } catch (err) {
+        toast.error(err.message || 'Upload failed');
+      } finally {
+        setUploading(false);
+        setProgress(0);
+      }
+      return;
+    }
+
+    // New file upload
     setUploading(true);
     setProgress(0);
-
     try {
-      const results = [];
-      for (let i = 0; i < fileArr.length; i++) {
-        const compressed = await compressImage(fileArr[i]);
-        const result = await uploadApi.upload(compressed, (p) => {
-          setProgress(Math.round(((i + p / 100) / fileArr.length) * 100));
+      const result = await uploadSingleFile(fileToUpload, setProgress);
+      const newEntry = { url: result.url, thumbUrl: result.thumbUrl, alt: '' };
+      onChange([...value, newEntry]);
+
+      // If more files queued, open next in cropper
+      if (queue && queue.length > 0) {
+        const [next, ...remaining] = queue;
+        setCropperState({
+          isOpen: true,
+          source: next,
+          fileName: next.name || 'photo.jpg',
+          queue: remaining,
+          targetIndex: null,
         });
-        results.push({ url: result.url, thumbUrl: result.thumbUrl, alt: '' });
+      } else {
+        setCropperState({ isOpen: false, source: null, fileName: '', queue: [], targetIndex: null });
       }
-      onChange([...value, ...results]);
     } catch (err) {
       toast.error(err.message || 'Upload failed');
+      setCropperState({ isOpen: false, source: null, fileName: '', queue: [], targetIndex: null });
     } finally {
       setUploading(false);
       setProgress(0);
+    }
+  }
+
+  function handleUseOriginal() {
+    const { source } = cropperState;
+    if (source instanceof File || source instanceof Blob) {
+      handleCroppedResult(source);
+    } else {
+      setCropperState({ isOpen: false, source: null, fileName: '', queue: [], targetIndex: null });
+    }
+  }
+
+  function handleCloseCropper() {
+    setCropperState({ isOpen: false, source: null, fileName: '', queue: [], targetIndex: null });
+  }
+
+  async function handleAdjustExisting(index) {
+    const item = value[index];
+    if (!item?.url) return;
+
+    try {
+      // Fetch existing image as blob
+      const res = await fetch(item.url);
+      if (!res.ok) throw new Error('Fetch failed');
+      const blob = await res.blob();
+      setCropperState({
+        isOpen: true,
+        source: blob,
+        fileName: 'adjusted-photo.jpg',
+        queue: [],
+        targetIndex: index,
+      });
+    } catch (err) {
+      // CORS or network error: prompt user to pick file again
+      toast.error('Please choose the photo again to adjust it');
+      inputRef.current?.click();
     }
   }
 
@@ -109,7 +212,11 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
         accept="image/jpeg,image/png,image/webp,image/avif"
         multiple
         style={{ display: 'none' }}
-        onChange={(e) => handleFiles(e.target.files)}
+        onChange={(e) => {
+          handleFiles(e.target.files);
+          // reset input so the same file can be selected again
+          e.target.value = '';
+        }}
         aria-hidden="true"
       />
 
@@ -124,6 +231,15 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
               <img src={img.thumbUrl || img.url} alt={img.alt || `Image ${i + 1}`} />
               {i === 0 && <span className="cover-badge">Cover</span>}
               <div className="image-preview-actions">
+                <button
+                  type="button"
+                  className="image-preview-btn adjust"
+                  onClick={() => handleAdjustExisting(i)}
+                  title="Adjust photo"
+                  aria-label="Adjust photo"
+                >
+                  <Crop size={12} />
+                </button>
                 {i !== 0 && (
                   <button
                     type="button"
@@ -149,6 +265,16 @@ export default function ImageUploader({ value = [], onChange, maxImages = 6 }) {
           ))}
         </div>
       )}
+
+      <ImageCropperModal
+        isOpen={cropperState.isOpen}
+        imageSource={cropperState.source}
+        fileName={cropperState.fileName}
+        aspect={4 / 3}
+        onClose={handleCloseCropper}
+        onConfirmCrop={handleCroppedResult}
+        onConfirmOriginal={handleUseOriginal}
+      />
     </div>
   );
 }
