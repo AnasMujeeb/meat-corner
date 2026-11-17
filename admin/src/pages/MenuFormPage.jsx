@@ -8,6 +8,11 @@ import toast from 'react-hot-toast';
 import { Plus, Trash2, ChevronDown, ChevronRight, ArrowLeft, RefreshCw, Layers, Check, X, Image as ImageIcon } from 'lucide-react';
 
 import { menuApi, categoriesApi, optionsLibraryApi } from '../api/endpoints.js';
+import {
+  MEAT_DONENESS_PRESET,
+  getMeatDonenessPresetClone,
+  getStandardOptionGroups,
+} from '../constants/optionPresets.js';
 import Button from '../components/Button.jsx';
 import Input from '../components/Input.jsx';
 import Toggle from '../components/Toggle.jsx';
@@ -88,6 +93,7 @@ const schema = z.object({
   name: z.string().min(1, 'Name is required.').max(200, 'Name cannot exceed 200 characters.'),
   nameAr: z.string().max(200, 'Arabic name cannot exceed 200 characters.').optional().default(''),
   category: z.string().min(1, 'Category is required.'),
+  extraCategories: z.array(z.string()).optional().default([]),
   description: z.string().max(1000, 'Description cannot exceed 1000 characters.').nullable().optional().default(''),
   descriptionAr: z.string().max(1000, 'Arabic description cannot exceed 1000 characters.').nullable().optional().default(''),
   price: z.preprocess(
@@ -128,7 +134,23 @@ function LibraryPickerModal({ isOpen, onClose, onSelect, alreadySelectedIds = []
 
   if (!isOpen) return null;
 
-  const filtered = libraryItems.filter((item) => {
+  const isDonenessSelected = chosenIds.has('preset-meat-doneness');
+  const isDonenessAlreadyAdded = false;
+
+  const libraryItemsWithPresets = [
+    {
+      _id: 'preset-meat-doneness',
+      name: 'Meat Doneness',
+      nameAr: 'درجة استواء اللحم',
+      category: 'other',
+      price: 0,
+      isPreset: true,
+      image: { url: '', thumbUrl: '' },
+    },
+    ...libraryItems,
+  ];
+
+  const filtered = libraryItemsWithPresets.filter((item) => {
     if (activeCategory !== 'all' && item.category !== activeCategory) return false;
     if (search.trim() && !item.name.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
@@ -168,7 +190,7 @@ function LibraryPickerModal({ isOpen, onClose, onSelect, alreadySelectedIds = []
   }
 
   function handleConfirm() {
-    const selectedItems = libraryItems.filter((i) => chosenIds.has(i._id));
+    const selectedItems = libraryItemsWithPresets.filter((i) => chosenIds.has(i._id));
     onSelect(selectedItems);
     onClose();
     setChosenIds(new Set());
@@ -320,6 +342,29 @@ function OptionsBuilder({ control, register, errors, setValue, getValues, watch 
     name: 'options',
   });
 
+  function handleAddStandardOptions() {
+    const currentOptions = getValues('options') || [];
+    const standardGroups = getStandardOptionGroups();
+
+    // Check which standard groups are not yet present (case-insensitive name check)
+    const groupsToAppend = standardGroups.filter((stdGroup) => {
+      const alreadyExists = currentOptions.some(
+        (opt) => opt?.name && opt.name.trim().toLowerCase() === stdGroup.name.trim().toLowerCase()
+      );
+      return !alreadyExists;
+    });
+
+    if (groupsToAppend.length === 0) {
+      toast('All 3 standard option groups are already added.', { icon: 'ℹ️' });
+      return;
+    }
+
+    groupsToAppend.forEach((group) => {
+      appendOption(group);
+    });
+    toast.success(`Added ${groupsToAppend.length} standard option group(s).`);
+  }
+
   return (
     <div>
       {optionFields.map((optField, optIdx) => (
@@ -335,23 +380,34 @@ function OptionsBuilder({ control, register, errors, setValue, getValues, watch 
           onRemove={() => removeOption(optIdx)}
         />
       ))}
-      <Button
-        type="button"
-        variant="secondary"
-        size="sm"
-        onClick={() =>
-          appendOption({
-            name: '',
-            type: 'single',
-            groupType: 'text',
-            maxSelections: 1,
-            required: false,
-            choices: [{ label: '', extraPrice: 0, image: { url: '', thumbUrl: '' }, libraryItemId: null }],
-          })
-        }
-      >
-        <Plus size={13} /> Add Option Group
-      </Button>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            appendOption({
+              name: '',
+              type: 'single',
+              groupType: 'text',
+              maxSelections: 1,
+              required: false,
+              choices: [{ label: '', extraPrice: 0, image: { url: '', thumbUrl: '' }, libraryItemId: null }],
+            })
+          }
+        >
+          <Plus size={13} /> Add Option Group
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={handleAddStandardOptions}
+          title="Add Meat Doneness, Side Choices, and Sauce Choices if not present"
+        >
+          <Layers size={13} /> Add Standard Options
+        </Button>
+      </div>
     </div>
   );
 }
@@ -370,7 +426,61 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
   const currentChoices = watch(`options.${optIdx}.choices`) || [];
   const existingLibIds = currentChoices.map((c) => c?.libraryItemId).filter(Boolean);
 
+  function isChoicesEmpty() {
+    const rawChoices = getValues(`options.${optIdx}.choices`) || currentChoices;
+    if (!rawChoices || rawChoices.length === 0) return true;
+    if (rawChoices.length === 1 && !rawChoices[0]?.label && !rawChoices[0]?.labelAr) return true;
+    return false;
+  }
+
+  function applyDonenessPresetIfEmpty() {
+    if (!isChoicesEmpty()) return;
+
+    const preset = getMeatDonenessPresetClone();
+
+    // Apply defaults: name, nameAr, single, maxSelections 1, required true
+    const currentName = getValues(`options.${optIdx}.name`);
+    if (!currentName || currentName.trim() === '') {
+      setValue(`options.${optIdx}.name`, preset.name);
+    }
+    const currentNameAr = getValues(`options.${optIdx}.nameAr`);
+    if (!currentNameAr || currentNameAr.trim() === '') {
+      setValue(`options.${optIdx}.nameAr`, preset.nameAr);
+    }
+    setValue(`options.${optIdx}.type`, preset.type);
+    setValue(`options.${optIdx}.groupType`, preset.groupType);
+    setValue(`options.${optIdx}.maxSelections`, preset.maxSelections);
+    setValue(`options.${optIdx}.required`, preset.required);
+
+    // Populate choices with fresh objects
+    const currentLength = choiceFields.length;
+    for (let i = currentLength - 1; i >= 0; i--) {
+      removeChoice(i);
+    }
+    for (const c of preset.choices) {
+      appendChoice({ ...c, image: { ...c.image } });
+    }
+  }
+
+  function handleGroupTypeChange(e) {
+    const newGroupType = e.target.value;
+    setValue(`options.${optIdx}.groupType`, newGroupType);
+    if (newGroupType === 'text') {
+      applyDonenessPresetIfEmpty();
+    }
+  }
+
   function handleAddFromLibrary(selectedLibraryItems) {
+    // If user picks "Meat Doneness" from the library list
+    const hasMeatDoneness = selectedLibraryItems.some(
+      (item) => item?.name && item.name.toLowerCase().includes('meat doneness')
+    );
+
+    if (hasMeatDoneness) {
+      applyDonenessPresetIfEmpty();
+      return;
+    }
+
     setValue(`options.${optIdx}.groupType`, 'photo');
     // If adding more than 1 item and type is single, default maxSelections to selected count
     if (selectedLibraryItems.length > 1 && selType === 'single') {
@@ -449,7 +559,9 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
         <select
           className="select"
           style={{ width: '150px' }}
-          {...register(`options.${optIdx}.groupType`)}
+          {...register(`options.${optIdx}.groupType`, {
+            onChange: handleGroupTypeChange,
+          })}
           aria-label="Display style"
         >
           <option value="text">Text (Doneness)</option>
@@ -675,6 +787,7 @@ export default function MenuFormPage() {
       name: '',
       nameAr: '',
       category: '',
+      extraCategories: [],
       description: '',
       descriptionAr: '',
       price: '',
@@ -683,7 +796,7 @@ export default function MenuFormPage() {
       allergens: [],
       tags: [],
       badges: [],
-      options: [],
+      options: isEdit ? [] : getStandardOptionGroups(),
       isAvailable: true,
     },
   });
@@ -698,6 +811,9 @@ export default function MenuFormPage() {
         name: item.name,
         nameAr: item.nameAr || '',
         category: item.category?._id || item.category || '',
+        extraCategories: Array.isArray(item.extraCategories)
+          ? item.extraCategories.map((c) => c?._id || c)
+          : [],
         description: item.description || '',
         descriptionAr: item.descriptionAr || '',
         price: item.price,
@@ -748,6 +864,7 @@ export default function MenuFormPage() {
       name: data.name.trim(),
       nameAr: data.nameAr ? data.nameAr.trim() : '',
       category: data.category,
+      extraCategories: (data.extraCategories || []).filter((id) => id && id !== data.category),
       price: Number(data.price),
       description: data.description ? data.description.trim() : '',
       descriptionAr: data.descriptionAr ? data.descriptionAr.trim() : '',
@@ -804,13 +921,20 @@ export default function MenuFormPage() {
     }
 
     const messages = [];
+    const visited = new Set();
     const collect = (obj) => {
-      if (!obj || typeof obj !== 'object') return;
+      if (!obj || typeof obj !== 'object' || visited.has(obj)) return;
+      visited.add(obj);
+
       if (typeof obj.message === 'string' && obj.message) {
         messages.push(obj.message);
       }
-      for (const v of Object.values(obj)) {
-        if (typeof v === 'object') collect(v);
+      for (const [key, v] of Object.entries(obj)) {
+        // Skip DOM references that contain circular links (e.g. error.ref)
+        if (key === 'ref') continue;
+        if (typeof v === 'object' && v !== null) {
+          collect(v);
+        }
       }
     };
     collect(fieldErrors);
@@ -900,7 +1024,7 @@ export default function MenuFormPage() {
                     {...register('name')}
                   />
                   <div>
-                    <label className="label" htmlFor="item-category">Category *</label>
+                    <label className="label" htmlFor="item-category">Main Category *</label>
                     <select
                       id="item-category"
                       className={`select${errors.category ? ' error' : ''}`}
@@ -908,13 +1032,87 @@ export default function MenuFormPage() {
                       disabled={isCatsLoading}
                       aria-invalid={!!errors.category}
                     >
-                      <option value="">Select category…</option>
+                      <option value="">Select main category…</option>
                       {catOptions.map((o) => (
                         <option key={o.value} value={o.value}>{o.label}</option>
                       ))}
                     </select>
                     {errors.category && <p className="field-error">{errors.category.message}</p>}
                   </div>
+                </div>
+
+                {/* Also show in (optional) extra categories */}
+                <div className="form-group" style={{ marginBottom: 16 }}>
+                  <label className="label" style={{ display: 'block', marginBottom: 6 }}>
+                    Also show in (optional)
+                    <span style={{ fontSize: 11, fontWeight: 400, color: 'var(--text-muted)', marginLeft: 6 }}>
+                      (choose additional categories where this dish will appear)
+                    </span>
+                  </label>
+                  <Controller
+                    name="extraCategories"
+                    control={control}
+                    render={({ field }) => {
+                      const selectedPrimary = watch('category');
+                      const selectedExtras = Array.isArray(field.value) ? field.value : [];
+                      const availableExtraCats = categories.filter((c) => c._id !== selectedPrimary);
+
+                      if (availableExtraCats.length === 0) {
+                        return (
+                          <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: 0 }}>
+                            {categories.length === 0 ? 'Loading categories…' : 'Select a main category first.'}
+                          </p>
+                        );
+                      }
+
+                      return (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                          {availableExtraCats.map((cat) => {
+                            const isSelected = selectedExtras.includes(cat._id);
+                            return (
+                              <button
+                                key={cat._id}
+                                type="button"
+                                onClick={() => {
+                                  if (isSelected) {
+                                    field.onChange(selectedExtras.filter((id) => id !== cat._id));
+                                  } else {
+                                    field.onChange([...selectedExtras, cat._id]);
+                                  }
+                                }}
+                                style={{
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 5,
+                                  padding: '5px 10px',
+                                  borderRadius: 999,
+                                  fontSize: 12,
+                                  fontWeight: 500,
+                                  cursor: 'pointer',
+                                  border: isSelected
+                                    ? '1px solid var(--primary, #b31b1b)'
+                                    : '1px solid var(--border)',
+                                  background: isSelected
+                                    ? 'rgba(179, 27, 27, 0.08)'
+                                    : 'var(--bg-surface, #fff)',
+                                  color: isSelected
+                                    ? 'var(--primary, #b31b1b)'
+                                    : 'var(--text-primary)',
+                                  transition: 'all 0.15s ease',
+                                }}
+                              >
+                                {isSelected ? <Check size={12} /> : <Plus size={12} />}
+                                <span>{cat.name}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      );
+                    }}
+                  />
+                  {errors.extraCategories && (
+                    <p className="field-error" style={{ marginTop: 4 }}>{errors.extraCategories.message}</p>
+                  )}
                 </div>
 
                 <div className="form-group" style={{ marginBottom: 16 }}>

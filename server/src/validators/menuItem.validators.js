@@ -62,6 +62,11 @@ export const createMenuItemSchema = z.object({
   descriptionAr: z.string().max(1000).nullable().optional().transform((v) => (v ? v.trim() : '')),
   description_ar: z.string().max(1000).nullable().optional().transform((v) => (v ? v.trim() : '')),
   category: z.string().min(1, 'Category ID is required.'),
+  extraCategories: z
+    .array(z.string().min(1))
+    .nullable()
+    .optional()
+    .transform((v) => v ?? []),
   price: z.preprocess(
     (v) => (v === '' || v === null || v === undefined ? undefined : Number(v)),
     z.number({ required_error: 'Price is required.', invalid_type_error: 'Price must be a valid number.' }).min(0, 'Price must be non-negative.')

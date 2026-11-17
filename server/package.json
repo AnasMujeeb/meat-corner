@@ -1,19 +1,20 @@
 {
   "name": "meat-corner-server",
   "version": "1.0.0",
-  "description": "Meat Corner Restaurant – REST API",
+  "description": "Meat Corner Restaurant \u2013 REST API",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node --watch-path=src/routes --watch-path=src/controllers --watch-path=src/models --watch-path=src/middleware --watch-path=src/services --watch-path=src/config --watch-path=src/validators --watch-path=src/utils --watch-path=src/app.js --watch-path=src/server.js src/server.js",
-    "start": "node src/server.js",
+    "dev": "node init && node --watch-path=src/routes --watch-path=src/controllers --watch-path=src/models --watch-path=src/middleware --watch-path=src/services --watch-path=src/config --watch-path=src/validators --watch-path=src/utils --watch-path=src/app.js --watch-path=src/server.js src/server.js",
+    "start": "node init && node src/server.js",
     "seed": "node src/seed/index.js",
     "clean": "node scripts/clean-db.mjs",
     "db:clean": "node scripts/clean-db.mjs",
     "smoke": "node scripts/smoke.mjs",
     "migrate:images": "node scripts/migrate-images-to-blob.mjs",
     "restore:blobs": "node scripts/restore-missing-blobs.mjs",
-    "seed:options": "node scripts/seed-options-library.mjs"
+    "seed:options": "node scripts/seed-options-library.mjs",
+    "reset-admin-password": "node scripts/reset-admin-password.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
