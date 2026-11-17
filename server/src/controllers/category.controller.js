@@ -31,7 +31,19 @@ export const listCategories = asyncHandler(async (req, res) => {
   const categories = await Category.find().sort({ sortOrder: 1, order: 1, createdAt: 1 }).lean();
 
   const itemCounts = await MenuItem.aggregate([
-    { $group: { _id: '$category', count: { $sum: 1 } } },
+    {
+      $project: {
+        allCats: {
+          $setUnion: [
+            [{ $ifNull: ['$category', null] }],
+            { $ifNull: ['$extraCategories', []] },
+          ],
+        },
+      },
+    },
+    { $unwind: '$allCats' },
+    { $match: { allCats: { $ne: null } } },
+    { $group: { _id: '$allCats', count: { $sum: 1 } } },
   ]);
   const countMap = new Map(itemCounts.map((i) => [String(i._id), i.count]));
 
@@ -129,8 +141,10 @@ export const deleteCategory = asyncHandler(async (req, res) => {
   const category = await Category.findById(req.params.id);
   if (!category) throw createError(404, 'Category not found.');
 
-  // Refuse if category still has items
-  const itemCount = await MenuItem.countDocuments({ category: category._id });
+  // Refuse if category still has items (as primary or extra category)
+  const itemCount = await MenuItem.countDocuments({
+    $or: [{ category: category._id }, { extraCategories: category._id }],
+  });
   if (itemCount > 0) {
     throw createError(
       409,

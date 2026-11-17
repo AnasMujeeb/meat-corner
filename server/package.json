@@ -13,7 +13,8 @@
     "smoke": "node scripts/smoke.mjs",
     "migrate:images": "node scripts/migrate-images-to-blob.mjs",
     "restore:blobs": "node scripts/restore-missing-blobs.mjs",
-    "seed:options": "node scripts/seed-options-library.mjs"
+    "seed:options": "node scripts/seed-options-library.mjs",
+    "reset-admin-password": "node scripts/reset-admin-password.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
