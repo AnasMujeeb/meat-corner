@@ -57,7 +57,11 @@ async function seedAdmin() {
   section('Admin User');
 
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@meatcorner.com';
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '10december2004';
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+  if (!ADMIN_PASSWORD) {
+    throw new Error('ADMIN_PASSWORD environment variable is required to seed the admin user.');
+  }
 
   const existing = await Admin.findOne({ email: ADMIN_EMAIL.toLowerCase() });
   if (existing) {

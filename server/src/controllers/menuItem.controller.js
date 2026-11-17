@@ -26,11 +26,15 @@ export const publicListMenu = asyncHandler(async (req, res) => {
       if (setCacheHeaders(req, res, payload, 60, 30)) return;
       return res.json(payload);
     }
-    filter.category = cat._id;
+    filter.$or = [{ category: cat._id }, { extraCategories: cat._id }];
   } else {
-    // Only return items belonging to active categories
+    // Only return items belonging to active categories (as primary or extra)
     const activeCategories = await Category.find({ isActive: { $ne: false } }).select('_id').lean();
-    filter.category = { $in: activeCategories.map((c) => c._id) };
+    const activeCatIds = activeCategories.map((c) => c._id);
+    filter.$or = [
+      { category: { $in: activeCatIds } },
+      { extraCategories: { $in: activeCatIds } },
+    ];
   }
 
   if (tag) {
@@ -46,11 +50,17 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     if (ARABIC_CHAR_REGEX.test(q)) {
       const escaped = escapeRegex(q.trim());
       const arRegex = new RegExp(escaped, 'i');
-      filter.$or = [
+      const searchOr = [
         { nameAr: arRegex },
         { descriptionAr: arRegex },
         { name: arRegex },
       ];
+      if (filter.$or) {
+        filter.$and = [{ $or: filter.$or }, { $or: searchOr }];
+        delete filter.$or;
+      } else {
+        filter.$or = searchOr;
+      }
       sort = { order: 1, createdAt: 1 };
     } else {
       filter.$text = { $search: q };
@@ -60,6 +70,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
 
   const projection = {
     name: 1, nameAr: 1, slug: 1, description: 1, descriptionAr: 1, category: 1,
+    extraCategories: 1,
     price: 1, images: 1, tags: 1, allergens: 1,
     nutrition: 1, options: 1, order: 1, badges: 1,
   };
@@ -71,7 +82,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     sort,
     page: Number(page) || 1,
     limit: Number(limit) || 20,
-    queryModifier: (query) => query.populate('category', 'name slug'),
+    queryModifier: (query) => query.populate('category', 'name slug').populate('extraCategories', 'name slug'),
   });
 
   const payload = { success: true, ...result };
@@ -82,6 +93,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
 export const publicGetMenuItem = asyncHandler(async (req, res) => {
   const item = await MenuItem.findOne({ slug: req.params.slug, isAvailable: true })
     .populate('category', 'name slug')
+    .populate('extraCategories', 'name slug')
     .lean();
 
   if (!item) throw createError(404, 'Menu item not found.');
@@ -100,7 +112,9 @@ export const adminListMenu = asyncHandler(async (req, res) => {
 
   if (category) {
     const cat = await Category.findOne({ slug: category }).select('_id').lean();
-    if (cat) filter.category = cat._id;
+    if (cat) {
+      filter.$or = [{ category: cat._id }, { extraCategories: cat._id }];
+    }
   }
   if (tag) filter.tags = tag;
   if (badge) filter.badges = String(badge).toLowerCase().trim();
@@ -112,11 +126,17 @@ export const adminListMenu = asyncHandler(async (req, res) => {
     if (ARABIC_CHAR_REGEX.test(q)) {
       const escaped = escapeRegex(q.trim());
       const arRegex = new RegExp(escaped, 'i');
-      filter.$or = [
+      const searchOr = [
         { nameAr: arRegex },
         { descriptionAr: arRegex },
         { name: arRegex },
       ];
+      if (filter.$or) {
+        filter.$and = [{ $or: filter.$or }, { $or: searchOr }];
+        delete filter.$or;
+      } else {
+        filter.$or = searchOr;
+      }
       sort = { order: 1, createdAt: 1 };
     } else {
       filter.$text = { $search: q };
@@ -131,14 +151,17 @@ export const adminListMenu = asyncHandler(async (req, res) => {
     sort,
     page: Number(page) || 1,
     limit: Number(limit) || 20,
-    queryModifier: (query) => query.populate('category', 'name slug'),
+    queryModifier: (query) => query.populate('category', 'name slug').populate('extraCategories', 'name slug'),
   });
 
   res.json({ success: true, ...result });
 });
 
 export const adminGetMenuItem = asyncHandler(async (req, res) => {
-  const item = await MenuItem.findById(req.params.id).populate('category', 'name slug').lean();
+  const item = await MenuItem.findById(req.params.id)
+    .populate('category', 'name slug')
+    .populate('extraCategories', 'name slug')
+    .lean();
   if (!item) throw createError(404, 'Menu item not found.');
   res.json({ success: true, data: item });
 });
@@ -146,17 +169,43 @@ export const adminGetMenuItem = asyncHandler(async (req, res) => {
 // ─── Admin – Create / Update / Delete ────────────────────────────────────────
 
 export const createMenuItem = asyncHandler(async (req, res) => {
-  const { name, category, ...rest } = req.body;
+  const { name, category, extraCategories, ...rest } = req.body;
 
-  // Validate category exists
+  // Validate primary category exists
   const cat = await Category.findById(category).lean();
   if (!cat) throw createError(404, 'Category not found.');
+
+  // Validate extraCategories: no duplicates, must exist, must not equal the primary
+  let cleanedExtraCategories = [];
+  if (Array.isArray(extraCategories) && extraCategories.length > 0) {
+    const rawIds = extraCategories.map((id) => id?.toString?.() || String(id));
+    // Filter out primary category and de-duplicate
+    const primaryIdStr = cat._id.toString();
+    const uniqueIds = Array.from(new Set(rawIds.filter((id) => id && id !== primaryIdStr)));
+
+    if (uniqueIds.length > 0) {
+      const foundCats = await Category.find({ _id: { $in: uniqueIds } }).select('_id').lean();
+      if (foundCats.length !== uniqueIds.length) {
+        throw createError(400, 'One or more extra categories not found.');
+      }
+      cleanedExtraCategories = foundCats.map((c) => c._id);
+    }
+  }
 
   const baseSlug = toSlug(name);
   const slug = await uniqueSlug(MenuItem, baseSlug);
 
-  const item = await MenuItem.create({ name, slug, category, ...rest });
-  const populated = await item.populate('category', 'name slug');
+  const item = await MenuItem.create({
+    name,
+    slug,
+    category,
+    extraCategories: cleanedExtraCategories,
+    ...rest,
+  });
+  const populated = await item.populate([
+    { path: 'category', select: 'name slug' },
+    { path: 'extraCategories', select: 'name slug' },
+  ]);
 
   res.status(201).json({ success: true, data: populated });
 });
@@ -165,7 +214,7 @@ export const updateMenuItem = asyncHandler(async (req, res) => {
   const item = await MenuItem.findById(req.params.id);
   if (!item) throw createError(404, 'Menu item not found.');
 
-  const { name, category, images, ...rest } = req.body;
+  const { name, category, extraCategories, images, ...rest } = req.body;
 
   if (name && name !== item.name) {
     const baseSlug = toSlug(name);
@@ -173,10 +222,35 @@ export const updateMenuItem = asyncHandler(async (req, res) => {
     item.name = name;
   }
 
+  let currentPrimaryIdStr = (category || item.category).toString();
   if (category && category.toString() !== item.category.toString()) {
     const cat = await Category.findById(category).lean();
     if (!cat) throw createError(404, 'Category not found.');
     item.category = category;
+    currentPrimaryIdStr = cat._id.toString();
+  }
+
+  if (extraCategories !== undefined) {
+    let cleanedExtraCategories = [];
+    if (Array.isArray(extraCategories) && extraCategories.length > 0) {
+      const rawIds = extraCategories.map((id) => id?.toString?.() || String(id));
+      const uniqueIds = Array.from(new Set(rawIds.filter((id) => id && id !== currentPrimaryIdStr)));
+
+      if (uniqueIds.length > 0) {
+        const foundCats = await Category.find({ _id: { $in: uniqueIds } }).select('_id').lean();
+        if (foundCats.length !== uniqueIds.length) {
+          throw createError(400, 'One or more extra categories not found.');
+        }
+        cleanedExtraCategories = foundCats.map((c) => c._id);
+      }
+    }
+    item.extraCategories = cleanedExtraCategories;
+  } else if (category && category.toString() !== item.category.toString()) {
+    // If primary category changed but extraCategories wasn't explicitly passed,
+    // ensure new primary category is stripped from existing extraCategories
+    item.extraCategories = (item.extraCategories || []).filter(
+      (ecId) => ecId.toString() !== currentPrimaryIdStr
+    );
   }
 
   // If images array is being replaced, collect old images no longer present and delete only after saving
@@ -194,7 +268,10 @@ export const updateMenuItem = asyncHandler(async (req, res) => {
     deleteImage(oldImg.url).catch(() => {});
   }
 
-  const populated = await item.populate('category', 'name slug');
+  const populated = await item.populate([
+    { path: 'category', select: 'name slug' },
+    { path: 'extraCategories', select: 'name slug' },
+  ]);
   res.json({ success: true, data: populated });
 });
 

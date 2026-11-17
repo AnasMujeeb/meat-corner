@@ -86,6 +86,16 @@ const menuItemSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
+    extraCategories: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Category',
+        },
+      ],
+      default: [],
+      index: true,
+    },
     price: {
       type: Number,
       required: true,
