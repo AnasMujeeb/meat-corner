@@ -32,6 +32,7 @@ export const menuApi = {
   update: (id, data) => api.put(`/admin/menu/${id}`, data),
   delete: (id) => api.delete(`/admin/menu/${id}`),
   toggleAvailability: (id) => api.patch(`/admin/menu/${id}/availability`),
+  toggleGuestFavourite: (id) => api.patch(`/admin/menu/${id}/guest-favourite`),
 };
 
 export const branchesApi = {

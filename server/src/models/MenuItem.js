@@ -133,6 +133,11 @@ const menuItemSchema = new mongoose.Schema(
       default: true,
       index: true,
     },
+    isGuestFavourite: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
     order: {
       type: Number,
       default: 0,

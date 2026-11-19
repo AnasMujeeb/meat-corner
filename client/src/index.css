@@ -981,7 +981,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 60%;
   display: block;
 }
 
@@ -4423,6 +4423,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Home Page Below-The-Fold Containment ───────────────────────────────────── */
+.home-page .site-section--anniversary {
+  background: transparent;
+  padding-top: 10px;
+  padding-bottom: 24px;
+}
+
+.anniversary-graphic-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.anniversary-graphic-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  mix-blend-mode: multiply;
+  object-fit: contain;
+  background: transparent;
+}
+
 .home-page .site-section--stories {
   content-visibility: auto;
   contain-intrinsic-size: 1px 640px;
@@ -4536,18 +4560,8 @@ h1, h2, h3, h4, h5, h6 {
   width: 64px;
   height: 3px;
   background: var(--red);
-  margin: 0 auto 28px auto;
+  margin: 0 auto 32px auto;
   transform-origin: center;
-}
-
-.catering-coming-soon__subtext {
-  font-family: var(--font-body);
-  font-size: clamp(15px, 1.3vw, 18px);
-  color: #c4bfba;
-  max-width: 600px;
-  line-height: 1.7;
-  letter-spacing: 0.02em;
-  margin: 0 auto 36px auto;
 }
 
 .catering-coming-soon__actions {
