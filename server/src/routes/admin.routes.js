@@ -15,6 +15,7 @@ import {
   updateMenuItem,
   deleteMenuItem,
   toggleAvailability,
+  toggleGuestFavourite,
 } from '../controllers/menuItem.controller.js';
 import {
   listBranches,
@@ -78,6 +79,7 @@ router.post('/menu', validate(createMenuItemSchema), createMenuItem);
 router.put('/menu/:id', validate(updateMenuItemSchema), updateMenuItem);
 router.delete('/menu/:id', deleteMenuItem);
 router.patch('/menu/:id/availability', toggleAvailability);
+router.patch('/menu/:id/guest-favourite', toggleGuestFavourite);
 
 // ─── Branches ──────────────────────────────────────────────────────────────────
 router.get('/branches', listBranches);

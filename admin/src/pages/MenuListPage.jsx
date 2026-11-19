@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Plus, Pencil, Trash2, Search, Image as ImageIcon } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Image as ImageIcon, Star } from 'lucide-react';
 import { menuApi, categoriesApi } from '../api/endpoints.js';
 import { useDebounce } from '../hooks/useDebounce.js';
 import Button from '../components/Button.jsx';
@@ -60,6 +60,29 @@ export default function MenuListPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['menu'] });
       queryClient.invalidateQueries({ queryKey: ['stats'] });
+    },
+  });
+
+  const { mutate: toggleGuestFavourite } = useMutation({
+    mutationFn: (id) => menuApi.toggleGuestFavourite(id),
+    onMutate: async (id) => {
+      const key = ['menu', { page, q: debouncedSearch, category: categoryFilter, available: availFilter }];
+      await queryClient.cancelQueries({ queryKey: key });
+      const prev = queryClient.getQueryData(key);
+      queryClient.setQueryData(key, (old) => ({
+        ...old,
+        data: old.data.map((item) =>
+          item._id === id ? { ...item, isGuestFavourite: !item.isGuestFavourite } : item
+        ),
+      }));
+      return { prev, key };
+    },
+    onError: (_err, _id, ctx) => {
+      queryClient.setQueryData(ctx.key, ctx.prev);
+      toast.error('Failed to update Guest Favourite status.');
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['menu'] });
     },
   });
 
@@ -152,6 +175,7 @@ export default function MenuListPage() {
                 <th>Category</th>
                 <th>Price</th>
                 <th>Available</th>
+                <th style={{ textAlign: 'center', width: 80 }}>Favourite</th>
                 <th style={{ textAlign: 'right' }}>Actions</th>
               </tr>
             </thead>
@@ -161,7 +185,7 @@ export default function MenuListPage() {
                 : items.length === 0
                 ? (
                   <tr>
-                    <td colSpan={6}>
+                    <td colSpan={7}>
                       <div className="empty-state">
                         <div className="empty-state-icon"><ImageIcon size={36} /></div>
                         <p className="empty-state-title">No items found</p>
@@ -203,6 +227,28 @@ export default function MenuListPage() {
                         checked={item.isAvailable}
                         onChange={() => toggleAvailability(item._id)}
                       />
+                    </td>
+                    <td data-label="Favourite" style={{ textAlign: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => toggleGuestFavourite(item._id)}
+                        className="btn btn-ghost btn-icon"
+                        style={{
+                          color: item.isGuestFavourite ? '#eab308' : 'var(--text-muted)',
+                          padding: 4,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                        aria-label={item.isGuestFavourite ? `Remove ${item.name} from Guest Favourites` : `Mark ${item.name} as Guest Favourite`}
+                        title={item.isGuestFavourite ? 'Guest Favourite (shown on Home)' : 'Not in Guest Favourites'}
+                      >
+                        <Star
+                          size={18}
+                          fill={item.isGuestFavourite ? '#eab308' : 'transparent'}
+                          stroke="currentColor"
+                        />
+                      </button>
                     </td>
                     <td data-label="Actions" style={{ textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: 4, justifyContent: 'flex-end' }}>

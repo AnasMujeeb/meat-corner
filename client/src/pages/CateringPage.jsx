@@ -113,20 +113,11 @@ export default function CateringPage() {
             transition={{ duration: 0.6, delay: 0.35, ease: LUXURY_EASE }}
           />
 
-          <motion.p
-            className="catering-coming-soon__subtext"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: LUXURY_EASE }}
-          >
-            {t("catering.comingSoon.subtext")}
-          </motion.p>
-
           <motion.div
             className="catering-coming-soon__actions"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55, ease: LUXURY_EASE }}
+            transition={{ duration: 0.6, delay: 0.45, ease: LUXURY_EASE }}
           >
             <Link to="/menu" className="btn btn--primary">
               {t("catering.comingSoon.exploreMenu")}
