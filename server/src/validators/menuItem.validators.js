@@ -78,6 +78,7 @@ export const createMenuItemSchema = z.object({
   badges: z.array(z.enum(['wagyu', 'chicken', 'healthy', 'fish'])).nullable().optional().transform((v) => v ?? []),
   options: z.array(optionSchema).nullable().optional().transform((v) => v ?? []),
   isAvailable: z.coerce.boolean().optional().default(true),
+  isGuestFavourite: z.coerce.boolean().optional().default(false),
   order: z.coerce.number().int().min(0).optional().default(0),
 });
 
@@ -87,6 +88,7 @@ export const menuQuerySchema = z.object({
   category: z.string().optional(),
   tag: z.string().optional(),
   badge: z.string().optional(),
+  guestFavourite: z.enum(['true', 'false']).optional(),
   q: z.string().optional(),
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),
