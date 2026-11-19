@@ -108,6 +108,7 @@ const schema = z.object({
   badges: z.array(z.enum(['wagyu', 'chicken', 'healthy', 'fish'])).nullable().optional().default([]),
   options: z.array(optionSchema).nullable().optional().default([]),
   isAvailable: z.boolean().optional().default(true),
+  isGuestFavourite: z.boolean().optional().default(false),
 });
 
 const ALLERGEN_SUGGESTIONS = [
@@ -798,6 +799,7 @@ export default function MenuFormPage() {
       badges: [],
       options: isEdit ? [] : getStandardOptionGroups(),
       isAvailable: true,
+      isGuestFavourite: false,
     },
   });
 
@@ -841,6 +843,7 @@ export default function MenuFormPage() {
           })),
         })),
         isAvailable: item.isAvailable,
+        isGuestFavourite: item.isGuestFavourite ?? false,
       });
     }
   }, [itemData, reset]);
@@ -873,6 +876,7 @@ export default function MenuFormPage() {
       tags: Array.isArray(data.tags) ? data.tags : [],
       badges: Array.isArray(data.badges) ? data.badges : [],
       isAvailable: data.isAvailable ?? true,
+      isGuestFavourite: data.isGuestFavourite ?? false,
     };
 
     // Clean nutrition: only keep defined numeric values (empty-string/null converted to undefined)
@@ -1277,6 +1281,25 @@ export default function MenuFormPage() {
                       checked={field.value}
                       onChange={field.onChange}
                       label={field.value ? 'Available for ordering' : 'Currently unavailable'}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Guest Favourite */}
+            <div className="card" style={{ marginBottom: 16 }}>
+              <div className="card-body">
+                <label className="label">Home Page Showcase</label>
+                <Controller
+                  name="isGuestFavourite"
+                  control={control}
+                  render={({ field }) => (
+                    <Toggle
+                      id="item-isGuestFavourite"
+                      checked={field.value}
+                      onChange={field.onChange}
+                      label="Guest Favourite (show on Home page)"
                     />
                   )}
                 />

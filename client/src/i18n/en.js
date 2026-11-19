@@ -298,7 +298,6 @@ export default {
   "catering.comingSoon.aria": "Catering Coming Soon",
   "catering.comingSoon.eyebrow": "CATERING SERVICES · MEAT CORNER",
   "catering.comingSoon.title": "COMING SOON!",
-  "catering.comingSoon.subtext": "We are preparing an elevated, bespoke catering experience for your private events, gatherings, and corporate banquets across Doha.",
   "catering.comingSoon.exploreMenu": "EXPLORE OUR MENU",
   "catering.comingSoon.backHome": "BACK TO HOME",
   "catering.hero.eyebrow": "EVENT SERVICE",
