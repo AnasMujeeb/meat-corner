@@ -107,7 +107,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
   const { data: fetchedSettings } = useSettings();
   const { data: fetchedBranches } = useBranches();
   const { data: categories = [], isLoading: catsLoading } = useCategories();
-  const { data: featuredData } = useMenu({ tag: "featured", limit: 6 });
+  const { data: featuredData } = useMenu({ guestFavourite: "true", limit: 50 });
 
   const settings = propSettings || fetchedSettings || {};
   const branches = propBranches?.length ? propBranches : (fetchedBranches || []);
@@ -116,18 +116,17 @@ export default function HomePage({ settings: propSettings, branches: propBranche
   const videoUrl = '';
   const showStories = Boolean(STORIES_SECTION.cards && STORIES_SECTION.cards.length > 0);
 
-  // Screen size check for story split video (desktop 16:9 side-by-side vs mobile 9:16 stacked)
-  // Breakpoint matches .story-split media query: max-width 760px
+  // Screen size check for story split video (desktop/tablet >640px vs mobile <=640px)
   const [isDesktopStory, setIsDesktopStory] = useState(() => {
     if (typeof window !== "undefined") {
-      return window.matchMedia("(min-width: 761px)").matches;
+      return window.matchMedia("(min-width: 641px)").matches;
     }
     return true;
   });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mql = window.matchMedia("(min-width: 761px)");
+    const mql = window.matchMedia("(min-width: 641px)");
     const handler = (e) => setIsDesktopStory(e.matches);
     if (mql.addEventListener) {
       mql.addEventListener("change", handler);
@@ -197,6 +196,25 @@ export default function HomePage({ settings: propSettings, branches: propBranche
 
       {/* ── Ticker ────────────────────────────────────────────────────────────── */}
       <TickerStrip />
+
+      {/* ── 5 Years of Meat Corner Anniversary Graphic ─────────────────────────── */}
+      <section className="site-section site-section--anniversary" aria-label="5 Years of Meat Corner Anniversary">
+        <div className="site-container">
+          <div className="anniversary-graphic-wrap">
+            <img
+              src="/images/5-years-1200.webp"
+              srcSet="/images/5-years-1200.webp 1200w, /images/5-years-2400.webp 2400w"
+              sizes="(max-width: 900px) 100vw, 1200px"
+              width={2400}
+              height={1238}
+              loading="lazy"
+              decoding="async"
+              alt="5 years of Meat Corner: our journey from 2021 to 2026"
+              className="anniversary-graphic-img"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* ── Video Stories (Meat Corner in motion) ───────────────────────── */}
       {showStories && (
@@ -278,7 +296,7 @@ export default function HomePage({ settings: propSettings, branches: propBranche
             </ScrollReveal>
 
             <StaggerContainer className="menu-section-grid">
-              {featured.slice(0, 4).map((item, index) => {
+              {featured.map((item, index) => {
                 const cat = categories.find((c) => c._id === (item.category?._id || item.category));
                 const catLocalizedName = cat ? localized(cat, "name", lang) : "";
                 return (
@@ -359,8 +377,8 @@ export default function HomePage({ settings: propSettings, branches: propBranche
       <section className="story-split story-split--home-story" aria-label={t("home.story.aria")}>
         <ScrollReveal className="story-split__media" delay={0.05}>
           <LazyVideo
-            src={isDesktopStory ? "/videos/story-landscape.mp4" : "/videos/story-portrait.mp4"}
-            poster={isDesktopStory ? "/posters/story-landscape.jpg" : "/posters/story-portrait.jpg"}
+            src={isDesktopStory ? "/videos/our-story.mp4" : "/videos/our-story-mobile.mp4"}
+            poster="/videos/our-story-poster.webp"
             preload="metadata"
             className="w-full h-full object-cover"
           />

@@ -15,9 +15,15 @@ const ARABIC_CHAR_REGEX = /[\u0600-\u06FF]/;
 // ─── Public ───────────────────────────────────────────────────────────────────
 
 export const publicListMenu = asyncHandler(async (req, res) => {
-  const { category, tag, badge, q, page, limit } = req.query;
+  const { category, tag, badge, guestFavourite, q, page, limit } = req.query;
 
   const filter = { isAvailable: true };
+
+  if (guestFavourite === 'true') {
+    filter.isGuestFavourite = true;
+  } else if (guestFavourite === 'false') {
+    filter.isGuestFavourite = false;
+  }
 
   if (category) {
     const cat = await Category.findOne({ slug: category, isActive: { $ne: false } }).select('_id').lean();
@@ -72,7 +78,8 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     name: 1, nameAr: 1, slug: 1, description: 1, descriptionAr: 1, category: 1,
     extraCategories: 1,
     price: 1, images: 1, tags: 1, allergens: 1,
-    nutrition: 1, options: 1, order: 1, badges: 1,
+    nutrition: 1, options: 1, isAvailable: 1, isGuestFavourite: 1, order: 1, badges: 1,
+    updatedAt: 1,
   };
 
   const result = await paginate({
@@ -106,9 +113,15 @@ export const publicGetMenuItem = asyncHandler(async (req, res) => {
 // ─── Admin – List / Get ───────────────────────────────────────────────────────
 
 export const adminListMenu = asyncHandler(async (req, res) => {
-  const { category, tag, badge, q, page, limit, available } = req.query;
+  const { category, tag, badge, guestFavourite, q, page, limit, available } = req.query;
 
   const filter = {};
+
+  if (guestFavourite === 'true') {
+    filter.isGuestFavourite = true;
+  } else if (guestFavourite === 'false') {
+    filter.isGuestFavourite = false;
+  }
 
   if (category) {
     const cat = await Category.findOne({ slug: category }).select('_id').lean();
@@ -299,4 +312,12 @@ export const toggleAvailability = asyncHandler(async (req, res) => {
   item.isAvailable = !item.isAvailable;
   await item.save();
   res.json({ success: true, data: { _id: item._id, isAvailable: item.isAvailable } });
+});
+
+export const toggleGuestFavourite = asyncHandler(async (req, res) => {
+  const item = await MenuItem.findById(req.params.id);
+  if (!item) throw createError(404, 'Menu item not found.');
+  item.isGuestFavourite = !item.isGuestFavourite;
+  await item.save();
+  res.json({ success: true, data: { _id: item._id, isGuestFavourite: item.isGuestFavourite } });
 });

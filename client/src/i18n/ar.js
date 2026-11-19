@@ -298,7 +298,6 @@ export default {
   "catering.comingSoon.aria": "التموين قريبًا",
   "catering.comingSoon.eyebrow": "خدمات التموين · ميت كورنر",
   "catering.comingSoon.title": "قريبًا!",
-  "catering.comingSoon.subtext": "نعمل على تجهيز تجربة تموين راقية ومصمّمة خصيصًا لمناسباتكم الخاصة وتجمعاتكم وولائم الشركات في أنحاء الدوحة.",
   "catering.comingSoon.exploreMenu": "استكشف قائمتنا",
   "catering.comingSoon.backHome": "العودة إلى الرئيسية",
   "catering.hero.eyebrow": "خدمة المناسبات",
