@@ -44,6 +44,8 @@ const optionSchema = new mongoose.Schema(
     nameAr: { type: String, default: '', trim: true },
     type: { type: String, enum: ['single', 'multiple'], required: true },
     groupType: { type: String, enum: ['text', 'photo'], default: 'text' },
+    minSelect: { type: Number, default: 0, min: 0 },
+    maxSelect: { type: Number, default: 0, min: 0 },
     maxSelections: { type: Number, default: 1 },
     required: { type: Boolean, default: false },
     choices: { type: [choiceSchema], default: [] },
