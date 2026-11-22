@@ -36,18 +36,55 @@ const choiceSchema = z.object({
   libraryItemId: z.string().nullable().optional().default(null),
 });
 
-const optionSchema = z.object({
-  name: z.string().min(1, 'Option group name is required.').max(100),
-  nameAr: z.string().max(100).nullable().optional().transform((v) => (v ? v.trim() : '')),
-  type: z.enum(['single', 'multiple']),
-  groupType: z.enum(['text', 'photo']).optional().default('text'),
-  maxSelections: z.preprocess(
-    (v) => (v === '' || v === null || v === undefined ? 1 : Number(v)),
-    z.number({ invalid_type_error: 'Must be a number.' }).int().min(1).optional().default(1)
-  ),
-  required: z.coerce.boolean().optional().default(false),
-  choices: z.array(choiceSchema).min(1, 'Option must have at least one choice.'),
-});
+const optionSchema = z
+  .object({
+    name: z.string().min(1, 'Option group name is required.').max(100),
+    nameAr: z.string().max(100).nullable().optional().transform((v) => (v ? v.trim() : '')),
+    type: z.enum(['single', 'multiple']),
+    groupType: z.enum(['text', 'photo']).optional().default('text'),
+    minSelect: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(0).optional().default(0)
+    ),
+    maxSelect: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(0).optional().default(0)
+    ),
+    maxSelections: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 1 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(1).optional().default(1)
+    ),
+    required: z.coerce.boolean().optional().default(false),
+    choices: z.array(choiceSchema).min(1, 'Option must have at least one choice.'),
+  })
+  .refine(
+    (opt) => {
+      if (opt.maxSelect > 0 && opt.maxSelect < opt.minSelect) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'Maximum choices must be 0 (no limit) or greater than or equal to minimum choices.',
+      path: ['maxSelect'],
+    }
+  )
+  .refine(
+    (opt) => {
+      const choiceCount = opt.choices?.length || 0;
+      if (opt.minSelect > choiceCount) {
+        return false;
+      }
+      if (opt.maxSelect > choiceCount) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: 'Selection limits cannot exceed the number of available choices.',
+      path: ['maxSelect'],
+    }
+  );
 
 const imageSchema = z.object({
   url: imageSourceSchema,
