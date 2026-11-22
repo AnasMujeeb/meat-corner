@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.js";
 import { useLanguage } from "../hooks/useLanguage.js";
@@ -6,6 +6,8 @@ import { useMode } from "../hooks/useMode.js";
 import { BADGES } from "../constants/badges.js";
 import { localized, getCurrency } from "../utils/localization.js";
 import { DeliveryPlatformActions } from "./MobileDeliveryBanner.jsx";
+
+const PhotoViewer = lazy(() => import("./PhotoViewer.jsx"));
 
 function getInitialSelections(item) {
   const init = {};
@@ -125,6 +127,36 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
   const [selections, setSelections] = useState(() => getInitialSelections(item));
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [isPhone, setIsPhone] = useState(false);
+  const [photoViewerOpen, setPhotoViewerOpen] = useState(false);
+  const imgTriggerRef = useRef(null);
+
+  // Phone check: matchMedia("(max-width: 768px) and (pointer: coarse)")
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia("(max-width: 768px) and (pointer: coarse)");
+    setIsPhone(mql.matches);
+
+    function handleChange(e) {
+      setIsPhone(e.matches);
+      if (!e.matches) {
+        setPhotoViewerOpen(false);
+      }
+    }
+
+    if (mql.addEventListener) {
+      mql.addEventListener("change", handleChange);
+    } else {
+      mql.addListener(handleChange);
+    }
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", handleChange);
+      } else {
+        mql.removeListener(handleChange);
+      }
+    };
+  }, []);
 
   const itemName = localized(item, "name", lang);
   const itemDesc = localized(item, "description", lang) || item.tagline || "";
@@ -143,6 +175,10 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
+        if (photoViewerOpen) {
+          // PhotoViewer handles its own escape
+          return;
+        }
         onClose?.();
       }
     }
@@ -285,15 +321,35 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           {/* Modal Image inside scrollable body */}
           <div className="item-modal__img-container">
             {imgSrc ? (
-              <img
-                src={imgSrc}
-                alt={imgAlt}
-                className="item-modal__img"
-                width="580"
-                height="326"
-                decoding="async"
-                loading="eager"
-              />
+              isPhone ? (
+                <button
+                  ref={imgTriggerRef}
+                  type="button"
+                  className="item-modal__img-btn"
+                  onClick={() => setPhotoViewerOpen(true)}
+                  aria-label={imgAlt || itemName}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={imgAlt}
+                    className="item-modal__img"
+                    width="580"
+                    height="326"
+                    decoding="async"
+                    loading="eager"
+                  />
+                </button>
+              ) : (
+                <img
+                  src={imgSrc}
+                  alt={imgAlt}
+                  className="item-modal__img"
+                  width="580"
+                  height="326"
+                  decoding="async"
+                  loading="eager"
+                />
+              )
             ) : (
               <div className="item-modal__img-placeholder">
                 <span>MEAT CORNER</span>
@@ -566,6 +622,19 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
           </div>
         )}
       </div>
+
+      {photoViewerOpen && (
+        <Suspense fallback={null}>
+          <PhotoViewer
+            src={imgSrc}
+            alt={imgAlt || itemName}
+            onClose={() => {
+              setPhotoViewerOpen(false);
+              imgTriggerRef.current?.focus();
+            }}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
