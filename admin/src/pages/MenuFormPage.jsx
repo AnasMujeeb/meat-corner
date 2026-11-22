@@ -76,18 +76,53 @@ const choiceSchema = z.object({
   libraryItemId: z.string().nullable().optional().default(null),
 });
 
-const optionSchema = z.object({
-  name: z.string().min(1, 'Option group name is required.'),
-  nameAr: z.string().optional().default(''),
-  type: z.enum(['single', 'multiple']),
-  groupType: z.enum(['text', 'photo']).optional().default('text'),
-  maxSelections: z.preprocess(
-    (v) => (v === '' || v === null || v === undefined ? 1 : Number(v)),
-    z.number({ invalid_type_error: 'Must be a number.' }).int().min(1).optional().default(1)
-  ),
-  required: z.boolean().optional().default(false),
-  choices: z.array(choiceSchema).min(1, 'Option group must have at least one choice.'),
-});
+const optionSchema = z
+  .object({
+    name: z.string().min(1, 'Option group name is required.'),
+    nameAr: z.string().optional().default(''),
+    type: z.enum(['single', 'multiple']),
+    groupType: z.enum(['text', 'photo']).optional().default('text'),
+    minSelect: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(0).optional().default(0)
+    ),
+    maxSelect: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 0 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(0).optional().default(0)
+    ),
+    maxSelections: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? 1 : Number(v)),
+      z.number({ invalid_type_error: 'Must be a number.' }).int().min(1).optional().default(1)
+    ),
+    required: z.boolean().optional().default(false),
+    choices: z.array(choiceSchema).min(1, 'Option group must have at least one choice.'),
+  })
+  .refine(
+    (opt) => {
+      const min = Number(opt.minSelect) || 0;
+      const max = Number(opt.maxSelect) || 0;
+      if (max > 0 && max < min) return false;
+      return true;
+    },
+    {
+      message: 'Maximum choices must be 0 (no limit) or greater than or equal to minimum choices.',
+      path: ['maxSelect'],
+    }
+  )
+  .refine(
+    (opt) => {
+      const min = Number(opt.minSelect) || 0;
+      const max = Number(opt.maxSelect) || 0;
+      const choiceCount = opt.choices?.length || 0;
+      if (min > choiceCount) return false;
+      if (max > choiceCount) return false;
+      return true;
+    },
+    {
+      message: 'Selection limits cannot exceed the number of available choices.',
+      path: ['maxSelect'],
+    }
+  );
 
 const schema = z.object({
   name: z.string().min(1, 'Name is required.').max(200, 'Name cannot exceed 200 characters.'),
@@ -391,6 +426,8 @@ function OptionsBuilder({ control, register, errors, setValue, getValues, watch 
               name: '',
               type: 'single',
               groupType: 'text',
+              minSelect: 0,
+              maxSelect: 0,
               maxSelections: 1,
               required: false,
               choices: [{ label: '', extraPrice: 0, image: { url: '', thumbUrl: '' }, libraryItemId: null }],
@@ -580,17 +617,31 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
           <option value="multiple">Multiple</option>
         </select>
 
+        {/* Min selections */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ fontSize: 12, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>Min:</span>
+          <input
+            type="number"
+            min="0"
+            className="input"
+            style={{ width: '60px', padding: '4px 6px', textAlign: 'center' }}
+            title="Minimum choices required (0 = optional)"
+            {...register(`options.${optIdx}.minSelect`)}
+            aria-label="Minimum choices"
+          />
+        </div>
+
         {/* Max selections */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ fontSize: 12, color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>Max:</span>
           <input
             type="number"
-            min="1"
+            min="0"
             className="input"
             style={{ width: '60px', padding: '4px 6px', textAlign: 'center' }}
-            title="Max choices allowed"
-            {...register(`options.${optIdx}.maxSelections`)}
-            aria-label="Max selections"
+            title="Maximum choices allowed (0 = no limit)"
+            {...register(`options.${optIdx}.maxSelect`)}
+            aria-label="Maximum choices (0 = no limit)"
           />
         </div>
 
@@ -605,7 +656,14 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
         </Button>
       </div>
 
+      <div style={{ display: 'flex', gap: 16, marginTop: 4, marginBottom: 4, fontSize: 11, color: 'var(--text-muted)', flexWrap: 'wrap' }}>
+        <span>Min: minimum choices (0 = optional).</span>
+        <span>Max: maximum choices (0 = no limit).</span>
+      </div>
+
       {optErrors?.name && <p className="field-error">{optErrors.name.message}</p>}
+      {optErrors?.minSelect && <p className="field-error">{optErrors.minSelect.message}</p>}
+      {optErrors?.maxSelect && <p className="field-error">{optErrors.maxSelect.message}</p>}
 
       {/* Group Action Tools */}
       <div style={{ display: 'flex', gap: 8, marginTop: 10, marginBottom: 10, flexWrap: 'wrap' }}>
@@ -829,6 +887,8 @@ export default function MenuFormPage() {
           nameAr: opt.nameAr || '',
           type: opt.type || 'single',
           groupType: opt.groupType || 'text',
+          minSelect: opt.minSelect ?? (opt.required ? 1 : 0),
+          maxSelect: opt.maxSelect ?? (opt.maxSelections || 0),
           maxSelections: opt.maxSelections || 1,
           required: !!opt.required,
           choices: (opt.choices || []).map((c) => ({
@@ -899,8 +959,10 @@ export default function MenuFormPage() {
         nameAr: opt.nameAr ? opt.nameAr.trim() : '',
         type: opt.type || 'single',
         groupType: opt.groupType || 'text',
-        maxSelections: Number(opt.maxSelections) || 1,
-        required: !!opt.required,
+        minSelect: Number(opt.minSelect) || 0,
+        maxSelect: Number(opt.maxSelect) || 0,
+        maxSelections: Number(opt.maxSelect) > 0 ? Number(opt.maxSelect) : (Number(opt.maxSelections) || 1),
+        required: !!opt.required || (Number(opt.minSelect) > 0),
         choices: (opt.choices || []).map((c) => ({
           label: c.label.trim(),
           labelAr: c.labelAr ? c.labelAr.trim() : '',

@@ -27,23 +27,57 @@ function getInitialSelections(item) {
   return init;
 }
 
+function getOptionLimits(opt) {
+  const isSingle = opt.type === "single";
+  let min = typeof opt.minSelect === "number" ? opt.minSelect : (opt.required ? 1 : 0);
+  let max = typeof opt.maxSelect === "number" ? opt.maxSelect : (opt.maxSelections || 0);
+
+  if (isSingle) {
+    if (max === 0 || max > 1) max = 1;
+    if (min > 1) min = 1;
+    if (opt.required && min < 1) min = 1;
+  }
+  return { min, max };
+}
+
+function getGroupHelperText(opt, t) {
+  const { min, max } = getOptionLimits(opt);
+
+  if (min >= 1 && max >= 1) {
+    if (min === max) {
+      return t ? t("itemModal.helperExact", { n: min }) : `Choose ${min}`;
+    }
+    return t ? t("itemModal.helperMinMax", { min, max }) : `Choose min-of ${min} & max-of ${max}`;
+  }
+  if (min === 0 && max >= 1) {
+    return t ? t("itemModal.helperUpTo", { max }) : `Choose up to ${max}`;
+  }
+  if (min >= 1 && max === 0) {
+    return t ? t("itemModal.helperAtLeast", { min }) : `Choose at least ${min}`;
+  }
+  return null;
+}
+
 function getGroupHint(opt, selections, t) {
   const sel = selections[opt.name];
   const isSingle = opt.type === "single";
-  const target = isSingle ? 1 : (opt.maxSelections || opt.choices.length || 1);
+  const { min, max } = getOptionLimits(opt);
   const count = isSingle ? (sel ? 1 : 0) : (Array.isArray(sel) ? sel.length : 0);
 
-  if (count >= target && target > 0) {
+  if (min > 0 && count >= min) {
+    return { text: t ? t("itemModal.done") : "Done ✓", state: "done" };
+  }
+  if (min === 0 && count > 0) {
     return { text: t ? t("itemModal.done") : "Done ✓", state: "done" };
   }
 
-  if (opt.required) {
-    const remaining = target - count;
+  if (min > 0) {
+    const remaining = min - count;
     if (count === 0) {
       return {
-        text: target === 1
+        text: min === 1
           ? (t ? t("itemModal.chooseOne") : "Choose 1")
-          : (t ? t("itemModal.chooseCount", { count: target }) : `Choose ${target}`),
+          : (t ? t("itemModal.chooseCount", { count: min }) : `Choose ${min}`),
         state: "pending",
       };
     }
@@ -55,9 +89,9 @@ function getGroupHint(opt, selections, t) {
     };
   }
 
-  if (target > 1) {
+  if (max > 1) {
     return {
-      text: t ? t("itemModal.chooseUpTo", { count: target }) : `Choose up to ${target}`,
+      text: t ? t("itemModal.chooseUpTo", { count: max }) : `Choose up to ${max}`,
       state: "optional",
     };
   }
@@ -65,19 +99,20 @@ function getGroupHint(opt, selections, t) {
 }
 
 function isGroupComplete(opt, selections) {
-  if (!opt.required) return true;
+  const { min } = getOptionLimits(opt);
+  if (min === 0) return true;
   const sel = selections[opt.name];
   if (opt.type === "single") {
     return Boolean(sel && typeof sel === "string" && sel.trim() !== "");
   }
-  const target = opt.maxSelections || 1;
-  return Array.isArray(sel) && sel.length >= target;
+  return Array.isArray(sel) && sel.length >= min;
 }
 
 function isChoiceDisabled(opt, choiceLabel, selections) {
-  if (opt.type === "single") return false;
+  const { max } = getOptionLimits(opt);
+  if (max === 0) return false;
+  if (opt.type === "single" || max === 1) return false;
   const cur = selections[opt.name] || [];
-  const max = opt.maxSelections || opt.choices.length || 999;
   const isSelected = cur.includes(choiceLabel);
   return !isSelected && cur.length >= max;
 }
@@ -147,19 +182,19 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
   const totalPrice = (item.price + extraPrice) * qty;
 
   function toggleChoice(opt, choiceLabel) {
+    const { max } = getOptionLimits(opt);
     setSelections((prev) => {
-      if (opt.type === "single") {
+      if (opt.type === "single" || max === 1) {
         if (prev[opt.name] === choiceLabel && !opt.required) {
           return { ...prev, [opt.name]: "" };
         }
         return { ...prev, [opt.name]: choiceLabel };
       } else {
         const cur = prev[opt.name] || [];
-        const max = opt.maxSelections || opt.choices.length || 999;
         if (cur.includes(choiceLabel)) {
           return { ...prev, [opt.name]: cur.filter((l) => l !== choiceLabel) };
         } else {
-          if (cur.length >= max) {
+          if (max > 0 && cur.length >= max) {
             return prev;
           }
           return { ...prev, [opt.name]: [...cur, choiceLabel] };
@@ -369,23 +404,31 @@ export default function ItemModal({ item, categoryName, onBadgeClick, onClose })
 
           {/* Option Groups */}
           {(item.options || []).map((opt) => {
-            const isPhotoGroup = opt.groupType === "photo";
-            const isSingle = opt.type === "single";
-            const sel = selections[opt.name];
-            const hint = getGroupHint(opt, selections, t);
-            const optTitle = localized(opt, "name", lang);
+              const isPhotoGroup = opt.groupType === "photo";
+              const { min, max } = getOptionLimits(opt);
+              const isSingle = opt.type === "single" || max === 1;
+              const sel = selections[opt.name];
+              const hint = getGroupHint(opt, selections, t);
+              const helperText = getGroupHelperText(opt, t);
+              const optTitle = localized(opt, "name", lang);
+              const isRequiredGroup = opt.required || min >= 1;
 
-            return (
-              <div key={opt.name} className="item-modal__option-group">
-                <div className="item-modal__option-header">
-                  <div className="item-modal__option-title">
-                    <span>{optTitle}</span>
-                    {opt.required && <span className="badge-required">{t("itemModal.required")}</span>}
+              return (
+                <div key={opt.name} className="item-modal__option-group">
+                  <div className="item-modal__option-header">
+                    <div className="item-modal__option-title">
+                      <span>{optTitle}</span>
+                      {isRequiredGroup && <span className="badge-required">{t("itemModal.required")}</span>}
+                    </div>
+                    <div className={`option-hint-badge option-hint-badge--${hint.state}`}>
+                      {hint.text}
+                    </div>
                   </div>
-                  <div className={`option-hint-badge option-hint-badge--${hint.state}`}>
-                    {hint.text}
-                  </div>
-                </div>
+                  {helperText && (
+                    <div className="item-modal__option-helper">
+                      {helperText}
+                    </div>
+                  )}
 
                 {/* Photo-based 3-Column Grid */}
                 {isPhotoGroup ? (
