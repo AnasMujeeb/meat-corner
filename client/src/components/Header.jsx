@@ -109,6 +109,17 @@ export default function Header({ onCartOpen }) {
             >
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
+
+            {/* Mobile Language Toggle (always visible on phone header next to hamburger) */}
+            <button
+              type="button"
+              className="site-header__lang-btn site-header__lang-btn--mobile"
+              onClick={() => setLang(lang === "en" ? "ar" : "en")}
+              aria-label={lang === "en" ? t("header.switchToAr") : t("header.switchToEn")}
+              title={lang === "en" ? "العربية" : "English"}
+            >
+              {lang === "en" ? "العربية" : "EN"}
+            </button>
           </div>
         </div>
       </header>
@@ -116,24 +127,6 @@ export default function Header({ onCartOpen }) {
       {/* Mobile Full Nav Panel */}
       {mobileMenuOpen && (
         <div className="mobile-nav-panel mobile-nav-panel--open" role="dialog" aria-label={t("header.mobileNavAria")}>
-          {/* Mobile Language Switcher Row */}
-          <div className="mobile-nav-panel__lang-row">
-            <span className="mobile-nav-panel__lang-label">
-              {lang === "en" ? t("header.langLabel") : "اللغة"}
-            </span>
-            <button
-              type="button"
-              className="site-header__lang-btn mobile-nav-panel__lang-btn"
-              onClick={() => {
-                setLang(lang === "en" ? "ar" : "en");
-                setMobileMenuOpen(false);
-              }}
-              aria-label={lang === "en" ? t("header.switchToAr") : t("header.switchToEn")}
-            >
-              {lang === "en" ? "العربية" : "EN"}
-            </button>
-          </div>
-
           <div className="mobile-nav-panel__links">
             {navItems.map(({ to, key, defaultLabel }) => {
               const targetHref = to === "/menu" ? menuHref : to;
