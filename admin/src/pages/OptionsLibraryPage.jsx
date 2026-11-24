@@ -477,12 +477,15 @@ export default function OptionsLibraryPage() {
               <div style={{ marginBottom: 16 }}>
                 <SingleImageUploader
                   value={formData.image?.url || ''}
-                  onChange={(url) => {
+                  onChange={(res) => {
+                    const url = typeof res === 'object' && res !== null ? res.url : res;
+                    const thumbUrl = typeof res === 'object' && res !== null ? (res.thumbUrl || res.url) : res;
                     setFormData({
                       ...formData,
-                      image: { url, thumbUrl: url },
+                      image: { url, thumbUrl },
                     });
                   }}
+                  aspect={1}
                   label="Item Photo (JPG, PNG, WebP)"
                 />
               </div>
