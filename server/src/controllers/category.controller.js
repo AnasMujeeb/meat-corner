@@ -1,5 +1,6 @@
 import Category from '../models/Category.js';
 import MenuItem from '../models/MenuItem.js';
+import mongoose from 'mongoose';
 import { asyncHandler } from '../middleware/asyncHandler.js';
 import { createError } from '../middleware/errorHandler.js';
 import { toSlug, uniqueSlug } from '../utils/slug.js';
@@ -177,4 +178,195 @@ export const reorderCategories = asyncHandler(async (req, res) => {
 
   await Category.bulkWrite(bulkOps, { ordered: false });
   res.json({ success: true, message: `Reordered ${ids.length} categories.` });
+});
+
+// ─── Admin – Category Items ──────────────────────────────────────────────────
+
+export const getCategoryItems = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw createError(400, 'Invalid category ID.');
+  }
+
+  const category = await Category.findById(id).lean();
+  if (!category) {
+    throw createError(404, 'Category not found.');
+  }
+
+  const items = await MenuItem.find({
+    $or: [{ category: id }, { extraCategories: id }],
+  })
+    .sort({ sortOrder: 1, order: 1, createdAt: 1 })
+    .populate('category', 'name nameAr slug')
+    .lean();
+
+  const formattedItems = items.map((item) => {
+    const primaryCatIdStr = (item.category?._id || item.category || '').toString();
+    const isAlsoShowIn = primaryCatIdStr !== id.toString();
+    const mainCategoryName = isAlsoShowIn
+      ? (item.category?.name || 'Other')
+      : null;
+
+    const rawImg = item.images?.[0];
+    const thumbUrl = typeof rawImg === 'object'
+      ? (rawImg?.thumbUrl || rawImg?.url || '')
+      : (typeof rawImg === 'string' ? rawImg : '');
+
+    return {
+      _id: item._id,
+      id: item._id,
+      name: item.name,
+      nameAr: item.nameAr || '',
+      description: item.description || '',
+      price: item.price,
+      thumbUrl,
+      isAvailable: item.isAvailable,
+      isGuestFavourite: item.isGuestFavourite ?? false,
+      isAlsoShowIn,
+      mainCategoryName,
+      sortOrder: item.sortOrder ?? item.order ?? 0,
+      order: item.order ?? item.sortOrder ?? 0,
+    };
+  });
+
+  res.json({
+    success: true,
+    data: formattedItems,
+    count: formattedItems.length,
+  });
+});
+
+export const reorderCategoryItems = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { itemIds } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw createError(400, 'Invalid category ID.');
+  }
+
+  const category = await Category.findById(id).lean();
+  if (!category) {
+    throw createError(404, 'Category not found.');
+  }
+
+  // 1. Fetch current items of this category (primary and extra)
+  const currentItems = await MenuItem.find({
+    $or: [{ category: id }, { extraCategories: id }],
+  })
+    .sort({ sortOrder: 1, order: 1, createdAt: 1 })
+    .select('_id name sortOrder order createdAt')
+    .lean();
+
+  const currentIds = currentItems.map((item) => item._id.toString());
+  const currentIdSet = new Set(currentIds);
+
+  // 2. Strict verification: submitted itemIds must be EXACTLY the set of items currently in that category
+  if (itemIds.length !== currentIds.length) {
+    throw createError(
+      400,
+      `Item count mismatch: submitted ${itemIds.length} items, but category currently has ${currentIds.length} items.`
+    );
+  }
+
+  const submittedSet = new Set(itemIds);
+  if (submittedSet.size !== itemIds.length) {
+    throw createError(400, 'Duplicate item IDs submitted in reorder list.');
+  }
+
+  for (const submittedId of itemIds) {
+    if (!currentIdSet.has(submittedId)) {
+      throw createError(
+        400,
+        `Item ${submittedId} does not belong to category ${id}. All items must belong to this category.`
+      );
+    }
+  }
+
+  // 3. Slot-swap calculation: collect current order values of these items
+  // Preserve order value convention: check sortOrder ?? order
+  const previousValues = currentItems.map((item) => ({
+    _id: item._id.toString(),
+    name: item.name,
+    sortOrder: item.sortOrder ?? item.order ?? 0,
+    order: item.order ?? 0,
+  }));
+
+  // Build clean slot values
+  const rawSlots = currentItems.map((item) => item.sortOrder ?? item.order ?? 0);
+  const uniqueSlots = Array.from(new Set(rawSlots)).sort((a, b) => a - b);
+  let assignedSlots = [];
+
+  // If slots have duplicates or missing sequence, build a clean ascending sequence 0, 1, 2...
+  if (uniqueSlots.length !== currentItems.length) {
+    assignedSlots = currentItems.map((_, index) => index);
+  } else {
+    assignedSlots = rawSlots.slice().sort((a, b) => a - b);
+  }
+
+  // Log single JSON line with old values before write so change can be undone
+  console.log(
+    JSON.stringify({
+      action: 'REORDER_CATEGORY_ITEMS',
+      categoryId: id,
+      timestamp: new Date().toISOString(),
+      previous: previousValues,
+    })
+  );
+
+  // 4. Build single bulkWrite of updateOne operations setting { sortOrder: n }
+  const bulkOps = itemIds.map((itemId, index) => {
+    const newSortOrder = assignedSlots[index];
+    return {
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(itemId) },
+        update: { $set: { sortOrder: newSortOrder } },
+      },
+    };
+  });
+
+  try {
+    await MenuItem.bulkWrite(bulkOps, { ordered: true });
+  } catch (err) {
+    throw createError(500, `Bulk reorder failed: ${err.message}`);
+  }
+
+  // 5. Fetch updated items
+  const updatedItems = await MenuItem.find({
+    $or: [{ category: id }, { extraCategories: id }],
+  })
+    .sort({ sortOrder: 1, order: 1, createdAt: 1 })
+    .populate('category', 'name nameAr slug')
+    .lean();
+
+  const formattedUpdatedItems = updatedItems.map((item) => {
+    const primaryCatIdStr = (item.category?._id || item.category || '').toString();
+    const isAlsoShowIn = primaryCatIdStr !== id.toString();
+    const rawImg = item.images?.[0];
+    const thumbUrl = typeof rawImg === 'object'
+      ? (rawImg?.thumbUrl || rawImg?.url || '')
+      : (typeof rawImg === 'string' ? rawImg : '');
+
+    return {
+      _id: item._id,
+      id: item._id,
+      name: item.name,
+      nameAr: item.nameAr || '',
+      description: item.description || '',
+      price: item.price,
+      thumbUrl,
+      isAvailable: item.isAvailable,
+      isGuestFavourite: item.isGuestFavourite ?? false,
+      isAlsoShowIn,
+      mainCategoryName: isAlsoShowIn ? (item.category?.name || 'Other') : null,
+      sortOrder: item.sortOrder ?? item.order ?? 0,
+      order: item.order ?? item.sortOrder ?? 0,
+    };
+  });
+
+  res.json({
+    success: true,
+    message: `Reordered ${itemIds.length} items in category.`,
+    data: formattedUpdatedItems,
+    previous: previousValues,
+  });
 });

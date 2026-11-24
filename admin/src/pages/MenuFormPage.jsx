@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -813,6 +813,7 @@ function OptionGroup({ optIdx, control, register, errors, setValue, getValues, w
 export default function MenuFormPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const isEdit = !!id;
   const [optionsOpen, setOptionsOpen] = useState(false);
@@ -915,7 +916,13 @@ export default function MenuFormPage() {
       toast.success(isEdit ? 'Menu item updated.' : 'Menu item created.');
       queryClient.invalidateQueries({ queryKey: ['menu'] });
       queryClient.invalidateQueries({ queryKey: ['stats'] });
-      navigate('/menu');
+      queryClient.invalidateQueries({ queryKey: ['category-items'] });
+      if (location.state?.from === 'categories') {
+        const returnUrl = location.state?.returnTo || '/categories';
+        navigate(returnUrl, { state: { expandedCategoryId: location.state?.expandedCategoryId } });
+      } else {
+        navigate('/menu');
+      }
     },
     onError: (err) => {
       toast.error(err.message || 'Save failed.');

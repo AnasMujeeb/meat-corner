@@ -7,6 +7,8 @@ import {
   toggleCategoryActive,
   deleteCategory,
   reorderCategories,
+  getCategoryItems,
+  reorderCategoryItems,
 } from '../controllers/category.controller.js';
 import {
   adminListMenu,
@@ -46,7 +48,7 @@ import {
   updateOptionLibraryItemSchema,
 } from '../validators/optionLibrary.validators.js';
 import { validate } from '../middleware/validate.js';
-import { createCategorySchema, updateCategorySchema, reorderCategoriesSchema } from '../validators/category.validators.js';
+import { createCategorySchema, updateCategorySchema, reorderCategoriesSchema, reorderCategoryItemsSchema } from '../validators/category.validators.js';
 import { createMenuItemSchema, updateMenuItemSchema, adminMenuQuerySchema } from '../validators/menuItem.validators.js';
 import { createBranchSchema, updateBranchSchema, reorderBranchesSchema } from '../validators/branch.validators.js';
 import { updateSettingsSchema } from '../validators/settings.validators.js';
@@ -64,6 +66,8 @@ router.get('/stats', getStats);
 // ─── Categories ────────────────────────────────────────────────────────────────
 router.get('/categories', listCategories);
 router.get('/categories/:id', getCategory);
+router.get('/categories/:id/items', getCategoryItems);
+router.patch('/categories/:id/items/reorder', validate(reorderCategoryItemsSchema), reorderCategoryItems);
 router.post('/categories', validate(createCategorySchema), createCategory);
 router.put('/categories/:id', validate(updateCategorySchema), updateCategory);
 router.patch('/categories/:id/toggle', toggleCategoryActive);

@@ -144,6 +144,9 @@ const menuItemSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    sortOrder: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

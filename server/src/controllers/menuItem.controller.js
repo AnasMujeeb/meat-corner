@@ -51,7 +51,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     filter.badges = String(badge).toLowerCase().trim();
   }
 
-  let sort = { order: 1, createdAt: 1 };
+  let sort = { sortOrder: 1, order: 1, createdAt: 1 };
   if (q) {
     if (ARABIC_CHAR_REGEX.test(q)) {
       const escaped = escapeRegex(q.trim());
@@ -67,7 +67,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
       } else {
         filter.$or = searchOr;
       }
-      sort = { order: 1, createdAt: 1 };
+      sort = { sortOrder: 1, order: 1, createdAt: 1 };
     } else {
       filter.$text = { $search: q };
       sort = { score: { $meta: 'textScore' } };
@@ -78,7 +78,7 @@ export const publicListMenu = asyncHandler(async (req, res) => {
     name: 1, nameAr: 1, slug: 1, description: 1, descriptionAr: 1, category: 1,
     extraCategories: 1,
     price: 1, images: 1, tags: 1, allergens: 1,
-    nutrition: 1, options: 1, isAvailable: 1, isGuestFavourite: 1, order: 1, badges: 1,
+    nutrition: 1, options: 1, isAvailable: 1, isGuestFavourite: 1, order: 1, sortOrder: 1, badges: 1,
     updatedAt: 1,
   };
 
@@ -134,7 +134,7 @@ export const adminListMenu = asyncHandler(async (req, res) => {
   if (available === 'true') filter.isAvailable = true;
   if (available === 'false') filter.isAvailable = false;
 
-  let sort = { order: 1, createdAt: 1 };
+  let sort = { sortOrder: 1, order: 1, createdAt: 1 };
   if (q) {
     if (ARABIC_CHAR_REGEX.test(q)) {
       const escaped = escapeRegex(q.trim());
@@ -150,7 +150,7 @@ export const adminListMenu = asyncHandler(async (req, res) => {
       } else {
         filter.$or = searchOr;
       }
-      sort = { order: 1, createdAt: 1 };
+      sort = { sortOrder: 1, order: 1, createdAt: 1 };
     } else {
       filter.$text = { $search: q };
       sort = { score: { $meta: 'textScore' } };
