@@ -18,6 +18,8 @@ export const categoriesApi = {
   toggleActive: (id, isActive) => api.patch(`/admin/categories/${id}/toggle`, { isActive }),
   delete: (id) => api.delete(`/admin/categories/${id}`),
   reorder: (ids) => api.patch('/admin/categories/reorder', { ids }),
+  getItems: (id) => api.get(`/admin/categories/${id}/items`),
+  reorderItems: (id, itemIds) => api.patch(`/admin/categories/${id}/items/reorder`, { itemIds }),
 };
 
 export const menuApi = {

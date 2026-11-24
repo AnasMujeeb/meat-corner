@@ -19,3 +19,9 @@ export const reorderCategoriesSchema = z.object({
     .array(z.string().min(1, 'Each id must be a non-empty string.'))
     .min(1, 'At least one id is required.'),
 });
+
+export const reorderCategoryItemsSchema = z.object({
+  itemIds: z
+    .array(z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid item ID format.'))
+    .min(1, 'At least one item ID is required.'),
+});
